@@ -29,9 +29,6 @@ class InesBotSearcher {
 
     initEventListeners() {
         document.getElementById('search-btn').addEventListener('click', () => this.performSearch());
-        // Remove the load-words-btn event listener since we auto-load
-        // But keep the button for manual reload if needed
-        document.getElementById('load-words-btn').addEventListener('click', () => this.loadWordsFromURL());
         document.getElementById('clear-btn').addEventListener('click', () => this.clearSearch());
         
         document.getElementById('prefix-input').addEventListener('keypress', (e) => {
@@ -112,7 +109,7 @@ class InesBotSearcher {
 
     performSearch() {
         if (this.words.length === 0) {
-            this.showError('No words loaded. Click "Load Words" first.');
+            this.showError('No words loaded. Please refresh the page to try again.');
             return;
         }
 
