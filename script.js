@@ -398,14 +398,14 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded, initializing InesBotSearcher...');
     new InesBotSearcher();
 });
-// Simple Wiktionary Dictionary - Fixed version
+// Simple Wiktionary Dictionary - Clean Version
 (function() {
     if (typeof InesBotSearcher === 'undefined') {
         console.error('InesBotSearcher not found!');
         return;
     }
 
-    console.log('📚 Initializing Wiktionary Dictionary...');
+    console.log('📚 Initializing Dictionary...');
 
     // Store the original displayResults method
     const originalDisplayResults = InesBotSearcher.prototype.displayResults;
@@ -422,45 +422,40 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cache for definitions
     const definitionCache = new Map();
 
-    // Clean color scheme - professional, easy on the eyes
-    const COLORS = {
-        primary: '#2c3e50',      // Dark blue-gray
-        secondary: '#34495e',     // Slightly lighter blue-gray
-        accent: '#3498db',        // Soft blue
-        background: '#ffffff',     // White
-        text: '#2c3e50',          // Dark text
-        border: '#bdc3c7',        // Light gray border
-        hover: '#ecf0f1'          // Light hover background
-    };
+    // Get current theme colors
+    function getThemeColors() {
+        const htmlElement = document.documentElement;
+        const isDark = htmlElement.getAttribute('data-theme') === 'dark';
+        
+        return {
+            bg: isDark ? '#1a1a1a' : '#ffffff',
+            text: isDark ? '#e0e0e0' : '#333333',
+            border: isDark ? '#444444' : '#dddddd',
+            shadow: isDark ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.1)',
+            highlight: isDark ? '#2d2d2d' : '#f5f5f5',
+            accent: isDark ? '#4a9eff' : '#0066cc'
+        };
+    }
 
-    // Wiktionary API endpoint
+    // Wiktionary API
     async function fetchFromWiktionary(word) {
         try {
             const url = `https://en.wiktionary.org/api/rest_v1/page/definition/${encodeURIComponent(word)}`;
             const response = await fetch(url, {
-                headers: {
-                    'Accept': 'application/json'
-                }
+                headers: { 'Accept': 'application/json' }
             });
             
-            if (!response.ok) {
-                throw new Error(`Wiktionary returned ${response.status}`);
-            }
-            
+            if (!response.ok) throw new Error('Not found');
             const data = await response.json();
             return parseWiktionaryResponse(word, data);
-            
         } catch (error) {
-            console.error('Wiktionary fetch failed:', error);
             return null;
         }
     }
 
     // Parse Wiktionary response
     function parseWiktionaryResponse(word, data) {
-        if (!data || !data.en || !Array.isArray(data.en)) {
-            return null;
-        }
+        if (!data || !data.en) return null;
 
         const result = {
             word: word,
@@ -468,17 +463,14 @@ document.addEventListener('DOMContentLoaded', () => {
             meanings: []
         };
 
-        // Process each part of speech
         data.en.forEach(entry => {
             if (entry.partOfSpeech && entry.definitions) {
-                entry.definitions.slice(0, 3).forEach(def => {
-                    // Clean up definition text (remove pronunciation guides in brackets)
+                entry.definitions.slice(0, 2).forEach(def => {
                     let definition = def.definition
-                        .replace(/\[.*?\]/g, '')  // Remove [something]
-                        .replace(/\{.*?\}/g, '')   // Remove {something}
+                        .replace(/\[.*?\]/g, '')
+                        .replace(/\{.*?\}/g, '')
                         .trim();
                     
-                    // Only add if definition exists after cleaning
                     if (definition) {
                         result.meanings.push({
                             partOfSpeech: entry.partOfSpeech,
@@ -490,134 +482,95 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Try to find phonetic pronunciation
-        if (data.en[0] && data.en[0].pronunciations) {
-            const pronunciation = data.en[0].pronunciations.find(p => p.ipa);
-            if (pronunciation) {
-                result.phonetic = pronunciation.ipa;
-            }
-        }
-
         return result.meanings.length > 0 ? result : null;
     }
 
-    // Make words clickable - FIXED to only click on actual word text
+    // Make words clickable
     function makeWordsClickable() {
         const resultWords = document.querySelectorAll('.result-word');
-        console.log(`Found ${resultWords.length} words to make clickable`);
         
         resultWords.forEach((wordElement) => {
-            // Remove any existing click handlers
+            // Remove existing handlers
             const newElement = wordElement.cloneNode(true);
             wordElement.parentNode.replaceChild(newElement, wordElement);
             
-            // Style the word
+            // Style the word - NO bottom line
             newElement.style.cursor = 'pointer';
-            newElement.style.borderBottom = `2px solid ${COLORS.accent}`;
+            newElement.style.display = 'inline-block';
             newElement.style.padding = '0 2px';
-            newElement.style.transition = 'all 0.2s ease';
-            newElement.style.display = 'inline-block'; // Better for click area
-            newElement.style.width = 'auto'; // Only as wide as the text
             
-            // Hover effect
-            newElement.addEventListener('mouseenter', () => {
-                newElement.style.backgroundColor = COLORS.hover;
-                newElement.style.borderBottomColor = COLORS.primary;
-            });
-            
-            newElement.addEventListener('mouseleave', () => {
-                newElement.style.backgroundColor = 'transparent';
-                newElement.style.borderBottomColor = COLORS.accent;
-            });
-            
-            // Click handler - ONLY triggers when clicking the word itself
+            // Click handler
             newElement.addEventListener('click', async (event) => {
-                event.stopPropagation(); // Prevent bubbling
+                event.stopPropagation();
                 event.preventDefault();
                 
                 const word = newElement.textContent;
                 const rect = newElement.getBoundingClientRect();
                 
-                // Position popup to the right of the word
-                await showDefinition(word, rect);
+                // Remove any existing popup
+                removeExistingPopup();
+                
+                // Show loading
+                showLoading(word, rect);
+                
+                // Fetch definition
+                const definition = await fetchFromWiktionary(word);
+                
+                // Remove loading
+                removeExistingPopup();
+                
+                if (definition) {
+                    showDefinition(definition, rect);
+                } else {
+                    showNoDefinition(word, rect);
+                }
             });
         });
     }
 
-    // Show definition popup
-    async function showDefinition(word, rect) {
-        removeExistingPopup();
-
-        // Show loading popup
-        showLoadingPopup(word, rect);
-
-        try {
-            // Check cache
-            if (definitionCache.has(word)) {
-                removeExistingPopup();
-                showDefinitionPopup(definitionCache.get(word), rect);
-                return;
-            }
-
-            // Fetch from Wiktionary
-            const definitionData = await fetchFromWiktionary(word);
-            
-            if (definitionData) {
-                definitionCache.set(word, definitionData);
-                removeExistingPopup();
-                showDefinitionPopup(definitionData, rect);
-            } else {
-                throw new Error('No definition found');
-            }
-            
-        } catch (error) {
-            removeExistingPopup();
-            showErrorPopup(word, rect);
-        }
-    }
-
-    // Loading popup
-    function showLoadingPopup(word, rect) {
+    // Loading indicator
+    function showLoading(word, rect) {
+        const colors = getThemeColors();
         const popup = createPopup(rect);
         popup.innerHTML = `
-            <div style="text-align: center; padding: 20px;">
-                <div style="margin-bottom: 10px; color: ${COLORS.primary};">🔍 Looking up "${word}"</div>
-                <div style="color: ${COLORS.secondary};">Loading from Wiktionary...</div>
+            <div style="text-align: center; padding: 20px; color: ${colors.text}">
+                <div style="margin-bottom: 10px;">🔍 Looking up "${word}"</div>
+                <div style="color: ${colors.accent}">Loading...</div>
             </div>
         `;
         document.body.appendChild(popup);
     }
 
-    // Definition popup - FIXED styling
-    function showDefinitionPopup(data, rect) {
+    // Show definition
+    function showDefinition(data, rect) {
+        const colors = getThemeColors();
         const popup = createPopup(rect);
         
         let html = `
-            <div style="border-bottom: 2px solid ${COLORS.accent}; padding-bottom: 10px; margin-bottom: 15px;">
-                <div style="font-size: 20px; font-weight: bold; color: ${COLORS.primary};">${data.word}</div>
+            <div style="border-bottom: 1px solid ${colors.border}; padding-bottom: 10px; margin-bottom: 10px;">
+                <div style="font-size: 20px; font-weight: bold; color: ${colors.accent};">${data.word}</div>
         `;
         
         if (data.phonetic) {
-            html += `<div style="font-family: monospace; color: ${COLORS.secondary}; margin-top: 5px;">/${data.phonetic}/</div>`;
+            html += `<div style="font-family: monospace; color: ${colors.text};">/${data.phonetic}/</div>`;
         }
         
         html += `</div>`;
 
-        // Add definitions
-        data.meanings.forEach((meaning, index) => {
+        data.meanings.forEach((meaning) => {
             html += `
-                <div style="margin-bottom: 15px; padding: 10px; background: #f8f9fa; border-radius: 6px; border-left: 3px solid ${COLORS.accent};">
-                    <div style="font-weight: bold; color: ${COLORS.secondary}; margin-bottom: 5px; font-size: 13px; text-transform: uppercase;">
+                <div style="margin-bottom: 12px; padding: 8px; background: ${colors.highlight}; border-radius: 4px;">
+                    <div style="font-weight: bold; color: ${colors.accent}; margin-bottom: 4px; font-size: 12px;">
                         ${meaning.partOfSpeech}
                     </div>
-                    <div style="color: ${COLORS.text}; line-height: 1.5; margin-bottom: 5px;">
+                    <div style="color: ${colors.text}; line-height: 1.4;">
                         ${meaning.definition}
                     </div>
             `;
             
             if (meaning.example) {
                 html += `
-                    <div style="color: ${COLORS.secondary}; font-style: italic; margin-top: 8px; padding-left: 10px; border-left: 2px solid ${COLORS.border}; font-size: 13px;">
+                    <div style="color: ${colors.text}; opacity: 0.7; font-style: italic; margin-top: 6px; font-size: 12px;">
                         "${meaning.example}"
                     </div>
                 `;
@@ -630,115 +583,67 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(popup);
     }
 
-    // Error popup - FIXED with the requested message
-    function showErrorPopup(word, rect) {
+    // Show "no definition" message - EXACTLY as requested
+    function showNoDefinition(word, rect) {
+        const colors = getThemeColors();
         const popup = createPopup(rect);
         popup.innerHTML = `
-            <div style="text-align: center; padding: 25px 20px;">
-                <div style="font-size: 32px; margin-bottom: 15px;">✨</div>
-                <div style="color: ${COLORS.primary}; font-size: 18px; font-weight: bold; margin-bottom: 10px;">"${word}"</div>
-                <div style="color: ${COLORS.secondary}; font-size: 16px; margin-bottom: 15px; line-height: 1.5;">
-                    It just works twin,<br>don't worry about the definition
+            <div style="text-align: center; padding: 25px 15px;">
+                <div style="font-size: 24px; margin-bottom: 10px;">✨</div>
+                <div style="color: ${colors.accent}; font-size: 16px; font-weight: bold; margin-bottom: 8px;">
+                    "${word}"
                 </div>
-                <div style="font-size: 12px; color: #95a5a6; margin-top: 10px; padding-top: 10px; border-top: 1px solid ${COLORS.border};">
-                    (even Wiktionary doesn't know everything)
+                <div style="color: ${colors.text}; font-size: 14px; line-height: 1.5;">
+                    It just works twin,<br>don't worry about the definition
                 </div>
             </div>
         `;
         document.body.appendChild(popup);
     }
 
-    // Create popup - FIXED positioning to the right of the word
+    // Create popup - NO close button, just click outside to close
     function createPopup(rect) {
         removeExistingPopup();
 
+        const colors = getThemeColors();
         const popup = document.createElement('div');
         
-        // Calculate position - popup appears to the RIGHT of the word
+        // Position to the right of the word
         const scrollY = window.scrollY;
         const scrollX = window.scrollX;
         
-        let top = rect.top + scrollY - 10; // Align with top of word, slight offset
-        let left = rect.right + scrollX + 10; // 10px to the right of the word
+        let top = rect.top + scrollY - 5;
+        let left = rect.right + scrollX + 10;
         
-        // Ensure popup stays within viewport
-        const popupWidth = 350;
-        const popupHeight = 400;
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-        
-        // Adjust horizontal position if it goes off right edge
-        if (left + popupWidth > viewportWidth) {
-            left = rect.left + scrollX - popupWidth - 10; // Show to the left instead
+        // Keep in viewport
+        const popupWidth = 300;
+        if (left + popupWidth > window.innerWidth) {
+            left = rect.left + scrollX - popupWidth - 10;
         }
         
-        // Adjust vertical position if popup would go off screen
-        if (top + popupHeight > viewportHeight + scrollY) {
-            top = viewportHeight + scrollY - popupHeight - 10;
-        }
-        
-        // Ensure top isn't above viewport
-        if (top < scrollY) {
-            top = scrollY + 5;
+        if (top < scrollY) top = scrollY + 5;
+        if (top + 300 > window.innerHeight + scrollY) {
+            top = window.innerHeight + scrollY - 305;
         }
 
         popup.style.cssText = `
             position: absolute;
-            background: ${COLORS.background};
-            border: 1px solid ${COLORS.border};
+            background: ${colors.bg};
+            border: 1px solid ${colors.border};
             border-radius: 8px;
             padding: 15px;
-            width: 350px;
-            max-height: 400px;
+            width: 300px;
+            max-height: 350px;
             overflow-y: auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px ${colors.shadow};
             z-index: 10000;
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.5;
             top: ${top}px;
             left: ${left}px;
-            animation: fadeIn 0.2s ease;
+            transition: all 0.2s ease;
+            color: ${colors.text};
         `;
-
-        // Add close button
-        const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.cssText = `
-            position: sticky;
-            top: 0;
-            float: right;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: ${COLORS.secondary};
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-            margin: -5px -5px 0 0;
-            transition: all 0.2s;
-            z-index: 10001;
-        `;
-        
-        closeBtn.addEventListener('mouseenter', () => {
-            closeBtn.style.backgroundColor = COLORS.hover;
-            closeBtn.style.color = COLORS.primary;
-        });
-        
-        closeBtn.addEventListener('mouseleave', () => {
-            closeBtn.style.backgroundColor = 'transparent';
-            closeBtn.style.color = COLORS.secondary;
-        });
-        
-        closeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            popup.remove();
-        });
-        
-        popup.appendChild(closeBtn);
 
         return popup;
     }
@@ -749,41 +654,32 @@ document.addEventListener('DOMContentLoaded', () => {
         if (existing) existing.remove();
     }
 
-    // Add animations
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateX(-5px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
+    // Click outside to close - SIMPLE and works
+    document.addEventListener('click', function(e) {
+        const popup = document.querySelector('div[style*="position: absolute"][style*="border-radius: 8px"]');
+        const clickedWord = e.target.closest('.result-word');
         
-        .result-word {
-            cursor: pointer !important;
-            user-select: none;
-            display: inline-block !important;
-            max-width: fit-content !important;
+        if (popup && !popup.contains(e.target) && !clickedWord) {
+            popup.remove();
         }
-    `;
-    document.head.appendChild(style);
+    });
 
-    // Escape key to close popup
+    // Escape key to close
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             removeExistingPopup();
         }
     });
 
-    // FIXED: Click outside to close popup - now works properly
-    document.addEventListener('click', function closePopupOnClickOutside(e) {
+    // Update colors when theme changes
+    themeToggle.addEventListener('click', () => {
+        // If there's an open popup, refresh its colors
         const popup = document.querySelector('div[style*="position: absolute"][style*="border-radius: 8px"]');
-        const clickedWord = e.target.closest('.result-word');
-        
-        // If there's a popup and the click wasn't on the popup and wasn't on a word
-        if (popup && !popup.contains(e.target) && !clickedWord) {
+        if (popup) {
+            // Just close it - they can reopen
             popup.remove();
         }
     });
 
-    console.log('✅ Wiktionary Dictionary Ready!');
-    console.log('✨ Click any word to see its definition!');
+    console.log('✅ Dictionary Ready! Click any word.');
 })();
