@@ -1,14 +1,10 @@
-// Theme management
 const themeToggle = document.getElementById('theme-toggle');
 const htmlElement = document.documentElement;
 
-// Check for saved theme preference
 const savedTheme = localStorage.getItem('theme') || 'light';
 htmlElement.setAttribute('data-theme', savedTheme);
 
-// Theme toggle handler - REPLACE your existing one with this
 themeToggle.addEventListener('click', () => {
-    // Disable transitions temporarily
     document.documentElement.classList.add('theme-transitioning');
     
     const currentTheme = htmlElement.getAttribute('data-theme');
@@ -17,24 +13,19 @@ themeToggle.addEventListener('click', () => {
     htmlElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     
-    // Re-enable transitions after theme is set
     setTimeout(() => {
         document.documentElement.classList.remove('theme-transitioning');
     }, 20);
 });
 
-// InesBot Searcher Class
 class InesBotSearcher {
     constructor() {
         this.words = [];
-        // Using raw.githubusercontent.com for direct file access
         this.wordListUrl = 'https://raw.githubusercontent.com/inesbotv1/askari/refs/heads/main/lastletter.txt';
         
-        // Check if all required elements exist
         this.checkRequiredElements();
         
         this.initEventListeners();
-        // Auto-load words when the page loads
         setTimeout(() => {
             this.loadWordsFromURL();
         }, 100);
@@ -58,7 +49,6 @@ class InesBotSearcher {
         if (missingElements.length > 0) {
             console.warn(`Missing elements: ${missingElements.join(', ')}. The app may not function correctly.`);
             
-            // Show error in the results box if it exists, otherwise alert
             const resultsBox = document.getElementById('results-box');
             if (resultsBox) {
                 resultsBox.innerHTML = `<div class="error-message">❌ Critical error: Missing HTML elements: ${missingElements.join(', ')}. Please check the console.</div>`;
@@ -71,7 +61,6 @@ class InesBotSearcher {
     }
 
     initEventListeners() {
-        // Safely add event listeners with null checks
         const searchBtn = document.getElementById('search-btn');
         if (searchBtn) {
             searchBtn.addEventListener('click', () => this.performSearch());
@@ -113,19 +102,16 @@ class InesBotSearcher {
         const wordCountElement = document.getElementById('word-count');
         const resultCountElement = document.getElementById('result-count');
         
-        // Check if critical elements exist
         if (!resultsBox) {
             console.error('❌ results-box element not found! Cannot display loading message.');
             return;
         }
         
-        // Show loading message
         resultsBox.innerHTML = '<div class="loading-message">⏳ Loading words from GitHub...</div>';
         
         try {
             console.log('Fetching from:', this.wordListUrl);
             
-            // Add cache-busting parameter to avoid cached responses
             const urlWithCache = `${this.wordListUrl}?t=${Date.now()}`;
             
             const response = await fetch(urlWithCache, {
@@ -150,7 +136,6 @@ class InesBotSearcher {
                 throw new Error('Word list file is empty');
             }
             
-            // Split by new lines and clean up - handle different line endings
             const words = text.split(/\r?\n/)
                 .map(word => word.trim())
                 .filter(word => word.length > 0);
@@ -162,10 +147,8 @@ class InesBotSearcher {
                 throw new Error('No words found in the file');
             }
             
-            // Remove duplicates and sort
             this.words = [...new Set(words)];
             
-            // Update word count if element exists
             if (wordCountElement) {
                 wordCountElement.textContent = this.words.length;
                 console.log('Updated word count to:', this.words.length);
@@ -173,18 +156,15 @@ class InesBotSearcher {
                 console.error('word-count element not found');
             }
             
-            // Update result count if element exists
             if (resultCountElement) {
                 resultCountElement.textContent = '0';
             }
             
-            // Show success message
             this.showSuccess(`Successfully loaded ${this.words.length} words!`);
             
         } catch (error) {
             console.error('❌ Error loading words:', error);
             
-            // Provide more specific error messages
             if (error.message.includes('Failed to fetch')) {
                 this.showError('Network error: Cannot reach GitHub. Check your internet connection.');
             } else if (error.message.includes('404')) {
@@ -195,7 +175,6 @@ class InesBotSearcher {
             
             this.words = [];
             
-            // Update word count if element exists
             if (wordCountElement) {
                 wordCountElement.textContent = '0';
             }
@@ -214,7 +193,6 @@ class InesBotSearcher {
         const suffixInput = document.getElementById('suffix-input');
         const sortRadios = document.querySelectorAll('input[name="sort"]');
         
-        // Check if elements exist
         if (!prefixInput || !suffixInput) {
             console.error('Search inputs not found');
             this.showError('Error: Search inputs not found in HTML');
@@ -230,7 +208,6 @@ class InesBotSearcher {
         const prefix = prefixInput.value.toLowerCase().trim();
         const suffix = suffixInput.value.toLowerCase().trim();
         
-        // Find checked radio button
         let checkedRadio = null;
         for (let radio of sortRadios) {
             if (radio.checked) {
@@ -245,7 +222,6 @@ class InesBotSearcher {
         if (prefix) criteria.push(`starts with '${prefix}'`);
         if (suffix) criteria.push(`ends with '${suffix}'`);
         
-        // Filter words based ONLY on current filters
         let results = this.words.filter(word => {
             const wordLower = word.toLowerCase();
             
@@ -255,7 +231,6 @@ class InesBotSearcher {
             return true;
         });
         
-        // Sort results based on selected option
         if (sortOption === 'shortest') {
             results.sort((a, b) => a.length - b.length);
         } else if (sortOption === 'longest') {
@@ -263,15 +238,12 @@ class InesBotSearcher {
         } else if (sortOption === 'alpha') {
             results.sort((a, b) => a.localeCompare(b));
         }
-        // 'none' keeps original order (as loaded from file)
         
-        // Update result count
         const resultCountElement = document.getElementById('result-count');
         if (resultCountElement) {
             resultCountElement.textContent = results.length;
         }
         
-        // Display results with 1000 limit
         this.displayResults(results, criteria);
     }
 
@@ -297,7 +269,6 @@ class InesBotSearcher {
         let html = '';
         const displayResults = results.slice(0, MAX_DISPLAY);
         
-        // Add summary header
         if (criteria.length > 0) {
             html += `<div class="result-item" style="background: var(--highlight-bg); font-weight: bold; border-radius: 8px; margin-bottom: 10px; color: var(--text-primary);">
                 Found ${results.length} words matching: ${criteria.join(' and ')}
@@ -370,7 +341,6 @@ class InesBotSearcher {
     }
 
     clearSearch() {
-        // Clear only the search results and input fields
         const resultsBox = document.getElementById('results-box');
         const prefixInput = document.getElementById('prefix-input');
         const suffixInput = document.getElementById('suffix-input');
@@ -384,7 +354,6 @@ class InesBotSearcher {
         if (prefixInput) prefixInput.value = '';
         if (suffixInput) suffixInput.value = '';
         
-        // Uncheck all radios and check the 'none' option
         sortRadios.forEach(radio => {
             if (radio.value === 'none') {
                 radio.checked = true;
@@ -401,12 +370,10 @@ class InesBotSearcher {
     }
 }
 
-// Initialize the app when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded, initializing InesBotSearcher...');
     new InesBotSearcher();
 });
-// Persistent Movable Dictionary Panel
 (function() {
     if (typeof InesBotSearcher === 'undefined') {
         console.error('InesBotSearcher not found!');
@@ -415,10 +382,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('📚 Initializing Persistent Dictionary Panel...');
 
-    // Store the original displayResults method
     const originalDisplayResults = InesBotSearcher.prototype.displayResults;
 
-    // Override the displayResults method
     InesBotSearcher.prototype.displayResults = function(results, criteria) {
         originalDisplayResults.call(this, results, criteria);
         
@@ -427,16 +392,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 50);
     };
 
-    // Cache for definitions
     const definitionCache = new Map();
     
-    // Track if panel exists and its position
     let dictionaryPanel = null;
-    let panelPosition = { top: 100, left: 100 }; // Default position
+    let panelPosition = { top: 100, left: 100 }; 
     let isDragging = false;
     let dragOffset = { x: 0, y: 0 };
 
-    // Create the persistent panel if it doesn't exist
     function createDictionaryPanel() {
         if (dictionaryPanel) return dictionaryPanel;
         
@@ -466,7 +428,6 @@ document.addEventListener('DOMContentLoaded', () => {
             transition: box-shadow 0.2s ease;
         `;
 
-        // Create header for dragging
         const header = document.createElement('div');
         header.id = 'dictionary-header';
         header.style.cssText = `
@@ -490,7 +451,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-        // Create content area
         const content = document.createElement('div');
         content.id = 'dictionary-content';
         content.style.cssText = `
@@ -511,10 +471,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         dictionaryPanel = panel;
         
-        // Add drag functionality
         setupDragHandlers(panel, header);
         
-        // Add button handlers
         document.getElementById('close-panel').addEventListener('click', (e) => {
             e.stopPropagation();
             panel.remove();
@@ -536,7 +494,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return panel;
     }
 
-    // Setup drag handlers
     function setupDragHandlers(panel, header) {
         header.addEventListener('mousedown', (e) => {
             if (e.target.closest('#close-panel') || e.target.closest('#minimize-panel')) return;
@@ -557,14 +514,12 @@ document.addEventListener('DOMContentLoaded', () => {
             let newLeft = e.clientX - dragOffset.x;
             let newTop = e.clientY - dragOffset.y;
             
-            // Keep within viewport
             newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - panel.offsetWidth));
             newTop = Math.max(0, Math.min(newTop, window.innerHeight - panel.offsetHeight));
             
             panel.style.left = newLeft + 'px';
             panel.style.top = newTop + 'px';
             
-            // Save position
             panelPosition = { top: newTop, left: newLeft };
         });
 
@@ -578,7 +533,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Update panel content
     function updatePanelContent(content) {
         if (!dictionaryPanel) {
             dictionaryPanel = createDictionaryPanel();
@@ -590,7 +544,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Show loading in panel
     function showLoadingInPanel(word) {
         const content = `
             <div style="text-align: center; padding: 20px;">
@@ -600,7 +553,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePanelContent(content);
     }
 
-    // Show definition in panel
     function showDefinitionInPanel(data) {
         let html = `
             <div style="border-bottom: 1px solid var(--border-primary); padding-bottom: 8px; margin-bottom: 10px;">
@@ -638,7 +590,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePanelContent(html);
     }
 
-    // Show no definition in panel
     function showNoDefinitionInPanel(word) {
         const content = `
             <div style="text-align: center; padding: 20px;">
@@ -650,23 +601,19 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePanelContent(content);
     }
 
-    // Make words clickable
     function makeWordsClickable() {
         const resultWords = document.querySelectorAll('.result-word');
         
         resultWords.forEach((wordElement) => {
-            // Remove existing handlers
             const newElement = wordElement.cloneNode(true);
             wordElement.parentNode.replaceChild(newElement, wordElement);
             
-            // Style the word
             newElement.style.cursor = 'pointer';
             newElement.style.display = 'inline-block';
             newElement.style.padding = '0 2px';
             newElement.style.color = 'var(--result-word)';
-            newElement.style.textDecoration = 'none'; // Remove any default underlines
+            newElement.style.textDecoration = 'none'; 
             
-            // Hover effect
             newElement.addEventListener('mouseenter', () => {
                 newElement.style.backgroundColor = 'var(--highlight-bg)';
                 newElement.style.borderRadius = '4px';
@@ -676,23 +623,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 newElement.style.backgroundColor = 'transparent';
             });
             
-            // Click handler
             newElement.addEventListener('click', async (event) => {
                 event.stopPropagation();
                 event.preventDefault();
                 
                 const word = newElement.textContent;
                 
-                // Show loading in panel
                 showLoadingInPanel(word);
                 
-                // Check cache
                 if (definitionCache.has(word)) {
                     showDefinitionInPanel(definitionCache.get(word));
                     return;
                 }
                 
-                // Fetch definition
                 const definition = await fetchFromWiktionary(word);
                 
                 if (definition) {
@@ -705,7 +648,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Wiktionary API
     async function fetchFromWiktionary(word) {
         try {
             const url = `https://en.wiktionary.org/api/rest_v1/page/definition/${encodeURIComponent(word)}`;
@@ -721,7 +663,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Parse Wiktionary response
     function parseWiktionaryResponse(word, data) {
         if (!data || !data.en) return null;
 
@@ -737,7 +678,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let definition = def.definition
                         .replace(/\[.*?\]/g, '')
                         .replace(/\{.*?\}/g, '')
-                        .replace(/<[^>]*>/g, '') // Remove any HTML tags
+                        .replace(/<[^>]*>/g, '') 
                         .trim();
                     
                     if (definition) {
@@ -751,7 +692,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Clean up any remaining HTML in examples
         if (result.meanings.length > 0) {
             result.meanings.forEach(m => {
                 if (m.example) {
@@ -763,13 +703,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return result.meanings.length > 0 ? result : null;
     }
 
-    // Handle theme changes
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
-            // Panel will automatically update colors via CSS variables
             if (dictionaryPanel) {
-                // Force a small repaint
                 dictionaryPanel.style.opacity = '0.99';
                 setTimeout(() => {
                     dictionaryPanel.style.opacity = '1';
@@ -781,7 +718,6 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('✅ Persistent Dictionary Panel Ready!');
     console.log('📌 Drag the header to move it around');
 })();;
-// Persistent Movable Dictionary Panel - Mobile Compatible
 (function() {
     if (typeof InesBotSearcher === 'undefined') {
         console.error('InesBotSearcher not found!');
@@ -790,10 +726,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('📚 Initializing Persistent Dictionary Panel (Mobile Ready)...');
 
-    // Store the original displayResults method
     const originalDisplayResults = InesBotSearcher.prototype.displayResults;
 
-    // Override the displayResults method
     InesBotSearcher.prototype.displayResults = function(results, criteria) {
         originalDisplayResults.call(this, results, criteria);
         
@@ -802,31 +736,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 50);
     };
 
-    // Cache for definitions
     const definitionCache = new Map();
     
-    // Track if panel exists and its position
     let dictionaryPanel = null;
     let panelPosition = { top: 100, left: 100 };
     let isDragging = false;
     let dragOffset = { x: 0, y: 0 };
     let currentTouchId = null;
 
-    // Check if mobile
     function isMobile() {
         return window.innerWidth <= 768;
     }
 
-    // Create the persistent panel
     function createDictionaryPanel() {
         if (dictionaryPanel) return dictionaryPanel;
         
         const panel = document.createElement('div');
         panel.id = 'dictionary-panel';
         
-        // Different styles for mobile vs desktop
         if (isMobile()) {
-            // Mobile - full width at bottom
             panel.style.cssText = `
                 position: fixed;
                 bottom: 0;
@@ -849,7 +777,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 animation: slideUp 0.3s ease;
             `;
 
-            // Add pull handle for mobile
             const pullHandle = document.createElement('div');
             pullHandle.style.cssText = `
                 width: 40px;
@@ -861,7 +788,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             panel.appendChild(pullHandle);
 
-            // Add drag functionality for pull handle
             let startY = 0;
             let startHeight = 0;
             
@@ -882,7 +808,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 pullHandle.style.cursor = 'grab';
             });
 
-            // Add close button at top
             const mobileHeader = document.createElement('div');
             mobileHeader.style.cssText = `
                 display: flex;
@@ -899,7 +824,6 @@ document.addEventListener('DOMContentLoaded', () => {
             panel.appendChild(mobileHeader);
 
         } else {
-            // Desktop - draggable panel
             panel.style.cssText = `
                 position: fixed;
                 background: var(--bg-secondary);
@@ -923,7 +847,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 transition: box-shadow 0.2s ease;
             `;
 
-            // Desktop header
             const header = document.createElement('div');
             header.id = 'dictionary-header';
             header.style.cssText = `
@@ -949,11 +872,9 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             panel.appendChild(header);
 
-            // Add drag handlers for desktop
             setupDragHandlers(panel, header);
         }
 
-        // Content area (same for both)
         const content = document.createElement('div');
         content.id = 'dictionary-content';
         content.style.cssText = `
@@ -974,7 +895,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         dictionaryPanel = panel;
         
-        // Add close button handlers
         const closeBtn = document.getElementById('close-panel') || document.getElementById('close-panel-mobile');
         if (closeBtn) {
             closeBtn.addEventListener('click', (e) => {
@@ -983,7 +903,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         
-        // Add minimize handler for desktop
         const minimizeBtn = document.getElementById('minimize-panel');
         if (minimizeBtn) {
             minimizeBtn.addEventListener('click', (e) => {
@@ -1002,12 +921,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return panel;
     }
 
-    // Setup drag handlers with touch support
     function setupDragHandlers(panel, header) {
-        // Mouse events
         header.addEventListener('mousedown', startDrag);
         
-        // Touch events
         header.addEventListener('touchstart', handleTouchStart, { passive: false });
         header.addEventListener('touchmove', handleTouchMove, { passive: false });
         header.addEventListener('touchend', handleTouchEnd);
@@ -1051,14 +967,12 @@ document.addEventListener('DOMContentLoaded', () => {
             let newLeft = touch.clientX - dragOffset.x;
             let newTop = touch.clientY - dragOffset.y;
             
-            // Keep within viewport
             newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - panel.offsetWidth));
             newTop = Math.max(0, Math.min(newTop, window.innerHeight - panel.offsetHeight));
             
             panel.style.left = newLeft + 'px';
             panel.style.top = newTop + 'px';
             
-            // Save position
             panelPosition = { top: newTop, left: newLeft };
         }
 
@@ -1078,14 +992,12 @@ document.addEventListener('DOMContentLoaded', () => {
             let newLeft = e.clientX - dragOffset.x;
             let newTop = e.clientY - dragOffset.y;
             
-            // Keep within viewport
             newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - panel.offsetWidth));
             newTop = Math.max(0, Math.min(newTop, window.innerHeight - panel.offsetHeight));
             
             panel.style.left = newLeft + 'px';
             panel.style.top = newTop + 'px';
             
-            // Save position
             panelPosition = { top: newTop, left: newLeft };
         }
 
@@ -1119,7 +1031,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Update panel content
     function updatePanelContent(content) {
         if (!dictionaryPanel) {
             dictionaryPanel = createDictionaryPanel();
@@ -1128,12 +1039,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const contentDiv = document.getElementById('dictionary-content');
         if (contentDiv) {
             contentDiv.innerHTML = content;
-            // Scroll to top on new content
             contentDiv.scrollTop = 0;
         }
     }
 
-    // Show loading in panel
     function showLoadingInPanel(word) {
         const content = `
             <div style="text-align: center; padding: 20px;">
@@ -1143,7 +1052,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePanelContent(content);
     }
 
-    // Show definition in panel
     function showDefinitionInPanel(data) {
         let html = `
             <div style="border-bottom: 1px solid var(--border-primary); padding-bottom: 8px; margin-bottom: 10px;">
@@ -1181,7 +1089,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePanelContent(html);
     }
 
-    // Show no definition in panel
     function showNoDefinitionInPanel(word) {
         const content = `
             <div style="text-align: center; padding: ${isMobile() ? '30px' : '20px'};">
@@ -1193,24 +1100,20 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePanelContent(content);
     }
 
-    // Make words clickable
     function makeWordsClickable() {
         const resultWords = document.querySelectorAll('.result-word');
         
         resultWords.forEach((wordElement) => {
-            // Remove existing handlers
             const newElement = wordElement.cloneNode(true);
             wordElement.parentNode.replaceChild(newElement, wordElement);
             
-            // Style the word
             newElement.style.cursor = 'pointer';
             newElement.style.display = 'inline-block';
             newElement.style.padding = '2px 4px';
             newElement.style.color = 'var(--result-word)';
             newElement.style.textDecoration = 'none';
-            newElement.style.touchAction = 'manipulation'; // Better touch handling
+            newElement.style.touchAction = 'manipulation'; 
             
-            // Hover effect (only on non-touch devices)
             if (!isMobile()) {
                 newElement.addEventListener('mouseenter', () => {
                     newElement.style.backgroundColor = 'var(--highlight-bg)';
@@ -1222,23 +1125,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
             
-            // Click handler
             newElement.addEventListener('click', async (event) => {
                 event.stopPropagation();
                 event.preventDefault();
                 
                 const word = newElement.textContent;
-                
-                // Show loading in panel
+            
                 showLoadingInPanel(word);
                 
-                // Check cache
                 if (definitionCache.has(word)) {
                     showDefinitionInPanel(definitionCache.get(word));
                     return;
                 }
                 
-                // Fetch definition
                 const definition = await fetchFromWiktionary(word);
                 
                 if (definition) {
@@ -1251,7 +1150,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Wiktionary API
     async function fetchFromWiktionary(word) {
         try {
             const url = `https://en.wiktionary.org/api/rest_v1/page/definition/${encodeURIComponent(word)}`;
@@ -1267,7 +1165,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Parse Wiktionary response
     function parseWiktionaryResponse(word, data) {
         if (!data || !data.en) return null;
 
@@ -1297,7 +1194,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Clean up any remaining HTML in examples
         if (result.meanings.length > 0) {
             result.meanings.forEach(m => {
                 if (m.example) {
@@ -1309,7 +1205,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return result.meanings.length > 0 ? result : null;
     }
 
-    // Add CSS animations
     const style = document.createElement('style');
     style.textContent = `
         @keyframes slideUp {
@@ -1336,12 +1231,10 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 
-    // Handle theme changes
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
             if (dictionaryPanel) {
-                // Force repaint
                 dictionaryPanel.style.opacity = '0.99';
                 setTimeout(() => {
                     dictionaryPanel.style.opacity = '1';
@@ -1350,12 +1243,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Handle resize events
     window.addEventListener('resize', () => {
-        // Close panel on mobile if it's open and we resize to desktop?
-        // Or just leave it, user can reopen
         if (dictionaryPanel && isMobile()) {
-            // Recreate panel with mobile styles
             const wasOpen = dictionaryPanel;
             closeDictionaryPanel();
             if (wasOpen) {
@@ -1373,7 +1262,6 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('✅ Persistent Dictionary Panel Ready!');
     console.log('📱 Mobile compatible - drag handle to resize, swipe down to close');
 })();
-// Add subtle underline to clickable words
 (function() {
     const style = document.createElement('style');
     style.textContent = '.result-word { text-decoration: underline !important; text-underline-offset: 2px; text-decoration-thickness: 1px; text-decoration-color: var(--text-secondary) !important; }';
