@@ -398,349 +398,221 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded, initializing InesBotSearcher...');
     new InesBotSearcher();
 });
-// Dictionary Functionality using Free Dictionary API
-class WordDictionary {
-    constructor() {
-        this.cache = new Map(); // Cache definitions to avoid repeated API calls
-        this.initDictionaryStyles();
+// Simple Dictionary Functionality
+(function() {
+    // Only run if InesBotSearcher exists
+    if (typeof InesBotSearcher === 'undefined') {
+        console.error('InesBotSearcher not found!');
+        return;
     }
 
-    initDictionaryStyles() {
-        // Add dictionary styles if they don't exist
-        if (!document.getElementById('dictionary-styles')) {
-            const style = document.createElement('style');
-            style.id = 'dictionary-styles';
-            style.textContent = `
-                .definition-popup {
-                    position: fixed;
-                    background: var(--bg-primary);
-                    border: 2px solid var(--accent-color);
-                    border-radius: 12px;
-                    padding: 20px;
-                    max-width: 400px;
-                    max-height: 500px;
-                    overflow-y: auto;
-                    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-                    z-index: 1000;
-                    font-size: 14px;
-                    animation: fadeIn 0.2s ease;
-                }
+    console.log('📖 Initializing dictionary feature...');
 
-                .definition-popup h3 {
-                    margin: 0 0 15px 0;
-                    color: var(--accent-color);
-                    font-size: 20px;
-                    border-bottom: 2px solid var(--border-color);
-                    padding-bottom: 8px;
-                }
+    // Store the original displayResults method
+    const originalDisplayResults = InesBotSearcher.prototype.displayResults;
 
-                .definition-popup .word-info {
-                    margin-bottom: 15px;
-                }
-
-                .definition-popup .phonetic {
-                    color: var(--text-secondary);
-                    font-family: monospace;
-                    font-size: 16px;
-                    margin-bottom: 10px;
-                }
-
-                .definition-popup .meaning-item {
-                    margin-bottom: 15px;
-                    padding: 10px;
-                    background: var(--highlight-bg);
-                    border-radius: 8px;
-                }
-
-                .definition-popup .part-of-speech {
-                    font-weight: bold;
-                    color: var(--accent-color);
-                    font-style: italic;
-                    margin-bottom: 5px;
-                }
-
-                .definition-popup .definition {
-                    margin-bottom: 8px;
-                    line-height: 1.5;
-                }
-
-                .definition-popup .example {
-                    color: var(--text-secondary);
-                    font-style: italic;
-                    font-size: 13px;
-                    padding-left: 15px;
-                    border-left: 3px solid var(--accent-color);
-                    margin-top: 5px;
-                }
-
-                .definition-popup .loading-def {
-                    text-align: center;
-                    padding: 30px;
-                    color: var(--text-secondary);
-                }
-
-                .definition-popup .error-def {
-                    color: #ff6b6b;
-                    text-align: center;
-                    padding: 20px;
-                }
-
-                .definition-popup .close-btn {
-                    position: absolute;
-                    top: 10px;
-                    right: 10px;
-                    background: none;
-                    border: none;
-                    color: var(--text-secondary);
-                    font-size: 24px;
-                    cursor: pointer;
-                    padding: 5px 10px;
-                    border-radius: 5px;
-                    transition: all 0.2s;
-                }
-
-                .definition-popup .close-btn:hover {
-                    background: var(--hover-bg);
-                    color: var(--text-primary);
-                }
-
-                @keyframes fadeIn {
-                    from { opacity: 0; transform: translateY(-10px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-
-                .word-definition-link {
-                    cursor: pointer;
-                    border-bottom: 2px dotted var(--accent-color);
-                    transition: all 0.2s;
-                }
-
-                .word-definition-link:hover {
-                    background-color: var(--accent-color);
-                    color: white !important;
-                    border-bottom-color: transparent;
-                }
-            `;
-            document.head.appendChild(style);
-        }
-    }
-
-    async getDefinition(word) {
-        // Check cache first
-        if (this.cache.has(word)) {
-            console.log(`📚 Cache hit for: ${word}`);
-            return this.cache.get(word);
-        }
-
-        console.log(`🔍 Fetching definition for: ${word}`);
+    // Override the displayResults method
+    InesBotSearcher.prototype.displayResults = function(results, criteria) {
+        // Call the original method first
+        originalDisplayResults.call(this, results, criteria);
         
+        // Now make words clickable
+        setTimeout(() => {
+            makeWordsClickable();
+        }, 50);
+    };
+
+    // Cache for definitions
+    const definitionCache = new Map();
+
+    // Function to make words clickable
+    function makeWordsClickable() {
+        const resultWords = document.querySelectorAll('.result-word');
+        console.log(`Found ${resultWords.length} words to make clickable`);
+        
+        resultWords.forEach((wordElement, index) => {
+            // Remove any existing click listeners by cloning
+            const newElement = wordElement.cloneNode(true);
+            wordElement.parentNode.replaceChild(newElement, wordElement);
+            
+            // Add click handler to new element
+            newElement.style.cursor = 'pointer';
+            newElement.style.textDecoration = 'underline dotted';
+            newElement.style.textDecorationColor = 'var(--accent-color, #4a90e2)';
+            
+            newElement.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const word = newElement.textContent;
+                console.log(`Clicked word: ${word}`);
+                await showDefinition(word, e.clientX, e.clientY);
+            });
+        });
+    }
+
+    // Function to show definition
+    async function showDefinition(word, x, y) {
+        // Remove any existing popup
+        removeExistingPopup();
+
+        // Show loading popup
+        showLoadingPopup(word, x, y);
+
         try {
+            // Check cache first
+            if (definitionCache.has(word)) {
+                console.log('Using cached definition');
+                removeExistingPopup();
+                showDefinitionPopup(word, definitionCache.get(word), x, y);
+                return;
+            }
+
+            // Fetch from API
+            console.log(`Fetching definition for: ${word}`);
             const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
             
             if (!response.ok) {
-                if (response.status === 404) {
-                    throw new Error('Word not found in dictionary');
-                }
-                throw new Error(`API error: ${response.status}`);
+                throw new Error(response.status === 404 ? 'Word not found' : 'API error');
             }
 
             const data = await response.json();
             
-            // Process and format the definition data
-            const formattedData = this.formatDefinitionData(data[0]);
-            
             // Cache the result
-            this.cache.set(word, formattedData);
+            definitionCache.set(word, data);
             
-            return formattedData;
+            // Remove loading popup and show definition
+            removeExistingPopup();
+            showDefinitionPopup(word, data, x, y);
+            
         } catch (error) {
-            console.error('Error fetching definition:', error);
-            const errorResult = {
-                word: word,
-                error: error.message,
-                phonetic: '',
-                meanings: []
-            };
-            this.cache.set(word, errorResult);
-            return errorResult;
+            console.error('Error:', error);
+            removeExistingPopup();
+            showErrorPopup(word, error.message, x, y);
         }
     }
 
-    formatDefinitionData(data) {
-        const result = {
-            word: data.word,
-            phonetic: data.phonetic || data.phonetics?.find(p => p.text)?.text || '',
-            meanings: []
-        };
-
-        data.meanings.forEach(meaning => {
-            meaning.definitions.slice(0, 3).forEach(def => { // Limit to 3 definitions per part of speech
-                result.meanings.push({
-                    partOfSpeech: meaning.partOfSpeech,
-                    definition: def.definition,
-                    example: def.example || null
-                });
-            });
-        });
-
-        return result;
+    function showLoadingPopup(word, x, y) {
+        const popup = createPopup(x, y);
+        popup.innerHTML = `
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 18px; margin-bottom: 10px;">⏳</div>
+                <div>Loading definition for<br><strong>"${word}"</strong>...</div>
+            </div>
+        `;
+        document.body.appendChild(popup);
     }
 
-    createDefinitionPopup(word, definitionData, x, y) {
-        // Remove any existing popup
-        this.removeExistingPopup();
+    function showDefinitionPopup(word, data, x, y) {
+        const popup = createPopup(x, y);
+        
+        let html = `
+            <h3 style="margin: 0 0 15px 0; color: var(--accent-color, #4a90e2); border-bottom: 2px solid var(--border-color, #ddd); padding-bottom: 8px;">
+                ${word}
+            </h3>
+        `;
 
-        const popup = document.createElement('div');
-        popup.className = 'definition-popup';
-        
-        // Position popup near click, but keep it in viewport
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-        
-        let left = x;
-        let top = y;
-        
-        // Adjust if popup would go off screen
-        if (left + 400 > viewportWidth) {
-            left = viewportWidth - 420;
+        // Add phonetic if available
+        const phonetic = data[0]?.phonetic || data[0]?.phonetics?.find(p => p.text)?.text;
+        if (phonetic) {
+            html += `<div style="color: #666; font-family: monospace; margin-bottom: 15px;">${phonetic}</div>`;
         }
-        if (top + 500 > viewportHeight) {
-            top = viewportHeight - 520;
-        }
-        
-        popup.style.left = left + 'px';
-        popup.style.top = top + 'px';
 
-        // Add close button
-        const closeBtn = document.createElement('button');
-        closeBtn.className = 'close-btn';
-        closeBtn.innerHTML = '×';
-        closeBtn.onclick = () => this.removeExistingPopup();
-        popup.appendChild(closeBtn);
-
-        // Add content
-        if (definitionData.error) {
-            popup.innerHTML += `
-                <h3>${word}</h3>
-                <div class="error-def">
-                    ❌ ${definitionData.error}<br>
-                    <small>No dictionary definition found</small>
-                </div>
-            `;
-        } else {
-            let html = `<h3>${definitionData.word}</h3>`;
-            
-            if (definitionData.phonetic) {
-                html += `<div class="phonetic">${definitionData.phonetic}</div>`;
-            }
-
-            definitionData.meanings.forEach(meaning => {
+        // Add definitions
+        data[0]?.meanings?.forEach(meaning => {
+            meaning.definitions.slice(0, 2).forEach(def => {
                 html += `
-                    <div class="meaning-item">
-                        <div class="part-of-speech">${meaning.partOfSpeech}</div>
-                        <div class="definition">• ${meaning.definition}</div>
+                    <div style="margin-bottom: 15px; padding: 10px; background: var(--highlight-bg, #f5f5f5); border-radius: 8px;">
+                        <div style="font-weight: bold; color: var(--accent-color, #4a90e2); font-style: italic; margin-bottom: 5px;">
+                            ${meaning.partOfSpeech}
+                        </div>
+                        <div style="margin-bottom: 5px;">• ${def.definition}</div>
                 `;
                 
-                if (meaning.example) {
-                    html += `<div class="example">"${meaning.example}"</div>`;
+                if (def.example) {
+                    html += `<div style="color: #666; font-style: italic; padding-left: 15px; border-left: 3px solid var(--accent-color, #4a90e2); margin-top: 5px;">"${def.example}"</div>`;
                 }
                 
                 html += `</div>`;
             });
+        });
 
-            popup.innerHTML += html;
-        }
-
-        // Close popup when clicking outside
-        setTimeout(() => {
-            document.addEventListener('click', function closePopup(e) {
-                if (!popup.contains(e.target)) {
-                    document.body.removeChild(popup);
-                    document.removeEventListener('click', closePopup);
-                }
-            });
-        }, 100);
-
+        popup.innerHTML = html;
         document.body.appendChild(popup);
     }
 
-    removeExistingPopup() {
-        const existingPopup = document.querySelector('.definition-popup');
-        if (existingPopup) {
-            existingPopup.remove();
+    function showErrorPopup(word, error, x, y) {
+        const popup = createPopup(x, y);
+        popup.innerHTML = `
+            <h3 style="margin: 0 0 15px 0; color: #ff6b6b;">${word}</h3>
+            <div style="text-align: center; padding: 10px;">
+                ❌ ${error}<br>
+                <small style="color: #666;">No dictionary definition found</small>
+            </div>
+        `;
+        document.body.appendChild(popup);
+    }
+
+    function createPopup(x, y) {
+        removeExistingPopup();
+
+        const popup = document.createElement('div');
+        popup.style.cssText = `
+            position: fixed;
+            background: var(--bg-primary, white);
+            border: 2px solid var(--accent-color, #4a90e2);
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 350px;
+            max-height: 400px;
+            overflow-y: auto;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            z-index: 10000;
+            font-size: 14px;
+            left: ${Math.min(x, window.innerWidth - 370)}px;
+            top: ${Math.min(y + 10, window.innerHeight - 420)}px;
+            animation: fadeIn 0.2s ease;
+        `;
+
+        // Add close button
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '×';
+        closeBtn.style.cssText = `
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            padding: 5px 10px;
+        `;
+        closeBtn.onclick = () => popup.remove();
+        popup.appendChild(closeBtn);
+
+        return popup;
+    }
+
+    function removeExistingPopup() {
+        const existing = document.querySelector('div[style*="position: fixed"][style*="border-radius: 12px"]');
+        if (existing) existing.remove();
+    }
+
+    // Add animation keyframes
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-    }
+    `;
+    document.head.appendChild(style);
 
-    makeWordClickable(wordElement, word) {
-        wordElement.classList.add('word-definition-link');
-        wordElement.title = 'Click to get definition';
-        
-        wordElement.addEventListener('click', async (e) => {
-            e.stopPropagation(); // Prevent event bubbling
-            const rect = wordElement.getBoundingClientRect();
-            
-            // Show loading popup immediately
-            const loadingPopup = document.createElement('div');
-            loadingPopup.className = 'definition-popup';
-            loadingPopup.style.left = rect.left + 'px';
-            loadingPopup.style.top = (rect.bottom + 10) + 'px';
-            loadingPopup.innerHTML = `
-                <div class="loading-def">
-                    ⏳ Loading definition for "${word}"...<br>
-                    <small>Fetching from dictionary API</small>
-                </div>
-            `;
-            
-            this.removeExistingPopup();
-            document.body.appendChild(loadingPopup);
-            
-            // Fetch definition
-            const definitionData = await this.getDefinition(word);
-            
-            // Remove loading popup and show actual definition
-            this.removeExistingPopup();
-            this.createDefinitionPopup(word, definitionData, rect.left, rect.bottom + 10);
-        });
-    }
-}
-
-// Modify the displayResults method to make words clickable
-// Find this function in your InesBotSearcher class and replace it, or add this enhancement:
-
-// Store original displayResults
-const originalDisplayResults = InesBotSearcher.prototype.displayResults;
-
-// Override displayResults to add dictionary functionality
-InesBotSearcher.prototype.displayResults = function(results, criteria) {
-    // Call the original method first
-    originalDisplayResults.call(this, results, criteria);
-    
-    // Initialize dictionary if not already done
-    if (!this.dictionary) {
-        this.dictionary = new WordDictionary();
-    }
-    
-    // Add click handlers to all result words
-    setTimeout(() => {
-        const resultWords = document.querySelectorAll('.result-word');
-        resultWords.forEach((wordElement, index) => {
-            // Get the actual word text
-            const word = wordElement.textContent;
-            // Make it clickable for dictionary definitions
-            this.dictionary.makeWordClickable(wordElement, word);
-        });
-        console.log(`📚 Added dictionary functionality to ${resultWords.length} words`);
-    }, 100); // Small delay to ensure DOM is updated
-};
-
-// Optional: Add a keyboard shortcut to close popup (Escape key)
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const popup = document.querySelector('.definition-popup');
-        if (popup) {
-            popup.remove();
+    // Add escape key handler
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            removeExistingPopup();
         }
-    }
-});
+    });
 
-console.log('📖 Dictionary functionality loaded! Click on any word to see its definition.');
+    console.log('✅ Dictionary feature ready! Words will be clickable after search.');
+})();
