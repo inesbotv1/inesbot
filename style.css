@@ -787,3 +787,8 @@ input[type="radio"] {
     border-color: var(--text-tertiary);
     background-color: var(--bg-accent);
 }
+/* Instant theme switching */
+html.theme-transitioning,
+html.theme-transitioning * {
+    transition: none !important;
+}
