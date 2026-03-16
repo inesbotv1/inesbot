@@ -422,11 +422,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cache for definitions
     const definitionCache = new Map();
 
-    // Get CSS variable value
-    function getCSSVar(varName) {
-        return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-    }
-
     // Wiktionary API
     async function fetchFromWiktionary(word) {
         try {
@@ -484,15 +479,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const newElement = wordElement.cloneNode(true);
             wordElement.parentNode.replaceChild(newElement, wordElement);
             
-            // Style the word - using your theme colors
+            // Style the word
             newElement.style.cursor = 'pointer';
             newElement.style.display = 'inline-block';
             newElement.style.padding = '0 2px';
-            newElement.style.color = 'var(--result-word)';
             
             // Hover effect
             newElement.addEventListener('mouseenter', () => {
                 newElement.style.backgroundColor = 'var(--highlight-bg)';
+                newElement.style.borderRadius = '4px';
             });
             
             newElement.addEventListener('mouseleave', () => {
@@ -533,7 +528,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const popup = createPopup(rect);
         popup.innerHTML = `
             <div style="text-align: center; padding: 15px;">
-                <div style="margin-bottom: 8px; color: var(--text-primary)">🔍 Loading "${word}"</div>
+                <div style="color: var(--text-primary);">🔍 Loading "${word}"</div>
             </div>
         `;
         document.body.appendChild(popup);
@@ -549,7 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         
         if (data.phonetic) {
-            html += `<div style="font-family: monospace; color: var(--text-secondary); font-size: 12px;">/${data.phonetic}/</div>`;
+            html += `<div style="font-family: monospace; color: var(--text-secondary); font-size: 12px; margin-top: 2px;">/${data.phonetic}/</div>`;
         }
         
         html += `</div>`;
@@ -557,7 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data.meanings.forEach((meaning) => {
             html += `
                 <div style="margin-bottom: 10px; padding: 8px; background: var(--highlight-bg); border-radius: 6px;">
-                    <div style="font-weight: 500; color: var(--text-tertiary); margin-bottom: 3px; font-size: 11px; text-transform: uppercase;">
+                    <div style="font-weight: 600; color: var(--text-tertiary); margin-bottom: 3px; font-size: 11px; text-transform: uppercase;">
                         ${meaning.partOfSpeech}
                     </div>
                     <div style="color: var(--text-primary); line-height: 1.4; font-size: 13px;">
@@ -580,12 +575,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(popup);
     }
 
-    // Show "no definition" - EXACTLY as requested, no emoji, not too big
+    // Show "no definition"
     function showNoDefinition(word, rect) {
         const popup = createPopup(rect);
         popup.innerHTML = `
             <div style="text-align: center; padding: 12px;">
-                <div style="color: var(--text-primary); font-size: 14px; line-height: 1.4;">
+                <div style="color: var(--text-primary); font-size: 14px; line-height: 1.5;">
                     It just works twin, don't worry about the definition
                 </div>
             </div>
@@ -593,37 +588,43 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(popup);
     }
 
-    // Create popup - NO close button, using your theme variables
+    // Create popup - Positioned BELOW the word like the old code
     function createPopup(rect) {
         removeExistingPopup();
 
         const popup = document.createElement('div');
         
-        // Position to the right of the word
+        // Position below the word (like the old code)
         const scrollY = window.scrollY;
         const scrollX = window.scrollX;
         
-        let top = rect.top + scrollY - 5;
-        let left = rect.right + scrollX + 10;
+        let top = rect.bottom + scrollY + 5; // 5px below the word
+        let left = rect.left + scrollX; // Align with left edge of word
         
         // Keep in viewport
-        const popupWidth = 280;
+        const popupWidth = 300;
+        const popupHeight = 350;
+        
+        // Adjust horizontal position if off screen
         if (left + popupWidth > window.innerWidth) {
-            left = rect.left + scrollX - popupWidth - 10;
+            left = window.innerWidth - popupWidth - 10;
         }
         
-        if (top < scrollY) top = scrollY + 5;
-        if (top + 300 > window.innerHeight + scrollY) {
-            top = window.innerHeight + scrollY - 305;
+        // Adjust vertical position if off screen
+        if (top + popupHeight > window.innerHeight + scrollY) {
+            top = rect.top + scrollY - popupHeight - 5; // Show above instead
         }
+        
+        // Ensure left isn't negative
+        if (left < 10) left = 10;
 
         popup.style.cssText = `
             position: absolute;
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
             border-radius: 8px;
-            padding: 12px;
-            width: 280px;
+            padding: 15px;
+            width: 300px;
             max-height: 350px;
             overflow-y: auto;
             box-shadow: 0 4px 12px var(--shadow-color);
@@ -633,6 +634,7 @@ document.addEventListener('DOMContentLoaded', () => {
             top: ${top}px;
             left: ${left}px;
             color: var(--text-primary);
+            transition: all 0.2s ease;
         `;
 
         return popup;
@@ -644,7 +646,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (existing) existing.remove();
     }
 
-    // Click outside to close - SIMPLE and works
+    // Click outside to close
     document.addEventListener('click', function(e) {
         const popup = document.querySelector('div[style*="position: absolute"][style*="border-radius: 8px"]');
         const clickedWord = e.target.closest('.result-word');
@@ -661,35 +663,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Theme toggle observer - update popup colors when theme changes
+    // Handle theme changes
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
-            // If there's an open popup, refresh it by reopening
-            const popup = document.querySelector('div[style*="position: absolute"][style*="border-radius: 8px"]');
-            if (popup) {
-                // Get the word from the popup if possible
-                const wordElement = popup.querySelector('div[style*="font-size: 18px"]');
-                if (wordElement) {
-                    const word = wordElement.textContent;
-                    const wordElements = document.querySelectorAll('.result-word');
-                    for (let el of wordElements) {
-                        if (el.textContent === word) {
-                            const rect = el.getBoundingClientRect();
-                            popup.remove();
-                            setTimeout(() => {
-                                fetchFromWiktionary(word).then(def => {
-                                    if (def) showDefinition(def, rect);
-                                    else showNoDefinition(word, rect);
-                                });
-                            }, 50);
-                            break;
-                        }
-                    }
-                } else {
-                    popup.remove();
-                }
-            }
+            // Just close any open popup - they can reopen it
+            removeExistingPopup();
         });
     }
 
