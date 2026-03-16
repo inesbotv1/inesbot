@@ -501,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return result.meanings.length > 0 ? result : null;
     }
 
-    // Make words clickable - FIXED to only click on actual word
+    // Make words clickable - FIXED to only click on actual word text
     function makeWordsClickable() {
         const resultWords = document.querySelectorAll('.result-word');
         console.log(`Found ${resultWords.length} words to make clickable`);
@@ -516,7 +516,8 @@ document.addEventListener('DOMContentLoaded', () => {
             newElement.style.borderBottom = `2px solid ${COLORS.accent}`;
             newElement.style.padding = '0 2px';
             newElement.style.transition = 'all 0.2s ease';
-            newElement.style.display = 'inline'; // Ensure it's inline
+            newElement.style.display = 'inline-block'; // Better for click area
+            newElement.style.width = 'auto'; // Only as wide as the text
             
             // Hover effect
             newElement.addEventListener('mouseenter', () => {
@@ -537,7 +538,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const word = newElement.textContent;
                 const rect = newElement.getBoundingClientRect();
                 
-                // Position popup relative to the word
+                // Position popup to the right of the word
                 await showDefinition(word, rect);
             });
         });
@@ -629,32 +630,36 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(popup);
     }
 
-    // Error popup
+    // Error popup - FIXED with the requested message
     function showErrorPopup(word, rect) {
         const popup = createPopup(rect);
         popup.innerHTML = `
-            <div style="text-align: center; padding: 20px;">
-                <div style="font-size: 24px; margin-bottom: 10px;">📖</div>
-                <div style="color: ${COLORS.primary}; font-weight: bold; margin-bottom: 10px;">"${word}"</div>
-                <div style="color: ${COLORS.secondary}; margin-bottom: 15px;">No definition found in Wiktionary</div>
-                <div style="font-size: 12px; color: #95a5a6;">Try checking the spelling or try another word</div>
+            <div style="text-align: center; padding: 25px 20px;">
+                <div style="font-size: 32px; margin-bottom: 15px;">✨</div>
+                <div style="color: ${COLORS.primary}; font-size: 18px; font-weight: bold; margin-bottom: 10px;">"${word}"</div>
+                <div style="color: ${COLORS.secondary}; font-size: 16px; margin-bottom: 15px; line-height: 1.5;">
+                    It just works twin,<br>don't worry about the definition
+                </div>
+                <div style="font-size: 12px; color: #95a5a6; margin-top: 10px; padding-top: 10px; border-top: 1px solid ${COLORS.border};">
+                    (even Wiktionary doesn't know everything)
+                </div>
             </div>
         `;
         document.body.appendChild(popup);
     }
 
-    // Create popup - FIXED positioning relative to word
+    // Create popup - FIXED positioning to the right of the word
     function createPopup(rect) {
         removeExistingPopup();
 
         const popup = document.createElement('div');
         
-        // Calculate position - popup appears below the word
+        // Calculate position - popup appears to the RIGHT of the word
         const scrollY = window.scrollY;
         const scrollX = window.scrollX;
         
-        let top = rect.bottom + scrollY + 5; // 5px below the word
-        let left = rect.left + scrollX;
+        let top = rect.top + scrollY - 10; // Align with top of word, slight offset
+        let left = rect.right + scrollX + 10; // 10px to the right of the word
         
         // Ensure popup stays within viewport
         const popupWidth = 350;
@@ -662,14 +667,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
         
-        // Adjust horizontal position if needed
+        // Adjust horizontal position if it goes off right edge
         if (left + popupWidth > viewportWidth) {
-            left = viewportWidth - popupWidth - 10;
+            left = rect.left + scrollX - popupWidth - 10; // Show to the left instead
         }
         
         // Adjust vertical position if popup would go off screen
         if (top + popupHeight > viewportHeight + scrollY) {
-            top = rect.top + scrollY - popupHeight - 5; // Show above the word
+            top = viewportHeight + scrollY - popupHeight - 10;
+        }
+        
+        // Ensure top isn't above viewport
+        if (top < scrollY) {
+            top = scrollY + 5;
         }
 
         popup.style.cssText = `
@@ -690,7 +700,7 @@ document.addEventListener('DOMContentLoaded', () => {
             animation: fadeIn 0.2s ease;
         `;
 
-        // Add close button - FIXED: actual working close button
+        // Add close button
         const closeBtn = document.createElement('button');
         closeBtn.innerHTML = '×';
         closeBtn.style.cssText = `
@@ -743,13 +753,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const style = document.createElement('style');
     style.textContent = `
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateX(-5px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         
         .result-word {
             cursor: pointer !important;
             user-select: none;
+            display: inline-block !important;
+            max-width: fit-content !important;
         }
     `;
     document.head.appendChild(style);
@@ -761,13 +773,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Click outside to close popup
-    document.addEventListener('click', (e) => {
+    // FIXED: Click outside to close popup - now works properly
+    document.addEventListener('click', function closePopupOnClickOutside(e) {
         const popup = document.querySelector('div[style*="position: absolute"][style*="border-radius: 8px"]');
-        if (popup && !popup.contains(e.target) && !e.target.classList.contains('result-word')) {
+        const clickedWord = e.target.closest('.result-word');
+        
+        // If there's a popup and the click wasn't on the popup and wasn't on a word
+        if (popup && !popup.contains(e.target) && !clickedWord) {
             popup.remove();
         }
     });
 
     console.log('✅ Wiktionary Dictionary Ready!');
+    console.log('✨ Click any word to see its definition!');
 })();
