@@ -6,13 +6,21 @@ const htmlElement = document.documentElement;
 const savedTheme = localStorage.getItem('theme') || 'light';
 htmlElement.setAttribute('data-theme', savedTheme);
 
-// Theme toggle handler
+// Theme toggle handler - REPLACE your existing one with this
 themeToggle.addEventListener('click', () => {
+    // Disable transitions temporarily
+    document.documentElement.classList.add('theme-transitioning');
+    
     const currentTheme = htmlElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     
     htmlElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
+    
+    // Re-enable transitions after theme is set
+    setTimeout(() => {
+        document.documentElement.classList.remove('theme-transitioning');
+    }, 20);
 });
 
 // InesBot Searcher Class
