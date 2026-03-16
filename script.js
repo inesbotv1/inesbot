@@ -22,31 +22,97 @@ class InesBotSearcher {
         // Using raw.githubusercontent.com for direct file access
         this.wordListUrl = 'https://raw.githubusercontent.com/inesbotv1/askari/refs/heads/main/lastletter.txt';
         
+        // Check if all required elements exist
+        this.checkRequiredElements();
+        
         this.initEventListeners();
-        // Auto-load words when the page loads - with a small delay to ensure DOM is ready
+        // Auto-load words when the page loads
         setTimeout(() => {
             this.loadWordsFromURL();
         }, 100);
     }
 
-    initEventListeners() {
-        document.getElementById('search-btn').addEventListener('click', () => this.performSearch());
-        document.getElementById('clear-btn').addEventListener('click', () => this.clearSearch());
+    checkRequiredElements() {
+        const requiredIds = [
+            'results-box', 'word-count', 'result-count', 
+            'prefix-input', 'suffix-input', 'search-btn', 'clear-btn'
+        ];
         
-        document.getElementById('prefix-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') this.performSearch();
+        let missingElements = [];
+        
+        requiredIds.forEach(id => {
+            if (!document.getElementById(id)) {
+                missingElements.push(id);
+                console.error(`❌ Required element with id "${id}" not found in HTML!`);
+            }
         });
-        document.getElementById('suffix-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') this.performSearch();
-        });
+        
+        if (missingElements.length > 0) {
+            console.warn(`Missing elements: ${missingElements.join(', ')}. The app may not function correctly.`);
+            
+            // Show error in the results box if it exists, otherwise alert
+            const resultsBox = document.getElementById('results-box');
+            if (resultsBox) {
+                resultsBox.innerHTML = `<div class="error-message">❌ Critical error: Missing HTML elements: ${missingElements.join(', ')}. Please check the console.</div>`;
+            } else {
+                alert(`Error: Missing required elements: ${missingElements.join(', ')}`);
+            }
+        } else {
+            console.log('✅ All required elements found');
+        }
+    }
+
+    initEventListeners() {
+        // Safely add event listeners with null checks
+        const searchBtn = document.getElementById('search-btn');
+        if (searchBtn) {
+            searchBtn.addEventListener('click', () => this.performSearch());
+        } else {
+            console.error('Search button not found');
+        }
+        
+        const clearBtn = document.getElementById('clear-btn');
+        if (clearBtn) {
+            clearBtn.addEventListener('click', () => this.clearSearch());
+        } else {
+            console.error('Clear button not found');
+        }
+        
+        const prefixInput = document.getElementById('prefix-input');
+        if (prefixInput) {
+            prefixInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') this.performSearch();
+            });
+        } else {
+            console.error('Prefix input not found');
+        }
+        
+        const suffixInput = document.getElementById('suffix-input');
+        if (suffixInput) {
+            suffixInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') this.performSearch();
+            });
+        } else {
+            console.error('Suffix input not found');
+        }
     }
 
     async loadWordsFromURL() {
-        // Show loading message immediately
+        console.log('📥 loadWordsFromURL started');
+        console.log('Current words array length:', this.words.length);
+        
         const resultsBox = document.getElementById('results-box');
-        if (resultsBox) {
-            resultsBox.innerHTML = '<div class="loading-message">⏳ Loading words from GitHub...</div>';
+        const wordCountElement = document.getElementById('word-count');
+        const resultCountElement = document.getElementById('result-count');
+        
+        // Check if critical elements exist
+        if (!resultsBox) {
+            console.error('❌ results-box element not found! Cannot display loading message.');
+            return;
         }
+        
+        // Show loading message
+        resultsBox.innerHTML = '<div class="loading-message">⏳ Loading words from GitHub...</div>';
         
         try {
             console.log('Fetching from:', this.wordListUrl);
@@ -70,6 +136,7 @@ class InesBotSearcher {
             }
             
             const text = await response.text();
+            console.log('Raw text length:', text.length);
             
             if (!text || text.length === 0) {
                 throw new Error('Word list file is empty');
@@ -81,6 +148,7 @@ class InesBotSearcher {
                 .filter(word => word.length > 0);
             
             console.log('Words found:', words.length);
+            console.log('First 5 words:', words.slice(0, 5));
             
             if (words.length === 0) {
                 throw new Error('No words found in the file');
@@ -89,15 +157,24 @@ class InesBotSearcher {
             // Remove duplicates and sort
             this.words = [...new Set(words)];
             
-            // Update word count
-            document.getElementById('word-count').textContent = this.words.length;
+            // Update word count if element exists
+            if (wordCountElement) {
+                wordCountElement.textContent = this.words.length;
+                console.log('Updated word count to:', this.words.length);
+            } else {
+                console.error('word-count element not found');
+            }
+            
+            // Update result count if element exists
+            if (resultCountElement) {
+                resultCountElement.textContent = '0';
+            }
             
             // Show success message
             this.showSuccess(`✅ Successfully loaded ${this.words.length} words!`);
-            document.getElementById('result-count').textContent = '0';
             
         } catch (error) {
-            console.error('Error loading words:', error);
+            console.error('❌ Error loading words:', error);
             
             // Provide more specific error messages
             if (error.message.includes('Failed to fetch')) {
@@ -109,20 +186,52 @@ class InesBotSearcher {
             }
             
             this.words = [];
-            document.getElementById('word-count').textContent = '0';
+            
+            // Update word count if element exists
+            if (wordCountElement) {
+                wordCountElement.textContent = '0';
+            }
         }
     }
 
     performSearch() {
+        console.log('Performing search. Words loaded:', this.words.length);
+        
         if (this.words.length === 0) {
             this.showError('No words loaded. Please refresh the page to try again.');
             return;
         }
 
-        const prefix = document.getElementById('prefix-input').value.toLowerCase().trim();
-        const suffix = document.getElementById('suffix-input').value.toLowerCase().trim();
+        const prefixInput = document.getElementById('prefix-input');
+        const suffixInput = document.getElementById('suffix-input');
+        const sortRadios = document.querySelectorAll('input[name="sort"]');
         
-        const sortOption = document.querySelector('input[name="sort"]:checked').value;
+        // Check if elements exist
+        if (!prefixInput || !suffixInput) {
+            console.error('Search inputs not found');
+            this.showError('Error: Search inputs not found in HTML');
+            return;
+        }
+        
+        if (sortRadios.length === 0) {
+            console.error('Sort radio buttons not found');
+            this.showError('Error: Sort options not found in HTML');
+            return;
+        }
+        
+        const prefix = prefixInput.value.toLowerCase().trim();
+        const suffix = suffixInput.value.toLowerCase().trim();
+        
+        // Find checked radio button
+        let checkedRadio = null;
+        for (let radio of sortRadios) {
+            if (radio.checked) {
+                checkedRadio = radio;
+                break;
+            }
+        }
+        
+        const sortOption = checkedRadio ? checkedRadio.value : 'none';
         
         let criteria = [];
         if (prefix) criteria.push(`starts with '${prefix}'`);
@@ -149,7 +258,10 @@ class InesBotSearcher {
         // 'none' keeps original order (as loaded from file)
         
         // Update result count
-        document.getElementById('result-count').textContent = results.length;
+        const resultCountElement = document.getElementById('result-count');
+        if (resultCountElement) {
+            resultCountElement.textContent = results.length;
+        }
         
         // Display results with 1000 limit
         this.displayResults(results, criteria);
@@ -157,6 +269,12 @@ class InesBotSearcher {
 
     displayResults(results, criteria) {
         const resultsBox = document.getElementById('results-box');
+        
+        if (!resultsBox) {
+            console.error('results-box element not found!');
+            return;
+        }
+        
         const MAX_DISPLAY = 1000;
         
         if (results.length === 0) {
@@ -183,8 +301,8 @@ class InesBotSearcher {
         }
         
         displayResults.forEach((word, index) => {
-            const prefix = document.getElementById('prefix-input').value.toLowerCase().trim();
-            const suffix = document.getElementById('suffix-input').value.toLowerCase().trim();
+            const prefix = document.getElementById('prefix-input')?.value.toLowerCase().trim() || '';
+            const suffix = document.getElementById('suffix-input')?.value.toLowerCase().trim() || '';
             
             let matches = [];
             if (prefix && word.toLowerCase().startsWith(prefix)) {
@@ -220,6 +338,9 @@ class InesBotSearcher {
         const resultsBox = document.getElementById('results-box');
         if (resultsBox) {
             resultsBox.innerHTML = `<div class="success-message">${message}</div>`;
+            console.log('✅ Success:', message);
+        } else {
+            console.error('Cannot show success message - results-box not found');
         }
     }
 
@@ -227,6 +348,9 @@ class InesBotSearcher {
         const resultsBox = document.getElementById('results-box');
         if (resultsBox) {
             resultsBox.innerHTML = `<div class="error-message">❌ ${message}</div>`;
+            console.error('❌ Error displayed:', message);
+        } else {
+            console.error('Cannot show error message - results-box not found. Error:', message);
         }
     }
 
@@ -239,16 +363,38 @@ class InesBotSearcher {
 
     clearSearch() {
         // Clear only the search results and input fields
-        document.getElementById('results-box').innerHTML = '<p class="placeholder-text">Enter search criteria and click Search...</p>';
-        document.getElementById('prefix-input').value = '';
-        document.getElementById('suffix-input').value = '';
-        document.querySelector('input[name="sort"][value="none"]').checked = true;
-        document.getElementById('result-count').textContent = '0';
-        // Don't clear the words array - keep the loaded words
+        const resultsBox = document.getElementById('results-box');
+        const prefixInput = document.getElementById('prefix-input');
+        const suffixInput = document.getElementById('suffix-input');
+        const sortRadios = document.querySelectorAll('input[name="sort"]');
+        const resultCountElement = document.getElementById('result-count');
+        
+        if (resultsBox) {
+            resultsBox.innerHTML = '<p class="placeholder-text">Enter search criteria and click Search...</p>';
+        }
+        
+        if (prefixInput) prefixInput.value = '';
+        if (suffixInput) suffixInput.value = '';
+        
+        // Uncheck all radios and check the 'none' option
+        sortRadios.forEach(radio => {
+            if (radio.value === 'none') {
+                radio.checked = true;
+            } else {
+                radio.checked = false;
+            }
+        });
+        
+        if (resultCountElement) {
+            resultCountElement.textContent = '0';
+        }
+        
+        console.log('Search cleared');
     }
 }
 
 // Initialize the app when the page loads
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM fully loaded, initializing InesBotSearcher...');
     new InesBotSearcher();
 });
