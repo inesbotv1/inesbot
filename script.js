@@ -23,12 +23,16 @@ class InesBotSearcher {
         this.wordListUrl = 'https://raw.githubusercontent.com/inesbotv1/askari/refs/heads/main/lastletter.txt';
         
         this.initEventListeners();
+        // Auto-load words when the page loads
+        this.loadWordsFromURL();
     }
 
     initEventListeners() {
         document.getElementById('search-btn').addEventListener('click', () => this.performSearch());
+        // Remove the load-words-btn event listener since we auto-load
+        // But keep the button for manual reload if needed
         document.getElementById('load-words-btn').addEventListener('click', () => this.loadWordsFromURL());
-        document.getElementById('clear-btn').addEventListener('click', () => this.clearAll());
+        document.getElementById('clear-btn').addEventListener('click', () => this.clearSearch());
         
         document.getElementById('prefix-input').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.performSearch();
@@ -57,18 +61,12 @@ class InesBotSearcher {
             });
             
             console.log('Response status:', response.status);
-            console.log('Response headers:', {
-                'content-type': response.headers.get('content-type'),
-                'content-length': response.headers.get('content-length')
-            });
             
             if (!response.ok) {
                 throw new Error(`Failed to load: ${response.status} ${response.statusText}`);
             }
             
             const text = await response.text();
-            console.log('First 200 chars:', text.substring(0, 200));
-            console.log('Total length:', text.length);
             
             if (!text || text.length === 0) {
                 throw new Error('Word list file is empty');
@@ -80,7 +78,6 @@ class InesBotSearcher {
                 .filter(word => word.length > 0);
             
             console.log('Words found:', words.length);
-            console.log('First 10 words:', words.slice(0, 10));
             
             if (words.length === 0) {
                 throw new Error('No words found in the file');
@@ -104,8 +101,6 @@ class InesBotSearcher {
                 this.showError('Network error: Cannot reach GitHub. Check your internet connection.');
             } else if (error.message.includes('404')) {
                 this.showError('File not found on GitHub. Check if the URL is correct: <br>' + this.wordListUrl);
-            } else if (error.message.includes('CORS')) {
-                this.showError('CORS error. This should not happen with GitHub raw files. Try a different browser.');
             } else {
                 this.showError(`Failed to load words: ${error.message}`);
             }
@@ -153,12 +148,13 @@ class InesBotSearcher {
         // Update result count
         document.getElementById('result-count').textContent = results.length;
         
-        // Display results
+        // Display results with 1000 limit
         this.displayResults(results, criteria);
     }
 
     displayResults(results, criteria) {
         const resultsBox = document.getElementById('results-box');
+        const MAX_DISPLAY = 1000; // Increased from 50 to 1000
         
         if (results.length === 0) {
             let message = 'No words match your criteria';
@@ -170,16 +166,16 @@ class InesBotSearcher {
         }
         
         let html = '';
-        const displayResults = results.slice(0, 50); // Show top 50 for better visibility
+        const displayResults = results.slice(0, MAX_DISPLAY);
         
         // Add summary header
         if (criteria.length > 0) {
-            html += `<div class="result-item" style="background: #e3f2fd; font-weight: bold; border-radius: 8px; margin-bottom: 10px;">
+            html += `<div class="result-item" style="background: var(--highlight-bg); font-weight: bold; border-radius: 8px; margin-bottom: 10px; color: var(--text-primary);">
                 Found ${results.length} words matching: ${criteria.join(' and ')}
             </div>`;
         } else {
-            html += `<div class="result-item" style="background: #f5f5f5; font-weight: bold; border-radius: 8px; margin-bottom: 10px;">
-                Showing first ${Math.min(50, results.length)} of ${results.length} words
+            html += `<div class="result-item" style="background: var(--highlight-bg); font-weight: bold; border-radius: 8px; margin-bottom: 10px; color: var(--text-primary);">
+                Showing first ${Math.min(MAX_DISPLAY, results.length)} of ${results.length} words
             </div>`;
         }
         
@@ -200,16 +196,16 @@ class InesBotSearcher {
             html += `
                 <div class="result-item">
                     <span class="result-number">${index + 1}.</span>
-                    ${word}${matchInfo}
+                    <span class="result-word">${word}</span>${matchInfo}
                     <span class="result-length">[${word.length}]</span>
                 </div>
             `;
         });
         
-        if (results.length > 50) {
+        if (results.length > MAX_DISPLAY) {
             html += `
-                <div class="result-item" style="color: #6c757d; font-style: italic; background: #f8f9fa;">
-                    ... and ${results.length - 50} more results (showing top 50 only)
+                <div class="result-item" style="color: var(--text-secondary); font-style: italic; background: var(--highlight-bg);">
+                    ... and ${results.length - MAX_DISPLAY} more results (showing first ${MAX_DISPLAY} only)
                 </div>
             `;
         }
@@ -232,15 +228,14 @@ class InesBotSearcher {
         resultsBox.innerHTML = `<div class="loading-message">⏳ ${message}</div>`;
     }
 
-    clearAll() {
-        document.getElementById('results-box').innerHTML = '<p class="placeholder-text">Click "Load Words" to begin...</p>';
+    clearSearch() {
+        // Clear only the search results and input fields
+        document.getElementById('results-box').innerHTML = '<p class="placeholder-text">Enter search criteria and click Search...</p>';
         document.getElementById('prefix-input').value = '';
         document.getElementById('suffix-input').value = '';
         document.querySelector('input[name="sort"][value="none"]').checked = true;
         document.getElementById('result-count').textContent = '0';
-        // Clear loaded words as well
-        this.words = [];
-        document.getElementById('word-count').textContent = '0';
+        // Don't clear the words array - keep the loaded words
     }
 }
 
