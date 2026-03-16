@@ -178,7 +178,7 @@ class InesBotSearcher {
                 Found ${results.length} words matching: ${criteria.join(' and ')}
             </div>`;
         } else {
-            html += ``<div class="result-item" style="background: #f5f5f5; font-weight: bold; border-radius: 8px; margin-bottom: 10px;">
+            html += `<div class="result-item" style="background: #f5f5f5; font-weight: bold; border-radius: 8px; margin-bottom: 10px;">
                 Showing first ${Math.min(50, results.length)} of ${results.length} words
             </div>`;
         }
