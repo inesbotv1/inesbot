@@ -23,8 +23,10 @@ class InesBotSearcher {
         this.wordListUrl = 'https://raw.githubusercontent.com/inesbotv1/askari/refs/heads/main/lastletter.txt';
         
         this.initEventListeners();
-        // Auto-load words when the page loads
-        this.loadWordsFromURL();
+        // Auto-load words when the page loads - with a small delay to ensure DOM is ready
+        setTimeout(() => {
+            this.loadWordsFromURL();
+        }, 100);
     }
 
     initEventListeners() {
@@ -40,7 +42,11 @@ class InesBotSearcher {
     }
 
     async loadWordsFromURL() {
-        this.showLoading('Loading words from GitHub...');
+        // Show loading message immediately
+        const resultsBox = document.getElementById('results-box');
+        if (resultsBox) {
+            resultsBox.innerHTML = '<div class="loading-message">⏳ Loading words from GitHub...</div>';
+        }
         
         try {
             console.log('Fetching from:', this.wordListUrl);
@@ -151,7 +157,7 @@ class InesBotSearcher {
 
     displayResults(results, criteria) {
         const resultsBox = document.getElementById('results-box');
-        const MAX_DISPLAY = 1000; // Increased from 50 to 1000
+        const MAX_DISPLAY = 1000;
         
         if (results.length === 0) {
             let message = 'No words match your criteria';
@@ -212,17 +218,23 @@ class InesBotSearcher {
 
     showSuccess(message) {
         const resultsBox = document.getElementById('results-box');
-        resultsBox.innerHTML = `<div class="success-message">${message}</div>`;
+        if (resultsBox) {
+            resultsBox.innerHTML = `<div class="success-message">${message}</div>`;
+        }
     }
 
     showError(message) {
         const resultsBox = document.getElementById('results-box');
-        resultsBox.innerHTML = `<div class="error-message">❌ ${message}</div>`;
+        if (resultsBox) {
+            resultsBox.innerHTML = `<div class="error-message">❌ ${message}</div>`;
+        }
     }
 
     showLoading(message) {
         const resultsBox = document.getElementById('results-box');
-        resultsBox.innerHTML = `<div class="loading-message">⏳ ${message}</div>`;
+        if (resultsBox) {
+            resultsBox.innerHTML = `<div class="loading-message">⏳ ${message}</div>`;
+        }
     }
 
     clearSearch() {
