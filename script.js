@@ -398,14 +398,14 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded, initializing InesBotSearcher...');
     new InesBotSearcher();
 });
-// Simple Wiktionary Dictionary - Using your theme variables
+// Persistent Movable Dictionary Panel
 (function() {
     if (typeof InesBotSearcher === 'undefined') {
         console.error('InesBotSearcher not found!');
         return;
     }
 
-    console.log('📚 Initializing Dictionary...');
+    console.log('📚 Initializing Persistent Dictionary Panel...');
 
     // Store the original displayResults method
     const originalDisplayResults = InesBotSearcher.prototype.displayResults;
@@ -421,123 +421,179 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cache for definitions
     const definitionCache = new Map();
+    
+    // Track if panel exists and its position
+    let dictionaryPanel = null;
+    let panelPosition = { top: 100, left: 100 }; // Default position
+    let isDragging = false;
+    let dragOffset = { x: 0, y: 0 };
 
-    // Wiktionary API
-    async function fetchFromWiktionary(word) {
-        try {
-            const url = `https://en.wiktionary.org/api/rest_v1/page/definition/${encodeURIComponent(word)}`;
-            const response = await fetch(url, {
-                headers: { 'Accept': 'application/json' }
-            });
+    // Create the persistent panel if it doesn't exist
+    function createDictionaryPanel() {
+        if (dictionaryPanel) return dictionaryPanel;
+        
+        const panel = document.createElement('div');
+        panel.id = 'dictionary-panel';
+        
+        panel.style.cssText = `
+            position: fixed;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 0;
+            width: 320px;
+            max-height: 400px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            z-index: 10000;
+            font-size: 13px;
+            line-height: 1.5;
+            top: ${panelPosition.top}px;
+            left: ${panelPosition.left}px;
+            display: flex;
+            flex-direction: column;
+            resize: both;
+            min-width: 250px;
+            min-height: 200px;
+            transition: box-shadow 0.2s ease;
+        `;
+
+        // Create header for dragging
+        const header = document.createElement('div');
+        header.id = 'dictionary-header';
+        header.style.cssText = `
+            padding: 10px 12px;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border-primary);
+            cursor: move;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: var(--text-primary);
+        `;
+        
+        header.innerHTML = `
+            <span>📖 Dictionary</span>
+            <div style="display: flex; gap: 8px;">
+                <span style="cursor: pointer; font-size: 16px; color: var(--text-secondary);" id="minimize-panel">−</span>
+                <span style="cursor: pointer; font-size: 16px; color: var(--text-secondary);" id="close-panel">×</span>
+            </div>
+        `;
+
+        // Create content area
+        const content = document.createElement('div');
+        content.id = 'dictionary-content';
+        content.style.cssText = `
+            padding: 15px;
+            overflow-y: auto;
+            flex: 1;
+            color: var(--text-primary);
+        `;
+        content.innerHTML = `
+            <div style="text-align: center; padding: 20px; color: var(--text-secondary);">
+                Click any word to see its definition here
+            </div>
+        `;
+
+        panel.appendChild(header);
+        panel.appendChild(content);
+        document.body.appendChild(panel);
+        
+        dictionaryPanel = panel;
+        
+        // Add drag functionality
+        setupDragHandlers(panel, header);
+        
+        // Add button handlers
+        document.getElementById('close-panel').addEventListener('click', (e) => {
+            e.stopPropagation();
+            panel.remove();
+            dictionaryPanel = null;
+        });
+        
+        document.getElementById('minimize-panel').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const content = document.getElementById('dictionary-content');
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                e.target.textContent = '−';
+            } else {
+                content.style.display = 'none';
+                e.target.textContent = '+';
+            }
+        });
+        
+        return panel;
+    }
+
+    // Setup drag handlers
+    function setupDragHandlers(panel, header) {
+        header.addEventListener('mousedown', (e) => {
+            if (e.target.closest('#close-panel') || e.target.closest('#minimize-panel')) return;
             
-            if (!response.ok) throw new Error('Not found');
-            const data = await response.json();
-            return parseWiktionaryResponse(word, data);
-        } catch (error) {
-            return null;
+            isDragging = true;
+            dragOffset.x = e.clientX - panel.offsetLeft;
+            dragOffset.y = e.clientY - panel.offsetTop;
+            panel.style.cursor = 'grabbing';
+            panel.style.transition = 'none';
+            panel.style.boxShadow = '0 8px 25px var(--shadow-color)';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            
+            e.preventDefault();
+            
+            let newLeft = e.clientX - dragOffset.x;
+            let newTop = e.clientY - dragOffset.y;
+            
+            // Keep within viewport
+            newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - panel.offsetWidth));
+            newTop = Math.max(0, Math.min(newTop, window.innerHeight - panel.offsetHeight));
+            
+            panel.style.left = newLeft + 'px';
+            panel.style.top = newTop + 'px';
+            
+            // Save position
+            panelPosition = { top: newTop, left: newLeft };
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                panel.style.cursor = '';
+                panel.style.transition = 'box-shadow 0.2s ease';
+                panel.style.boxShadow = '0 4px 15px var(--shadow-color)';
+            }
+        });
+    }
+
+    // Update panel content
+    function updatePanelContent(content) {
+        if (!dictionaryPanel) {
+            dictionaryPanel = createDictionaryPanel();
+        }
+        
+        const contentDiv = document.getElementById('dictionary-content');
+        if (contentDiv) {
+            contentDiv.innerHTML = content;
         }
     }
 
-    // Parse Wiktionary response
-    function parseWiktionaryResponse(word, data) {
-        if (!data || !data.en) return null;
-
-        const result = {
-            word: word,
-            phonetic: '',
-            meanings: []
-        };
-
-        data.en.forEach(entry => {
-            if (entry.partOfSpeech && entry.definitions) {
-                entry.definitions.slice(0, 2).forEach(def => {
-                    let definition = def.definition
-                        .replace(/\[.*?\]/g, '')
-                        .replace(/\{.*?\}/g, '')
-                        .trim();
-                    
-                    if (definition) {
-                        result.meanings.push({
-                            partOfSpeech: entry.partOfSpeech,
-                            definition: definition,
-                            example: def.examples ? def.examples[0] : null
-                        });
-                    }
-                });
-            }
-        });
-
-        return result.meanings.length > 0 ? result : null;
-    }
-
-    // Make words clickable
-    function makeWordsClickable() {
-        const resultWords = document.querySelectorAll('.result-word');
-        
-        resultWords.forEach((wordElement) => {
-            // Remove existing handlers
-            const newElement = wordElement.cloneNode(true);
-            wordElement.parentNode.replaceChild(newElement, wordElement);
-            
-            // Style the word
-            newElement.style.cursor = 'pointer';
-            newElement.style.display = 'inline-block';
-            newElement.style.padding = '0 2px';
-            
-            // Hover effect
-            newElement.addEventListener('mouseenter', () => {
-                newElement.style.backgroundColor = 'var(--highlight-bg)';
-                newElement.style.borderRadius = '4px';
-            });
-            
-            newElement.addEventListener('mouseleave', () => {
-                newElement.style.backgroundColor = 'transparent';
-            });
-            
-            // Click handler
-            newElement.addEventListener('click', async (event) => {
-                event.stopPropagation();
-                event.preventDefault();
-                
-                const word = newElement.textContent;
-                const rect = newElement.getBoundingClientRect();
-                
-                // Remove any existing popup
-                removeExistingPopup();
-                
-                // Show loading
-                showLoading(word, rect);
-                
-                // Fetch definition
-                const definition = await fetchFromWiktionary(word);
-                
-                // Remove loading
-                removeExistingPopup();
-                
-                if (definition) {
-                    showDefinition(definition, rect);
-                } else {
-                    showNoDefinition(word, rect);
-                }
-            });
-        });
-    }
-
-    // Loading indicator
-    function showLoading(word, rect) {
-        const popup = createPopup(rect);
-        popup.innerHTML = `
-            <div style="text-align: center; padding: 15px;">
-                <div style="color: var(--text-primary);">🔍 Loading "${word}"</div>
+    // Show loading in panel
+    function showLoadingInPanel(word) {
+        const content = `
+            <div style="text-align: center; padding: 20px;">
+                <div style="color: var(--text-primary); margin-bottom: 8px;">🔍 Loading "${word}"</div>
             </div>
         `;
-        document.body.appendChild(popup);
+        updatePanelContent(content);
     }
 
-    // Show definition
-    function showDefinition(data, rect) {
-        const popup = createPopup(rect);
-        
+    // Show definition in panel
+    function showDefinitionInPanel(data) {
         let html = `
             <div style="border-bottom: 1px solid var(--border-primary); padding-bottom: 8px; margin-bottom: 10px;">
                 <div style="font-size: 18px; font-weight: 500; color: var(--text-primary);">${data.word}</div>
@@ -571,106 +627,149 @@ document.addEventListener('DOMContentLoaded', () => {
             html += `</div>`;
         });
 
-        popup.innerHTML += html;
-        document.body.appendChild(popup);
+        updatePanelContent(html);
     }
 
-    // Show "no definition"
-    function showNoDefinition(word, rect) {
-        const popup = createPopup(rect);
-        popup.innerHTML = `
-            <div style="text-align: center; padding: 12px;">
+    // Show no definition in panel
+    function showNoDefinitionInPanel(word) {
+        const content = `
+            <div style="text-align: center; padding: 20px;">
                 <div style="color: var(--text-primary); font-size: 14px; line-height: 1.5;">
                     It just works twin, don't worry about the definition
                 </div>
             </div>
         `;
-        document.body.appendChild(popup);
+        updatePanelContent(content);
     }
 
-    // Create popup - Positioned BELOW the word like the old code
-    function createPopup(rect) {
-        removeExistingPopup();
-
-        const popup = document.createElement('div');
+    // Make words clickable
+    function makeWordsClickable() {
+        const resultWords = document.querySelectorAll('.result-word');
         
-        // Position below the word (like the old code)
-        const scrollY = window.scrollY;
-        const scrollX = window.scrollX;
-        
-        let top = rect.bottom + scrollY + 5; // 5px below the word
-        let left = rect.left + scrollX; // Align with left edge of word
-        
-        // Keep in viewport
-        const popupWidth = 300;
-        const popupHeight = 350;
-        
-        // Adjust horizontal position if off screen
-        if (left + popupWidth > window.innerWidth) {
-            left = window.innerWidth - popupWidth - 10;
-        }
-        
-        // Adjust vertical position if off screen
-        if (top + popupHeight > window.innerHeight + scrollY) {
-            top = rect.top + scrollY - popupHeight - 5; // Show above instead
-        }
-        
-        // Ensure left isn't negative
-        if (left < 10) left = 10;
-
-        popup.style.cssText = `
-            position: absolute;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-primary);
-            border-radius: 8px;
-            padding: 15px;
-            width: 300px;
-            max-height: 350px;
-            overflow-y: auto;
-            box-shadow: 0 4px 12px var(--shadow-color);
-            z-index: 10000;
-            font-size: 13px;
-            line-height: 1.5;
-            top: ${top}px;
-            left: ${left}px;
-            color: var(--text-primary);
-            transition: all 0.2s ease;
-        `;
-
-        return popup;
+        resultWords.forEach((wordElement) => {
+            // Remove existing handlers
+            const newElement = wordElement.cloneNode(true);
+            wordElement.parentNode.replaceChild(newElement, wordElement);
+            
+            // Style the word
+            newElement.style.cursor = 'pointer';
+            newElement.style.display = 'inline-block';
+            newElement.style.padding = '0 2px';
+            newElement.style.color = 'var(--result-word)';
+            newElement.style.textDecoration = 'none'; // Remove any default underlines
+            
+            // Hover effect
+            newElement.addEventListener('mouseenter', () => {
+                newElement.style.backgroundColor = 'var(--highlight-bg)';
+                newElement.style.borderRadius = '4px';
+            });
+            
+            newElement.addEventListener('mouseleave', () => {
+                newElement.style.backgroundColor = 'transparent';
+            });
+            
+            // Click handler
+            newElement.addEventListener('click', async (event) => {
+                event.stopPropagation();
+                event.preventDefault();
+                
+                const word = newElement.textContent;
+                
+                // Show loading in panel
+                showLoadingInPanel(word);
+                
+                // Check cache
+                if (definitionCache.has(word)) {
+                    showDefinitionInPanel(definitionCache.get(word));
+                    return;
+                }
+                
+                // Fetch definition
+                const definition = await fetchFromWiktionary(word);
+                
+                if (definition) {
+                    definitionCache.set(word, definition);
+                    showDefinitionInPanel(definition);
+                } else {
+                    showNoDefinitionInPanel(word);
+                }
+            });
+        });
     }
 
-    // Remove existing popup
-    function removeExistingPopup() {
-        const existing = document.querySelector('div[style*="position: absolute"][style*="border-radius: 8px"]');
-        if (existing) existing.remove();
+    // Wiktionary API
+    async function fetchFromWiktionary(word) {
+        try {
+            const url = `https://en.wiktionary.org/api/rest_v1/page/definition/${encodeURIComponent(word)}`;
+            const response = await fetch(url, {
+                headers: { 'Accept': 'application/json' }
+            });
+            
+            if (!response.ok) throw new Error('Not found');
+            const data = await response.json();
+            return parseWiktionaryResponse(word, data);
+        } catch (error) {
+            return null;
+        }
     }
 
-    // Click outside to close
-    document.addEventListener('click', function(e) {
-        const popup = document.querySelector('div[style*="position: absolute"][style*="border-radius: 8px"]');
-        const clickedWord = e.target.closest('.result-word');
-        
-        if (popup && !popup.contains(e.target) && !clickedWord) {
-            popup.remove();
-        }
-    });
+    // Parse Wiktionary response
+    function parseWiktionaryResponse(word, data) {
+        if (!data || !data.en) return null;
 
-    // Escape key to close
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            removeExistingPopup();
+        const result = {
+            word: word,
+            phonetic: '',
+            meanings: []
+        };
+
+        data.en.forEach(entry => {
+            if (entry.partOfSpeech && entry.definitions) {
+                entry.definitions.slice(0, 2).forEach(def => {
+                    let definition = def.definition
+                        .replace(/\[.*?\]/g, '')
+                        .replace(/\{.*?\}/g, '')
+                        .replace(/<[^>]*>/g, '') // Remove any HTML tags
+                        .trim();
+                    
+                    if (definition) {
+                        result.meanings.push({
+                            partOfSpeech: entry.partOfSpeech,
+                            definition: definition,
+                            example: def.examples ? def.examples[0] : null
+                        });
+                    }
+                });
+            }
+        });
+
+        // Clean up any remaining HTML in examples
+        if (result.meanings.length > 0) {
+            result.meanings.forEach(m => {
+                if (m.example) {
+                    m.example = m.example.replace(/<[^>]*>/g, '').trim();
+                }
+            });
         }
-    });
+
+        return result.meanings.length > 0 ? result : null;
+    }
 
     // Handle theme changes
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
-            // Just close any open popup - they can reopen it
-            removeExistingPopup();
+            // Panel will automatically update colors via CSS variables
+            if (dictionaryPanel) {
+                // Force a small repaint
+                dictionaryPanel.style.opacity = '0.99';
+                setTimeout(() => {
+                    dictionaryPanel.style.opacity = '1';
+                }, 10);
+            }
         });
     }
 
-    console.log('✅ Dictionary Ready! Click any word.');
-})();
+    console.log('✅ Persistent Dictionary Panel Ready!');
+    console.log('📌 Drag the header to move it around');
+})();;
