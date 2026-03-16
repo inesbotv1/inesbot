@@ -171,7 +171,7 @@ class InesBotSearcher {
             }
             
             // Show success message
-            this.showSuccess(`✅ Successfully loaded ${this.words.length} words!`);
+            this.showSuccess(`Successfully loaded ${this.words.length} words!`);
             
         } catch (error) {
             console.error('❌ Error loading words:', error);
