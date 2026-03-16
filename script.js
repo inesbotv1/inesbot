@@ -773,3 +773,595 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('✅ Persistent Dictionary Panel Ready!');
     console.log('📌 Drag the header to move it around');
 })();;
+// Persistent Movable Dictionary Panel - Mobile Compatible
+(function() {
+    if (typeof InesBotSearcher === 'undefined') {
+        console.error('InesBotSearcher not found!');
+        return;
+    }
+
+    console.log('📚 Initializing Persistent Dictionary Panel (Mobile Ready)...');
+
+    // Store the original displayResults method
+    const originalDisplayResults = InesBotSearcher.prototype.displayResults;
+
+    // Override the displayResults method
+    InesBotSearcher.prototype.displayResults = function(results, criteria) {
+        originalDisplayResults.call(this, results, criteria);
+        
+        setTimeout(() => {
+            makeWordsClickable();
+        }, 50);
+    };
+
+    // Cache for definitions
+    const definitionCache = new Map();
+    
+    // Track if panel exists and its position
+    let dictionaryPanel = null;
+    let panelPosition = { top: 100, left: 100 };
+    let isDragging = false;
+    let dragOffset = { x: 0, y: 0 };
+    let currentTouchId = null;
+
+    // Check if mobile
+    function isMobile() {
+        return window.innerWidth <= 768;
+    }
+
+    // Create the persistent panel
+    function createDictionaryPanel() {
+        if (dictionaryPanel) return dictionaryPanel;
+        
+        const panel = document.createElement('div');
+        panel.id = 'dictionary-panel';
+        
+        // Different styles for mobile vs desktop
+        if (isMobile()) {
+            // Mobile - full width at bottom
+            panel.style.cssText = `
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: var(--bg-secondary);
+                border-top: 2px solid var(--border-primary);
+                border-radius: 16px 16px 0 0;
+                padding: 0;
+                max-height: 50vh;
+                overflow: hidden;
+                box-shadow: 0 -4px 15px var(--shadow-color);
+                z-index: 10000;
+                font-size: 14px;
+                line-height: 1.5;
+                display: flex;
+                flex-direction: column;
+                transform: translateY(0);
+                transition: transform 0.3s ease;
+                animation: slideUp 0.3s ease;
+            `;
+
+            // Add pull handle for mobile
+            const pullHandle = document.createElement('div');
+            pullHandle.style.cssText = `
+                width: 40px;
+                height: 5px;
+                background: var(--border-secondary);
+                border-radius: 3px;
+                margin: 8px auto;
+                cursor: grab;
+            `;
+            panel.appendChild(pullHandle);
+
+            // Add drag functionality for pull handle
+            let startY = 0;
+            let startHeight = 0;
+            
+            pullHandle.addEventListener('touchstart', (e) => {
+                startY = e.touches[0].clientY;
+                startHeight = panel.offsetHeight;
+                pullHandle.style.cursor = 'grabbing';
+            }, { passive: true });
+            
+            pullHandle.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const deltaY = e.touches[0].clientY - startY;
+                const newHeight = Math.max(200, Math.min(400, startHeight - deltaY));
+                panel.style.maxHeight = newHeight + 'px';
+            }, { passive: false });
+            
+            pullHandle.addEventListener('touchend', () => {
+                pullHandle.style.cursor = 'grab';
+            });
+
+            // Add close button at top
+            const mobileHeader = document.createElement('div');
+            mobileHeader.style.cssText = `
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 15px;
+                border-bottom: 1px solid var(--border-primary);
+                background: var(--bg-tertiary);
+            `;
+            mobileHeader.innerHTML = `
+                <span style="font-weight: 500; color: var(--text-primary);">📖 Dictionary</span>
+                <span style="cursor: pointer; font-size: 24px; color: var(--text-secondary); padding: 0 8px;" id="close-panel-mobile">×</span>
+            `;
+            panel.appendChild(mobileHeader);
+
+        } else {
+            // Desktop - draggable panel
+            panel.style.cssText = `
+                position: fixed;
+                background: var(--bg-secondary);
+                border: 1px solid var(--border-primary);
+                border-radius: 8px;
+                padding: 0;
+                width: 320px;
+                max-height: 400px;
+                overflow: hidden;
+                box-shadow: 0 4px 15px var(--shadow-color);
+                z-index: 10000;
+                font-size: 13px;
+                line-height: 1.5;
+                top: ${panelPosition.top}px;
+                left: ${panelPosition.left}px;
+                display: flex;
+                flex-direction: column;
+                resize: both;
+                min-width: 250px;
+                min-height: 200px;
+                transition: box-shadow 0.2s ease;
+            `;
+
+            // Desktop header
+            const header = document.createElement('div');
+            header.id = 'dictionary-header';
+            header.style.cssText = `
+                padding: 10px 12px;
+                background: var(--bg-tertiary);
+                border-bottom: 1px solid var(--border-primary);
+                cursor: move;
+                user-select: none;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-weight: 500;
+                color: var(--text-primary);
+                touch-action: none;
+            `;
+            
+            header.innerHTML = `
+                <span>📖 Dictionary</span>
+                <div style="display: flex; gap: 8px;">
+                    <span style="cursor: pointer; font-size: 16px; color: var(--text-secondary);" id="minimize-panel">−</span>
+                    <span style="cursor: pointer; font-size: 16px; color: var(--text-secondary);" id="close-panel">×</span>
+                </div>
+            `;
+            panel.appendChild(header);
+
+            // Add drag handlers for desktop
+            setupDragHandlers(panel, header);
+        }
+
+        // Content area (same for both)
+        const content = document.createElement('div');
+        content.id = 'dictionary-content';
+        content.style.cssText = `
+            padding: 15px;
+            overflow-y: auto;
+            flex: 1;
+            color: var(--text-primary);
+            -webkit-overflow-scrolling: touch;
+        `;
+        content.innerHTML = `
+            <div style="text-align: center; padding: 20px; color: var(--text-secondary);">
+                Click any word to see its definition
+            </div>
+        `;
+
+        panel.appendChild(content);
+        document.body.appendChild(panel);
+        
+        dictionaryPanel = panel;
+        
+        // Add close button handlers
+        const closeBtn = document.getElementById('close-panel') || document.getElementById('close-panel-mobile');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeDictionaryPanel();
+            });
+        }
+        
+        // Add minimize handler for desktop
+        const minimizeBtn = document.getElementById('minimize-panel');
+        if (minimizeBtn) {
+            minimizeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const content = document.getElementById('dictionary-content');
+                if (content.style.display === 'none') {
+                    content.style.display = 'block';
+                    e.target.textContent = '−';
+                } else {
+                    content.style.display = 'none';
+                    e.target.textContent = '+';
+                }
+            });
+        }
+        
+        return panel;
+    }
+
+    // Setup drag handlers with touch support
+    function setupDragHandlers(panel, header) {
+        // Mouse events
+        header.addEventListener('mousedown', startDrag);
+        
+        // Touch events
+        header.addEventListener('touchstart', handleTouchStart, { passive: false });
+        header.addEventListener('touchmove', handleTouchMove, { passive: false });
+        header.addEventListener('touchend', handleTouchEnd);
+        header.addEventListener('touchcancel', handleTouchEnd);
+
+        function startDrag(e) {
+            if (e.target.closest('#close-panel') || e.target.closest('#minimize-panel')) return;
+            
+            isDragging = true;
+            dragOffset.x = e.clientX - panel.offsetLeft;
+            dragOffset.y = e.clientY - panel.offsetTop;
+            panel.style.cursor = 'grabbing';
+            panel.style.transition = 'none';
+            panel.style.boxShadow = '0 8px 25px var(--shadow-color)';
+            
+            document.addEventListener('mousemove', onDrag);
+            document.addEventListener('mouseup', stopDrag);
+        }
+
+        function handleTouchStart(e) {
+            if (e.target.closest('#close-panel') || e.target.closest('#minimize-panel')) return;
+            
+            e.preventDefault();
+            const touch = e.touches[0];
+            currentTouchId = touch.identifier;
+            
+            isDragging = true;
+            dragOffset.x = touch.clientX - panel.offsetLeft;
+            dragOffset.y = touch.clientY - panel.offsetTop;
+            panel.style.transition = 'none';
+            panel.style.boxShadow = '0 8px 25px var(--shadow-color)';
+        }
+
+        function handleTouchMove(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            
+            const touch = Array.from(e.touches).find(t => t.identifier === currentTouchId);
+            if (!touch) return;
+            
+            let newLeft = touch.clientX - dragOffset.x;
+            let newTop = touch.clientY - dragOffset.y;
+            
+            // Keep within viewport
+            newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - panel.offsetWidth));
+            newTop = Math.max(0, Math.min(newTop, window.innerHeight - panel.offsetHeight));
+            
+            panel.style.left = newLeft + 'px';
+            panel.style.top = newTop + 'px';
+            
+            // Save position
+            panelPosition = { top: newTop, left: newLeft };
+        }
+
+        function handleTouchEnd(e) {
+            if (isDragging) {
+                e.preventDefault();
+                stopDrag();
+            }
+            currentTouchId = null;
+        }
+
+        function onDrag(e) {
+            if (!isDragging) return;
+            
+            e.preventDefault();
+            
+            let newLeft = e.clientX - dragOffset.x;
+            let newTop = e.clientY - dragOffset.y;
+            
+            // Keep within viewport
+            newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - panel.offsetWidth));
+            newTop = Math.max(0, Math.min(newTop, window.innerHeight - panel.offsetHeight));
+            
+            panel.style.left = newLeft + 'px';
+            panel.style.top = newTop + 'px';
+            
+            // Save position
+            panelPosition = { top: newTop, left: newLeft };
+        }
+
+        function stopDrag() {
+            if (isDragging) {
+                isDragging = false;
+                panel.style.cursor = '';
+                panel.style.transition = 'box-shadow 0.2s ease';
+                panel.style.boxShadow = '0 4px 15px var(--shadow-color)';
+                
+                document.removeEventListener('mousemove', onDrag);
+                document.removeEventListener('mouseup', stopDrag);
+            }
+        }
+    }
+
+    function closeDictionaryPanel() {
+        if (dictionaryPanel) {
+            if (isMobile()) {
+                dictionaryPanel.style.transform = 'translateY(100%)';
+                setTimeout(() => {
+                    if (dictionaryPanel) {
+                        dictionaryPanel.remove();
+                        dictionaryPanel = null;
+                    }
+                }, 300);
+            } else {
+                dictionaryPanel.remove();
+                dictionaryPanel = null;
+            }
+        }
+    }
+
+    // Update panel content
+    function updatePanelContent(content) {
+        if (!dictionaryPanel) {
+            dictionaryPanel = createDictionaryPanel();
+        }
+        
+        const contentDiv = document.getElementById('dictionary-content');
+        if (contentDiv) {
+            contentDiv.innerHTML = content;
+            // Scroll to top on new content
+            contentDiv.scrollTop = 0;
+        }
+    }
+
+    // Show loading in panel
+    function showLoadingInPanel(word) {
+        const content = `
+            <div style="text-align: center; padding: 20px;">
+                <div style="color: var(--text-primary); margin-bottom: 8px;">🔍 Loading "${word}"</div>
+            </div>
+        `;
+        updatePanelContent(content);
+    }
+
+    // Show definition in panel
+    function showDefinitionInPanel(data) {
+        let html = `
+            <div style="border-bottom: 1px solid var(--border-primary); padding-bottom: 8px; margin-bottom: 10px;">
+                <div style="font-size: ${isMobile() ? '20px' : '18px'}; font-weight: 500; color: var(--text-primary);">${data.word}</div>
+        `;
+        
+        if (data.phonetic) {
+            html += `<div style="font-family: monospace; color: var(--text-secondary); font-size: ${isMobile() ? '13px' : '12px'}; margin-top: 2px;">/${data.phonetic}/</div>`;
+        }
+        
+        html += `</div>`;
+
+        data.meanings.forEach((meaning) => {
+            html += `
+                <div style="margin-bottom: 12px; padding: ${isMobile() ? '10px' : '8px'}; background: var(--highlight-bg); border-radius: 6px;">
+                    <div style="font-weight: 600; color: var(--text-tertiary); margin-bottom: 4px; font-size: ${isMobile() ? '12px' : '11px'}; text-transform: uppercase;">
+                        ${meaning.partOfSpeech}
+                    </div>
+                    <div style="color: var(--text-primary); line-height: 1.5; font-size: ${isMobile() ? '14px' : '13px'};">
+                        ${meaning.definition}
+                    </div>
+            `;
+            
+            if (meaning.example) {
+                html += `
+                    <div style="color: var(--text-secondary); font-style: italic; margin-top: 6px; font-size: ${isMobile() ? '13px' : '12px'}; border-left: 2px solid var(--border-secondary); padding-left: 8px;">
+                        "${meaning.example}"
+                    </div>
+                `;
+            }
+            
+            html += `</div>`;
+        });
+
+        updatePanelContent(html);
+    }
+
+    // Show no definition in panel
+    function showNoDefinitionInPanel(word) {
+        const content = `
+            <div style="text-align: center; padding: ${isMobile() ? '30px' : '20px'};">
+                <div style="color: var(--text-primary); font-size: ${isMobile() ? '16px' : '14px'}; line-height: 1.5;">
+                    It just works twin, don't worry about the definition
+                </div>
+            </div>
+        `;
+        updatePanelContent(content);
+    }
+
+    // Make words clickable
+    function makeWordsClickable() {
+        const resultWords = document.querySelectorAll('.result-word');
+        
+        resultWords.forEach((wordElement) => {
+            // Remove existing handlers
+            const newElement = wordElement.cloneNode(true);
+            wordElement.parentNode.replaceChild(newElement, wordElement);
+            
+            // Style the word
+            newElement.style.cursor = 'pointer';
+            newElement.style.display = 'inline-block';
+            newElement.style.padding = '2px 4px';
+            newElement.style.color = 'var(--result-word)';
+            newElement.style.textDecoration = 'none';
+            newElement.style.touchAction = 'manipulation'; // Better touch handling
+            
+            // Hover effect (only on non-touch devices)
+            if (!isMobile()) {
+                newElement.addEventListener('mouseenter', () => {
+                    newElement.style.backgroundColor = 'var(--highlight-bg)';
+                    newElement.style.borderRadius = '4px';
+                });
+                
+                newElement.addEventListener('mouseleave', () => {
+                    newElement.style.backgroundColor = 'transparent';
+                });
+            }
+            
+            // Click handler
+            newElement.addEventListener('click', async (event) => {
+                event.stopPropagation();
+                event.preventDefault();
+                
+                const word = newElement.textContent;
+                
+                // Show loading in panel
+                showLoadingInPanel(word);
+                
+                // Check cache
+                if (definitionCache.has(word)) {
+                    showDefinitionInPanel(definitionCache.get(word));
+                    return;
+                }
+                
+                // Fetch definition
+                const definition = await fetchFromWiktionary(word);
+                
+                if (definition) {
+                    definitionCache.set(word, definition);
+                    showDefinitionInPanel(definition);
+                } else {
+                    showNoDefinitionInPanel(word);
+                }
+            });
+        });
+    }
+
+    // Wiktionary API
+    async function fetchFromWiktionary(word) {
+        try {
+            const url = `https://en.wiktionary.org/api/rest_v1/page/definition/${encodeURIComponent(word)}`;
+            const response = await fetch(url, {
+                headers: { 'Accept': 'application/json' }
+            });
+            
+            if (!response.ok) throw new Error('Not found');
+            const data = await response.json();
+            return parseWiktionaryResponse(word, data);
+        } catch (error) {
+            return null;
+        }
+    }
+
+    // Parse Wiktionary response
+    function parseWiktionaryResponse(word, data) {
+        if (!data || !data.en) return null;
+
+        const result = {
+            word: word,
+            phonetic: '',
+            meanings: []
+        };
+
+        data.en.forEach(entry => {
+            if (entry.partOfSpeech && entry.definitions) {
+                entry.definitions.slice(0, 2).forEach(def => {
+                    let definition = def.definition
+                        .replace(/\[.*?\]/g, '')
+                        .replace(/\{.*?\}/g, '')
+                        .replace(/<[^>]*>/g, '')
+                        .trim();
+                    
+                    if (definition) {
+                        result.meanings.push({
+                            partOfSpeech: entry.partOfSpeech,
+                            definition: definition,
+                            example: def.examples ? def.examples[0] : null
+                        });
+                    }
+                });
+            }
+        });
+
+        // Clean up any remaining HTML in examples
+        if (result.meanings.length > 0) {
+            result.meanings.forEach(m => {
+                if (m.example) {
+                    m.example = m.example.replace(/<[^>]*>/g, '').trim();
+                }
+            });
+        }
+
+        return result.meanings.length > 0 ? result : null;
+    }
+
+    // Add CSS animations
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .result-word {
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Mobile improvements */
+        @media (max-width: 768px) {
+            #dictionary-content {
+                font-size: 14px;
+                padding: 15px;
+            }
+            
+            .result-word {
+                padding: 4px 6px !important;
+                margin: -2px 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Handle theme changes
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            if (dictionaryPanel) {
+                // Force repaint
+                dictionaryPanel.style.opacity = '0.99';
+                setTimeout(() => {
+                    dictionaryPanel.style.opacity = '1';
+                }, 10);
+            }
+        });
+    }
+
+    // Handle resize events
+    window.addEventListener('resize', () => {
+        // Close panel on mobile if it's open and we resize to desktop?
+        // Or just leave it, user can reopen
+        if (dictionaryPanel && isMobile()) {
+            // Recreate panel with mobile styles
+            const wasOpen = dictionaryPanel;
+            closeDictionaryPanel();
+            if (wasOpen) {
+                setTimeout(() => {
+                    dictionaryPanel = createDictionaryPanel();
+                    const contentDiv = document.getElementById('dictionary-content');
+                    if (contentDiv) {
+                        contentDiv.innerHTML = 'Click any word to see its definition';
+                    }
+                }, 50);
+            }
+        }
+    });
+
+    console.log('✅ Persistent Dictionary Panel Ready!');
+    console.log('📱 Mobile compatible - drag handle to resize, swipe down to close');
+})();
