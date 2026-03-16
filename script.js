@@ -398,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded, initializing InesBotSearcher...');
     new InesBotSearcher();
 });
-// Simple Wiktionary Dictionary - Clean Version
+// Simple Wiktionary Dictionary - Using your theme variables
 (function() {
     if (typeof InesBotSearcher === 'undefined') {
         console.error('InesBotSearcher not found!');
@@ -422,19 +422,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cache for definitions
     const definitionCache = new Map();
 
-    // Get current theme colors
-    function getThemeColors() {
-        const htmlElement = document.documentElement;
-        const isDark = htmlElement.getAttribute('data-theme') === 'dark';
-        
-        return {
-            bg: isDark ? '#1a1a1a' : '#ffffff',
-            text: isDark ? '#e0e0e0' : '#333333',
-            border: isDark ? '#444444' : '#dddddd',
-            shadow: isDark ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.1)',
-            highlight: isDark ? '#2d2d2d' : '#f5f5f5',
-            accent: isDark ? '#4a9eff' : '#0066cc'
-        };
+    // Get CSS variable value
+    function getCSSVar(varName) {
+        return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
     }
 
     // Wiktionary API
@@ -494,10 +484,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const newElement = wordElement.cloneNode(true);
             wordElement.parentNode.replaceChild(newElement, wordElement);
             
-            // Style the word - NO bottom line
+            // Style the word - using your theme colors
             newElement.style.cursor = 'pointer';
             newElement.style.display = 'inline-block';
             newElement.style.padding = '0 2px';
+            newElement.style.color = 'var(--result-word)';
+            
+            // Hover effect
+            newElement.addEventListener('mouseenter', () => {
+                newElement.style.backgroundColor = 'var(--highlight-bg)';
+            });
+            
+            newElement.addEventListener('mouseleave', () => {
+                newElement.style.backgroundColor = 'transparent';
+            });
             
             // Click handler
             newElement.addEventListener('click', async (event) => {
@@ -530,12 +530,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Loading indicator
     function showLoading(word, rect) {
-        const colors = getThemeColors();
         const popup = createPopup(rect);
         popup.innerHTML = `
-            <div style="text-align: center; padding: 20px; color: ${colors.text}">
-                <div style="margin-bottom: 10px;">🔍 Looking up "${word}"</div>
-                <div style="color: ${colors.accent}">Loading...</div>
+            <div style="text-align: center; padding: 15px;">
+                <div style="margin-bottom: 8px; color: var(--text-primary)">🔍 Loading "${word}"</div>
             </div>
         `;
         document.body.appendChild(popup);
@@ -543,34 +541,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Show definition
     function showDefinition(data, rect) {
-        const colors = getThemeColors();
         const popup = createPopup(rect);
         
         let html = `
-            <div style="border-bottom: 1px solid ${colors.border}; padding-bottom: 10px; margin-bottom: 10px;">
-                <div style="font-size: 20px; font-weight: bold; color: ${colors.accent};">${data.word}</div>
+            <div style="border-bottom: 1px solid var(--border-primary); padding-bottom: 8px; margin-bottom: 10px;">
+                <div style="font-size: 18px; font-weight: 500; color: var(--text-primary);">${data.word}</div>
         `;
         
         if (data.phonetic) {
-            html += `<div style="font-family: monospace; color: ${colors.text};">/${data.phonetic}/</div>`;
+            html += `<div style="font-family: monospace; color: var(--text-secondary); font-size: 12px;">/${data.phonetic}/</div>`;
         }
         
         html += `</div>`;
 
         data.meanings.forEach((meaning) => {
             html += `
-                <div style="margin-bottom: 12px; padding: 8px; background: ${colors.highlight}; border-radius: 4px;">
-                    <div style="font-weight: bold; color: ${colors.accent}; margin-bottom: 4px; font-size: 12px;">
+                <div style="margin-bottom: 10px; padding: 8px; background: var(--highlight-bg); border-radius: 6px;">
+                    <div style="font-weight: 500; color: var(--text-tertiary); margin-bottom: 3px; font-size: 11px; text-transform: uppercase;">
                         ${meaning.partOfSpeech}
                     </div>
-                    <div style="color: ${colors.text}; line-height: 1.4;">
+                    <div style="color: var(--text-primary); line-height: 1.4; font-size: 13px;">
                         ${meaning.definition}
                     </div>
             `;
             
             if (meaning.example) {
                 html += `
-                    <div style="color: ${colors.text}; opacity: 0.7; font-style: italic; margin-top: 6px; font-size: 12px;">
+                    <div style="color: var(--text-secondary); font-style: italic; margin-top: 5px; font-size: 12px; border-left: 2px solid var(--border-secondary); padding-left: 8px;">
                         "${meaning.example}"
                     </div>
                 `;
@@ -583,29 +580,23 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(popup);
     }
 
-    // Show "no definition" message - EXACTLY as requested
+    // Show "no definition" - EXACTLY as requested, no emoji, not too big
     function showNoDefinition(word, rect) {
-        const colors = getThemeColors();
         const popup = createPopup(rect);
         popup.innerHTML = `
-            <div style="text-align: center; padding: 25px 15px;">
-                <div style="font-size: 24px; margin-bottom: 10px;">✨</div>
-                <div style="color: ${colors.accent}; font-size: 16px; font-weight: bold; margin-bottom: 8px;">
-                    "${word}"
-                </div>
-                <div style="color: ${colors.text}; font-size: 14px; line-height: 1.5;">
-                    It just works twin,<br>don't worry about the definition
+            <div style="text-align: center; padding: 12px;">
+                <div style="color: var(--text-primary); font-size: 14px; line-height: 1.4;">
+                    It just works twin, don't worry about the definition
                 </div>
             </div>
         `;
         document.body.appendChild(popup);
     }
 
-    // Create popup - NO close button, just click outside to close
+    // Create popup - NO close button, using your theme variables
     function createPopup(rect) {
         removeExistingPopup();
 
-        const colors = getThemeColors();
         const popup = document.createElement('div');
         
         // Position to the right of the word
@@ -616,7 +607,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let left = rect.right + scrollX + 10;
         
         // Keep in viewport
-        const popupWidth = 300;
+        const popupWidth = 280;
         if (left + popupWidth > window.innerWidth) {
             left = rect.left + scrollX - popupWidth - 10;
         }
@@ -628,21 +619,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         popup.style.cssText = `
             position: absolute;
-            background: ${colors.bg};
-            border: 1px solid ${colors.border};
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
             border-radius: 8px;
-            padding: 15px;
-            width: 300px;
+            padding: 12px;
+            width: 280px;
             max-height: 350px;
             overflow-y: auto;
-            box-shadow: 0 4px 12px ${colors.shadow};
+            box-shadow: 0 4px 12px var(--shadow-color);
             z-index: 10000;
             font-size: 13px;
             line-height: 1.5;
             top: ${top}px;
             left: ${left}px;
-            transition: all 0.2s ease;
-            color: ${colors.text};
+            color: var(--text-primary);
         `;
 
         return popup;
@@ -671,15 +661,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Update colors when theme changes
-    themeToggle.addEventListener('click', () => {
-        // If there's an open popup, refresh its colors
-        const popup = document.querySelector('div[style*="position: absolute"][style*="border-radius: 8px"]');
-        if (popup) {
-            // Just close it - they can reopen
-            popup.remove();
-        }
-    });
+    // Theme toggle observer - update popup colors when theme changes
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            // If there's an open popup, refresh it by reopening
+            const popup = document.querySelector('div[style*="position: absolute"][style*="border-radius: 8px"]');
+            if (popup) {
+                // Get the word from the popup if possible
+                const wordElement = popup.querySelector('div[style*="font-size: 18px"]');
+                if (wordElement) {
+                    const word = wordElement.textContent;
+                    const wordElements = document.querySelectorAll('.result-word');
+                    for (let el of wordElements) {
+                        if (el.textContent === word) {
+                            const rect = el.getBoundingClientRect();
+                            popup.remove();
+                            setTimeout(() => {
+                                fetchFromWiktionary(word).then(def => {
+                                    if (def) showDefinition(def, rect);
+                                    else showNoDefinition(word, rect);
+                                });
+                            }, 50);
+                            break;
+                        }
+                    }
+                } else {
+                    popup.remove();
+                }
+            }
+        });
+    }
 
     console.log('✅ Dictionary Ready! Click any word.');
 })();
