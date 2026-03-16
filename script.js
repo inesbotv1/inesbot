@@ -1365,3 +1365,9 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('✅ Persistent Dictionary Panel Ready!');
     console.log('📱 Mobile compatible - drag handle to resize, swipe down to close');
 })();
+// Add subtle underline to clickable words
+(function() {
+    const style = document.createElement('style');
+    style.textContent = '.result-word { text-decoration: underline !important; text-underline-offset: 2px; text-decoration-thickness: 1px; text-decoration-color: var(--text-secondary) !important; }';
+    document.head.appendChild(style);
+})();
