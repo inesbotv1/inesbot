@@ -398,3 +398,349 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded, initializing InesBotSearcher...');
     new InesBotSearcher();
 });
+// Dictionary Functionality using Free Dictionary API
+class WordDictionary {
+    constructor() {
+        this.cache = new Map(); // Cache definitions to avoid repeated API calls
+        this.initDictionaryStyles();
+    }
+
+    initDictionaryStyles() {
+        // Add dictionary styles if they don't exist
+        if (!document.getElementById('dictionary-styles')) {
+            const style = document.createElement('style');
+            style.id = 'dictionary-styles';
+            style.textContent = `
+                .definition-popup {
+                    position: fixed;
+                    background: var(--bg-primary);
+                    border: 2px solid var(--accent-color);
+                    border-radius: 12px;
+                    padding: 20px;
+                    max-width: 400px;
+                    max-height: 500px;
+                    overflow-y: auto;
+                    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+                    z-index: 1000;
+                    font-size: 14px;
+                    animation: fadeIn 0.2s ease;
+                }
+
+                .definition-popup h3 {
+                    margin: 0 0 15px 0;
+                    color: var(--accent-color);
+                    font-size: 20px;
+                    border-bottom: 2px solid var(--border-color);
+                    padding-bottom: 8px;
+                }
+
+                .definition-popup .word-info {
+                    margin-bottom: 15px;
+                }
+
+                .definition-popup .phonetic {
+                    color: var(--text-secondary);
+                    font-family: monospace;
+                    font-size: 16px;
+                    margin-bottom: 10px;
+                }
+
+                .definition-popup .meaning-item {
+                    margin-bottom: 15px;
+                    padding: 10px;
+                    background: var(--highlight-bg);
+                    border-radius: 8px;
+                }
+
+                .definition-popup .part-of-speech {
+                    font-weight: bold;
+                    color: var(--accent-color);
+                    font-style: italic;
+                    margin-bottom: 5px;
+                }
+
+                .definition-popup .definition {
+                    margin-bottom: 8px;
+                    line-height: 1.5;
+                }
+
+                .definition-popup .example {
+                    color: var(--text-secondary);
+                    font-style: italic;
+                    font-size: 13px;
+                    padding-left: 15px;
+                    border-left: 3px solid var(--accent-color);
+                    margin-top: 5px;
+                }
+
+                .definition-popup .loading-def {
+                    text-align: center;
+                    padding: 30px;
+                    color: var(--text-secondary);
+                }
+
+                .definition-popup .error-def {
+                    color: #ff6b6b;
+                    text-align: center;
+                    padding: 20px;
+                }
+
+                .definition-popup .close-btn {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background: none;
+                    border: none;
+                    color: var(--text-secondary);
+                    font-size: 24px;
+                    cursor: pointer;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    transition: all 0.2s;
+                }
+
+                .definition-popup .close-btn:hover {
+                    background: var(--hover-bg);
+                    color: var(--text-primary);
+                }
+
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(-10px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+
+                .word-definition-link {
+                    cursor: pointer;
+                    border-bottom: 2px dotted var(--accent-color);
+                    transition: all 0.2s;
+                }
+
+                .word-definition-link:hover {
+                    background-color: var(--accent-color);
+                    color: white !important;
+                    border-bottom-color: transparent;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    }
+
+    async getDefinition(word) {
+        // Check cache first
+        if (this.cache.has(word)) {
+            console.log(`📚 Cache hit for: ${word}`);
+            return this.cache.get(word);
+        }
+
+        console.log(`🔍 Fetching definition for: ${word}`);
+        
+        try {
+            const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
+            
+            if (!response.ok) {
+                if (response.status === 404) {
+                    throw new Error('Word not found in dictionary');
+                }
+                throw new Error(`API error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            
+            // Process and format the definition data
+            const formattedData = this.formatDefinitionData(data[0]);
+            
+            // Cache the result
+            this.cache.set(word, formattedData);
+            
+            return formattedData;
+        } catch (error) {
+            console.error('Error fetching definition:', error);
+            const errorResult = {
+                word: word,
+                error: error.message,
+                phonetic: '',
+                meanings: []
+            };
+            this.cache.set(word, errorResult);
+            return errorResult;
+        }
+    }
+
+    formatDefinitionData(data) {
+        const result = {
+            word: data.word,
+            phonetic: data.phonetic || data.phonetics?.find(p => p.text)?.text || '',
+            meanings: []
+        };
+
+        data.meanings.forEach(meaning => {
+            meaning.definitions.slice(0, 3).forEach(def => { // Limit to 3 definitions per part of speech
+                result.meanings.push({
+                    partOfSpeech: meaning.partOfSpeech,
+                    definition: def.definition,
+                    example: def.example || null
+                });
+            });
+        });
+
+        return result;
+    }
+
+    createDefinitionPopup(word, definitionData, x, y) {
+        // Remove any existing popup
+        this.removeExistingPopup();
+
+        const popup = document.createElement('div');
+        popup.className = 'definition-popup';
+        
+        // Position popup near click, but keep it in viewport
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        
+        let left = x;
+        let top = y;
+        
+        // Adjust if popup would go off screen
+        if (left + 400 > viewportWidth) {
+            left = viewportWidth - 420;
+        }
+        if (top + 500 > viewportHeight) {
+            top = viewportHeight - 520;
+        }
+        
+        popup.style.left = left + 'px';
+        popup.style.top = top + 'px';
+
+        // Add close button
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'close-btn';
+        closeBtn.innerHTML = '×';
+        closeBtn.onclick = () => this.removeExistingPopup();
+        popup.appendChild(closeBtn);
+
+        // Add content
+        if (definitionData.error) {
+            popup.innerHTML += `
+                <h3>${word}</h3>
+                <div class="error-def">
+                    ❌ ${definitionData.error}<br>
+                    <small>No dictionary definition found</small>
+                </div>
+            `;
+        } else {
+            let html = `<h3>${definitionData.word}</h3>`;
+            
+            if (definitionData.phonetic) {
+                html += `<div class="phonetic">${definitionData.phonetic}</div>`;
+            }
+
+            definitionData.meanings.forEach(meaning => {
+                html += `
+                    <div class="meaning-item">
+                        <div class="part-of-speech">${meaning.partOfSpeech}</div>
+                        <div class="definition">• ${meaning.definition}</div>
+                `;
+                
+                if (meaning.example) {
+                    html += `<div class="example">"${meaning.example}"</div>`;
+                }
+                
+                html += `</div>`;
+            });
+
+            popup.innerHTML += html;
+        }
+
+        // Close popup when clicking outside
+        setTimeout(() => {
+            document.addEventListener('click', function closePopup(e) {
+                if (!popup.contains(e.target)) {
+                    document.body.removeChild(popup);
+                    document.removeEventListener('click', closePopup);
+                }
+            });
+        }, 100);
+
+        document.body.appendChild(popup);
+    }
+
+    removeExistingPopup() {
+        const existingPopup = document.querySelector('.definition-popup');
+        if (existingPopup) {
+            existingPopup.remove();
+        }
+    }
+
+    makeWordClickable(wordElement, word) {
+        wordElement.classList.add('word-definition-link');
+        wordElement.title = 'Click to get definition';
+        
+        wordElement.addEventListener('click', async (e) => {
+            e.stopPropagation(); // Prevent event bubbling
+            const rect = wordElement.getBoundingClientRect();
+            
+            // Show loading popup immediately
+            const loadingPopup = document.createElement('div');
+            loadingPopup.className = 'definition-popup';
+            loadingPopup.style.left = rect.left + 'px';
+            loadingPopup.style.top = (rect.bottom + 10) + 'px';
+            loadingPopup.innerHTML = `
+                <div class="loading-def">
+                    ⏳ Loading definition for "${word}"...<br>
+                    <small>Fetching from dictionary API</small>
+                </div>
+            `;
+            
+            this.removeExistingPopup();
+            document.body.appendChild(loadingPopup);
+            
+            // Fetch definition
+            const definitionData = await this.getDefinition(word);
+            
+            // Remove loading popup and show actual definition
+            this.removeExistingPopup();
+            this.createDefinitionPopup(word, definitionData, rect.left, rect.bottom + 10);
+        });
+    }
+}
+
+// Modify the displayResults method to make words clickable
+// Find this function in your InesBotSearcher class and replace it, or add this enhancement:
+
+// Store original displayResults
+const originalDisplayResults = InesBotSearcher.prototype.displayResults;
+
+// Override displayResults to add dictionary functionality
+InesBotSearcher.prototype.displayResults = function(results, criteria) {
+    // Call the original method first
+    originalDisplayResults.call(this, results, criteria);
+    
+    // Initialize dictionary if not already done
+    if (!this.dictionary) {
+        this.dictionary = new WordDictionary();
+    }
+    
+    // Add click handlers to all result words
+    setTimeout(() => {
+        const resultWords = document.querySelectorAll('.result-word');
+        resultWords.forEach((wordElement, index) => {
+            // Get the actual word text
+            const word = wordElement.textContent;
+            // Make it clickable for dictionary definitions
+            this.dictionary.makeWordClickable(wordElement, word);
+        });
+        console.log(`📚 Added dictionary functionality to ${resultWords.length} words`);
+    }, 100); // Small delay to ensure DOM is updated
+};
+
+// Optional: Add a keyboard shortcut to close popup (Escape key)
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const popup = document.querySelector('.definition-popup');
+        if (popup) {
+            popup.remove();
+        }
+    }
+});
+
+console.log('📖 Dictionary functionality loaded! Click on any word to see its definition.');
