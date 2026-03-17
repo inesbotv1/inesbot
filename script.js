@@ -19,6 +19,38 @@ themeToggle.addEventListener('click', () => {
     }, 20);
 });
 
+// Random phrase generator
+const phrases = [
+    "We ALL fw this, right?",
+    "Keiko throwing",
+    "Zenzenzen",
+    "I´m Always Truthful About My Trades",
+    "Zenith woman harasser",
+    "Gary Zhou",
+    "Zennn do you play minecraft",
+    "#1 Nova Lover",
+    "lwiheardyoustefanimgivingthemlwsolve",
+    "Doxx yourself if you see this",
+    "Orange Juice > Apple Juice",
+    "Supercalifragilisticexpialidocious",
+    "Opp List: Lrrx, Panda, Shush, Rocksta, Croc",
+    "What traps do you use?",
+    "Yoyoyo",
+    "Oioioi",
+    "Synau",
+    "Tchambuli",
+    "Keiko throwing V2",
+];
+
+// Set random phrase when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    const phraseElement = document.getElementById('random-phrase');
+    if (phraseElement) {
+        const randomIndex = Math.floor(Math.random() * phrases.length);
+        phraseElement.textContent = phrases[randomIndex];
+    }
+});
+
 // main searcher class
 class InesBotSearcher {
     constructor() {
