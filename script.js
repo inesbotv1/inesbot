@@ -91,8 +91,6 @@ class InesBotSearcher {
             results.sort((a, b) => a.length - b.length);
         } else if (sortOption === 'longest') {
             results.sort((a, b) => b.length - a.length);
-        } else if (sortOption === 'alpha') {
-            results.sort((a, b) => a.localeCompare(b));
         }
         
         document.getElementById('result-count').textContent = results.length;
