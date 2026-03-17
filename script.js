@@ -26,8 +26,6 @@ const phrases = [
     "Zenzenzen",
     "I´m Always Truthful About My Trades",
     "Zenith woman harasser",
-    "Gary Zhou",
-    "Zennn do you play minecraft",
     "#1 Nova Lover",
     "lwiheardyoustefanimgivingthemlwsolve",
     "Doxx yourself if you see this",
@@ -44,26 +42,31 @@ const phrases = [
     "Red angel wolves",
 ];
 
-// Set random phrase when page loads - cycles through all before repeating
+// Set random phrase when page loads - random order, no repeats until all seen
 document.addEventListener('DOMContentLoaded', function() {
     const phraseElement = document.getElementById('random-phrase');
     if (phraseElement) {
-        // Get the current index from localStorage
-        let currentIndex = localStorage.getItem('phraseIndex');
+        // Get the remaining phrases from localStorage
+        let remainingPhrases = JSON.parse(localStorage.getItem('remainingPhrases'));
         
-        // If no index exists or we've reached the end, start over
-        if (currentIndex === null || parseInt(currentIndex) >= phrases.length - 1) {
-            currentIndex = 0;
-        } else {
-            // Move to next phrase
-            currentIndex = parseInt(currentIndex) + 1;
+        // If no remaining phrases or empty, reshuffle all phrases
+        if (!remainingPhrases || remainingPhrases.length === 0) {
+            // Create a shuffled copy of all phrases
+            remainingPhrases = [...phrases];
+            for (let i = remainingPhrases.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [remainingPhrases[i], remainingPhrases[j]] = [remainingPhrases[j], remainingPhrases[i]];
+            }
         }
         
-        // Set the phrase
-        phraseElement.textContent = phrases[currentIndex];
+        // Pick the next phrase (first in the shuffled list)
+        const nextPhrase = remainingPhrases.shift();
         
-        // Save the new index
-        localStorage.setItem('phraseIndex', currentIndex);
+        // Set the phrase
+        phraseElement.textContent = nextPhrase;
+        
+        // Save the remaining phrases
+        localStorage.setItem('remainingPhrases', JSON.stringify(remainingPhrases));
     }
 });
 
