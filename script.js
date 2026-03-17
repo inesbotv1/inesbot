@@ -40,6 +40,8 @@ const phrases = [
     "Synau",
     "Tchambuli",
     "Keiko throwing V2",
+    "Xilofob",
+    "Red angel wolves",
 ];
 
 // Set random phrase when page loads - cycles through all before repeating
