@@ -671,7 +671,7 @@ function createFilterModeUI() {
             if (filterMode === 'max-words') {
                 // Original behavior: filter by count range (2 to maxWords)
                 prefixCounts.forEach((count, prefix) => {
-                    if (count >= 2 && count <= maxWords) {
+                    if (count >= 4 && count <= maxWords) {
                         validPrefixes.push({ prefix, count });
                     }
                 });
@@ -697,7 +697,7 @@ function createFilterModeUI() {
     
     // Now check each prefix that has at least 2 words
     wordsByPrefix.forEach((words, prefix) => {
-        if (words.length >= 2) {
+        if (words.length >= 4) {
             // Check if ALL words for this prefix are longer than 6 letters
             const allWordsLong = words.every(word => word.length > 6);
             
@@ -743,7 +743,7 @@ function createFilterModeUI() {
             } else {
                 let message = '';
                 if (filterMode === 'max-words') {
-                    message = `No ${prefixLength}-letter prefixes with 2-${maxWords} words found`;
+                    message = `No ${prefixLength}-letter prefixes with 4-${maxWords} words found`;
                 } else {
                     message = `No ${prefixLength}-letter prefixes with words longer than 6 letters found`;
                 }
@@ -883,7 +883,7 @@ function createFilterModeUI() {
         
         let modeDescription = '';
         if (filterMode === 'max-words') {
-            modeDescription = `2-${maxWords} words`;
+            modeDescription = `4-${maxWords} words`;
         } else {
             modeDescription = `words longer than 6 letters`;
         }
@@ -1015,9 +1015,7 @@ function createFilterModeUI() {
     const maxSelect = document.getElementById('rare-max-words');
     if (maxSelect) {
         maxSelect.innerHTML = `
-            <option value="2" selected>2 words</option>
-            <option value="3">3 words</option>
-            <option value="4">4 words</option>
+            <option value="4" selected>4 words</option>
             <option value="5">5 words</option>
             <option value="6">6 words</option>
             <option value="7">7 words</option>
