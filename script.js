@@ -370,7 +370,7 @@ if (normalBtn && rareBtn && normalSection && rareSection) {
     let rareState = {
         prefix: '',
         prefixLength: '2',
-        maxWords: '2',
+        maxWords: '4',
         filterMode: 'max-words',
         sort: 'count-asc',
         results: '<p class="placeholder-text">Click Search to find rare prefixes</p>',
@@ -756,7 +756,7 @@ function createFilterModeUI() {
     document.getElementById('rare-clear-btn')?.addEventListener('click', () => {
         document.getElementById('rare-prefix').value = '';
         document.getElementById('rare-prefix-length').value = '2';
-        document.getElementById('rare-max-words').value = '2';
+        document.getElementById('rare-max-words').value = '4';
         
         // Reset filter mode to max-words
         const maxWordsRadio = document.querySelector('input[name="filter-mode"][value="max-words"]');
