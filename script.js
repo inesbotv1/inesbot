@@ -42,12 +42,26 @@ const phrases = [
     "Keiko throwing V2",
 ];
 
-// Set random phrase when page loads
+// Set random phrase when page loads - cycles through all before repeating
 document.addEventListener('DOMContentLoaded', function() {
     const phraseElement = document.getElementById('random-phrase');
     if (phraseElement) {
-        const randomIndex = Math.floor(Math.random() * phrases.length);
-        phraseElement.textContent = phrases[randomIndex];
+        // Get the current index from localStorage
+        let currentIndex = localStorage.getItem('phraseIndex');
+        
+        // If no index exists or we've reached the end, start over
+        if (currentIndex === null || parseInt(currentIndex) >= phrases.length - 1) {
+            currentIndex = 0;
+        } else {
+            // Move to next phrase
+            currentIndex = parseInt(currentIndex) + 1;
+        }
+        
+        // Set the phrase
+        phraseElement.textContent = phrases[currentIndex];
+        
+        // Save the new index
+        localStorage.setItem('phraseIndex', currentIndex);
     }
 });
 
