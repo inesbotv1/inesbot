@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
 class InesBotSearcher {
     constructor() {
         this.words = [];
-        this.wordListUrl = 'https://raw.githubusercontent.com/inesbotv1/askari/refs/heads/main/lastletter.txt';
+        this.wordListUrl = 'https://raw.githubusercontent.com/inesbotv1/inesbot/refs/heads/main/lastletter.txt';
         
         this.initEventListeners();
         this.loadWordsFromURL();
@@ -519,7 +519,7 @@ async function loadRareWords() {
     
     try {
         const [wordsResponse, blacklistResponse] = await Promise.all([
-            fetch('https://raw.githubusercontent.com/inesbotv1/askari/refs/heads/main/lastletter.txt?t=' + Date.now()),
+            fetch('https://raw.githubusercontent.com/inesbotv1/inesbot/refs/heads/main/lastletter.txt?t=' + Date.now()),
             fetch('https://raw.githubusercontent.com/inesbotv1/inesbot/refs/heads/main/blacklist.txt?t=' + Date.now())
         ]);
         
