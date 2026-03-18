@@ -189,7 +189,7 @@ class InesBotSearcher {
 // main searcher
 const searcher = new InesBotSearcher();
 
-// Dictionary mode
+// Dictionary Panel
 
 const definitionCache = new Map();
 let dictionaryPanel = null;
@@ -386,9 +386,6 @@ function makeWordsClickable() {
     let isLoading = false;
     let searchState = null; 
     let blacklistedPrefixes = new Set();
-
-    window._compareModeInitialized = false;
-    window._maxWordsModeInitialized = false;
     
     const normalBtn = document.getElementById('mode-normal');
     const rareBtn = document.getElementById('mode-rare');
@@ -598,7 +595,7 @@ function createFilterModeUI() {
             <div style="width: 1px; height: 20px; background: var(--border-color); margin: 0 4px;"></div>
             
             <!-- Number input -->
-            <input type="number" id="compare-length" value="4" min="1" max="20" 
+            <input type="number" id="compare-length" value="6" min="1" max="20" 
                    style="width: 45px; padding: 4px; border-radius: 20px; background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border-color); text-align: center; font-weight: 500; outline: none; margin: 0 2px;"
                    onmouseover="this.style.background='var(--bg-hover)'" 
                    onmouseout="this.style.background='var(--bg-secondary)'"
@@ -716,36 +713,22 @@ setTimeout(function() {
             <option value="3">3 letters</option>
             <option value="4">4 letters</option>
         `;
+        prefixLengthSelect.value = '1';
         
-        if (!window._compareModeInitialized) {
-            prefixLengthSelect.value = '1';
-            
-            const compareLength = document.getElementById('compare-length');
-            if (compareLength) compareLength.value = '4';
-            
-            window._compareModeInitialized = true;
-            window._maxWordsModeInitialized = false; // Reset the other mode's flag
-        } else {
-            if (Array.from(prefixLengthSelect.options).some(opt => opt.value === currentValue)) {
-                prefixLengthSelect.value = currentValue;
-            }
-        }
+        const compareLength = document.getElementById('compare-length');
+        if (compareLength) compareLength.value = '1';
         
-    } else { 
+    } else {
         prefixLengthSelect.innerHTML = `
             <option value="2">2 letters</option>
             <option value="3">3 letters</option>
             <option value="4">4 letters</option>
         `;
         
-        if (!window._maxWordsModeInitialized) {
-            prefixLengthSelect.value = '2';
-            window._maxWordsModeInitialized = true;
-            window._compareModeInitialized = false; 
+        if (Array.from(prefixLengthSelect.options).some(opt => opt.value === currentValue)) {
+            prefixLengthSelect.value = currentValue;
         } else {
-            if (Array.from(prefixLengthSelect.options).some(opt => opt.value === currentValue)) {
-                prefixLengthSelect.value = currentValue;
-            }
+            prefixLengthSelect.value = '2'; // Default to 2 if previous value not available
         }
     }
 }
@@ -927,7 +910,7 @@ filteredWords.forEach(word => {
     const lengthComparison = document.getElementById('length-comparison');
     if (lengthComparison) lengthComparison.value = '<=';
     const compareLength = document.getElementById('compare-length');
-    if (compareLength) compareLength.value = '4';
+    if (compareLength) compareLength.value = '6';
         
         document.querySelectorAll('input[name="rare-sort"]')[0].checked = true;
         document.getElementById('results-box').innerHTML = '<p class="placeholder-text">Filters cleared</p>';
