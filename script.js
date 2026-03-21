@@ -336,6 +336,7 @@ async function fetchFromWiktionary(word) {
         data.en.forEach(entry => {
             if (entry.definitions) {
                 entry.definitions.slice(0, 1).forEach(def => {
+                    console.log(def.definition);
                     result.meanings.push({
                         partOfSpeech: entry.partOfSpeech,
                         definition: def.definition
