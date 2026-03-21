@@ -326,20 +326,16 @@ function showNoDefinitionInPanel() {
 }
 
 async function fetchFromWiktionary(word) {
-    console.log('fetching:', word);
     try {
         const response = await fetch(`https://en.wiktionary.org/api/rest_v1/page/definition/${encodeURIComponent(word)}`);
-        console.log('response status:', response.status);
         if (!response.ok) return null;
         const data = await response.json();
-        console.log('raw data:', data);
         if (!data.en) return null;
         
         const result = { word, meanings: [] };
         data.en.forEach(entry => {
             if (entry.definitions) {
                 entry.definitions.slice(0, 1).forEach(def => {
-                    console.log(def.definition);
                     result.meanings.push({
                         partOfSpeech: entry.partOfSpeech,
                         definition: def.definition
