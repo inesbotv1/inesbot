@@ -338,7 +338,10 @@ async function fetchFromWiktionary(word) {
                 entry.definitions.slice(0, 1).forEach(def => {
                     result.meanings.push({
                         partOfSpeech: entry.partOfSpeech,
-                        definition: def.definition.replace(/<[^>]*>/g, '').trim()
+                        definition: def.definition
+                            .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+                            .replace(/<[^>]*>/g, '')
+                            .trim()
                     });
                 });
             }
