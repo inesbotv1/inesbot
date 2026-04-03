@@ -244,3 +244,8 @@ yr
 ys
 yt
 yx
+endl
+enre
+epar
+emar
+erub
