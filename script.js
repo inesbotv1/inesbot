@@ -1454,37 +1454,45 @@ class PrefixChecker {
         </div>
     `;
     
-    // Show breakdown by next letter
-    if (uniqueNextLetters.length > 0) {
-        resultHtml += `
-            <div style="margin-bottom: 10px; color: var(--text-primary);">
-                <div style="font-weight: 600; margin-bottom: 8px;">Breakdown:</div>
-                <div style="display: grid; gap: 8px;">
-        `;
+    // Show breakdown by next letter (collapsible)
+if (uniqueNextLetters.length > 0) {
+    // Create a unique ID for this breakdown
+    const breakdownId = 'breakdown-' + Date.now();
+    
+    resultHtml += `
+        <div style="margin-bottom: 10px; color: var(--text-primary);">
+            <div style="font-weight: 600; margin-bottom: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px;" onclick="toggleBreakdown('${breakdownId}')">
+                <span id="${breakdownId}-arrow">▶</span>
+                <span>Breakdown(click to expand)</span>
+            </div>
+            <div id="${breakdownId}" style="display: none; overflow: hidden; transition: max-height 0.3s ease-out;">
+                <div style="display: grid; gap: 8px; margin-top: 8px;">
+    `;
+    
+    const sortedLetters = uniqueNextLetters.sort();
+    for (const letter of sortedLetters) {
+        const wordsList = nextLetters.get(letter);
+        const displayWords = wordsList.slice(0, 5);
+        const moreCount = wordsList.length - 5;
         
-        const sortedLetters = uniqueNextLetters.sort();
-        for (const letter of sortedLetters) {
-            const wordsList = nextLetters.get(letter);
-            const displayWords = wordsList.slice(0, 5);
-            const moreCount = wordsList.length - 5;
-            
-            resultHtml += `
-                <div style="padding: 8px; background: var(--bg-tertiary); border-radius: 6px;">
-                    <div style="font-weight: 600; margin-bottom: 5px; color: var(--text-primary);">
-                        +"${letter}" → ${wordsList.length} word(s)
-                    </div>
-                    <div style="font-size: 12px; color: var(--text-secondary);">
-                        ${displayWords.join(', ')}${moreCount > 0 ? ` (+${moreCount} more)` : ''}
-                    </div>
+        resultHtml += `
+            <div style="padding: 8px; background: var(--bg-tertiary); border-radius: 6px;">
+                <div style="font-weight: 600; margin-bottom: 5px; color: var(--text-primary);">
+                    +"${letter}" → ${wordsList.length} word(s)
                 </div>
-            `;
-        }
-        
-        resultHtml += `
+                <div style="font-size: 12px; color: var(--text-secondary);">
+                    ${displayWords.join(', ')}${moreCount > 0 ? ` (+${moreCount} more)` : ''}
                 </div>
             </div>
         `;
     }
+    
+    resultHtml += `
+                </div>
+            </div>
+        </div>
+    `;
+}
     
     resultDiv.innerHTML = resultHtml;
     resultDiv.style.display = 'block';
@@ -1519,7 +1527,7 @@ if (document.readyState === 'loading') {
         prefixChecker = new PrefixChecker();
     }, 500);
 }
-
+    
 // Re-initialize when switching to normal mode
 const normalModeBtn = document.getElementById('mode-normal');
 if (normalModeBtn) {
@@ -1535,3 +1543,21 @@ if (normalModeBtn) {
     });
 }
 })();
+
+// Toggle breakdown visibility with slide animation
+function toggleBreakdown(breakdownId) {
+    const breakdown = document.getElementById(breakdownId);
+    const arrow = document.getElementById(breakdownId + '-arrow');
+    
+    if (breakdown.style.display === 'none' || breakdown.style.display === '') {
+        breakdown.style.display = 'block';
+        breakdown.style.maxHeight = breakdown.scrollHeight + 'px';
+        arrow.textContent = '▼';
+    } else {
+        breakdown.style.maxHeight = '0';
+        setTimeout(() => {
+            breakdown.style.display = 'none';
+        }, 300);
+        arrow.textContent = '▶';
+    }
+}
