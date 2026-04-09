@@ -1358,8 +1358,32 @@ class PrefixChecker {
         return;
     }
     
-    // Check if prefix is blacklisted
-    const isBlacklisted = blacklistedPrefixes.has(prefix);
+    // Check if prefix is blacklisted (exact match OR ends with any blacklisted prefix)
+    const isBlacklisted = blacklistedPrefixes.has(prefix) || [...blacklistedPrefixes].some(b => prefix.endsWith(b));
+    
+    // If blacklisted, show simple message and stop
+    if (isBlacklisted) {
+        let blacklistReason = '';
+        if (blacklistedPrefixes.has(prefix)) {
+            blacklistReason = `exact match in blacklist`;
+        } else {
+            const matchingBlacklist = [...blacklistedPrefixes].find(b => prefix.endsWith(b));
+            blacklistReason = `ends with blacklisted prefix "${matchingBlacklist}"`;
+        }
+        
+        resultDiv.innerHTML = `
+            <div style="padding: 8px; background: var(--bg-tertiary); border-radius: 6px; color: var(--text-primary);">
+                <div style="font-weight: 500; color: #f44366; margin-bottom: 10px;">
+                    ✗ INVALID: Prefix "${prefix}" is blacklisted (${blacklistReason})
+                </div>
+                <div style="font-size: 13px; color: var(--text-secondary);">
+                    Blacklisted prefixes cannot be used regardless of letter patterns.
+                </div>
+            </div>
+        `;
+        resultDiv.style.display = 'block';
+        return;
+    }
     
     // Find all words that start with the prefix
     const matchingWords = words.filter(word => 
@@ -1390,19 +1414,16 @@ class PrefixChecker {
     const oneLetterSolves = matchingWords.filter(word => word.length === prefix.length + 1);
     const hasOneLetterSolve = oneLetterSolves.length > 0;
     
-    // Determine validity (also consider blacklist)
+    // Determine validity
     let isValid = false;
     let validityReason = '';
     
-    if (isBlacklisted) {
-        isValid = false;
-        validityReason = '✗ BLACKLISTED';
-    } else if (hasThreeDistinctLetters && !hasOneLetterSolve) {
+    if (hasThreeDistinctLetters && !hasOneLetterSolve) {
         isValid = true;
-        validityReason = '✓ VALID';
+        validityReason = '✓ VALID: Has 3+ distinct letters after prefix with no single-letter solves';
     } else if (hasThreeDistinctLetters && hasOneLetterSolve) {
         isValid = false;
-        validityReason = '✗ INVALID';
+        validityReason = '✗ INVALID: Has 3+ distinct letters BUT also has single-letter solves (these would be problematic)';
     } else if (!hasThreeDistinctLetters && uniqueNextLetters.length === 2) {
         isValid = false;
         validityReason = `✗ INVALID: Only has ${uniqueNextLetters.length} distinct letters after prefix (needs 3+)`;
@@ -1431,12 +1452,12 @@ class PrefixChecker {
     // Show statistics
     resultHtml += `
         <div style="margin-bottom: 15px; color: var(--text-primary);">
-            <div style="font-weight: 600; margin-bottom: 8px;">Statistics:</div>
+            <div style="font-weight: 600; margin-bottom: 8px;">📊 Statistics:</div>
             <div style="padding-left: 10px;">
                 <div>• Total words starting with "${prefix}": ${matchingWords.length}</div>
                 <div>• Unique next letters: ${uniqueNextLetters.length}</div>
                 <div>• Single-letter solves: ${oneLetterSolves.length}</div>
-                ${isBlacklisted ? '<div>•This prefix is BLACKLISTED</div>' : ''}
+                <div>• Required for validity: 3+ distinct next letters & no single-letter solves</div>
             </div>
         </div>
     `;
@@ -1445,7 +1466,7 @@ class PrefixChecker {
     if (uniqueNextLetters.length > 0) {
         resultHtml += `
             <div style="margin-bottom: 10px; color: var(--text-primary);">
-                <div style="font-weight: 600; margin-bottom: 8px;">Breakdown:</div>
+                <div style="font-weight: 600; margin-bottom: 8px;">📝 Breakdown by next letter:</div>
                 <div style="display: grid; gap: 8px;">
         `;
         
