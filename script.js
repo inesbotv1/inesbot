@@ -398,12 +398,24 @@ function makeWordsClickable() {
     let blacklistedPrefixes = new Set();
 
     function hasThreeDistinctNextLetters(prefix, words) {
+    const vowels = new Set(['a', 'e', 'i', 'o', 'u', 'y']);
     const nextLetters = new Set();
     for (const word of words) {
         if (word.length > prefix.length) {
-            nextLetters.add(word[prefix.length].toLowerCase());
+            const nextLetter = word[prefix.length].toLowerCase();
+            nextLetters.add(nextLetter);
         }
         if (nextLetters.size >= 3) return true;
+    }
+    return false;
+}
+
+function isVowelSolvable(prefix, words) {
+    const vowels = new Set(['a', 'e', 'i', 'o', 'u', 'y']);
+    for (const word of words) {
+        if (word.length === prefix.length + 1 && vowels.has(word[prefix.length].toLowerCase())) {
+            return true;
+        }
     }
     return false;
 }
@@ -825,7 +837,7 @@ filteredWords.forEach(word => {
                 prefixCounts.forEach((count, prefix) => {
                     if (count >= 3 && count <= maxWords) {
                         const words = wordsByPrefixMap.get(prefix) || [];
-                        if (hasThreeDistinctNextLetters(prefix, words)) {
+                        if (hasThreeDistinctNextLetters(prefix, words) && !isVowelSolvable(prefix, words)) {
                             validPrefixes.push({ prefix, count });
                         }
                     }
