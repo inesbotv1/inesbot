@@ -1,4 +1,3 @@
-// da theme toggle
 const themeToggle = document.getElementById('theme-toggle');
 function debounce(fn, delay) {
     let timer;
@@ -193,7 +192,6 @@ class InesBotSearcher {
     }
 }
 
-// main searcher
 const searcher = new InesBotSearcher();
 
 // Dictionary Panel
@@ -732,7 +730,6 @@ setTimeout(function() {
     
     if (!prefixLengthSelect || !modeRadios.length) return;
     
-    // Store initial values for compare length mode
 let compareLengthInitialized = false;
 let savedCompareLengthValue = '1';
 let savedComparisonOp = '<=';
@@ -751,14 +748,12 @@ function updatePrefixLengthOptions() {
             <option value="4">4 letters</option>
         `;
         
-        // Only set to '1' if this is the FIRST TIME entering compare length mode
         if (!compareLengthInitialized) {
             prefixLengthSelect.value = '1';
             const compareLength = document.getElementById('compare-length');
             if (compareLength) compareLength.value = '1';
             compareLengthInitialized = true;
         } else {
-            // Restore saved values
             prefixLengthSelect.value = currentValue;
             const compareLength = document.getElementById('compare-length');
             if (compareLength) compareLength.value = savedCompareLengthValue;
@@ -773,7 +768,6 @@ function updatePrefixLengthOptions() {
             <option value="4">4 letters</option>
         `;
         
-        // Restore previous value if it exists, otherwise default to '2'
         if (currentValue && currentValue !== '1') {
             prefixLengthSelect.value = currentValue;
         } else {
@@ -782,7 +776,6 @@ function updatePrefixLengthOptions() {
     }
 }
 
-// Save compare length values when they change
 function saveCompareLengthValues() {
     const compareLength = document.getElementById('compare-length');
     const comparisonSelect = document.getElementById('length-comparison');
@@ -792,7 +785,6 @@ function saveCompareLengthValues() {
     
     modeRadios.forEach(radio => {
     radio.addEventListener('change', function() {
-        // Reset compare length initialization flag when switching AWAY from compare length
         if (this.value !== 'length-compare') {
             compareLengthInitialized = false;
         }
@@ -802,7 +794,6 @@ function saveCompareLengthValues() {
     
     updatePrefixLengthOptions();
     
-    // Add this inside the setTimeout, after updatePrefixLengthOptions()
 const compareLength = document.getElementById('compare-length');
 const comparisonSelect = document.getElementById('length-comparison');
 
@@ -1238,9 +1229,7 @@ function addLoadMoreButton() {
         `;
     }
 
-    // ============================================
-// PREFIX CHECKER FOR NORMAL WORD SEARCH MODE
-// ============================================
+// Prefix Checker
 
 class PrefixChecker {
     constructor() {
@@ -1250,13 +1239,11 @@ class PrefixChecker {
     }
 
     initCheckerUI() {
-    // Check if checker UI already exists
     if (document.getElementById('prefix-checker-section')) return;
     
     const normalSection = document.getElementById('normal-search-section');
     if (!normalSection) return;
     
-    // Create checker section
     const checkerSection = document.createElement('div');
     checkerSection.id = 'prefix-checker-section';
     checkerSection.style.cssText = `
@@ -1286,7 +1273,6 @@ class PrefixChecker {
         <div id="checker-result" style="margin-top: 15px; padding: 10px; border-radius: 6px; display: none;"></div>
     `;
     
-    // Insert after action buttons
     const actionButtons = normalSection.querySelector('.action-buttons');
     if (actionButtons) {
         actionButtons.parentNode.insertBefore(checkerSection, actionButtons.nextSibling);
@@ -1358,10 +1344,8 @@ class PrefixChecker {
         return;
     }
     
-    // Check if prefix is blacklisted (exact match OR ends with any blacklisted prefix)
     const isBlacklisted = blacklistedPrefixes.has(prefix);
     
-    // If blacklisted, show simple message and stop
     if (isBlacklisted) {
         let blacklistReason = '';
         if (blacklistedPrefixes.has(prefix)) {
@@ -1385,7 +1369,6 @@ class PrefixChecker {
         return;
     }
     
-    // Find all words that start with the prefix
     const matchingWords = words.filter(word => 
         word.toLowerCase().startsWith(prefix) && word.length > prefix.length
     );
@@ -1395,7 +1378,6 @@ class PrefixChecker {
         return;
     }
     
-    // Get the next letters after the prefix
     const nextLetters = new Map();
     matchingWords.forEach(word => {
         if (word.length > prefix.length) {
@@ -1410,7 +1392,6 @@ class PrefixChecker {
     const uniqueNextLetters = Array.from(nextLetters.keys());
     const hasThreeDistinctLetters = uniqueNextLetters.length >= 3;
     
-    // Determine validity (only need 3+ distinct next letters)
     let isValid = false;
     let validityReason = '';
     
@@ -1428,7 +1409,6 @@ class PrefixChecker {
         validityReason = `✗ INVALID`;
     }
     
-    // Build result display
     let resultHtml = `
         <div style="margin-bottom: 15px; color: var(--text-primary);">
             <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">
@@ -1442,7 +1422,6 @@ class PrefixChecker {
         </div>
     `;
     
-    // Show statistics
     resultHtml += `
         <div style="margin-bottom: 15px; color: var(--text-primary);">
             <div style="font-weight: 600; margin-bottom: 8px;">Statistics:</div>
@@ -1454,9 +1433,7 @@ class PrefixChecker {
         </div>
     `;
     
-    // Show breakdown by next letter (collapsible)
 if (uniqueNextLetters.length > 0) {
-    // Create a unique ID for this breakdown
     const breakdownId = 'breakdown-' + Date.now();
     
     resultHtml += `
@@ -1512,10 +1489,8 @@ if (uniqueNextLetters.length > 0) {
     }
 }
 
-// Initialize the prefix checker when the page loads
 let prefixChecker = null;
 
-// Wait for DOM to load and also when switching to normal mode
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
@@ -1528,7 +1503,6 @@ if (document.readyState === 'loading') {
     }, 500);
 }
     
-// Re-initialize when switching to normal mode
 const normalModeBtn = document.getElementById('mode-normal');
 if (normalModeBtn) {
     normalModeBtn.addEventListener('click', function() {
@@ -1544,7 +1518,6 @@ if (normalModeBtn) {
 }
 })();
 
-// Toggle breakdown visibility with slide animation
 function toggleBreakdown(breakdownId) {
     const breakdown = document.getElementById(breakdownId);
     const arrow = document.getElementById(breakdownId + '-arrow');
