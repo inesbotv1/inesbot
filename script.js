@@ -1067,7 +1067,7 @@ if (filterMode === 'max-words') {
             const statsDiv = document.createElement('div');
             statsDiv.className = 'rare-stats';
             statsDiv.id = 'rare-stats';
-            statsDiv.innerHTML = `Found ${totalCount} total prefixes, showing ${searchState.validResults.length} verified with ${modeDescription}`;
+            statsDiv.innerHTML = `Found ${totalCount} total prefixes, showing ${searchState.validResults.length} verified with ${modeDescription}<br><span style="color: var(--text-secondary); font-size: 0.85em;">Not all prefixes work due to invalid solves, dm me so I can blacklist them</span>`;
             
             if (resultsBox.firstChild) {
                 resultsBox.insertBefore(statsDiv, resultsBox.firstChild);
@@ -1077,7 +1077,7 @@ if (filterMode === 'max-words') {
         } else {
             const statsDiv = document.getElementById('rare-stats');
             if (statsDiv) {
-                statsDiv.innerHTML = `Found ${totalCount} total prefixes, showing ${searchState.validResults.length} verified with ${modeDescription}`;
+                statsDiv.innerHTML = `Found ${totalCount} total prefixes, showing ${searchState.validResults.length} verified with ${modeDescription}<br><span style="color: var(--text-secondary); font-size: 0.85em;">Not all prefixes work due to invalid solves, dm me so I can blacklist them</span>`;
             }
         }
         
