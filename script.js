@@ -1359,7 +1359,7 @@ class PrefixChecker {
     }
     
     // Check if prefix is blacklisted (exact match OR ends with any blacklisted prefix)
-    const isBlacklisted = blacklistedPrefixes.has(prefix) || [...blacklistedPrefixes].some(b => prefix.endsWith(b));
+    const isBlacklisted = blacklistedPrefixes.has(prefix);
     
     // If blacklisted, show simple message and stop
     if (isBlacklisted) {
