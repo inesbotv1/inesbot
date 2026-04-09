@@ -1339,10 +1339,27 @@ class PrefixChecker {
     
     const words = await this.loadWordsForChecker();
     
+    // Load blacklist
+    let blacklistedPrefixes = new Set();
+    try {
+        const blacklistResponse = await fetch('https://raw.githubusercontent.com/inesbotv1/inesbot/refs/heads/main/blacklist.txt?t=' + Date.now());
+        const blacklistText = await blacklistResponse.text();
+        blacklistedPrefixes = new Set(
+            blacklistText.split(/\r?\n/)
+                .map(line => line.trim().toLowerCase())
+                .filter(line => line.length > 0)
+        );
+    } catch (error) {
+        console.error('Failed to load blacklist:', error);
+    }
+    
     if (words.length === 0) {
         this.showResult('❌ Failed to load word list', 'error');
         return;
     }
+    
+    // Check if prefix is blacklisted
+    const isBlacklisted = blacklistedPrefixes.has(prefix);
     
     // Find all words that start with the prefix
     const matchingWords = words.filter(word => 
@@ -1373,14 +1390,14 @@ class PrefixChecker {
     const oneLetterSolves = matchingWords.filter(word => word.length === prefix.length + 1);
     const hasOneLetterSolve = oneLetterSolves.length > 0;
     
-    // Check if all solves share the same next letter
-    const allSameLetter = uniqueNextLetters.length === 1;
-    
-    // Determine validity
+    // Determine validity (also consider blacklist)
     let isValid = false;
     let validityReason = '';
     
-    if (hasThreeDistinctLetters && !hasOneLetterSolve) {
+    if (isBlacklisted) {
+        isValid = false;
+        validityReason = '✗ BLACKLISTED';
+    } else if (hasThreeDistinctLetters && !hasOneLetterSolve) {
         isValid = true;
         validityReason = '✓ VALID';
     } else if (hasThreeDistinctLetters && hasOneLetterSolve) {
@@ -1419,6 +1436,7 @@ class PrefixChecker {
                 <div>• Total words starting with "${prefix}": ${matchingWords.length}</div>
                 <div>• Unique next letters: ${uniqueNextLetters.length}</div>
                 <div>• Single-letter solves: ${oneLetterSolves.length}</div>
+                ${isBlacklisted ? '<div>•This prefix is BLACKLISTED</div>' : ''}
             </div>
         </div>
     `;
