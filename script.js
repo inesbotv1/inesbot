@@ -396,6 +396,17 @@ function makeWordsClickable() {
     let isLoading = false;
     let searchState = null; 
     let blacklistedPrefixes = new Set();
+
+    function hasThreeDistinctNextLetters(prefix, words) {
+    const nextLetters = new Set();
+    for (const word of words) {
+        if (word.length > prefix.length) {
+            nextLetters.add(word[prefix.length].toLowerCase());
+        }
+        if (nextLetters.size >= 3) return true;
+    }
+    return false;
+}
     
     const normalBtn = document.getElementById('mode-normal');
     const rareBtn = document.getElementById('mode-rare');
@@ -803,9 +814,20 @@ filteredWords.forEach(word => {
             const validPrefixes = [];
             
             if (filterMode === 'max-words') {
+                const wordsByPrefixMap = new Map();
+                for (const word of filteredWords) {
+                    if (word.length >= prefixLength) {
+                        const p = word.slice(0, prefixLength).toLowerCase();
+                        if (!wordsByPrefixMap.has(p)) wordsByPrefixMap.set(p, []);
+                        wordsByPrefixMap.get(p).push(word);
+                    }
+                }
                 prefixCounts.forEach((count, prefix) => {
                     if (count >= 4 && count <= maxWords) {
-                        validPrefixes.push({ prefix, count });
+                        const words = wordsByPrefixMap.get(prefix) || [];
+                        if (hasThreeDistinctNextLetters(prefix, words)) {
+                            validPrefixes.push({ prefix, count });
+                        }
                     }
                 });
 } else if (filterMode === 'length-compare') {
@@ -857,7 +879,7 @@ filteredWords.forEach(word => {
                 }
             }
             
-            if (allWordsMatch) {
+            if (allWordsMatch && hasThreeDistinctNextLetters(prefix, words)) {
                 validPrefixes.push({ prefix, count: words.length });
             }
         }
