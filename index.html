@@ -1,5 +1,140 @@
+
 <!DOCTYPE html>
-<html>
-<head><title>Down for maintenance</title></head>
-<body></body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InesBot V1</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>InesBotV1</h1>
+                <p id="random-phrase">We ALL fw this, right?</p>
+            </div>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <span class="light-icon">☀️</span>
+                <span class="dark-icon">🌙</span>
+            </button>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <span class="stat-label">Words loaded:</span>
+                <span class="stat-value" id="word-count">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Results found:</span>
+                <span class="stat-value" id="result-count">0</span>
+            </div>
+        </div>
+
+        <div class="control-panel">
+            <div class="mode-toggle-container">
+                <div class="mode-toggle">
+                    <button id="mode-normal" class="mode-btn mode-active">🔍 Normal Word Search</button>
+                    <button id="mode-rare" class="mode-btn">🔎 Rare Prefix Finder</button>
+                </div>
+            </div>
+
+            <div id="normal-search-section">
+                <div class="sort-options">
+                    <span class="sort-label">Sort by:</span>
+                    <label class="radio-label">
+                        <input type="radio" name="sort" value="none" checked> Alphabetical
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="sort" value="shortest"> Shortest First
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="sort" value="longest"> Longest First
+                    </label>
+                </div>
+
+                <div class="search-filters">
+                    <div class="filter-group">
+                        <label for="prefix-input">Starts with:</label>
+                        <input type="text" id="prefix-input" placeholder="e.g., 'ly'" class="filter-input">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="suffix-input">Ends with:</label>
+                        <input type="text" id="suffix-input" placeholder="e.g., 'ines'" class="filter-input">
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="search-btn" class="btn btn-search">Search</button>
+                    <button id="clear-btn" class="btn btn-clear">Clear All</button>
+                </div>
+            </div>
+
+            <div id="rare-finder-section" style="display: none;">
+                <div class="rare-sort-options" style="margin-bottom: 20px;">
+                    <span class="sort-label">Sort results by:</span>
+                    <label class="radio-label">
+                        <input type="radio" name="rare-sort" value="count-asc" checked> Count (fewest first)
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="rare-sort" value="count-desc"> Count (most first)
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="rare-sort" value="alpha"> Alphabetical
+                    </label>
+                </div>
+                
+                <div class="rare-filters">
+                    <div class="filter-group">
+                        <label for="rare-prefix-length">Prefix length:</label>
+                        <select id="rare-prefix-length" class="filter-input">
+                            <option value="2" selected>2 letters</option>
+                            <option value="3">3 letters</option>
+                            <option value="4">4 letters</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="rare-max-words">Maximum words (rare if ≤):</label>
+                        <select id="rare-max-words" class="filter-input">
+                            <option value="3" selected>3 words</option>
+                            <option value="4">4 words</option>
+                            <option value="5">5 words</option>
+                            <option value="6">6 words</option>
+                            <option value="7">7 words</option>
+                            <option value="8">8 words</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="given-letter-input">Give starts with (optional):</label>
+                        <input type="text" id="given-letter-input" maxlength="1" class="filter-input" placeholder="e.g., 's' for sapego">
+                    </div>
+                    <div class="filter-group">
+                        <label for="rare-prefix">Prefix starts with (optional):</label>
+                        <input type="text" id="rare-prefix" class="filter-input" placeholder="e.g., 'a' for words starting with a">
+                    </div>
+                </div>
+                
+                <div class="action-buttons" style="margin-top: 20px;">
+                    <button id="rare-search-btn" class="btn btn-search">Find Rare Prefixes</button>
+                    <button id="rare-clear-btn" class="btn btn-clear">Clear Rare Filters</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-container">
+            <div id="results-box" class="results-box">
+                <p class="placeholder-text">Loading words from GitHub...</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Xilofob</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
 </html>
