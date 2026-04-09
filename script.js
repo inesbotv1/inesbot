@@ -426,7 +426,7 @@ if (normalBtn && rareBtn && normalSection && rareSection) {
     let rareState = {
         prefix: '',
         prefixLength: '2',
-        maxWords: '4',
+        maxWords: '3',
         filterMode: 'max-words',
         sort: 'count-asc',
         results: '<p class="placeholder-text">Click Search to find rare prefixes</p>',
