@@ -732,7 +732,12 @@ setTimeout(function() {
     
     if (!prefixLengthSelect || !modeRadios.length) return;
     
-    function updatePrefixLengthOptions() {
+    // Store initial values for compare length mode
+let compareLengthInitialized = false;
+let savedCompareLengthValue = '1';
+let savedComparisonOp = '<=';
+
+function updatePrefixLengthOptions() {
     const selectedMode = document.querySelector('input[name="filter-mode"]:checked')?.value;
     const currentValue = prefixLengthSelect.value;
     
@@ -745,10 +750,21 @@ setTimeout(function() {
             <option value="3">3 letters</option>
             <option value="4">4 letters</option>
         `;
-        prefixLengthSelect.value = '1';
         
-        const compareLength = document.getElementById('compare-length');
-        if (compareLength) compareLength.value = '1';
+        // Only set to '1' if this is the FIRST TIME entering compare length mode
+        if (!compareLengthInitialized) {
+            prefixLengthSelect.value = '1';
+            const compareLength = document.getElementById('compare-length');
+            if (compareLength) compareLength.value = '1';
+            compareLengthInitialized = true;
+        } else {
+            // Restore saved values
+            prefixLengthSelect.value = currentValue;
+            const compareLength = document.getElementById('compare-length');
+            if (compareLength) compareLength.value = savedCompareLengthValue;
+            const comparisonSelect = document.getElementById('length-comparison');
+            if (comparisonSelect) comparisonSelect.value = savedComparisonOp;
+        }
         
     } else {
         prefixLengthSelect.innerHTML = `
@@ -757,19 +773,46 @@ setTimeout(function() {
             <option value="4">4 letters</option>
         `;
         
-        if (Array.from(prefixLengthSelect.options).some(opt => opt.value === currentValue)) {
+        // Restore previous value if it exists, otherwise default to '2'
+        if (currentValue && currentValue !== '1') {
             prefixLengthSelect.value = currentValue;
         } else {
-            prefixLengthSelect.value = '2'; // Default to 2 if previous value not available
+            prefixLengthSelect.value = '2';
         }
     }
 }
+
+// Save compare length values when they change
+function saveCompareLengthValues() {
+    const compareLength = document.getElementById('compare-length');
+    const comparisonSelect = document.getElementById('length-comparison');
+    if (compareLength) savedCompareLengthValue = compareLength.value;
+    if (comparisonSelect) savedComparisonOp = comparisonSelect.value;
+}
     
     modeRadios.forEach(radio => {
-        radio.addEventListener('change', updatePrefixLengthOptions);
+    radio.addEventListener('change', function() {
+        // Reset compare length initialization flag when switching AWAY from compare length
+        if (this.value !== 'length-compare') {
+            compareLengthInitialized = false;
+        }
+        updatePrefixLengthOptions();
     });
+});
     
     updatePrefixLengthOptions();
+    
+    // Add this inside the setTimeout, after updatePrefixLengthOptions()
+const compareLength = document.getElementById('compare-length');
+const comparisonSelect = document.getElementById('length-comparison');
+
+if (compareLength) {
+    compareLength.addEventListener('change', saveCompareLengthValues);
+    compareLength.addEventListener('input', saveCompareLengthValues);
+}
+if (comparisonSelect) {
+    comparisonSelect.addEventListener('change', saveCompareLengthValues);
+}
     
 }, 200); 
     
@@ -805,14 +848,7 @@ setTimeout(function() {
 const prefixCounts = new Map();
 const wordSet = new Set(rareWords.map(w => w.toLowerCase()));
 
-const blacklistArray = [...blacklistedPrefixes];
-
-const filteredWords = rareWords.filter(word => {
-    const lowerWord = word.toLowerCase();
-    return !blacklistArray.some(prefix => lowerWord.startsWith(prefix));
-});
-
-filteredWords.forEach(word => {
+rareWords.forEach(word => {
     if (word.length >= prefixLength) {
         const prefix = word.slice(0, prefixLength).toLowerCase();
         if (prefixFilter && !prefix.startsWith(prefixFilter)) return;
@@ -826,7 +862,7 @@ filteredWords.forEach(word => {
             
             if (filterMode === 'max-words') {
                 const wordsByPrefixMap = new Map();
-                for (const word of filteredWords) {
+                for (const word of rareWords) {
                     if (word.length >= prefixLength) {
                         const p = word.slice(0, prefixLength).toLowerCase();
                         if (!wordsByPrefixMap.has(p)) wordsByPrefixMap.set(p, []);
@@ -834,6 +870,7 @@ filteredWords.forEach(word => {
                     }
                 }
                 prefixCounts.forEach((count, prefix) => {
+                    if (blacklistedPrefixes.has(prefix) || [...blacklistedPrefixes].some(b => prefix.endsWith(b))) return;
                     if (count >= 3 && count <= maxWords) {
                         const words = wordsByPrefixMap.get(prefix) || [];
                         if (hasThreeDistinctNextLetters(prefix, words) && !hasOneLetterSolve(prefix, words)) {
@@ -847,12 +884,7 @@ filteredWords.forEach(word => {
     
     const wordsByPrefix = new Map();
     
-    const filteredWords = rareWords.filter(word => {
-        const lowerWord = word.toLowerCase();
-        return !blacklistArray.some(prefix => lowerWord.startsWith(prefix));
-    });
-    
-    for (let word of filteredWords) {
+    for (let word of rareWords) {
         if (word.length >= prefixLength) {
             const prefix = word.slice(0, prefixLength).toLowerCase();
             
@@ -902,6 +934,26 @@ filteredWords.forEach(word => {
                 if (sortOption === 'count-desc') return b.count - a.count || a.prefix.localeCompare(b.prefix);
                 return a.prefix.localeCompare(b.prefix);
             });
+            const givenLetterFilter = document.getElementById('given-letter-input')?.value.toLowerCase().trim();
+            if (givenLetterFilter && givenLetterFilter.length === 1) {
+                const wordsStartingWithLetter = rareWords.filter(word => 
+                    word.toLowerCase().startsWith(givenLetterFilter)
+                );
+                const gFiltered = validPrefixes.filter(({ prefix }) =>
+                    wordsStartingWithLetter.some(word => word.toLowerCase().endsWith(prefix))
+                );
+                gFiltered.forEach(p => {
+                    const gives = wordsStartingWithLetter.filter(word => word.toLowerCase().endsWith(p.prefix));
+                    if (gives.length === 1) {
+                        p.giveLabel = `only give: ${gives[0]}`;
+                    } else {
+                        const shortest = gives.reduce((a, b) => a.length <= b.length ? a : b);
+                        p.giveLabel = `shortest give: ${shortest}`;
+                    }
+                });
+                validPrefixes.length = 0;
+                validPrefixes.push(...gFiltered);
+            }
             
             searchState = {
                 prefixFilter,
@@ -940,6 +992,7 @@ filteredWords.forEach(word => {
     
     document.getElementById('rare-clear-btn')?.addEventListener('click', () => {
         document.getElementById('rare-prefix').value = '';
+        document.getElementById('given-letter-input').value = '';
         document.getElementById('rare-prefix-length').value = '2';
         document.getElementById('rare-max-words').value = '4';
         
@@ -1014,7 +1067,8 @@ function loadVerifiedResults(isFirstLoad = false) {
                 verified.push({
                     prefix: p.prefix,
                     count: p.count,
-                    words: words
+                    words: words,
+                    giveLabel: p.giveLabel
                 });
             }
         }
@@ -1095,6 +1149,7 @@ if (filterMode === 'max-words') {
                 <div class="rare-prefix-header">
                     <span class="rare-prefix-badge">${r.count} words</span>
                     <span class="rare-prefix-value">"${r.prefix}" ${badge}</span>
+                    ${r.giveLabel ? '<span style="color: var(--text-secondary); font-size: 0.85em; margin-left: 8px;">(' + r.giveLabel + ')</span>' : ''}
                     <span class="rare-prefix-toggle" onclick="window.toggleWords(this)">Show</span>
                 </div>
                 <div class="rare-prefix-words" style="display:none; margin-top:10px; padding:10px; background:var(--bg-tertiary); border-radius:4px;"></div>
@@ -1182,4 +1237,270 @@ function addLoadMoreButton() {
             <option value="10">10 words</option>
         `;
     }
+
+    // ============================================
+// PREFIX CHECKER FOR NORMAL WORD SEARCH MODE
+// ============================================
+
+class PrefixChecker {
+    constructor() {
+        this.initCheckerUI();
+        this.words = [];
+        this.initEventListeners();
+    }
+
+    initCheckerUI() {
+    // Check if checker UI already exists
+    if (document.getElementById('prefix-checker-section')) return;
+    
+    const normalSection = document.getElementById('normal-search-section');
+    if (!normalSection) return;
+    
+    // Create checker section
+    const checkerSection = document.createElement('div');
+    checkerSection.id = 'prefix-checker-section';
+    checkerSection.style.cssText = `
+        margin-top: 20px;
+        padding: 15px;
+        background: var(--bg-secondary);
+        border-radius: 8px;
+        border: 1px solid var(--border-primary);
+    `;
+    
+    checkerSection.innerHTML = `
+        <div style="margin-bottom: 12px; font-weight: 600; color: var(--text-primary); font-size: 0.95rem;">
+            🔍 Prefix Validator
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <input type="text" id="check-prefix-input" placeholder="Enter prefix to check (e.g., 'abl')" 
+                   style="flex: 1; min-width: 150px; padding: 8px 12px; background: var(--bg-tertiary); 
+                          border: 1px solid var(--border-primary); border-radius: 6px; color: var(--text-primary);
+                          font-size: 14px;">
+            <button id="check-prefix-btn" class="btn btn-search" style="width: auto; padding: 8px 20px;">
+                Check Prefix
+            </button>
+            <button id="clear-checker-btn" class="btn btn-clear" style="width: auto; padding: 8px 20px;">
+                Clear
+            </button>
+        </div>
+        <div id="checker-result" style="margin-top: 15px; padding: 10px; border-radius: 6px; display: none;"></div>
+    `;
+    
+    // Insert after action buttons
+    const actionButtons = normalSection.querySelector('.action-buttons');
+    if (actionButtons) {
+        actionButtons.parentNode.insertBefore(checkerSection, actionButtons.nextSibling);
+    } else {
+        normalSection.appendChild(checkerSection);
+    }
+}
+
+    initEventListeners() {
+        document.getElementById('check-prefix-btn')?.addEventListener('click', () => this.checkPrefix());
+        document.getElementById('clear-checker-btn')?.addEventListener('click', () => this.clearChecker());
+        document.getElementById('check-prefix-input')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.checkPrefix();
+        });
+    }
+
+    async loadWordsForChecker() {
+        if (this.words.length > 0) return this.words;
+        
+        try {
+            const response = await fetch('https://raw.githubusercontent.com/inesbotv1/inesbot/refs/heads/main/lastletter.txt?t=' + Date.now());
+            const text = await response.text();
+            this.words = [...new Set(text.split(/\r?\n/)
+                .map(w => w.trim())
+                .filter(w => w.length > 0))];
+            return this.words;
+        } catch (error) {
+            console.error('Failed to load words for checker:', error);
+            return [];
+        }
+    }
+
+    async checkPrefix() {
+    const prefixInput = document.getElementById('check-prefix-input');
+    const prefix = prefixInput.value.toLowerCase().trim();
+    const resultDiv = document.getElementById('checker-result');
+    
+    if (!prefix) {
+        this.showResult('❌ Please enter a prefix to check', 'error');
+        return;
+    }
+    
+    if (!/^[a-z]+$/.test(prefix)) {
+        this.showResult('❌ Use only letters A-Z', 'error');
+        return;
+    }
+    
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = '<div class="loading-message">⏳ Checking prefix...</div>';
+    
+    const words = await this.loadWordsForChecker();
+    
+    if (words.length === 0) {
+        this.showResult('❌ Failed to load word list', 'error');
+        return;
+    }
+    
+    // Find all words that start with the prefix
+    const matchingWords = words.filter(word => 
+        word.toLowerCase().startsWith(prefix) && word.length > prefix.length
+    );
+    
+    if (matchingWords.length === 0) {
+        this.showResult(`❌ No words found with prefix "${prefix}"`, 'error');
+        return;
+    }
+    
+    // Get the next letters after the prefix
+    const nextLetters = new Map();
+    matchingWords.forEach(word => {
+        if (word.length > prefix.length) {
+            const nextLetter = word[prefix.length].toLowerCase();
+            if (!nextLetters.has(nextLetter)) {
+                nextLetters.set(nextLetter, []);
+            }
+            nextLetters.get(nextLetter).push(word);
+        }
+    });
+    
+    const uniqueNextLetters = Array.from(nextLetters.keys());
+    const hasThreeDistinctLetters = uniqueNextLetters.length >= 3;
+    
+    // Check for one-letter solves (words exactly prefix + 1 letter)
+    const oneLetterSolves = matchingWords.filter(word => word.length === prefix.length + 1);
+    const hasOneLetterSolve = oneLetterSolves.length > 0;
+    
+    // Check if all solves share the same next letter
+    const allSameLetter = uniqueNextLetters.length === 1;
+    
+    // Determine validity
+    let isValid = false;
+    let validityReason = '';
+    
+    if (hasThreeDistinctLetters && !hasOneLetterSolve) {
+        isValid = true;
+        validityReason = '✓ VALID';
+    } else if (hasThreeDistinctLetters && hasOneLetterSolve) {
+        isValid = false;
+        validityReason = '✗ INVALID';
+    } else if (!hasThreeDistinctLetters && uniqueNextLetters.length === 2) {
+        isValid = false;
+        validityReason = `✗ INVALID: Only has ${uniqueNextLetters.length} distinct letters after prefix (needs 3+)`;
+    } else if (uniqueNextLetters.length === 1) {
+        isValid = false;
+        validityReason = `✗ INVALID: All solves add the same letter "${uniqueNextLetters[0]}" after the prefix`;
+    } else {
+        isValid = false;
+        validityReason = `✗ INVALID: Only has ${uniqueNextLetters.length} distinct letter(s) after prefix (needs at least 3)`;
+    }
+    
+    // Build result display
+    let resultHtml = `
+        <div style="margin-bottom: 15px; color: var(--text-primary);">
+            <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">
+                Prefix: "${prefix}"
+            </div>
+            <div style="padding: 8px; background: var(--bg-tertiary); border-radius: 6px; margin-bottom: 10px;">
+                <div style="font-weight: 500; color: ${isValid ? '#4CAF50' : '#f44366'}">
+                    ${validityReason}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Show statistics
+    resultHtml += `
+        <div style="margin-bottom: 15px; color: var(--text-primary);">
+            <div style="font-weight: 600; margin-bottom: 8px;">Statistics:</div>
+            <div style="padding-left: 10px;">
+                <div>• Total words starting with "${prefix}": ${matchingWords.length}</div>
+                <div>• Unique next letters: ${uniqueNextLetters.length}</div>
+                <div>• Single-letter solves: ${oneLetterSolves.length}</div>
+            </div>
+        </div>
+    `;
+    
+    // Show breakdown by next letter
+    if (uniqueNextLetters.length > 0) {
+        resultHtml += `
+            <div style="margin-bottom: 10px; color: var(--text-primary);">
+                <div style="font-weight: 600; margin-bottom: 8px;">Breakdown:</div>
+                <div style="display: grid; gap: 8px;">
+        `;
+        
+        const sortedLetters = uniqueNextLetters.sort();
+        for (const letter of sortedLetters) {
+            const wordsList = nextLetters.get(letter);
+            const displayWords = wordsList.slice(0, 5);
+            const moreCount = wordsList.length - 5;
+            
+            resultHtml += `
+                <div style="padding: 8px; background: var(--bg-tertiary); border-radius: 6px;">
+                    <div style="font-weight: 600; margin-bottom: 5px; color: var(--text-primary);">
+                        +"${letter}" → ${wordsList.length} word(s)
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-secondary);">
+                        ${displayWords.join(', ')}${moreCount > 0 ? ` (+${moreCount} more)` : ''}
+                    </div>
+                </div>
+            `;
+        }
+        
+        resultHtml += `
+                </div>
+            </div>
+        `;
+    }
+    
+    resultDiv.innerHTML = resultHtml;
+    resultDiv.style.display = 'block';
+}
+
+    showResult(message, type) {
+        const resultDiv = document.getElementById('checker-result');
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `<div style="color: ${type === 'error' ? '#f44366' : '#4CAF50'}">${message}</div>`;
+    }
+
+    clearChecker() {
+        document.getElementById('check-prefix-input').value = '';
+        const resultDiv = document.getElementById('checker-result');
+        resultDiv.style.display = 'none';
+        resultDiv.innerHTML = '';
+    }
+}
+
+// Initialize the prefix checker when the page loads
+let prefixChecker = null;
+
+// Wait for DOM to load and also when switching to normal mode
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+            prefixChecker = new PrefixChecker();
+        }, 500);
+    });
+} else {
+    setTimeout(() => {
+        prefixChecker = new PrefixChecker();
+    }, 500);
+}
+
+// Re-initialize when switching to normal mode
+const normalModeBtn = document.getElementById('mode-normal');
+if (normalModeBtn) {
+    normalModeBtn.addEventListener('click', function() {
+        setTimeout(() => {
+            if (!prefixChecker) {
+                prefixChecker = new PrefixChecker();
+            } else {
+                // Just ensure UI is there
+                prefixChecker.initCheckerUI();
+            }
+        }, 100);
+    });
+}
 })();
