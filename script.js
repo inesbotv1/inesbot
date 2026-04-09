@@ -823,7 +823,7 @@ filteredWords.forEach(word => {
                     }
                 }
                 prefixCounts.forEach((count, prefix) => {
-                    if (count >= 4 && count <= maxWords) {
+                    if (count >= 3 && count <= maxWords) {
                         const words = wordsByPrefixMap.get(prefix) || [];
                         if (hasThreeDistinctNextLetters(prefix, words)) {
                             validPrefixes.push({ prefix, count });
@@ -855,7 +855,7 @@ filteredWords.forEach(word => {
     }
     
     wordsByPrefix.forEach((words, prefix) => {
-        if (words.length >= 4) {
+        if (words.length >= 3) {
             let allWordsMatch = true;
             
             for (let word of words) {
@@ -1161,7 +1161,8 @@ function addLoadMoreButton() {
     const maxSelect = document.getElementById('rare-max-words');
     if (maxSelect) {
         maxSelect.innerHTML = `
-            <option value="4" selected>4 words</option>
+            <option value="3" selected>3 words</option>
+            <option value="4">4 words</option>
             <option value="5">5 words</option>
             <option value="6">6 words</option>
             <option value="7">7 words</option>
