@@ -1410,29 +1410,22 @@ class PrefixChecker {
     const uniqueNextLetters = Array.from(nextLetters.keys());
     const hasThreeDistinctLetters = uniqueNextLetters.length >= 3;
     
-    // Check for one-letter solves (words exactly prefix + 1 letter)
-    const oneLetterSolves = matchingWords.filter(word => word.length === prefix.length + 1);
-    const hasOneLetterSolve = oneLetterSolves.length > 0;
-    
-    // Determine validity
+    // Determine validity (only need 3+ distinct next letters)
     let isValid = false;
     let validityReason = '';
     
-    if (hasThreeDistinctLetters && !hasOneLetterSolve) {
+    if (hasThreeDistinctLetters) {
         isValid = true;
-        validityReason = '✓ VALID: Has 3+ distinct letters after prefix with no single-letter solves';
-    } else if (hasThreeDistinctLetters && hasOneLetterSolve) {
+        validityReason = '✓ VALID';
+    } else if (uniqueNextLetters.length === 2) {
         isValid = false;
-        validityReason = '✗ INVALID: Has 3+ distinct letters BUT also has single-letter solves (these would be problematic)';
-    } else if (!hasThreeDistinctLetters && uniqueNextLetters.length === 2) {
-        isValid = false;
-        validityReason = `✗ INVALID: Only has ${uniqueNextLetters.length} distinct letters after prefix (needs 3+)`;
+        validityReason = `✗ INVALID`;
     } else if (uniqueNextLetters.length === 1) {
         isValid = false;
-        validityReason = `✗ INVALID: All solves add the same letter "${uniqueNextLetters[0]}" after the prefix`;
+        validityReason = `✗ INVALID`;
     } else {
         isValid = false;
-        validityReason = `✗ INVALID: Only has ${uniqueNextLetters.length} distinct letter(s) after prefix (needs at least 3)`;
+        validityReason = `✗ INVALID`;
     }
     
     // Build result display
@@ -1452,12 +1445,11 @@ class PrefixChecker {
     // Show statistics
     resultHtml += `
         <div style="margin-bottom: 15px; color: var(--text-primary);">
-            <div style="font-weight: 600; margin-bottom: 8px;">📊 Statistics:</div>
+            <div style="font-weight: 600; margin-bottom: 8px;">Statistics:</div>
             <div style="padding-left: 10px;">
                 <div>• Total words starting with "${prefix}": ${matchingWords.length}</div>
                 <div>• Unique next letters: ${uniqueNextLetters.length}</div>
-                <div>• Single-letter solves: ${oneLetterSolves.length}</div>
-                <div>• Required for validity: 3+ distinct next letters & no single-letter solves</div>
+                <div>• Required for validity: 3+ distinct next letters</div>
             </div>
         </div>
     `;
@@ -1466,7 +1458,7 @@ class PrefixChecker {
     if (uniqueNextLetters.length > 0) {
         resultHtml += `
             <div style="margin-bottom: 10px; color: var(--text-primary);">
-                <div style="font-weight: 600; margin-bottom: 8px;">📝 Breakdown by next letter:</div>
+                <div style="font-weight: 600; margin-bottom: 8px;">Breakdown:</div>
                 <div style="display: grid; gap: 8px;">
         `;
         
