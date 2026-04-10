@@ -1374,6 +1374,8 @@ function renderRarePage(isFirst) {
 
   batch.forEach((r, idx) => {
     const isWord = wordSet.has(r.prefix);
+    const isEndsWith = words.some(w => w.length > r.prefix.length && w.toLowerCase().endsWith(r.prefix));
+    if (!isWord && !isEndsWith) return;
     const item = document.createElement('div');
     item.className = 'rare-item';
     item.style.animationDelay = (idx * 0.04) + 's';
