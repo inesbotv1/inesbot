@@ -1,139 +1,1538 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InesBot V1</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="favicon.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InesBot V1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg0:#f5f0e8;
+  --bg1:#ede7da;
+  --bg2:#e4ddd0;
+  --bg3:#d9d0c2;
+  --text0:#2a2318;
+  --text1:#5a5044;
+  --text2:#8a7d6e;
+  --accent:#c4602a;
+  --accent2:#8a4a1f;
+  --border:#cfc7b6;
+  --border2:#bfb5a2;
+  --pill:#3d3428;
+  --pill-text:#f0ead8;
+  --shadow:rgba(60,40,10,0.08);
+  --shadow2:rgba(60,40,10,0.15);
+  --valid:#4a7c59;
+  --invalid:#b94040;
+  --mono:'DM Mono',monospace;
+  --sans:'DM Sans',sans-serif;
+  --display:'Syne',sans-serif;
+}
+[data-theme="dark"]{
+  --bg0:#141210;
+  --bg1:#1e1b17;
+  --bg2:#252118;
+  --bg3:#2e291f;
+  --text0:#f0ead8;
+  --text1:#c0b8a8;
+  --text2:#7a7060;
+  --accent:#e07840;
+  --accent2:#f09060;
+  --border:#38332a;
+  --border2:#4a4438;
+  --pill:#e8e0cc;
+  --pill-text:#1e1b17;
+  --shadow:rgba(0,0,0,0.3);
+  --shadow2:rgba(0,0,0,0.5);
+  --valid:#5a9a6e;
+  --invalid:#d06060;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--bg0);
+  color:var(--text0);
+  min-height:100vh;
+  transition:background .4s,color .4s;
+  overflow-x:hidden;
+}
+
+/* GRAIN OVERLAY */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+  opacity:.5;
+}
+
+/* LAYOUT */
+.wrap{
+  max-width:900px;
+  margin:0 auto;
+  padding:0 16px 60px;
+  position:relative;
+  z-index:1;
+}
+
+/* ── HEADER ── */
+header{
+  padding:48px 0 36px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+  animation:fadeDown .6s ease both;
+}
+.header-left{}
+.logo{
+  font-family:var(--display);
+  font-size:clamp(2.4rem,6vw,4.2rem);
+  font-weight:800;
+  color:var(--text0);
+  letter-spacing:-0.03em;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.logo-dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:var(--accent);
+  display:inline-block;
+  animation:pulse 2.4s ease infinite;
+}
+.tagline{
+  font-family:var(--mono);
+  font-size:1rem;
+  color:var(--text2);
+  margin-top:10px;
+  letter-spacing:0.04em;
+  height:auto;
+  overflow:visible;
+  position:relative;
+}
+.tagline-text{
+  display:block;
+  animation:slideTag .5s ease both;
+}
+
+.theme-btn{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  border:1.5px solid var(--border2);
+  background:var(--bg1);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;
+  flex-shrink:0;
+  margin-top:6px;
+  transition:background .3s,border-color .3s,transform .2s;
+}
+.theme-btn:hover{background:var(--bg2);transform:scale(1.08)}
+.theme-btn:active{transform:scale(0.94)}
+[data-theme="dark"] .icon-sun{display:none}
+[data-theme="light"] .icon-moon{display:none}
+
+/* ── STATS BAR ── */
+.stats{
+  display:flex;
+  gap:12px;
+  margin-bottom:24px;
+  animation:fadeUp .5s .15s ease both;
+}
+.stat-pill{
+  background:var(--bg1);
+  border:1px solid var(--border);
+  border-radius:40px;
+  padding:7px 18px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:0.8rem;
+  transition:background .3s,border-color .3s;
+}
+.stat-pill .label{color:var(--text2);font-family:var(--mono)}
+.stat-pill .value{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:1rem;
+  color:var(--accent);
+  min-width:24px;
+  transition:all .3s;
+}
+
+/* ── CARD ── */
+.card{
+  background:var(--bg1);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:14px;
+  transition:background .3s,border-color .3s,box-shadow .3s;
+  animation:fadeUp .5s .2s ease both;
+}
+.card:hover{box-shadow:0 4px 20px var(--shadow)}
+
+/* ── MODE TABS ── */
+.tabs{
+  display:flex;
+  gap:6px;
+  background:var(--bg2);
+  border-radius:12px;
+  padding:5px;
+  margin-bottom:20px;
+}
+.tab{
+  flex:1;
+  padding:10px 16px;
+  border:none;
+  border-radius:9px;
+  background:transparent;
+  color:var(--text2);
+  font-family:var(--sans);
+  font-size:0.87rem;
+  font-weight:500;
+  cursor:pointer;
+  transition:all .25s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.tab .tab-icon{font-size:0.95rem}
+.tab.active{
+  background:var(--pill);
+  color:var(--pill-text);
+  box-shadow:0 2px 8px var(--shadow2);
+}
+.tab:not(.active):hover{background:var(--bg3);color:var(--text1)}
+
+/* ── SECTION PANELS ── */
+.panel{display:none;animation:fadeIn .3s ease both}
+.panel.visible{display:block}
+
+/* ── SORT ROW ── */
+.sort-row{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px 16px;
+  padding:12px 16px;
+  background:var(--bg2);
+  border-radius:10px;
+  margin-bottom:16px;
+}
+.sort-row .sort-label{
+  font-size:0.78rem;
+  color:var(--text2);
+  font-family:var(--mono);
+  letter-spacing:.04em;
+}
+.radio-wrap{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px 14px;
+}
+.radio-label{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:0.83rem;
+  color:var(--text1);
+  cursor:pointer;
+  transition:color .2s;
+}
+.radio-label:hover{color:var(--text0)}
+.radio-label input{
+  accent-color:var(--accent);
+  width:15px;height:15px;
+  cursor:pointer;
+}
+
+/* ── SEARCH GRID ── */
+.search-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:16px;
+}
+@media(max-width:560px){.search-grid{grid-template-columns:1fr}}
+
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{
+  font-size:0.75rem;
+  color:var(--text2);
+  font-family:var(--mono);
+  letter-spacing:.04em;
+}
+.field input,
+.field select{
+  padding:10px 14px;
+  border:1.5px solid var(--border);
+  border-radius:9px;
+  background:var(--bg0);
+  color:var(--text0);
+  font-family:var(--sans);
+  font-size:0.9rem;
+  transition:border-color .2s,background .2s;
+  outline:none;
+}
+.field input:focus,
+.field select:focus{border-color:var(--accent);background:var(--bg1)}
+.field input::placeholder{color:var(--text2);font-style:italic}
+select option{background:var(--bg1);color:var(--text0)}
+
+/* ── ACTION BUTTONS ── */
+.btn-row{display:flex;gap:10px;margin-top:4px}
+@media(max-width:460px){.btn-row{flex-direction:column}}
+
+.btn{
+  padding:11px 24px;
+  border:none;
+  border-radius:9px;
+  font-family:var(--sans);
+  font-size:0.88rem;
+  font-weight:500;
+  cursor:pointer;
+  transition:all .2s;
+  white-space:nowrap;
+}
+.btn-primary{
+  flex:2;
+  background:var(--pill);
+  color:var(--pill-text);
+}
+.btn-primary:hover{opacity:.88;transform:translateY(-1px)}
+.btn-primary:active{transform:scale(0.97)}
+.btn-ghost{
+  flex:1;
+  background:transparent;
+  color:var(--text1);
+  border:1.5px solid var(--border2);
+}
+.btn-ghost:hover{background:var(--bg2);border-color:var(--text2)}
+.btn-ghost:active{transform:scale(0.97)}
+
+/* ── RESULTS ── */
+.results-wrap{
+  animation:fadeUp .5s .25s ease both;
+}
+.results-box{
+  background:var(--bg1);
+  border:1px solid var(--border);
+  border-radius:16px;
+  min-height:320px;
+  max-height:520px;
+  overflow-y:auto;
+  padding:8px;
+  transition:background .3s,border-color .3s;
+  scrollbar-width:thin;
+  scrollbar-color:var(--border2) transparent;
+}
+.results-box::-webkit-scrollbar{width:5px}
+.results-box::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ── RESULT ITEMS ── */
+.r-placeholder{
+  text-align:center;
+  padding:80px 20px;
+  color:var(--text2);
+  font-family:var(--mono);
+  font-size:0.82rem;
+  letter-spacing:.06em;
+}
+.r-header{
+  padding:10px 14px;
+  font-family:var(--mono);
+  font-size:0.75rem;
+  color:var(--text2);
+  letter-spacing:.06em;
+  border-bottom:1px solid var(--border);
+  margin-bottom:2px;
+}
+.r-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.r-item:hover{background:var(--bg2)}
+.r-num{
+  font-family:var(--mono);
+  font-size:0.72rem;
+  color:var(--text2);
+  min-width:30px;
+  text-align:right;
+}
+.r-word{
+  font-family:var(--mono);
+  font-size:0.93rem;
+  color:var(--text0);
+  flex:1;
+  cursor:pointer;
+  text-decoration:underline;
+  text-underline-offset:3px;
+  text-decoration-color:var(--border2);
+  transition:color .2s,text-decoration-color .2s;
+}
+.r-word:hover{color:var(--accent);text-decoration-color:var(--accent)}
+.r-len{
+  font-family:var(--mono);
+  font-size:0.72rem;
+  color:var(--text2);
+  background:var(--bg2);
+  padding:2px 7px;
+  border-radius:4px;
+}
+
+/* STATUS MESSAGES */
+.msg{
+  padding:16px;
+  border-radius:10px;
+  text-align:center;
+  font-size:0.85rem;
+  font-family:var(--mono);
+  color:var(--text1);
+  margin:8px;
+  border:1px solid var(--border);
+  background:var(--bg2);
+}
+.msg.loading::before{content:'◌ ';animation:spin 1s linear infinite}
+.msg.error{color:var(--invalid);border-color:var(--invalid)}
+.msg.success{color:var(--valid);border-color:var(--valid)}
+
+/* ── RARE PREFIX ── */
+.rare-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:14px;
+}
+@media(max-width:560px){.rare-grid{grid-template-columns:1fr}}
+
+/* filter mode toggle */
+.filter-mode-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:14px;
+}
+.mode-chip{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 14px;
+  border-radius:30px;
+  border:1.5px solid var(--border);
+  background:var(--bg2);
+  font-size:0.82rem;
+  color:var(--text1);
+  cursor:pointer;
+  transition:all .2s;
+}
+.mode-chip input{display:none}
+.mode-chip.selected{
+  background:var(--pill);
+  color:var(--pill-text);
+  border-color:var(--pill);
+}
+.mode-chip:not(.selected):hover{background:var(--bg3)}
+
+.compare-controls{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:var(--bg2);
+  border-radius:30px;
+  border:1.5px solid var(--border);
+  padding:4px 10px;
+}
+.compare-controls select,
+.compare-controls input{
+  border:none;
+  background:transparent;
+  color:var(--text0);
+  font-family:var(--mono);
+  font-size:0.82rem;
+  outline:none;
+  cursor:pointer;
+  width:auto;
+  padding:2px 4px;
+}
+.compare-controls input{width:42px;text-align:center}
+.compare-sep{width:1px;height:18px;background:var(--border2)}
+
+/* Rare prefix results */
+.rare-stats-bar{
+  padding:12px 16px;
+  background:var(--bg2);
+  border-radius:10px;
+  margin:8px;
+  font-size:0.78rem;
+  font-family:var(--mono);
+  color:var(--text2);
+  text-align:center;
+  border:1px solid var(--border);
+}
+.rare-stats-bar small{display:block;margin-top:3px;font-size:0.72rem}
+
+.rare-item{
+  margin:4px 8px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+  background:var(--bg0);
+  transition:border-color .2s,box-shadow .2s;
+  animation:fadeItem .25s ease both;
+}
+.rare-item:hover{border-color:var(--border2);box-shadow:0 2px 8px var(--shadow)}
+.rare-item-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:11px 14px;
+  flex-wrap:wrap;
+  cursor:default;
+}
+.rare-badge{
+  font-family:var(--mono);
+  font-size:0.72rem;
+  padding:3px 10px;
+  border-radius:20px;
+  background:var(--pill);
+  color:var(--pill-text);
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.rare-prefix-val{
+  font-family:var(--mono);
+  font-size:1.05rem;
+  font-weight:500;
+  color:var(--text0);
+  background:var(--bg2);
+  padding:3px 10px;
+  border-radius:6px;
+}
+.rare-type-badge{
+  font-size:0.7rem;
+  padding:2px 8px;
+  border-radius:4px;
+  font-family:var(--mono);
+}
+.rare-type-word{background:#4a7c5920;color:var(--valid)}
+.rare-type-ends{background:#c4602a20;color:var(--accent)}
+.rare-give{
+  color:var(--text2);
+  font-size:0.78rem;
+  font-family:var(--mono);
+  font-style:italic;
+}
+.rare-toggle{
+  margin-left:auto;
+  font-size:0.76rem;
+  font-family:var(--mono);
+  padding:4px 12px;
+  border-radius:6px;
+  border:1.5px solid var(--border);
+  background:transparent;
+  color:var(--text1);
+  cursor:pointer;
+  transition:all .2s;
+  flex-shrink:0;
+}
+.rare-toggle:hover{background:var(--bg2);border-color:var(--text2)}
+.rare-words{
+  display:none;
+  padding:12px 14px;
+  border-top:1px solid var(--border);
+  background:var(--bg1);
+  flex-wrap:wrap;
+  gap:6px;
+}
+.rare-words.open{display:flex}
+.rare-word-chip{
+  font-family:var(--mono);
+  font-size:0.8rem;
+  padding:4px 10px;
+  border-radius:6px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  color:var(--text0);
+  transition:background .15s;
+}
+.rare-word-chip:hover{background:var(--bg3)}
+
+/* load more btn */
+.load-more-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  padding:16px;
+}
+.load-more-count{
+  font-family:var(--mono);
+  font-size:0.75rem;
+  color:var(--text2);
+}
+.btn-load{
+  background:transparent;
+  border:1.5px solid var(--border2);
+  color:var(--text1);
+  font-family:var(--mono);
+  font-size:0.8rem;
+  padding:7px 24px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:all .2s;
+}
+.btn-load:hover{background:var(--bg2);border-color:var(--text1)}
+.btn-load:disabled{opacity:.5;cursor:default}
+
+/* ── PREFIX CHECKER ── */
+.checker-section{
+  background:var(--bg2);
+  border-radius:12px;
+  border:1px solid var(--border);
+  padding:16px;
+  margin-top:14px;
+}
+.checker-section .section-label{
+  font-family:var(--mono);
+  font-size:0.72rem;
+  letter-spacing:.06em;
+  color:var(--text2);
+  margin-bottom:10px;
+}
+.checker-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.checker-row input{
+  flex:1;
+  min-width:130px;
+  padding:9px 14px;
+  border:1.5px solid var(--border);
+  border-radius:9px;
+  background:var(--bg0);
+  color:var(--text0);
+  font-family:var(--mono);
+  font-size:0.88rem;
+  outline:none;
+  transition:border-color .2s;
+}
+.checker-row input:focus{border-color:var(--accent)}
+.checker-row input::placeholder{color:var(--text2);font-style:italic;font-family:var(--sans)}
+.checker-result{
+  margin-top:12px;
+  display:none;
+  animation:fadeIn .25s ease both;
+}
+.validity-line{
+  font-family:var(--display);
+  font-size:1rem;
+  font-weight:700;
+  letter-spacing:-.01em;
+  margin-bottom:8px;
+}
+.validity-line.valid{color:var(--valid)}
+.validity-line.invalid{color:var(--invalid)}
+.checker-stats{
+  font-family:var(--mono);
+  font-size:0.78rem;
+  color:var(--text1);
+  line-height:1.8;
+  margin-bottom:10px;
+}
+.breakdown-toggle{
+  font-family:var(--mono);
+  font-size:0.78rem;
+  color:var(--text2);
+  cursor:pointer;
+  display:flex;align-items:center;gap:6px;
+  user-select:none;
+}
+.breakdown-toggle:hover{color:var(--text1)}
+.breakdown-arrow{transition:transform .25s}
+.breakdown-arrow.open{transform:rotate(90deg)}
+.breakdown-grid{
+  display:none;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+  margin-top:8px;
+}
+.breakdown-grid.open{display:grid}
+@media(max-width:440px){.breakdown-grid{grid-template-columns:1fr}}
+.breakdown-card{
+  background:var(--bg1);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:8px 12px;
+}
+.breakdown-letter{
+  font-family:var(--mono);
+  font-size:0.82rem;
+  font-weight:500;
+  color:var(--accent);
+  margin-bottom:3px;
+}
+.breakdown-words{
+  font-size:0.75rem;
+  color:var(--text2);
+  font-family:var(--mono);
+}
+
+/* ── DICTIONARY PANEL ── */
+#dict-panel{
+  position:fixed;
+  background:var(--bg1);
+  border:1.5px solid var(--border2);
+  border-radius:14px;
+  width:300px;
+  max-height:380px;
+  overflow:hidden;
+  box-shadow:0 8px 32px var(--shadow2);
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  animation:popIn .2s ease both;
+  top:100px;
+  left:100px;
+}
+.dict-header{
+  padding:10px 14px;
+  background:var(--bg2);
+  border-bottom:1px solid var(--border);
+  cursor:grab;
+  user-select:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.dict-header:active{cursor:grabbing}
+.dict-title{
+  font-family:var(--mono);
+  font-size:0.75rem;
+  color:var(--text2);
+  letter-spacing:.06em;
+}
+.dict-controls{display:flex;gap:6px}
+.dict-btn{
+  background:none;
+  border:none;
+  color:var(--text2);
+  cursor:pointer;
+  font-size:1rem;
+  line-height:1;
+  padding:0 2px;
+  transition:color .2s;
+}
+.dict-btn:hover{color:var(--text0)}
+.dict-body{
+  padding:14px;
+  overflow-y:auto;
+  flex:1;
+  scrollbar-width:thin;
+  scrollbar-color:var(--border2) transparent;
+}
+.dict-word-title{
+  font-family:var(--display);
+  font-size:1.2rem;
+  font-weight:700;
+  color:var(--text0);
+  margin-bottom:10px;
+}
+.dict-entry{
+  padding:8px 10px;
+  background:var(--bg2);
+  border-radius:8px;
+  margin-bottom:6px;
+}
+.dict-pos{
+  font-family:var(--mono);
+  font-size:0.68rem;
+  color:var(--accent);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  margin-bottom:3px;
+}
+.dict-def{font-size:0.83rem;color:var(--text1);line-height:1.5}
+.dict-placeholder{
+  text-align:center;
+  padding:30px 10px;
+  font-family:var(--mono);
+  font-size:0.78rem;
+  color:var(--text2);
+}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;
+  padding:32px 0 20px;
+  font-family:var(--mono);
+  font-size:0.72rem;
+  color:var(--text2);
+  letter-spacing:.1em;
+  animation:fadeUp .5s .4s ease both;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeItem{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+@keyframes popIn{from{opacity:0;transform:scale(0.93)}to{opacity:1;transform:scale(1)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 40%,transparent)}50%{box-shadow:0 0 0 6px transparent}}
+@keyframes spin{from{display:inline-block}to{}}
+@keyframes slideTag{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes numFlip{0%{transform:translateY(-4px);opacity:0}100%{transform:translateY(0);opacity:1}}
+.val-anim{animation:numFlip .3s ease both}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  header{padding:32px 0 24px}
+  .card{padding:16px}
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <h1>InesBotV1</h1>
-                <p id="random-phrase">We ALL fw this, right?</p>
-            </div>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-                <span class="light-icon">☀️</span>
-                <span class="dark-icon">🌙</span>
-            </button>
-        </header>
+<div class="wrap">
 
-        <div class="stats-bar">
-            <div class="stat">
-                <span class="stat-label">Words loaded:</span>
-                <span class="stat-value" id="word-count">0</span>
-            </div>
-            <div class="stat">
-                <span class="stat-label">Results found:</span>
-                <span class="stat-value" id="result-count">0</span>
-            </div>
-        </div>
-
-        <div class="control-panel">
-            <div class="mode-toggle-container">
-                <div class="mode-toggle">
-                    <button id="mode-normal" class="mode-btn mode-active">🔍 Normal Word Search</button>
-                    <button id="mode-rare" class="mode-btn">🔎 Rare Prefix Finder</button>
-                </div>
-            </div>
-
-            <div id="normal-search-section">
-                <div class="sort-options">
-                    <span class="sort-label">Sort by:</span>
-                    <label class="radio-label">
-                        <input type="radio" name="sort" value="none" checked> Alphabetical
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="sort" value="shortest"> Shortest First
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="sort" value="longest"> Longest First
-                    </label>
-                </div>
-
-                <div class="search-filters">
-                    <div class="filter-group">
-                        <label for="prefix-input">Starts with:</label>
-                        <input type="text" id="prefix-input" placeholder="e.g., 'ly'" class="filter-input">
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label for="suffix-input">Ends with:</label>
-                        <input type="text" id="suffix-input" placeholder="e.g., 'ines'" class="filter-input">
-                    </div>
-                </div>
-
-                <div class="action-buttons">
-                    <button id="search-btn" class="btn btn-search">Search</button>
-                    <button id="clear-btn" class="btn btn-clear">Clear All</button>
-                </div>
-            </div>
-
-            <div id="rare-finder-section" style="display: none;">
-                <div class="rare-sort-options" style="margin-bottom: 20px;">
-                    <span class="sort-label">Sort results by:</span>
-                    <label class="radio-label">
-                        <input type="radio" name="rare-sort" value="count-asc" checked> Count (fewest first)
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="rare-sort" value="count-desc"> Count (most first)
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="rare-sort" value="alpha"> Alphabetical
-                    </label>
-                </div>
-                
-                <div class="rare-filters">
-                    <div class="filter-group">
-                        <label for="rare-prefix-length">Prefix length:</label>
-                        <select id="rare-prefix-length" class="filter-input">
-                            <option value="2" selected>2 letters</option>
-                            <option value="3">3 letters</option>
-                            <option value="4">4 letters</option>
-                        </select>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label for="rare-max-words">Maximum words (rare if ≤):</label>
-                        <select id="rare-max-words" class="filter-input">
-                            <option value="3" selected>3 words</option>
-                            <option value="4">4 words</option>
-                            <option value="5">5 words</option>
-                            <option value="6">6 words</option>
-                            <option value="7">7 words</option>
-                            <option value="8">8 words</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label for="given-letter-input">Give starts with (optional):</label>
-                        <input type="text" id="given-letter-input" maxlength="1" class="filter-input" placeholder="e.g., 's' for sapego">
-                    </div>
-                    <div class="filter-group">
-                        <label for="rare-prefix">Prefix starts with (optional):</label>
-                        <input type="text" id="rare-prefix" class="filter-input" placeholder="e.g., 'a' for words starting with a">
-                    </div>
-                </div>
-                
-                <div class="action-buttons" style="margin-top: 20px;">
-                    <button id="rare-search-btn" class="btn btn-search">Find Rare Prefixes</button>
-                    <button id="rare-clear-btn" class="btn btn-clear">Clear Rare Filters</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="results-container">
-            <div id="results-box" class="results-box">
-                <p class="placeholder-text">Loading words from GitHub...</p>
-            </div>
-        </div>
-
-        <footer>
-            <p>Xilofob</p>
-        </footer>
+<!-- HEADER -->
+<header>
+  <div class="header-left">
+    <div class="logo">
+      <span>InesBot</span>
+      <span class="logo-dot"></span>
+      <span style="opacity:.35">V1</span>
     </div>
-    <script src="script.js"></script>
+    <div class="tagline"><span class="tagline-text" id="tagline-el">—</span></div>
+  </div>
+  <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">
+    <span class="icon-sun">☀️</span>
+    <span class="icon-moon">🌙</span>
+  </button>
+</header>
+
+<!-- STATS -->
+<div class="stats" id="stats-bar">
+  <div class="stat-pill">
+    <span class="label">words loaded</span>
+    <span class="value" id="word-count">—</span>
+  </div>
+  <div class="stat-pill">
+    <span class="label">results</span>
+    <span class="value" id="result-count">0</span>
+  </div>
+</div>
+
+<!-- MAIN CARD -->
+<div class="card">
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" id="tab-normal" onclick="switchTab('normal')">
+      <span class="tab-icon">⌕</span> Normal Search
+    </button>
+    <button class="tab" id="tab-rare" onclick="switchTab('rare')">
+      <span class="tab-icon">◎</span> Rare Prefix Finder
+    </button>
+  </div>
+
+  <!-- NORMAL PANEL -->
+  <div class="panel visible" id="panel-normal">
+    <div class="sort-row">
+      <span class="sort-label">SORT</span>
+      <div class="radio-wrap">
+        <label class="radio-label"><input type="radio" name="sort" value="shortest"> Shortest first</label>
+        <label class="radio-label"><input type="radio" name="sort" value="longest"> Longest first</label>
+        <label class="radio-label"><input type="radio" name="sort" value="none" checked> A–Z</label>
+      </div>
+    </div>
+    <div class="search-grid">
+      <div class="field">
+        <label>STARTS WITH</label>
+        <input type="text" id="prefix-input" placeholder="e.g.  ly">
+      </div>
+      <div class="field">
+        <label>ENDS WITH</label>
+        <input type="text" id="suffix-input" placeholder="e.g.  ines">
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="performSearch()">Search</button>
+      <button class="btn btn-ghost" onclick="clearSearch()">Clear</button>
+    </div>
+
+    <!-- PREFIX CHECKER -->
+    <div class="checker-section">
+      <div class="section-label">PREFIX VALIDATOR</div>
+      <div class="checker-row">
+        <input type="text" id="check-input" placeholder="enter prefix to validate…">
+        <button class="btn btn-primary" style="flex:0;padding:9px 18px" onclick="checkPrefix()">Check</button>
+        <button class="btn btn-ghost" style="flex:0;padding:9px 14px" onclick="clearChecker()">✕</button>
+      </div>
+      <div class="checker-result" id="checker-result"></div>
+    </div>
+  </div>
+
+  <!-- RARE PANEL -->
+  <div class="panel" id="panel-rare">
+    <div class="sort-row">
+      <span class="sort-label">SORT</span>
+      <div class="radio-wrap">
+        <label class="radio-label"><input type="radio" name="rare-sort" value="count-asc" checked> Fewest first</label>
+        <label class="radio-label"><input type="radio" name="rare-sort" value="count-desc"> Most first</label>
+        <label class="radio-label"><input type="radio" name="rare-sort" value="alpha"> A–Z</label>
+      </div>
+    </div>
+
+    <!-- filter mode chips -->
+    <div class="filter-mode-row" id="filter-mode-row">
+      <label class="mode-chip selected" id="chip-max">
+        <input type="radio" name="filter-mode" value="max-words" checked> Max Words
+        <span id="chip-max-val" style="background:var(--bg3);color:var(--text0);padding:1px 7px;border-radius:12px;font-size:.7rem;font-family:var(--mono)">3</span>
+      </label>
+      <label class="mode-chip" id="chip-len">
+        <input type="radio" name="filter-mode" value="length-compare"> Compare Length
+      </label>
+      <div class="compare-controls" id="compare-controls">
+        <select id="len-op"><option value="<=">≤</option><option value="=">=</option><option value=">=">≥</option></select>
+        <div class="compare-sep"></div>
+        <input type="number" id="len-val" value="6" min="1" max="20">
+      </div>
+    </div>
+
+    <div class="rare-grid">
+      <div class="field">
+        <label>PREFIX LENGTH</label>
+        <select id="rare-prefix-length">
+          <option value="2" selected>2 letters</option>
+          <option value="3">3 letters</option>
+          <option value="4">4 letters</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>MAX WORDS (rare if ≤)</label>
+        <select id="rare-max-words">
+          <option value="3" selected>3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>GIVEN LETTER (optional)</label>
+        <input type="text" id="given-letter" maxlength="1" placeholder="e.g.  s">
+      </div>
+      <div class="field">
+        <label>PREFIX STARTS WITH (optional)</label>
+        <input type="text" id="rare-prefix" placeholder="e.g.  a">
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="findRarePrefixes()">Find Rare Prefixes</button>
+      <button class="btn btn-ghost" onclick="clearRare()">Clear</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="results-wrap">
+  <div class="results-box" id="results-box">
+    <div class="r-placeholder">loading words from github…</div>
+  </div>
+</div>
+
+<!-- DICTIONARY PANEL (hidden initially) -->
+<div id="dict-panel" style="display:none">
+  <div class="dict-header" id="dict-drag-handle">
+    <span class="dict-title">DICTIONARY</span>
+    <div class="dict-controls">
+      <button class="dict-btn" id="dict-minimize">−</button>
+      <button class="dict-btn" id="dict-close">×</button>
+    </div>
+  </div>
+  <div class="dict-body" id="dict-body">
+    <div class="dict-placeholder">click any word to look it up</div>
+  </div>
+</div>
+
+<footer>XILOFOB</footer>
+</div>
+
+<script>
+// ─────────────────────────────────────────
+// THEME
+// ─────────────────────────────────────────
+const html = document.documentElement;
+const themeBtn = document.getElementById('theme-btn');
+html.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
+themeBtn.addEventListener('click', () => {
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+});
+
+// ─────────────────────────────────────────
+// TAGLINE
+// ─────────────────────────────────────────
+const PHRASES = [
+  "We ALL fw this, right?","Keiko throwing","Zenzenzen",
+  "I'm Always Truthful About My Trades","Zenith woman harasser",
+  "#1 Nova Lover","lwiheardyoustefanimgivingthemlwsolve",
+  "Doxx yourself if you see this","Orange Juice > Apple Juice",
+  "Opp List: Lrrx, Shush, Rocksta, Croc",
+  "What traps do you use?","Yoyoyo","Oioioi","Synau","Tchambuli","Xilofob",
+  "Red angel wolves"
+];
+(function() {
+  const el = document.getElementById('tagline-el');
+  let rem = JSON.parse(localStorage.getItem('rp') || 'null');
+  if (!rem || !rem.length) {
+    rem = [...PHRASES];
+    for (let i = rem.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [rem[i], rem[j]] = [rem[j], rem[i]];
+    }
+  }
+  el.textContent = rem.shift();
+  localStorage.setItem('rp', JSON.stringify(rem));
+})();
+
+// ─────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────
+let words = [];
+let blacklist = new Set();
+let rareWordsLoaded = false;
+const defCache = new Map();
+
+const WORDS_URL = 'https://raw.githubusercontent.com/inesbotv1/inesbot/refs/heads/main/lastletter.txt';
+const BLACK_URL = 'https://raw.githubusercontent.com/inesbotv1/inesbot/refs/heads/main/blacklist.txt';
+
+function setCount(id, val) {
+  const el = document.getElementById(id);
+  el.textContent = val;
+  el.classList.remove('val-anim');
+  void el.offsetWidth;
+  el.classList.add('val-anim');
+}
+
+async function loadWords() {
+  try {
+    const r = await fetch(WORDS_URL + '?t=' + Date.now());
+    const t = await r.text();
+    words = [...new Set(t.split(/\r?\n/).map(w => w.trim()).filter(Boolean))];
+    setCount('word-count', words.length);
+    document.getElementById('results-box').innerHTML = '<div class="msg success">✓ ' + words.length + ' words loaded</div>';
+    setCount('result-count', 0);
+  } catch (e) {
+    document.getElementById('results-box').innerHTML = '<div class="msg error">failed to load words from github</div>';
+  }
+}
+
+async function loadBlacklist() {
+  try {
+    const r = await fetch(BLACK_URL + '?t=' + Date.now());
+    const t = await r.text();
+    blacklist = new Set(t.split(/\r?\n/).map(l => l.trim().toLowerCase()).filter(Boolean));
+  } catch {}
+}
+
+loadWords();
+loadBlacklist();
+
+// ─────────────────────────────────────────
+// TAB SWITCHING
+// ─────────────────────────────────────────
+let savedNormal = null, savedRare = null;
+
+function switchTab(tab) {
+  const nTab = document.getElementById('tab-normal');
+  const rTab = document.getElementById('tab-rare');
+  const nPan = document.getElementById('panel-normal');
+  const rPan = document.getElementById('panel-rare');
+
+  if (tab === 'normal') {
+    nTab.classList.add('active'); rTab.classList.remove('active');
+    nPan.classList.add('visible'); rPan.classList.remove('visible');
+  } else {
+    rTab.classList.add('active'); nTab.classList.remove('active');
+    rPan.classList.add('visible'); nPan.classList.remove('visible');
+    if (!rareWordsLoaded && words.length > 0) rareWordsLoaded = true;
+  }
+}
+
+// ─────────────────────────────────────────
+// NORMAL SEARCH
+// ─────────────────────────────────────────
+function debounce(fn, ms) {
+  let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
+}
+
+const dSearch = debounce(performSearch, 280);
+document.getElementById('prefix-input').addEventListener('input', dSearch);
+document.getElementById('suffix-input').addEventListener('input', dSearch);
+document.getElementById('suffix-input').addEventListener('keydown', e => { if (e.key === 'Enter') performSearch(); });
+document.querySelectorAll('input[name="sort"]').forEach(r => r.addEventListener('change', performSearch));
+
+function performSearch() {
+  if (!words.length) { showMsg('no words loaded', 'error'); return; }
+  const pf = document.getElementById('prefix-input').value.toLowerCase().trim();
+  const sf = document.getElementById('suffix-input').value.toLowerCase().trim();
+
+  let res = words.filter(w => {
+    const wl = w.toLowerCase();
+    if (pf && !wl.startsWith(pf)) return false;
+    if (sf && !wl.endsWith(sf)) return false;
+    return true;
+  });
+
+  const sv = [...document.querySelectorAll('input[name="sort"]')].find(r => r.checked)?.value || 'none';
+  if (sv === 'shortest') res.sort((a, b) => a.length - b.length);
+  else if (sv === 'longest') res.sort((a, b) => b.length - a.length);
+
+  setCount('result-count', res.length);
+  displayNormalResults(res);
+}
+
+function displayNormalResults(res) {
+  const box = document.getElementById('results-box');
+  if (!res.length) { box.innerHTML = '<div class="r-placeholder">no words match your criteria</div>'; return; }
+
+  let html = '<div class="r-header">found ' + res.length + ' words</div>';
+  res.slice(0, 1000).forEach((w, i) => {
+    html += `<div class="r-item"><span class="r-num">${i + 1}</span><span class="r-word" data-word="${w}">${w}</span><span class="r-len">${w.length}</span></div>`;
+  });
+  if (res.length > 1000) html += '<div class="msg">… and ' + (res.length - 1000) + ' more</div>';
+  box.innerHTML = html;
+
+  box.querySelectorAll('.r-word').forEach(el => {
+    el.addEventListener('click', () => lookupWord(el.dataset.word));
+  });
+}
+
+function clearSearch() {
+  document.getElementById('prefix-input').value = '';
+  document.getElementById('suffix-input').value = '';
+  document.querySelectorAll('input[name="sort"]').forEach(r => { if (r.value === 'none') r.checked = true; });
+  document.getElementById('results-box').innerHTML = '<div class="r-placeholder">enter search criteria…</div>';
+  setCount('result-count', 0);
+}
+
+function showMsg(msg, type = '') {
+  document.getElementById('results-box').innerHTML = `<div class="msg ${type}">${msg}</div>`;
+}
+
+// ─────────────────────────────────────────
+// DICTIONARY
+// ─────────────────────────────────────────
+const dictPanel = document.getElementById('dict-panel');
+const dictBody = document.getElementById('dict-body');
+let dictPos = { top: 80, left: 80 };
+let dragging = false, dOff = { x: 0, y: 0 };
+
+document.getElementById('dict-close').addEventListener('click', () => { dictPanel.style.display = 'none'; });
+document.getElementById('dict-minimize').addEventListener('click', () => {
+  dictBody.style.display = dictBody.style.display === 'none' ? '' : 'none';
+});
+
+const handle = document.getElementById('dict-drag-handle');
+handle.addEventListener('mousedown', e => {
+  if (['dict-close', 'dict-minimize'].includes(e.target.id)) return;
+  dragging = true;
+  dOff.x = e.clientX - dictPanel.offsetLeft;
+  dOff.y = e.clientY - dictPanel.offsetTop;
+});
+document.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  let l = Math.max(0, Math.min(e.clientX - dOff.x, window.innerWidth - dictPanel.offsetWidth));
+  let t = Math.max(0, Math.min(e.clientY - dOff.y, window.innerHeight - dictPanel.offsetHeight));
+  dictPanel.style.left = l + 'px';
+  dictPanel.style.top = t + 'px';
+});
+document.addEventListener('mouseup', () => { dragging = false; });
+
+async function lookupWord(word) {
+  dictPanel.style.display = 'flex';
+  dictBody.innerHTML = `<div class="dict-placeholder">looking up "${word}"…</div>`;
+
+  if (defCache.has(word)) { renderDef(word, defCache.get(word)); return; }
+
+  try {
+    const r = await fetch(`https://en.wiktionary.org/api/rest_v1/page/definition/${encodeURIComponent(word)}`);
+    if (!r.ok) throw 0;
+    const d = await r.json();
+    if (!d.en) throw 0;
+    const meanings = [];
+    d.en.forEach(entry => {
+      (entry.definitions || []).slice(0, 1).forEach(def => {
+        meanings.push({ pos: entry.partOfSpeech, def: def.definition.replace(/<[^>]*>/g, '').trim() });
+      });
+    });
+    if (!meanings.length) throw 0;
+    defCache.set(word, meanings);
+    renderDef(word, meanings);
+  } catch {
+    dictBody.innerHTML = `<div class="dict-placeholder" style="font-style:italic">it just works twin, don't worry about the definition</div>`;
+  }
+}
+
+function renderDef(word, meanings) {
+  let h = `<div class="dict-word-title">${word}</div>`;
+  meanings.forEach(m => {
+    h += `<div class="dict-entry"><div class="dict-pos">${m.pos}</div><div class="dict-def">${m.def}</div></div>`;
+  });
+  dictBody.innerHTML = h;
+}
+
+// ─────────────────────────────────────────
+// FILTER MODE CHIPS
+// ─────────────────────────────────────────
+document.querySelectorAll('input[name="filter-mode"]').forEach(radio => {
+  radio.closest('.mode-chip').addEventListener('click', () => {
+    document.querySelectorAll('.mode-chip').forEach(c => c.classList.remove('selected'));
+    radio.closest('.mode-chip').classList.add('selected');
+    const isLen = radio.value === 'length-compare';
+    document.getElementById('rare-max-words').disabled = isLen;
+    document.getElementById('rare-max-words').style.opacity = isLen ? '.4' : '1';
+
+    const prefLenSel = document.getElementById('rare-prefix-length');
+    if (isLen) {
+      if (!prefLenSel.querySelector('[value="1"]')) {
+        prefLenSel.insertAdjacentHTML('afterbegin', '<option value="1">1 letter</option>');
+      }
+    } else {
+      const opt1 = prefLenSel.querySelector('[value="1"]');
+      if (opt1) opt1.remove();
+      if (prefLenSel.value === '1') prefLenSel.value = '2';
+    }
+  });
+});
+
+document.getElementById('rare-max-words').addEventListener('change', function() {
+  document.getElementById('chip-max-val').textContent = this.value;
+});
+
+// ─────────────────────────────────────────
+// RARE PREFIX FINDER
+// ─────────────────────────────────────────
+let searchState = null;
+
+const dRare = debounce(() => findRarePrefixes(), 500);
+document.getElementById('rare-prefix').addEventListener('input', dRare);
+
+function hasThreeDistinct(prefix, ws) {
+  const s = new Set();
+  for (const w of ws) {
+    if (w.length > prefix.length) { s.add(w[prefix.length].toLowerCase()); if (s.size >= 3) return true; }
+  }
+  return false;
+}
+function hasOneLetter(prefix, ws) {
+  return ws.some(w => w.length === prefix.length + 1);
+}
+
+function findRarePrefixes() {
+  if (!words.length) { showMsg('no words loaded', 'error'); return; }
+
+  const prefFilter = document.getElementById('rare-prefix').value.toLowerCase().trim();
+  const prefLen = parseInt(document.getElementById('rare-prefix-length').value);
+  const filterMode = document.querySelector('input[name="filter-mode"]:checked')?.value || 'max-words';
+  const maxWords = parseInt(document.getElementById('rare-max-words').value);
+  const sortOpt = document.querySelector('input[name="rare-sort"]:checked')?.value || 'count-asc';
+  const givenLetter = (document.getElementById('given-letter').value || '').toLowerCase().trim();
+
+  if (prefFilter && !/^[a-z]+$/.test(prefFilter)) { showMsg('use only letters a–z', 'error'); return; }
+  if (prefFilter.length > prefLen) { showMsg('filter longer than prefix length', 'error'); return; }
+
+  showMsg('counting prefixes…', 'loading');
+
+  setTimeout(() => {
+    const byPrefix = new Map();
+    const wordSet = new Set(words.map(w => w.toLowerCase()));
+
+    for (const word of words) {
+      if (word.length >= prefLen) {
+        const p = word.slice(0, prefLen).toLowerCase();
+        if (prefFilter && !p.startsWith(prefFilter)) continue;
+        if (!byPrefix.has(p)) byPrefix.set(p, []);
+        byPrefix.get(p).push(word);
+      }
+    }
+
+    const valid = [];
+
+    if (filterMode === 'max-words') {
+      byPrefix.forEach((ws, p) => {
+        if (blacklist.has(p)) return;
+        if (ws.length >= 3 && ws.length <= maxWords) {
+          if (hasThreeDistinct(p, ws) && !hasOneLetter(p, ws)) {
+            valid.push({ prefix: p, count: ws.length, words: ws });
+          }
+        }
+      });
+    } else {
+      const op = document.getElementById('len-op').value;
+      const cv = parseInt(document.getElementById('len-val').value);
+      byPrefix.forEach((ws, p) => {
+        if (ws.length < 3) return;
+        const allMatch = ws.every(w => {
+          if (op === '<=') return w.length <= cv;
+          if (op === '=') return w.length === cv;
+          return w.length >= cv;
+        });
+        if (allMatch && hasThreeDistinct(p, ws)) {
+          valid.push({ prefix: p, count: ws.length, words: ws });
+        }
+      });
+    }
+
+    valid.sort((a, b) => {
+      if (sortOpt === 'count-asc') return a.count - b.count || a.prefix.localeCompare(b.prefix);
+      if (sortOpt === 'count-desc') return b.count - a.count || a.prefix.localeCompare(b.prefix);
+      return a.prefix.localeCompare(b.prefix);
+    });
+
+    // given letter filter
+    let finalList = valid;
+    if (givenLetter) {
+      const givingWords = words.filter(w => w.toLowerCase().startsWith(givenLetter));
+      finalList = valid.filter(({ prefix }) =>
+        givingWords.some(w => w.toLowerCase().endsWith(prefix))
+      ).map(p => {
+        const gives = givingWords.filter(w => w.toLowerCase().endsWith(p.prefix));
+        const shortest = gives.reduce((a, b) => a.length <= b.length ? a : b);
+        return { ...p, giveLabel: gives.length === 1 ? 'only give: ' + gives[0] : 'shortest give: ' + shortest };
+      });
+    }
+
+    setCount('result-count', finalList.length);
+
+    searchState = {
+      all: finalList,
+      cur: 0,
+      pageSize: 10,
+      wordSet,
+      filterMode,
+      maxWords,
+      validResults: []
+    };
+
+    const box = document.getElementById('results-box');
+    box.innerHTML = '';
+
+    if (!finalList.length) {
+      box.innerHTML = '<div class="r-placeholder">no matching rare prefixes found</div>';
+      return;
+    }
+
+    renderRarePage(true);
+  }, 10);
+}
+
+function renderRarePage(isFirst) {
+  if (!searchState) return;
+  const { all, cur, pageSize, wordSet, filterMode, maxWords, validResults } = searchState;
+  if (cur >= all.length) return;
+
+  const box = document.getElementById('results-box');
+  const end = Math.min(cur + pageSize, all.length);
+  const batch = all.slice(cur, end);
+  searchState.cur = end;
+  searchState.validResults = [...validResults, ...batch];
+
+  if (isFirst) {
+    const statsBar = document.createElement('div');
+    statsBar.className = 'rare-stats-bar';
+    statsBar.id = 'rare-stats';
+    updateRareStats(statsBar);
+    box.appendChild(statsBar);
+  } else {
+    const s = document.getElementById('rare-stats');
+    if (s) updateRareStats(s);
+    document.getElementById('load-more-wrap')?.remove();
+  }
+
+  batch.forEach((r, idx) => {
+    const isWord = wordSet.has(r.prefix);
+    const item = document.createElement('div');
+    item.className = 'rare-item';
+    item.style.animationDelay = (idx * 0.04) + 's';
+    item.innerHTML = `
+      <div class="rare-item-header">
+        <span class="rare-badge">${r.count} words</span>
+        <span class="rare-prefix-val">"${r.prefix}"</span>
+        <span class="rare-type-badge ${isWord ? 'rare-type-word' : 'rare-type-ends'}">${isWord ? 'word' : 'ends with'}</span>
+        ${r.giveLabel ? `<span class="rare-give">(${r.giveLabel})</span>` : ''}
+        <button class="rare-toggle" onclick="toggleRareWords(this)">show</button>
+      </div>
+      <div class="rare-words" data-words='${JSON.stringify(r.words)}'></div>
+    `;
+    box.appendChild(item);
+  });
+
+  if (searchState.cur < all.length) {
+    addLoadMoreBtn();
+  }
+}
+
+function updateRareStats(el) {
+  const { all, validResults, filterMode, maxWords } = searchState;
+  let desc = filterMode === 'max-words'
+    ? `3–${maxWords} words`
+    : `length ${document.getElementById('len-op').value} ${document.getElementById('len-val').value}`;
+  el.innerHTML = `${all.length} prefixes found with ${desc} — showing ${searchState.validResults.length}<br><small>not all prefixes work due to invalid solves — dm me to blacklist</small>`;
+}
+
+function addLoadMoreBtn() {
+  const box = document.getElementById('results-box');
+  const wrap = document.createElement('div');
+  wrap.className = 'load-more-wrap';
+  wrap.id = 'load-more-wrap';
+  const count = document.createElement('div');
+  count.className = 'load-more-count';
+  count.textContent = `showing ${searchState.validResults.length} of ${searchState.all.length}`;
+  const btn = document.createElement('button');
+  btn.className = 'btn-load';
+  btn.textContent = 'load more ▼';
+  btn.onclick = function() {
+    this.disabled = true;
+    this.textContent = 'loading…';
+    renderRarePage(false);
+  };
+  wrap.appendChild(count);
+  wrap.appendChild(btn);
+  box.appendChild(wrap);
+}
+
+window.toggleRareWords = function(btn) {
+  const item = btn.closest('.rare-item');
+  const wordsDiv = item.querySelector('.rare-words');
+  const isOpen = wordsDiv.classList.contains('open');
+
+  document.querySelectorAll('.rare-words.open').forEach(d => {
+    d.classList.remove('open');
+    d.closest('.rare-item').querySelector('.rare-toggle').textContent = 'show';
+  });
+
+  if (!isOpen) {
+    const ws = JSON.parse(wordsDiv.dataset.words);
+    wordsDiv.innerHTML = ws.map(w => `<span class="rare-word-chip">${w}</span>`).join('');
+    wordsDiv.classList.add('open');
+    btn.textContent = 'hide';
+  }
+};
+
+function clearRare() {
+  document.getElementById('rare-prefix').value = '';
+  document.getElementById('given-letter').value = '';
+  document.getElementById('rare-prefix-length').value = '2';
+  document.getElementById('rare-max-words').value = '3';
+  document.getElementById('chip-max-val').textContent = '3';
+  document.getElementById('len-op').value = '<=';
+  document.getElementById('len-val').value = '6';
+  document.querySelectorAll('input[name="rare-sort"]')[0].checked = true;
+  document.querySelectorAll('.mode-chip').forEach((c, i) => { c.classList.toggle('selected', i === 0); });
+  document.getElementById('results-box').innerHTML = '<div class="r-placeholder">filters cleared</div>';
+  setCount('result-count', 0);
+  searchState = null;
+}
+
+// ─────────────────────────────────────────
+// PREFIX CHECKER
+// ─────────────────────────────────────────
+document.getElementById('check-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') checkPrefix();
+});
+
+async function checkPrefix() {
+  const val = document.getElementById('check-input').value.toLowerCase().trim();
+  const res = document.getElementById('checker-result');
+  if (!val) { res.style.display = 'block'; res.innerHTML = '<div class="validity-line invalid">enter a prefix</div>'; return; }
+  if (!/^[a-z]+$/.test(val)) { res.style.display = 'block'; res.innerHTML = '<div class="validity-line invalid">letters only</div>'; return; }
+
+  res.style.display = 'block';
+  res.innerHTML = '<div class="checker-stats">checking…</div>';
+
+  if (words.length === 0) {
+    try {
+      const r = await fetch(WORDS_URL + '?t=' + Date.now());
+      const t = await r.text();
+      words = [...new Set(t.split(/\r?\n/).map(w => w.trim()).filter(Boolean))];
+    } catch { res.innerHTML = '<div class="validity-line invalid">failed to load words</div>'; return; }
+  }
+
+  if (!blacklist.size) await loadBlacklist();
+
+  if (blacklist.has(val)) {
+    res.innerHTML = `<div class="validity-line invalid">✗ Blacklisted</div><div class="checker-stats">This prefix is in the blacklist</div>`;
+    return;
+  }
+
+  const matching = words.filter(w => w.toLowerCase().startsWith(val) && w.length > val.length);
+  if (!matching.length) { res.innerHTML = `<div class="validity-line invalid">✗ no words found</div>`; return; }
+
+  const nextMap = new Map();
+  matching.forEach(w => {
+    const nl = w[val.length].toLowerCase();
+    if (!nextMap.has(nl)) nextMap.set(nl, []);
+    nextMap.get(nl).push(w);
+  });
+
+  const unique = [...nextMap.keys()];
+  const isValid = unique.length >= 3;
+
+  const bId = 'bd-' + Date.now();
+  res.innerHTML = `
+    <div class="validity-line ${isValid ? 'valid' : 'invalid'}">${isValid ? '✓ Valid' : '✗ invalid'}</div>
+    <div class="checker-stats">
+      ${matching.length} words start with "${val}"<br>
+      ${unique.length} unique next letter${unique.length !== 1 ? 's' : ''} &nbsp;·&nbsp; need 3+ for validity
+    </div>
+    <div class="breakdown-toggle" onclick="toggleBreakdown('${bId}')">
+      <span class="breakdown-arrow" id="${bId}-arrow">▶</span> Breakdown
+    </div>
+    <div class="breakdown-grid" id="${bId}">
+      ${unique.sort().map(l => {
+        const ws = nextMap.get(l);
+        const preview = ws.slice(0, 4).join(', ') + (ws.length > 4 ? ` +${ws.length - 4}` : '');
+        return `<div class="breakdown-card"><div class="breakdown-letter">+${l} → ${ws.length}</div><div class="breakdown-words">${preview}</div></div>`;
+      }).join('')}
+    </div>
+  `;
+}
+
+function toggleBreakdown(id) {
+  const el = document.getElementById(id);
+  const arrow = document.getElementById(id + '-arrow');
+  const open = el.classList.toggle('open');
+  arrow.classList.toggle('open', open);
+}
+
+function clearChecker() {
+  document.getElementById('check-input').value = '';
+  const res = document.getElementById('checker-result');
+  res.style.display = 'none';
+  res.innerHTML = '';
+}
+</script>
 </body>
 </html>
