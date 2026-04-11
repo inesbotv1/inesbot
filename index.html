@@ -1027,8 +1027,11 @@ function hasThreeDistinct(prefix, ws) {
   }
   return false;
 }
+
+const ONE_LETTER_BLACKLIST = ['s'];
+
 function hasOneLetter(prefix, ws) {
-  return ws.some(w => w.length === prefix.length + 1);
+  return ws.some(w => w.length === prefix.length + 1 && ONE_LETTER_BLACKLIST.includes(w.slice(-1).toLowerCase()));
 }
 
 function findRarePrefixes() {
