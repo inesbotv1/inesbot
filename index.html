@@ -907,6 +907,9 @@ async function loadWords() {
     const r = await fetch(WORDS_URL + '?t=' + Date.now());
     const t = await r.text();
     words = [...new Set(t.split(/\r?\n/).map(w => w.trim()).filter(Boolean))];
+    gameWordSet = new Set(words.map(w => w.toLowerCase())); // populate after words load
+    buildPrefixIndex();
+    prefixIndexBuilt = true;
     setCount('word-count', words.length);
     document.getElementById('results-box').innerHTML = '<div class="msg success">✓ ' + words.length + ' words loaded</div>';
     setCount('result-count', 0);
