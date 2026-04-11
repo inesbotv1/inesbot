@@ -1422,6 +1422,19 @@ function isValidPrefix(prefix, usedWords) {
   return nextLetters.size >= required;
 }
 
+function isValidPrefixStrict(prefix, usedWords) {
+  if (!prefix || blacklist.has(prefix) || prefix.length > 4) return false;
+  if (gameWordSet.has(prefix)) return false;
+  const candidates = (prefixIndex.get(prefix) || []).filter(w => !usedWords.has(w));
+  const nextLetters = new Set();
+  for (const w of candidates) {
+    if (w.length > prefix.length) {
+      nextLetters.add(w[prefix.length].toLowerCase());
+    }
+  }
+  return nextLetters.size >= 3;
+}
+
 function getPossibleAnswers(prefix, usedWords) {
   return (prefixIndex.get(prefix) || []).filter(w => !usedWords.has(w) && w.length > prefix.length);
 }
@@ -1434,13 +1447,13 @@ function getPrefixFromWord(word, round, usedWords) {
   for (let len = targetLen; len >= 1; len--) {
     const p = word.slice(-len).toLowerCase();
     if (gameWordSet.has(p)) continue;
-    if (isValidPrefix(p, usedWords)) return p;
+    if (isValidPrefixStrict(p, usedWords)) return p;
   }
   
   // Second pass: self-solve prefixes only if literally no other option
   for (let len = targetLen; len >= 1; len--) {
     const p = word.slice(-len).toLowerCase();
-    if (isValidPrefix(p, usedWords)) return p;
+    if (isValidPrefixStrict(p, usedWords)) return p;
   }
   
   return null;
@@ -1471,7 +1484,7 @@ function botChooseWord(prefix, round, usedWords) {
   for (const word of sample) {
     for (let len = targetLen; len >= 1; len--) {
       const nextP = word.slice(-len).toLowerCase();
-      if (!isValidPrefix(nextP, usedWords)) continue;
+      if (!isValidPrefixStrict (nextP, usedWords)) continue;
       const selfIsWord = gameWordSet.has(nextP);
       if (selfIsWord) continue;
       const playerOptions = getPossibleAnswers(nextP, usedWords).length;
