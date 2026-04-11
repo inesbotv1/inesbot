@@ -1427,7 +1427,6 @@ function isValidPrefix(prefix, usedWords) {
 
 function isValidPrefixStrict(prefix, usedWords) {
   if (!prefix || blacklist.has(prefix) || prefix.length > 4) return false;
-  if (gameWordSet.has(prefix)) return false;
   const candidates = (prefixIndex.get(prefix) || []).filter(w => !usedWords.has(w));
   const nextLetters = new Set();
   for (const w of candidates) {
@@ -1435,7 +1434,9 @@ function isValidPrefixStrict(prefix, usedWords) {
       nextLetters.add(w[prefix.length].toLowerCase());
     }
   }
-  return nextLetters.size >= 3;
+  const selfIsWord = gameWordSet.has(prefix);
+  const required = selfIsWord ? 2 : 3;
+  return nextLetters.size >= required;
 }
 
 function getPossibleAnswers(prefix, usedWords) {
