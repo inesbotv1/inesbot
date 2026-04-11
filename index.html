@@ -1350,12 +1350,14 @@ function botChooseWord(prefix, round, usedWords) {
     for (let len = targetLen; len >= 1; len--) {
       const nextP = word.slice(-len).toLowerCase();
       if (!isValidPrefix(nextP, usedWords)) continue;
-      const playerOptions = getPossibleAnswers(nextP, usedWords).length;
+      const playerOptions = getPossibleAnswers(nextP, new Set()).length;
       const isWord = wordSet.has(nextP);
       const score = playerOptions + (isWord ? 10000 : 0);
-      if (playerOptions >= 3 && score < bestScore) {
-        bestScore = score;
-        bestWord = word;
+      if (playerOptions >= 3 && score < bestScore + 5) {
+        if (!bestWord || Math.random() < 0.4) {
+          bestScore = score;
+          bestWord = word;
+        }
       }
       break;
     }
