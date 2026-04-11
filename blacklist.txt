@@ -164,6 +164,7 @@ pq
 ps
 psis
 pss
+ss
 psw
 pt
 ptg
