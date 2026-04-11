@@ -1145,6 +1145,7 @@ function renderRarePage(isFirst) {
     const s = document.getElementById('rare-stats');
     if (s) updateRareStats(s);
     document.getElementById('load-more-wrap')?.remove();
+    document.getElementById('load-sentinel')?.remove();
   }
   batch.forEach((r, idx) => {
     const isWord = wordSet.has(r.prefix);
@@ -1164,7 +1165,14 @@ function renderRarePage(isFirst) {
       <div class="rare-words" data-words='${JSON.stringify(r.words)}'></div>`;
     box.appendChild(item);
   });
-  if (searchState.cur < all.length) addLoadMoreBtn();
+  if (searchState.cur < all.length) {
+    if (document.getElementById('load-sentinel') !== null || searchState.infiniteScroll) {
+    searchState.infiniteScroll = true;
+      activateInfiniteScroll();
+    } else {
+      addLoadMoreBtn();
+    }
+  }
 }
 
 function updateRareStats(el) {
@@ -1182,10 +1190,36 @@ function addLoadMoreBtn() {
   const count = document.createElement('div');
   count.className = 'load-more-count';
   count.textContent = `showing ${searchState.validResults.length} of ${searchState.all.length}`;
+  const btnRow = document.createElement('div');
+  btnRow.style.cssText = 'display:flex;gap:8px;';
   const btn = document.createElement('button');
   btn.className = 'btn-load'; btn.textContent = 'load more ▼';
-  btn.onclick = function() { this.disabled = true; this.textContent = 'loading…'; renderRarePage(false); };
-  wrap.appendChild(count); wrap.appendChild(btn); box.appendChild(wrap);
+  const btnAll = document.createElement('button');
+  btnAll.className = 'btn-load'; btnAll.textContent = 'load all';
+  btnAll.addEventListener('click', function() {
+    wrap.remove();
+    activateInfiniteScroll();
+  });
+  btnRow.appendChild(btn); btnRow.appendChild(btnAll);
+  wrap.appendChild(count); wrap.appendChild(btnRow); box.appendChild(wrap);
+}
+
+function activateInfiniteScroll() {
+  const box = document.getElementById('results-box');
+  const sentinel = document.createElement('div');
+  sentinel.id = 'load-sentinel';
+  sentinel.style.height = '1px';
+  box.appendChild(sentinel);
+
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && searchState && searchState.cur < searchState.all.length) {
+      observer.disconnect();
+      document.getElementById('load-sentinel')?.remove();
+      renderRarePage(false);
+    }
+  }, { root: box, threshold: 0.1 });
+
+  observer.observe(sentinel);
 }
 
 window.toggleRareWords = function(btn) {
