@@ -1754,7 +1754,7 @@ function shakePrefix() {
 
 function checkRoundAdvance() {
   if (gameState.wordsInRound >= 4) {
-    if (gameState.round < 4) gameState.round++;
+    gameState.round++;
     gameState.wordsInRound = 0;
   }
 }
