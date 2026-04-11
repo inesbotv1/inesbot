@@ -874,17 +874,40 @@ async function loadBlacklist() {
 loadWords();
 loadBlacklist();
 
+let savedNormalResults = { html: '<div class="r-placeholder">enter search criteria…</div>', count: '0' };
+let savedRareResults = { html: '<div class="r-placeholder">click find rare prefixes…</div>', count: '0' };
+let currentTab = 'normal';
+
 // ── TABS ──
 function switchTab(tab) {
+  const box = document.getElementById('results-box');
+
+  // save current results before switching
+  if (currentTab === 'normal') {
+    savedNormalResults = { html: box.innerHTML, count: document.getElementById('result-count').textContent };
+  } else if (currentTab === 'rare') {
+    savedRareResults = { html: box.innerHTML, count: document.getElementById('result-count').textContent };
+  }
+
+  currentTab = tab;
+
   ['normal','rare','game'].forEach(t => {
     document.getElementById('tab-' + t).classList.toggle('active', t === tab);
     document.getElementById('panel-' + t).classList.toggle('visible', t === tab);
   });
+
   if (tab === 'game') {
-    document.getElementById('results-box').closest('.results-wrap').style.display = 'none';
+    box.closest('.results-wrap').style.display = 'none';
     if (!gameInitialized) initGameScreen();
   } else {
-    document.getElementById('results-box').closest('.results-wrap').style.display = '';
+    box.closest('.results-wrap').style.display = '';
+    if (tab === 'normal') {
+      box.innerHTML = savedNormalResults.html;
+      setCount('result-count', savedNormalResults.count);
+    } else if (tab === 'rare') {
+      box.innerHTML = savedRareResults.html;
+      setCount('result-count', savedRareResults.count);
+    }
   }
 }
 
