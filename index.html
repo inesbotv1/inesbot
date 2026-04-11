@@ -1430,14 +1430,14 @@ function getPossibleAnswers(prefix, usedWords) {
 function getPrefixFromWord(word, round, usedWords) {
   const targetLen = Math.min(round, 4);
   
-  // First pass: find prefixes that are NOT standalone words
+  // First pass: non-self-solve prefixes only
   for (let len = targetLen; len >= 1; len--) {
     const p = word.slice(-len).toLowerCase();
-    const selfIsWord = gameWordSet.has(p);
-    if (!selfIsWord && isValidPrefix(p, usedWords)) return p;
+    if (gameWordSet.has(p)) continue;
+    if (isValidPrefix(p, usedWords)) return p;
   }
   
-  // Second pass: fall back to self-solve prefixes if no better option exists
+  // Second pass: self-solve prefixes only if literally no other option
   for (let len = targetLen; len >= 1; len--) {
     const p = word.slice(-len).toLowerCase();
     if (isValidPrefix(p, usedWords)) return p;
