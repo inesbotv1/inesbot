@@ -1231,6 +1231,7 @@ async function checkPrefix() {
       ${matching.length} words start with "${val}"<br>
       ${unique.length} unique next letter${unique.length !== 1 ? 's' : ''} &nbsp;·&nbsp; need ${required}+ for validity${selfIsWord ? ' <span style="color:var(--valid)">(prefix is a word ✓)</span>' : ''}
     </div>
+    ${selfIsWord && unique.length < 3 ? `<div style="font-family:var(--mono);font-size:0.75rem;color:var(--text2);margin-top:6px;">⚠ self-solving "${val}" removes the word credit — only ${unique.length} distinct next letter${unique.length !== 1 ? 's' : ''} remain, making it invalid</div>` : ''}
     <div class="breakdown-toggle" onclick="toggleBreakdown('${bId}')">
       <span class="breakdown-arrow" id="${bId}-arrow">▶</span> Breakdown
     </div>
