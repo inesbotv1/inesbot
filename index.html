@@ -1272,7 +1272,7 @@ function buildPrefixIndex() {
   if (prefixIndexBuilt || !words.length) return;
   prefixIndex = new Map();
   for (const word of words) {
-    for (let len = 1; len <= Math.min(4, word.length - 1); len++) {
+    for (let len = 1; len <= Math.min(4, word.length); len++) {
       const p = word.slice(0, len).toLowerCase();
       if (!prefixIndex.has(p)) prefixIndex.set(p, []);
       prefixIndex.get(p).push(word);
