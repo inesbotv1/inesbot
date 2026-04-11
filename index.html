@@ -10,6 +10,46 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
+/* Custom confirm modal */
+.confirm-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99999;
+  display:flex;align-items:center;justify-content:center;
+  animation:fadeIn .2s ease both;
+}
+.confirm-box{
+  background:var(--bg1);border:1.5px solid var(--border2);border-radius:16px;
+  padding:24px;width:min(340px,90vw);box-shadow:0 12px 40px var(--shadow2);
+  animation:popIn .2s ease both;
+}
+.confirm-title{
+  font-family:var(--display);font-size:1.1rem;font-weight:700;
+  color:var(--text0);margin-bottom:8px;letter-spacing:-.02em;
+}
+.confirm-sub{
+  font-family:var(--mono);font-size:0.78rem;color:var(--text2);
+  line-height:1.7;margin-bottom:20px;
+}
+.confirm-btns{display:flex;gap:8px;justify-content:flex-end;}
+
+function showConfirm(title, sub, onConfirm) {
+  const overlay = document.createElement('div');
+  overlay.className = 'confirm-overlay';
+  overlay.innerHTML = `
+    <div class="confirm-box">
+      <div class="confirm-title">${title}</div>
+      <div class="confirm-sub">${sub}</div>
+      <div class="confirm-btns">
+        <button class="btn btn-ghost" id="confirm-cancel">cancel</button>
+        <button class="btn btn-primary" id="confirm-ok" style="flex:0;padding:11px 22px">clear all</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+  const close = () => overlay.remove();
+  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+  overlay.querySelector('#confirm-cancel').addEventListener('click', close);
+  overlay.querySelector('#confirm-ok').addEventListener('click', () => { close(); onConfirm(); });
+}
+
 :root{
   --bg0:#f5f0e8;
   --bg1:#ede7da;
@@ -1849,9 +1889,14 @@ function removeMatch(index, panelId) {
 }
 
 function clearAllHistory(panelId) {
-  if (!confirm('clear all match history?')) return;
-  localStorage.removeItem('gameHistory');
-  renderHistoryBody(panelId);
+  showConfirm(
+    'Clear match history',
+    'This will permanently delete all your saved matches.\nThis cannot be undone.',
+    () => {
+      localStorage.removeItem('gameHistory');
+      renderHistoryBody(panelId);
+    }
+  );
 }
 
 function renderHistoryBody(panelId) {
