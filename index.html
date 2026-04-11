@@ -247,7 +247,7 @@ select option{background:var(--bg1);color:var(--text0)}
 
 .rare-item{margin:4px 8px;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--bg0);transition:border-color .2s,box-shadow .2s;animation:fadeItem .25s ease both;}
 .rare-item:hover{border-color:var(--border2);box-shadow:0 2px 8px var(--shadow)}
-.rare-item-header{display:flex;align-items:center;gap:10px;padding:11px 14px;flex-wrap:wrap;cursor:default;}
+.rare-item-header{display:flex;align-items:center;gap:10px;padding:11px 14px;flex-wrap:nowrap;cursor:default;}
 .rare-badge{font-family:var(--mono);font-size:0.72rem;padding:3px 10px;border-radius:20px;background:var(--pill);color:var(--pill-text);white-space:nowrap;flex-shrink:0;}
 .rare-prefix-val{font-family:var(--mono);font-size:1.05rem;font-weight:500;color:var(--text0);background:var(--bg2);padding:3px 10px;border-radius:6px;}
 .rare-type-badge{font-size:0.7rem;padding:2px 8px;border-radius:4px;font-family:var(--mono);}
@@ -256,8 +256,8 @@ select option{background:var(--bg1);color:var(--text0)}
 .rare-give{color:var(--text2);font-size:0.78rem;font-family:var(--mono);font-style:italic;}
 .rare-toggle{margin-left:auto;font-size:0.76rem;font-family:var(--mono);padding:4px 12px;border-radius:6px;border:1.5px solid var(--border);background:transparent;color:var(--text1);cursor:pointer;transition:all .2s;flex-shrink:0;}
 .rare-toggle:hover{background:var(--bg2);border-color:var(--text2)}
-.rare-words{display:none;padding:0;border-top:none;background:var(--bg1);flex-wrap:wrap;gap:6px;}
-.rare-words.open{display:flex;padding:12px 14px;border-top:1px solid var(--border);}
+.rare-words{display:none;padding:12px 14px;border-top:1px solid var(--border);background:var(--bg1);flex-wrap:wrap;gap:6px;}
+.rare-words.open{display:flex}
 .rare-word-chip{font-family:var(--mono);font-size:0.8rem;padding:4px 10px;border-radius:6px;background:var(--bg2);border:1px solid var(--border);color:var(--text0);transition:background .15s;}
 .rare-word-chip:hover{background:var(--bg3)}
 
@@ -308,6 +308,32 @@ select option{background:var(--bg1);color:var(--text0)}
 .dict-placeholder{text-align:center;padding:30px 10px;font-family:var(--mono);font-size:0.78rem;color:var(--text2);}
 
 footer{text-align:center;padding:32px 0 20px;font-family:var(--mono);font-size:0.72rem;color:var(--text2);letter-spacing:.1em;animation:fadeUp .5s .4s ease both;}
+
+/* ── MATCH HISTORY ── */
+.history-wrap{margin-top:20px;border-top:1px solid var(--border);padding-top:16px;}
+.history-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.history-toggle{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:0.72rem;color:var(--text2);letter-spacing:.08em;cursor:pointer;user-select:none;transition:color .2s;}
+.history-toggle:hover{color:var(--text1)}
+.history-toggle-arrow{transition:transform .25s;display:inline-block;}
+.history-toggle-arrow.open{transform:rotate(90deg)}
+.history-clear-all{font-family:var(--mono);font-size:0.7rem;color:var(--text2);background:none;border:1.5px solid var(--border);border-radius:6px;padding:3px 10px;cursor:pointer;transition:all .2s;}
+.history-clear-all:hover{border-color:var(--invalid);color:var(--invalid)}
+.history-body{display:none;}
+.history-body.open{display:block;}
+.history-empty{font-family:var(--mono);font-size:0.78rem;color:var(--text2);text-align:center;padding:24px 0;}
+.history-item{background:var(--bg0);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:8px;transition:border-color .2s;}
+.history-item:hover{border-color:var(--border2)}
+.history-item-header{display:flex;align-items:center;gap:10px;padding:10px 14px;flex-wrap:wrap;}
+.history-outcome{font-family:var(--display);font-size:0.9rem;font-weight:800;letter-spacing:-.01em;flex-shrink:0;}
+.history-outcome.win{color:var(--valid)}
+.history-outcome.lose{color:var(--invalid)}
+.history-meta{font-family:var(--mono);font-size:0.7rem;color:var(--text2);flex:1;line-height:1.6;}
+.history-remove{background:none;border:1.5px solid var(--border);border-radius:6px;color:var(--text2);font-family:var(--mono);font-size:0.68rem;padding:3px 9px;cursor:pointer;transition:all .2s;flex-shrink:0;}
+.history-remove:hover{border-color:var(--invalid);color:var(--invalid)}
+.history-chips{padding:0 14px 12px;display:flex;flex-wrap:wrap;gap:5px;}
+.history-chip{font-family:var(--mono);font-size:0.73rem;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:var(--bg2);color:var(--text0);}
+.history-chip.you{border-color:var(--valid);color:var(--valid)}
+.history-chip.bot{border-color:var(--accent);color:var(--accent)}
 
 /* ── GAME STYLES ── */
 #game-panel{
@@ -874,41 +900,17 @@ async function loadBlacklist() {
 loadWords();
 loadBlacklist();
 
-let savedNormalResults = { html: '<div class="r-placeholder">enter search criteria…</div>', count: '0' };
-let savedRareResults = { html: '<div class="r-placeholder">click find rare prefixes…</div>', count: '0' };
-let currentTab = 'normal';
-
 // ── TABS ──
 function switchTab(tab) {
-  const box = document.getElementById('results-box');
-
-  // save current results before switching
-  if (currentTab === 'normal') {
-    savedNormalResults = { html: box.innerHTML, count: document.getElementById('result-count').textContent };
-  } else if (currentTab === 'rare') {
-    savedRareResults = { html: box.innerHTML, count: document.getElementById('result-count').textContent, state: searchState };
-  }
-
-  currentTab = tab;
-
   ['normal','rare','game'].forEach(t => {
     document.getElementById('tab-' + t).classList.toggle('active', t === tab);
     document.getElementById('panel-' + t).classList.toggle('visible', t === tab);
   });
-
   if (tab === 'game') {
-    box.closest('.results-wrap').style.display = 'none';
+    document.getElementById('results-box').closest('.results-wrap').style.display = 'none';
     if (!gameInitialized) initGameScreen();
   } else {
-    box.closest('.results-wrap').style.display = '';
-    if (tab === 'normal') {
-      box.innerHTML = savedNormalResults.html;
-      setCount('result-count', savedNormalResults.count);
-    } else if (tab === 'rare') {
-      box.innerHTML = savedRareResults.html;
-      setCount('result-count', savedRareResults.count);
-      searchState = savedRareResults.state;
-    }
+    document.getElementById('results-box').closest('.results-wrap').style.display = '';
   }
 }
 
@@ -1052,14 +1054,6 @@ function hasThreeDistinct(prefix, ws) {
   return false;
 }
 
-document.getElementById('results-box').addEventListener('click', e => {
-  if (e.target.classList.contains('btn-load')) {
-    e.target.disabled = true;
-    e.target.textContent = 'loading…';
-    renderRarePage(false);
-  }
-});
-
 const ONE_LETTER_BLACKLIST = ['s'];
 
 function hasOneLetter(prefix, ws) {
@@ -1139,7 +1133,6 @@ function renderRarePage(isFirst) {
   const { all, cur, pageSize, wordSet, filterMode, maxWords, validResults } = searchState;
   if (cur >= all.length) return;
   const box = document.getElementById('results-box');
-  if (isFirst) box.innerHTML = '';
   const end = Math.min(cur + pageSize, all.length);
   const batch = all.slice(cur, end);
   searchState.cur = end;
@@ -1189,20 +1182,10 @@ function addLoadMoreBtn() {
   const count = document.createElement('div');
   count.className = 'load-more-count';
   count.textContent = `showing ${searchState.validResults.length} of ${searchState.all.length}`;
-  const btnRow = document.createElement('div');
-  btnRow.style.cssText = 'display:flex;gap:8px;';
   const btn = document.createElement('button');
   btn.className = 'btn-load'; btn.textContent = 'load more ▼';
-  const btnAll = document.createElement('button');
-  btnAll.className = 'btn-load'; btnAll.textContent = 'load all ▼';
-  btnAll.addEventListener('click', function() {
-    this.disabled = true; btn.disabled = true;
-    this.textContent = 'loading…';
-    searchState.pageSize = searchState.all.length;
-    renderRarePage(false);
-  });
-  btnRow.appendChild(btn); btnRow.appendChild(btnAll);
-  wrap.appendChild(count); wrap.appendChild(btnRow); box.appendChild(wrap);
+  btn.onclick = function() { this.disabled = true; this.textContent = 'loading…'; renderRarePage(false); };
+  wrap.appendChild(count); wrap.appendChild(btn); box.appendChild(wrap);
 }
 
 window.toggleRareWords = function(btn) {
@@ -1370,8 +1353,7 @@ function getRandomValidStart(usedWords) {
 
 // Timer: starts at 15s, decreases by 1 each round until min 4s
 function getTimerForRound(round) {
-  if (round <= 4) return 15;
-  return Math.max(4, 15 - Math.floor((round - 4) / 2));
+  return Math.max(4, 15 - (round - 1));
 }
 
 // InesBot AI: 40% random, 60% tries to trap with rare prefixes
@@ -1379,7 +1361,9 @@ function botChooseWord(prefix, round, usedWords) {
   const possible = getPossibleAnswers(prefix, usedWords);
   if (!possible.length) return null;
 
-//trap chance
+  if (Math.random() < 0.1) {
+    return possible[Math.floor(Math.random() * possible.length)];
+  }
 
   const targetLen = Math.min(round, 4);
   let bestWord = null;
@@ -1387,20 +1371,14 @@ function botChooseWord(prefix, round, usedWords) {
 
   const sample = possible.length > 40 ? possible.sort(() => Math.random() - .5).slice(0, 40) : possible;
 
-  const wordSet = new Set(words.map(w => w.toLowerCase()));
-    
   for (const word of sample) {
     for (let len = targetLen; len >= 1; len--) {
       const nextP = word.slice(-len).toLowerCase();
       if (!isValidPrefix(nextP, usedWords)) continue;
-      const playerOptions = getPossibleAnswers(nextP, new Set()).length;
-      const isWord = wordSet.has(nextP);
-      const score = playerOptions + (isWord ? 10000 : 0);
-      if (playerOptions >= 3 && score < bestScore + 5) {
-        if (!bestWord || Math.random() < 0.4) {
-          bestScore = score;
-          bestWord = word;
-        }
+      const playerOptions = getPossibleAnswers(nextP, usedWords).length;
+      if (playerOptions >= 3 && playerOptions < bestScore) {
+        bestScore = playerOptions;
+        bestWord = word;
       }
       break;
     }
@@ -1431,6 +1409,15 @@ function renderGameStart() {
         Start Game
       </button>
       ${!words.length ? '<div class="game-error" style="margin-top:12px">words still loading — wait a moment</div>' : ''}
+      <div class="history-wrap" id="history-wrap-start" style="text-align:left">
+        <div class="history-header">
+          <div class="history-toggle" onclick="toggleHistoryPanel('start')">
+            <span class="history-toggle-arrow" id="history-arrow-start">▶</span> match history
+          </div>
+          <button class="history-clear-all" onclick="clearAllHistory('start')">clear all</button>
+        </div>
+        <div class="history-body" id="history-body-start"></div>
+      </div>
     </div>`;
 }
 
@@ -1510,7 +1497,7 @@ function renderGameArena() {
       <div class="game-main">
         <div class="game-log" id="game-log">${logHTML}</div>
         <div class="game-prefix-display">
-          <div class="game-prefix-label">PREFIX</div>
+          <div class="game-prefix-label">YOUR PREFIX</div>
           <div class="game-prefix-value" id="prefix-display">${currentPrefix}</div>
           ${phase === 'player' ? buildPipsHTML(attemptsLeft) : ''}
         </div>
@@ -1691,7 +1678,7 @@ function shakePrefix() {
 
 function checkRoundAdvance() {
   if (gameState.wordsInRound >= 4) {
-    gameState.round++;
+    if (gameState.round < 4) gameState.round++;
     gameState.wordsInRound = 0;
   }
 }
@@ -1716,6 +1703,7 @@ function triggerWin() {
 }
 
 function renderGameOver() {
+  saveMatchToHistory(gameState);
   const { won, lostOnPrefix, lostReason, possibleOnLoss, log, round } = gameState;
   const panel = document.getElementById('game-panel');
 
@@ -1749,7 +1737,79 @@ function renderGameOver() {
         <button class="btn btn-primary" style="flex:0;padding:11px 32px" onclick="startGame()">Play Again</button>
         <button class="btn btn-ghost" style="flex:0" onclick="renderGameStart()">Menu</button>
       </div>
+      <div class="history-wrap" id="history-wrap-result">
+        <div class="history-header">
+          <div class="history-toggle" onclick="toggleHistoryPanel('result')">
+            <span class="history-toggle-arrow" id="history-arrow-result">▶</span> match history
+          </div>
+          <button class="history-clear-all" onclick="clearAllHistory('result')">clear all</button>
+        </div>
+        <div class="history-body" id="history-body-result"></div>
+      </div>
     </div>`;
+}
+
+// ── MATCH HISTORY ──
+function saveMatchToHistory(state) {
+  const history = JSON.parse(localStorage.getItem('gameHistory') || '[]');
+  history.unshift({
+    won: state.won,
+    round: state.round,
+    lostReason: state.lostReason || '',
+    lostOn: state.lostOnPrefix || null,
+    words: state.log.map(e => ({ who: e.who, word: e.word })),
+    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+  });
+  if (history.length > 50) history.pop();
+  localStorage.setItem('gameHistory', JSON.stringify(history));
+}
+
+function removeMatch(index, panelId) {
+  const history = JSON.parse(localStorage.getItem('gameHistory') || '[]');
+  history.splice(index, 1);
+  localStorage.setItem('gameHistory', JSON.stringify(history));
+  renderHistoryBody(panelId);
+}
+
+function clearAllHistory(panelId) {
+  if (!confirm('clear all match history?')) return;
+  localStorage.removeItem('gameHistory');
+  renderHistoryBody(panelId);
+}
+
+function renderHistoryBody(panelId) {
+  const body = document.getElementById('history-body-' + panelId);
+  if (!body) return;
+  const history = JSON.parse(localStorage.getItem('gameHistory') || '[]');
+  if (!history.length) {
+    body.innerHTML = '<div class="history-empty">no matches yet</div>';
+    return;
+  }
+  body.innerHTML = history.map((m, i) => `
+    <div class="history-item">
+      <div class="history-item-header">
+        <span class="history-outcome ${m.won ? 'win' : 'lose'}">${m.won ? 'WIN' : 'LOSS'}</span>
+        <span class="history-meta">
+          round ${m.round} · ${m.words.length} words<br>
+          ${m.date} ${m.time}${!m.won && m.lostOn ? ` · died on "${m.lostOn}"` : ''}
+        </span>
+        <button class="history-remove" onclick="removeMatch(${i},'${panelId}')">✕</button>
+      </div>
+      <div class="history-chips">
+        ${m.words.map(e => `<span class="history-chip ${e.who}">${e.word}</span>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function toggleHistoryPanel(panelId) {
+  const body = document.getElementById('history-body-' + panelId);
+  const arrow = document.getElementById('history-arrow-' + panelId);
+  if (!body || !arrow) return;
+  const opening = !body.classList.contains('open');
+  body.classList.toggle('open', opening);
+  arrow.classList.toggle('open', opening);
+  if (opening) renderHistoryBody(panelId);
 }
 
 function renderError(msg) {
