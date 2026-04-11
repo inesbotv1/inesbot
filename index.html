@@ -1328,7 +1328,7 @@ function getRandomValidStart(usedWords) {
 // Timer: starts at 15s, decreases by 1 each round until min 4s
 function getTimerForRound(round) {
   if (round <= 4) return 15;
-  return Math.max(4, 15 - Math.floor((round - 4) / 2) * 2);
+  return Math.max(4, 15 - Math.floor((round - 4) / 2));
 }
 
 // InesBot AI: 40% random, 60% tries to trap with rare prefixes
