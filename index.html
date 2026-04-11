@@ -1794,8 +1794,8 @@ function renderGameOver() {
     : `<div style="font-family:var(--mono);font-size:0.78rem;color:var(--text2)">no valid words left for "${lostOnPrefix}"</div>`;
 
   const loseReason = lostReason === 'attempts'
-    ? `ran out of attempts on prefix "${lostOnPrefix}"`
-    : `timed out on prefix "${lostOnPrefix}"`;
+    ? `ran out of attempts on prefix "<strong>${lostOnPrefix}</strong>"`
+    : `timed out on prefix "<strong>${lostOnPrefix}</strong>"`;
 
   panel.innerHTML = `
     <div class="game-result">
@@ -1868,7 +1868,7 @@ function renderHistoryBody(panelId) {
         <span class="history-outcome ${m.won ? 'win' : 'lose'}">${m.won ? 'WIN' : 'LOSS'}</span>
         <span class="history-meta">
           round ${m.round} · ${m.words.length} words<br>
-          ${m.date} ${m.time}${!m.won && m.lostOn ? ` · died on "${m.lostOn}"` : ''}
+          ${m.date} ${m.time}${!m.won && m.lostOn ? ` · died on "<strong>${m.lostOn}</strong>"` : ''}
         </span>
         <button class="history-remove" onclick="removeMatch(${i},'${panelId}')">✕</button>
       </div>
