@@ -1139,6 +1139,7 @@ function renderRarePage(isFirst) {
   const { all, cur, pageSize, wordSet, filterMode, maxWords, validResults } = searchState;
   if (cur >= all.length) return;
   const box = document.getElementById('results-box');
+  if (isFirst) box.innerHTML = '';
   const end = Math.min(cur + pageSize, all.length);
   const batch = all.slice(cur, end);
   searchState.cur = end;
