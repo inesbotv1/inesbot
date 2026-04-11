@@ -1457,12 +1457,12 @@ function renderGameArena() {
         <div class="timer-bar ${urgent ? 'urgent' : ''}" id="timer-bar" style="width:${timerPct}%"></div>
       </div>
       <div class="game-main">
+        <div class="game-log" id="game-log">${logHTML}</div>
         <div class="game-prefix-display">
           <div class="game-prefix-label">YOUR PREFIX</div>
           <div class="game-prefix-value" id="prefix-display">${currentPrefix}</div>
           ${phase === 'player' ? buildPipsHTML(attemptsLeft) : ''}
         </div>
-        <div class="game-log" id="game-log">${logHTML}</div>
         ${phase === 'player' ? `
           <div class="game-input-area">
             <input class="game-input" id="game-input" placeholder="type a word starting with '${currentPrefix}'…" autocomplete="off" autocorrect="off" spellcheck="false">
