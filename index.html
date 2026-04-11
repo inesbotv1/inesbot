@@ -1221,13 +1221,15 @@ async function checkPrefix() {
     nextMap.get(nl).push(w);
   });
   const unique = [...nextMap.keys()];
-  const isValid = unique.length >= 3;
+  const selfIsWord = words.some(w => w.toLowerCase() === val);
+  const required = selfIsWord ? 2 : 3;
+  const isValid = unique.length >= required;
   const bId = 'bd-' + Date.now();
   res.innerHTML = `
     <div class="validity-line ${isValid ? 'valid' : 'invalid'}">${isValid ? '✓ Valid' : '✗ invalid'}</div>
     <div class="checker-stats">
       ${matching.length} words start with "${val}"<br>
-      ${unique.length} unique next letter${unique.length !== 1 ? 's' : ''} &nbsp;·&nbsp; need 3+ for validity
+      ${unique.length} unique next letter${unique.length !== 1 ? 's' : ''} &nbsp;·&nbsp; need ${required}+ for validity${selfIsWord ? ' <span style="color:var(--valid)">(prefix is a word ✓)</span>' : ''}
     </div>
     <div class="breakdown-toggle" onclick="toggleBreakdown('${bId}')">
       <span class="breakdown-arrow" id="${bId}-arrow">▶</span> Breakdown
@@ -1282,14 +1284,20 @@ function buildPrefixIndex() {
 function isValidPrefix(prefix, usedWords) {
   if (!prefix || blacklist.has(prefix) || prefix.length > 4) return false;
   const candidates = (prefixIndex.get(prefix) || []).filter(w => !usedWords.has(w));
+  
+  // check if the prefix itself is a word (and hasn't been used)
+  const selfIsWord = candidates.some(w => w.toLowerCase() === prefix.toLowerCase());
+  
   const nextLetters = new Set();
   for (const w of candidates) {
     if (w.length > prefix.length) {
       nextLetters.add(w[prefix.length].toLowerCase());
-      if (nextLetters.size >= 3) return true;
     }
   }
-  return false;
+  
+  // if prefix is itself a word, only need 2 distinct next letters instead of 3
+  const required = selfIsWord ? 2 : 3;
+  return nextLetters.size >= required;
 }
 
 function getPossibleAnswers(prefix, usedWords) {
