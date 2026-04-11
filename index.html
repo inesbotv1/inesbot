@@ -1327,7 +1327,8 @@ function getRandomValidStart(usedWords) {
 
 // Timer: starts at 15s, decreases by 1 each round until min 4s
 function getTimerForRound(round) {
-  return Math.max(4, 15 - (round - 1));
+  if (round <= 4) return 15;
+  return Math.max(4, 15 - Math.floor((round - 4) / 2) * 2);
 }
 
 // InesBot AI: 40% random, 60% tries to trap with rare prefixes
@@ -1335,9 +1336,7 @@ function botChooseWord(prefix, round, usedWords) {
   const possible = getPossibleAnswers(prefix, usedWords);
   if (!possible.length) return null;
 
-  if (Math.random() < 0.1) {
-    return possible[Math.floor(Math.random() * possible.length)];
-  }
+//trap chance
 
   const targetLen = Math.min(round, 4);
   let bestWord = null;
@@ -1643,7 +1642,7 @@ function shakePrefix() {
 
 function checkRoundAdvance() {
   if (gameState.wordsInRound >= 4) {
-    if (gameState.round < 4) gameState.round++;
+    gameState.round++;
     gameState.wordsInRound = 0;
   }
 }
