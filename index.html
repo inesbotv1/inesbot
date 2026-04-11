@@ -1419,7 +1419,8 @@ function getRandomValidStart(usedWords) {
 
 // Timer: starts at 15s, decreases by 1 each round until min 4s
 function getTimerForRound(round) {
-  return Math.max(4, 15 - (round - 1));
+  if (round <= 4) return 15;
+  return Math.max(4, 15 - Math.floor((round - 4) / 2));
 }
 
 // InesBot AI: 40% random, 60% tries to trap with rare prefixes
@@ -1563,7 +1564,7 @@ function renderGameArena() {
       <div class="game-main">
         <div class="game-log" id="game-log">${logHTML}</div>
         <div class="game-prefix-display">
-          <div class="game-prefix-label">YOUR PREFIX</div>
+          <div class="game-prefix-label">PREFIX</div>
           <div class="game-prefix-value" id="prefix-display">${currentPrefix}</div>
           ${phase === 'player' ? buildPipsHTML(attemptsLeft) : ''}
         </div>
