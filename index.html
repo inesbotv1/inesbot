@@ -886,7 +886,7 @@ function switchTab(tab) {
   if (currentTab === 'normal') {
     savedNormalResults = { html: box.innerHTML, count: document.getElementById('result-count').textContent };
   } else if (currentTab === 'rare') {
-    savedRareResults = { html: box.innerHTML, count: document.getElementById('result-count').textContent };
+    savedRareResults = { html: box.innerHTML, count: document.getElementById('result-count').textContent, state: searchState };
   }
 
   currentTab = tab;
@@ -907,6 +907,7 @@ function switchTab(tab) {
     } else if (tab === 'rare') {
       box.innerHTML = savedRareResults.html;
       setCount('result-count', savedRareResults.count);
+      searchState = savedRareResults.state;
     }
   }
 }
