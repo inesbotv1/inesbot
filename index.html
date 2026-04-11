@@ -1189,9 +1189,20 @@ function addLoadMoreBtn() {
   const count = document.createElement('div');
   count.className = 'load-more-count';
   count.textContent = `showing ${searchState.validResults.length} of ${searchState.all.length}`;
+  const btnRow = document.createElement('div');
+  btnRow.style.cssText = 'display:flex;gap:8px;';
   const btn = document.createElement('button');
   btn.className = 'btn-load'; btn.textContent = 'load more ▼';
-  wrap.appendChild(count); wrap.appendChild(btn); box.appendChild(wrap);
+  const btnAll = document.createElement('button');
+  btnAll.className = 'btn-load'; btnAll.textContent = 'load all';
+  btnAll.addEventListener('click', function() {
+    this.disabled = true; btn.disabled = true;
+    this.textContent = 'loading…';
+    searchState.pageSize = searchState.all.length;
+    renderRarePage(false);
+  });
+  btnRow.appendChild(btn); btnRow.appendChild(btnAll);
+  wrap.appendChild(count); wrap.appendChild(btnRow); box.appendChild(wrap);
 }
 
 window.toggleRareWords = function(btn) {
