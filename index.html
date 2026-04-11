@@ -1450,13 +1450,13 @@ function getPrefixFromWord(word, round, usedWords) {
   for (let len = targetLen; len >= 1; len--) {
     const p = word.slice(-len).toLowerCase();
     if (gameWordSet.has(p)) continue;
-    if (isValidPrefixStrict(p, usedWords)) return p;
+    if (isValidPrefix(p, usedWords)) return p;
   }
   
-  // Second pass: self-solve prefixes only if literally no other option
+  // Second pass: fall back to any valid prefix including self-solves
   for (let len = targetLen; len >= 1; len--) {
     const p = word.slice(-len).toLowerCase();
-    if (isValidPrefixStrict(p, usedWords)) return p;
+    if (isValidPrefix(p, usedWords)) return p;
   }
   
   return null;
