@@ -977,6 +977,14 @@ function displayNormalResults(res) {
   box.querySelectorAll('.r-word').forEach(el => el.addEventListener('click', () => lookupWord(el.dataset.word)));
 }
 
+document.getElementById('results-box').addEventListener('click', e => {
+  if (e.target.classList.contains('btn-load')) {
+    e.target.disabled = true;
+    e.target.textContent = 'loading…';
+    renderRarePage(false);
+  }
+});
+
 function clearSearch() {
   document.getElementById('prefix-input').value = '';
   document.getElementById('suffix-input').value = '';
