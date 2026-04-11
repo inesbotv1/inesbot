@@ -1166,8 +1166,7 @@ function renderRarePage(isFirst) {
     box.appendChild(item);
   });
   if (searchState.cur < all.length) {
-    if (document.getElementById('load-sentinel') !== null || searchState.infiniteScroll) {
-    searchState.infiniteScroll = true;
+    if (searchState.infiniteScroll) {
       activateInfiniteScroll();
     } else {
       addLoadMoreBtn();
@@ -1197,6 +1196,7 @@ function addLoadMoreBtn() {
   const btnAll = document.createElement('button');
   btnAll.className = 'btn-load'; btnAll.textContent = 'load all';
   btnAll.addEventListener('click', function() {
+    searchState.infiniteScroll = true;
     wrap.remove();
     activateInfiniteScroll();
   });
