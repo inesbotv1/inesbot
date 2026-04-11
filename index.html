@@ -1194,7 +1194,7 @@ function addLoadMoreBtn() {
   const btn = document.createElement('button');
   btn.className = 'btn-load'; btn.textContent = 'load more ▼';
   const btnAll = document.createElement('button');
-  btnAll.className = 'btn-load'; btnAll.textContent = 'load all';
+  btnAll.className = 'btn-load'; btnAll.textContent = 'load all ▼';
   btnAll.addEventListener('click', function() {
     this.disabled = true; btn.disabled = true;
     this.textContent = 'loading…';
