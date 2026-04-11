@@ -882,6 +882,8 @@ const PHRASES = [
 
 // ── DATA ──
 let words = [];
+let wordSet = new Set();
+wordSet = new Set(words.map(w => w.toLowerCase()));
 let blacklist = new Set();
 let rareWordsLoaded = false;
 const defCache = new Map();
@@ -1468,7 +1470,7 @@ function botChooseWord(prefix, round, usedWords) {
     for (let len = targetLen; len >= 1; len--) {
       const nextP = word.slice(-len).toLowerCase();
       if (!isValidPrefix(nextP, usedWords)) continue;
-      const selfIsWord = words.some(w => w.toLowerCase() === nextP);
+      const selfIsWord = wordSet.has(nextP);
       if (selfIsWord) continue;
       const playerOptions = getPossibleAnswers(nextP, usedWords).length;
       if (playerOptions >= 3) {
