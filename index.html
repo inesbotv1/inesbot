@@ -1561,12 +1561,12 @@ function renderGameArena() {
       inp.value = currentPrefix;
       inp.focus();
       inp.setSelectionRange(currentPrefix.length, currentPrefix.length);
-      inp.addEventListener('keydown', e => {
+      inp.onkeydown = e => {
         if (e.key === 'Enter') submitWord();
         if (e.key === 'Backspace' && inp.value.length <= currentPrefix.length) {
           e.preventDefault();
         }
-      });
+      };
     }
   }
 }
@@ -1622,6 +1622,11 @@ function submitWord() {
       void errEl.offsetWidth;
       errEl.style.animation = '';
     }
+    const inp2 = document.getElementById('game-input');
+    if (inp2) {
+      inp2.value = gameState.currentPrefix;
+      inp2.setSelectionRange(gameState.currentPrefix.length, gameState.currentPrefix.length);
+    }
   };
 
   // Use an attempt and check if player is out
@@ -1641,20 +1646,17 @@ function submitWord() {
   if (!word) { setErr('type a word first'); return; }
 
   if (!word.startsWith(gameState.currentPrefix)) {
-    inp.value = '';
     if (useAttempt(`must start with "${gameState.currentPrefix}"`)) return;
     return;
   }
 
   const wordListLower = words.map(w => w.toLowerCase());
   if (!wordListLower.includes(word)) {
-    inp.value = '';
     if (useAttempt(`"${word}" is not in the word list`)) return;
     return;
   }
 
   if (gameState.usedWords.has(word)) {
-    inp.value = '';
     if (useAttempt(`"${word}" was already used`)) return;
     return;
   }
