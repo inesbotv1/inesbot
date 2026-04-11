@@ -1344,13 +1344,17 @@ function botChooseWord(prefix, round, usedWords) {
 
   const sample = possible.length > 40 ? possible.sort(() => Math.random() - .5).slice(0, 40) : possible;
 
+  const wordSet = new Set(words.map(w => w.toLowerCase()));
+    
   for (const word of sample) {
     for (let len = targetLen; len >= 1; len--) {
       const nextP = word.slice(-len).toLowerCase();
       if (!isValidPrefix(nextP, usedWords)) continue;
       const playerOptions = getPossibleAnswers(nextP, usedWords).length;
-      if (playerOptions >= 3 && playerOptions < bestScore) {
-        bestScore = playerOptions;
+      const isWord = wordSet.has(nextP);
+      const score = playerOptions + (isWord ? 10000 : 0);
+      if (playerOptions >= 3 && score < bestScore) {
+        bestScore = score;
         bestWord = word;
       }
       break;
