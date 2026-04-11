@@ -1537,7 +1537,7 @@ function renderGameArena() {
         </div>
         ${phase === 'player' ? `
           <div class="game-input-area">
-            <input class="game-input" id="game-input" placeholder="type a word starting with '${currentPrefix}'…" autocomplete="off" autocorrect="off" spellcheck="false">
+            <input class="game-input" id="game-input" placeholder="" autocomplete="off" autocorrect="off" spellcheck="false">
             <button class="game-submit" id="game-submit" onclick="submitWord()">Play</button>
           </div>
           <div class="game-error" id="game-error"></div>
@@ -1558,8 +1558,15 @@ function renderGameArena() {
   if (phase === 'player') {
     const inp = document.getElementById('game-input');
     if (inp) {
+      inp.value = currentPrefix;
       inp.focus();
-      inp.addEventListener('keydown', e => { if (e.key === 'Enter') submitWord(); });
+      inp.setSelectionRange(currentPrefix.length, currentPrefix.length);
+      inp.addEventListener('keydown', e => {
+        if (e.key === 'Enter') submitWord();
+        if (e.key === 'Backspace' && inp.value.length <= currentPrefix.length) {
+          e.preventDefault();
+        }
+      });
     }
   }
 }
