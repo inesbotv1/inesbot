@@ -884,6 +884,8 @@ const PHRASES = [
 let words = [];
 let wordSet = new Set();
 wordSet = new Set(words.map(w => w.toLowerCase()));
+let gameWordSet = new Set();
+gameWordSet = new Set(words.map(w => w.toLowerCase()));
 let blacklist = new Set();
 let rareWordsLoaded = false;
 const defCache = new Map();
@@ -1431,7 +1433,7 @@ function getPrefixFromWord(word, round, usedWords) {
   // First pass: find prefixes that are NOT standalone words
   for (let len = targetLen; len >= 1; len--) {
     const p = word.slice(-len).toLowerCase();
-    const selfIsWord = words.some(w => w.toLowerCase() === p);
+    const selfIsWord = gameWordSet.has(p);
     if (!selfIsWord && isValidPrefix(p, usedWords)) return p;
   }
   
@@ -1462,7 +1464,7 @@ function botChooseWord(prefix, round, usedWords) {
   if (!possible.length) return null;
 
   const targetLen = Math.min(round, 4);
-  const sample = possible.length > 40 ? possible.slice().sort(() => Math.random() - .5).slice(0, 120) : possible;
+  const sample = possible.length > 40 ? possible.slice().sort(() => Math.random() - .5).slice(0, 40) : possible;
 
   const trapCandidates = [];
 
@@ -1470,7 +1472,7 @@ function botChooseWord(prefix, round, usedWords) {
     for (let len = targetLen; len >= 1; len--) {
       const nextP = word.slice(-len).toLowerCase();
       if (!isValidPrefix(nextP, usedWords)) continue;
-      const selfIsWord = wordSet.has(nextP);
+      const selfIsWord = gameWordSet.has(nextP);
       if (selfIsWord) continue;
       const playerOptions = getPossibleAnswers(nextP, usedWords).length;
       if (playerOptions >= 3) {
