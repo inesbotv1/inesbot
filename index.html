@@ -907,9 +907,6 @@ async function loadWords() {
     const r = await fetch(WORDS_URL + '?t=' + Date.now());
     const t = await r.text();
     words = [...new Set(t.split(/\r?\n/).map(w => w.trim()).filter(Boolean))];
-    gameWordSet = new Set(words.map(w => w.toLowerCase())); // must be before buildPrefixIndex
-    buildPrefixIndex();
-    prefixIndexBuilt = true;
     setCount('word-count', words.length);
     document.getElementById('results-box').innerHTML = '<div class="msg success">✓ ' + words.length + ' words loaded</div>';
     setCount('result-count', 0);
@@ -1427,6 +1424,7 @@ function isValidPrefix(prefix, usedWords) {
 
 function isValidPrefixStrict(prefix, usedWords) {
   if (!prefix || blacklist.has(prefix) || prefix.length > 4) return false;
+  if (gameWordSet.has(prefix)) return false;
   const candidates = (prefixIndex.get(prefix) || []).filter(w => !usedWords.has(w));
   const nextLetters = new Set();
   for (const w of candidates) {
@@ -1434,9 +1432,7 @@ function isValidPrefixStrict(prefix, usedWords) {
       nextLetters.add(w[prefix.length].toLowerCase());
     }
   }
-  const selfIsWord = gameWordSet.has(prefix);
-  const required = selfIsWord ? 2 : 3;
-  return nextLetters.size >= required;
+  return nextLetters.size >= 3;
 }
 
 function getPossibleAnswers(prefix, usedWords) {
