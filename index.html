@@ -1323,7 +1323,7 @@ function botChooseWord(prefix, round, usedWords) {
   const possible = getPossibleAnswers(prefix, usedWords);
   if (!possible.length) return null;
 
-  if (Math.random() < 0.4) {
+  if (Math.random() < 0.1) {
     return possible[Math.floor(Math.random() * possible.length)];
   }
 
