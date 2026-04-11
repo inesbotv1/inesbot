@@ -1052,6 +1052,14 @@ function hasThreeDistinct(prefix, ws) {
   return false;
 }
 
+document.getElementById('results-box').addEventListener('click', e => {
+  if (e.target.classList.contains('btn-load')) {
+    e.target.disabled = true;
+    e.target.textContent = 'loading…';
+    renderRarePage(false);
+  }
+});
+
 const ONE_LETTER_BLACKLIST = ['s'];
 
 function hasOneLetter(prefix, ws) {
@@ -1182,7 +1190,6 @@ function addLoadMoreBtn() {
   count.textContent = `showing ${searchState.validResults.length} of ${searchState.all.length}`;
   const btn = document.createElement('button');
   btn.className = 'btn-load'; btn.textContent = 'load more ▼';
-  btn.onclick = function() { this.disabled = true; this.textContent = 'loading…'; renderRarePage(false); };
   wrap.appendChild(count); wrap.appendChild(btn); box.appendChild(wrap);
 }
 
