@@ -882,10 +882,6 @@ const PHRASES = [
 
 // ── DATA ──
 let words = [];
-let wordSet = new Set();
-wordSet = new Set(words.map(w => w.toLowerCase()));
-let gameWordSet = new Set();
-gameWordSet = new Set(words.map(w => w.toLowerCase()));
 let blacklist = new Set();
 let rareWordsLoaded = false;
 const defCache = new Map();
@@ -907,9 +903,6 @@ async function loadWords() {
     const r = await fetch(WORDS_URL + '?t=' + Date.now());
     const t = await r.text();
     words = [...new Set(t.split(/\r?\n/).map(w => w.trim()).filter(Boolean))];
-    gameWordSet = new Set(words.map(w => w.toLowerCase())); // populate after words load
-    buildPrefixIndex();
-    prefixIndexBuilt = true;
     setCount('word-count', words.length);
     document.getElementById('results-box').innerHTML = '<div class="msg success">✓ ' + words.length + ' words loaded</div>';
     setCount('result-count', 0);
@@ -1425,19 +1418,6 @@ function isValidPrefix(prefix, usedWords) {
   return nextLetters.size >= required;
 }
 
-function isValidPrefixStrict(prefix, usedWords) {
-  if (!prefix || blacklist.has(prefix) || prefix.length > 4) return false;
-  if (gameWordSet.has(prefix)) return false;
-  const candidates = (prefixIndex.get(prefix) || []).filter(w => !usedWords.has(w));
-  const nextLetters = new Set();
-  for (const w of candidates) {
-    if (w.length > prefix.length) {
-      nextLetters.add(w[prefix.length].toLowerCase());
-    }
-  }
-  return nextLetters.size >= 3;
-}
-
 function getPossibleAnswers(prefix, usedWords) {
   return (prefixIndex.get(prefix) || []).filter(w => !usedWords.has(w) && w.length > prefix.length);
 }
@@ -1445,21 +1425,12 @@ function getPossibleAnswers(prefix, usedWords) {
 // Get the prefix from last N letters of a word where N = min(round, 4)
 function getPrefixFromWord(word, round, usedWords) {
   const targetLen = Math.min(round, 4);
-  
-  // First pass: non-self-solve prefixes only
-  for (let len = targetLen; len >= 1; len--) {
-    const p = word.slice(-len).toLowerCase();
-    if (gameWordSet.has(p)) continue;
-    if (isValidPrefix(p, usedWords)) return p;
-  }
-  
-  // Second pass: fall back to any valid prefix including self-solves
+  // try from target length down to 1
   for (let len = targetLen; len >= 1; len--) {
     const p = word.slice(-len).toLowerCase();
     if (isValidPrefix(p, usedWords)) return p;
   }
-  
-  return null;
+  return null; // no valid prefix found — game ends
 }
 
 function getRandomValidStart(usedWords) {
@@ -1479,31 +1450,30 @@ function botChooseWord(prefix, round, usedWords) {
   const possible = getPossibleAnswers(prefix, usedWords);
   if (!possible.length) return null;
 
-  const targetLen = Math.min(round, 4);
-  const sample = possible.length > 40 ? possible.slice().sort(() => Math.random() - .5).slice(0, 40) : possible;
+  if (Math.random() < 0.1) {
+    return possible[Math.floor(Math.random() * possible.length)];
+  }
 
-  const trapCandidates = [];
+  const targetLen = Math.min(round, 4);
+  let bestWord = null;
+  let bestScore = Infinity;
+
+  const sample = possible.length > 40 ? possible.sort(() => Math.random() - .5).slice(0, 40) : possible;
 
   for (const word of sample) {
     for (let len = targetLen; len >= 1; len--) {
       const nextP = word.slice(-len).toLowerCase();
-      if (!isValidPrefixStrict (nextP, usedWords)) continue;
-      const selfIsWord = gameWordSet.has(nextP);
-      if (selfIsWord) continue;
+      if (!isValidPrefix(nextP, usedWords)) continue;
       const playerOptions = getPossibleAnswers(nextP, usedWords).length;
-      if (playerOptions >= 3) {
-        trapCandidates.push({ word, score: playerOptions });
+      if (playerOptions >= 3 && playerOptions < bestScore) {
+        bestScore = playerOptions;
+        bestWord = word;
       }
       break;
     }
   }
 
-  if (!trapCandidates.length) return possible[Math.floor(Math.random() * possible.length)];
-
-  // Sort by score and pick from the top tier of traps randomly
-  trapCandidates.sort((a, b) => a.score - b.score);
-  const topTier = trapCandidates.slice(0, Math.max(3, Math.floor(trapCandidates.length * 0.2)));
-  return topTier[Math.floor(Math.random() * topTier.length)].word;
+  return bestWord || possible[Math.floor(Math.random() * possible.length)];
 }
 
 // ── GAME UI RENDERING ──
@@ -1765,7 +1735,6 @@ function submitWord() {
 
   // bot's turn
   gameState.phase = 'bot';
-  clearInterval(timerInterval);
   renderGameArena();
 
   setTimeout(() => {
@@ -1794,7 +1763,7 @@ function submitWord() {
     gameState.maxTime = gameState.timeLeft;
     renderGameArena();
     startTimer();
-  }, 400 + Math.random() * 400);
+  }, 600 + Math.random() * 600);
 }
 
 function shakePrefix() {
