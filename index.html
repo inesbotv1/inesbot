@@ -330,7 +330,9 @@ footer{text-align:center;padding:32px 0 20px;font-family:var(--mono);font-size:0
 .history-meta{font-family:var(--mono);font-size:0.7rem;color:var(--text2);flex:1;line-height:1.6;}
 .history-remove{background:none;border:1.5px solid var(--border);border-radius:6px;color:var(--text2);font-family:var(--mono);font-size:0.68rem;padding:3px 9px;cursor:pointer;transition:all .2s;flex-shrink:0;}
 .history-remove:hover{border-color:var(--invalid);color:var(--invalid)}
-.history-chips{padding:0 14px 12px;display:flex;flex-wrap:wrap;gap:5px;}
+.history-chips{display:none;padding:0 14px 12px;flex-wrap:wrap;gap:5px;}
+.history-chips.open{display:flex;}
+.hct-arrow.open{transform:rotate(90deg);}
 .history-chip{font-family:var(--mono);font-size:0.73rem;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:var(--bg2);color:var(--text0);}
 .history-chip.you{border-color:var(--valid);color:var(--valid)}
 .history-chip.bot{border-color:var(--accent);color:var(--accent)}
@@ -1885,6 +1887,9 @@ function renderHistoryBody(panelId) {
           ${m.date} ${m.time}${!m.won && m.lostOn ? ` · died on "<strong>${m.lostOn}</strong>"` : ''}
         </span>
         <button class="history-remove" onclick="removeMatch(${i},'${panelId}')">✕</button>
+      </div>
+      <div class="history-chips-toggle" onclick="const c=this.nextElementSibling;const a=this.querySelector('.hct-arrow');c.classList.toggle('open');a.classList.toggle('open')" style="padding:0 14px 10px;font-family:var(--mono);font-size:0.7rem;color:var(--text2);cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px;">
+        <span class="hct-arrow" style="font-size:0.65rem;transition:transform .25s;display:inline-block;">▶</span> words played (${m.words.length})
       </div>
       <div class="history-chips">
         ${m.words.map(e => `<span class="history-chip ${e.who}">${e.word}</span>`).join('')}
