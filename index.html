@@ -547,6 +547,61 @@ footer{text-align:center;padding:32px 0 20px;font-family:var(--mono);font-size:0
   transform:scale(0.7);
 }
 
+/* ── BOT TAUNT BUBBLE ── */
+.bot-taunt{
+  display:flex;
+  justify-content:center;
+  padding:0 0 14px 0;
+  animation:tauntSlide .35s cubic-bezier(.22,1,.36,1) both;
+}
+.bot-taunt-avatar{display:none;}
+.bot-taunt-bubble{
+  background:var(--bg3);
+  border:1.5px solid var(--accent);
+  border-radius:10px;
+  padding:9px 18px;
+  font-family:var(--mono);
+  font-size:0.82rem;
+  color:var(--text0);
+  line-height:1.5;
+  max-width:80%;
+  position:relative;
+  text-align:center;
+  margin-top:10px;
+}
+.bot-taunt-bubble::before{
+  content:'';
+  position:absolute;
+  top:-9px;
+  left:50%;
+  transform:translateX(-50%);
+  border-left:9px solid transparent;
+  border-right:9px solid transparent;
+  border-bottom:9px solid var(--accent);
+}
+.bot-taunt-bubble::after{
+  content:'';
+  position:absolute;
+  top:-7px;
+  left:50%;
+  transform:translateX(-50%);
+  border-left:7px solid transparent;
+  border-right:7px solid transparent;
+  border-bottom:7px solid var(--bg3);
+}
+.bot-taunt-name{
+  font-size:0.62rem;
+  color:var(--accent);
+  letter-spacing:.1em;
+  margin-bottom:4px;
+  font-weight:500;
+}
+
+@keyframes tauntSlide{
+  from{opacity:0;transform:translateY(-6px) scale(0.96)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
 /* Game over / result screen */
 .game-result{
   text-align:center;
@@ -1375,14 +1430,190 @@ function clearChecker() {
 }
 
 // ═══════════════════════════════════════════
+// BOT TAUNTS — no-repeat shuffle pools
+// ═══════════════════════════════════════════
+
+// Each pool gets its own deck that refills only when exhausted.
+// pickFromDeck(deckObj) always returns a unique taunt until the deck is empty, then reshuffles.
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function makeDeck(pool) {
+  return { pool, remaining: shuffle(pool) };
+}
+
+function pickFromDeck(deck) {
+  if (!deck.remaining.length) deck.remaining = shuffle(deck.pool);
+  return deck.remaining.pop();
+}
+
+// ── Hard taunts (≤5 answers for prefix) ──
+const HARD_TAUNT_POOL = [
+  "gl with that one",
+  "good luck fr fr",
+  "do they know",
+  "see ya next round",
+  "that one hurts doesn't it",
+  "i genuinely feel bad",
+  "skill issue incoming",
+  "touch grass after this L",
+  "sent you to the shadow realm",
+  "this is where you die",
+  "LMAOOO have fun",
+  "not sorry at all",
+  "you know what to do… or do you?",
+  "search feature is right there bro",
+  "my work here is done",
+  "you might wanna open another tab",
+  "clock's ticking bestie",
+  "i studied for this. you didn't.",
+  "average sweat trap for an average sweat",
+  "found the one prefix you can't solve",
+  "respectfully, you're done",
+  "this is personal",
+  "i'm built different fr",
+  "say less. actually say more, you need it",
+  "yap all you want it won't help",
+  "trapped",
+  "nerd",
+  "don't look at me like that",
+];
+
+// ── Mid taunts (6–18 answers for prefix) ──
+const MID_TAUNT_POOL = [
+  "not the easiest one 👀",
+  "hmm, tricky",
+  "think fast",
+  "that's not a freebie",
+  "carefully now…",
+  "took me a second to find that",
+  "not saying it's hard… but",
+  "let's see how well you studied",
+  "squirm a little",
+  "no hints from me",
+];
+
+// ── Wrong-answer taunts ──
+const WRONG_TAUNT_POOL = [
+  "bro what 💀",
+  "not even close",
+  "that's not a word twin",
+  "LMAOOO",
+  "try again champ",
+  "nope",
+  "imagine",
+  "autocorrect gave up on you",
+  "you sure about that?",
+  "i'll pretend i didn't see that",
+  "skill issue",
+  "be so serious rn",
+  "touch grass and come back",
+  "who taught you?",
+  "bruh",
+  "nawwww 💀",
+  "close! (it wasn't)",
+  "lock in gang",
+  "haha",
+  "negative aura points",
+  "chat, is this real?",
+  "this ain't wordle lil bro",
+  "i'm not even mad, i'm impressed (negatively)",
+  "do better",
+  "we don't claim this one",
+  "proud of u for trying ❤️",
+  "interesting approach!",
+  "that's one way to do it",
+  "i'll wait while you figure it out",
+  "you're doing great sweetie",
+  "source: trust me bro",
+];
+
+// Deck instances — persist across the whole session
+const hardDeck  = makeDeck(HARD_TAUNT_POOL);
+const midDeck   = makeDeck(MID_TAUNT_POOL);
+const wrongDeck = makeDeck(WRONG_TAUNT_POOL);
+
+function countAnswers(prefix, usedWords) {
+  return getPossibleAnswers(prefix, usedWords).length;
+}
+
+function isSelfSolve(prefix) {
+  return words.some(w => w.toLowerCase() === prefix.toLowerCase());
+}
+
+function shouldTaunt(prefix, usedWords) {
+  const count = countAnswers(prefix, usedWords);
+  const selfSolve = isSelfSolve(prefix);
+  if (selfSolve) {
+    if (count <= 5) return Math.random() < 0.30;
+    return false;
+  } else {
+    if (count <= 5)  return Math.random() < 0.70;
+    if (count <= 10) return Math.random() < 0.45;
+    if (count <= 18) return Math.random() < 0.20;
+    return false;
+  }
+}
+
+function isTrulyHard(prefix, usedWords) {
+  return countAnswers(prefix, usedWords) <= 5;
+}
+
+function spawnTauntBubble(msg, autodismiss) {
+  const main = document.querySelector('.game-main');
+  if (!main) return;
+  main.querySelector('.bot-taunt')?.remove();
+  const tauntEl = document.createElement('div');
+  tauntEl.className = 'bot-taunt';
+  tauntEl.innerHTML = `
+    <div class="bot-taunt-avatar">IB</div>
+    <div class="bot-taunt-bubble">
+      <div class="bot-taunt-name">INESBOT</div>
+      ${msg}
+    </div>`;
+  const prefixDisplay = main.querySelector('.game-prefix-display');
+  if (prefixDisplay && prefixDisplay.nextSibling) {
+    main.insertBefore(tauntEl, prefixDisplay.nextSibling);
+  } else if (prefixDisplay) {
+    main.appendChild(tauntEl);
+  } else {
+    main.prepend(tauntEl);
+  }
+  if (autodismiss > 0) {
+    setTimeout(() => {
+      tauntEl.style.transition = 'opacity .5s';
+      tauntEl.style.opacity = '0';
+      setTimeout(() => tauntEl.remove(), 500);
+    }, autodismiss);
+  }
+}
+
+function showBotTaunt(prefix, usedWords) {
+  if (!shouldTaunt(prefix, usedWords)) return;
+  const hard = isTrulyHard(prefix, usedWords);
+  const msg = hard ? pickFromDeck(hardDeck) : pickFromDeck(midDeck);
+  spawnTauntBubble(msg, 5000);
+}
+
+function showWrongAnswerTaunt() {
+  spawnTauntBubble(pickFromDeck(wrongDeck), 3500);
+}
+
+// ═══════════════════════════════════════════
 // GAME ENGINE
 // ═══════════════════════════════════════════
 let gameInitialized = false;
 let gameState = null;
 let timerInterval = null;
 
-// Prefix index for fast game lookups
-let prefixIndex = new Map(); // prefix(1-4 chars) -> [words]
+let prefixIndex = new Map();
 let prefixIndexBuilt = false;
 
 function buildPrefixIndex() {
@@ -1426,6 +1657,7 @@ function isValidPrefix(prefix, usedWords) {
 function isPromptValidPrefix(prefix, usedWords) {
   if (!prefix || prefix.length > 4) return false;
   const normalized = prefix.toLowerCase();
+  if (blacklist.has(normalized)) return false;
   const candidates = (prefixIndex.get(normalized) || []).filter(w => !usedWords.has(w));
   const selfIsWord = candidates.some(w => w.toLowerCase() === normalized);
   const nextLetters = new Set();
@@ -1448,17 +1680,15 @@ function getPossibleAnswers(prefix, usedWords) {
   return (prefixIndex.get(prefix) || []).filter(w => !usedWords.has(w) && w.length > prefix.length);
 }
 
-// Get the prefix from last N letters of a word where N = min(round, 4)
 function getPrefixFromWord(word, round, usedWords) {
   const targetLen = Math.min(round, 4);
   let fallback = null;
-  // try from target length down to 1
   for (let len = targetLen; len >= 1; len--) {
     const p = word.slice(-len).toLowerCase();
     if (isPromptValidPrefix(p, usedWords)) return p;
     if (!fallback && isRealSolvablePrefix(p, usedWords)) fallback = p;
   }
-  return fallback; // if no prompt-valid prefix exists, use a real solvable prefix
+  return fallback;
 }
 
 function getRandomValidStart(usedWords) {
@@ -1467,13 +1697,11 @@ function getRandomValidStart(usedWords) {
   return valid.length ? valid[Math.floor(Math.random() * valid.length)] : null;
 }
 
-// Timer: starts at 15s, decreases by 1 each round until min 4s
 function getTimerForRound(round) {
   if (round <= 4) return 15;
   return Math.max(4, 15 - Math.floor((round - 4) / 2));
 }
 
-// InesBot AI: 40% random, 60% tries to trap with rare prefixes
 function botChooseWord(prefix, round, usedWords) {
   const possible = getPossibleAnswers(prefix, usedWords);
   if (!possible.length) return null;
@@ -1577,7 +1805,7 @@ function buildPipsHTML(attemptsLeft) {
   return html;
 }
 
-function renderGameArena() {
+function renderGameArena(pendingTauntPrefix) {
   if (!gameState) return;
   const { round, currentPrefix, log, phase, timeLeft, maxTime, wordsInRound, attemptsLeft } = gameState;
   const panel = document.getElementById('game-panel');
@@ -1637,6 +1865,10 @@ function renderGameArena() {
 
   const log2 = document.getElementById('game-log');
   if (log2) log2.scrollTop = log2.scrollHeight;
+
+  if (pendingTauntPrefix && phase === 'player') {
+    showBotTaunt(pendingTauntPrefix, gameState.usedWords);
+  }
 
   if (phase === 'player') {
     const inp = document.getElementById('game-input');
@@ -1712,15 +1944,15 @@ function submitWord() {
     }
   };
 
-  // Use an attempt and check if player is out
   const useAttempt = (msg) => {
     gameState.attemptsLeft--;
     shakePrefix();
     updatePips();
+    showWrongAnswerTaunt();
     if (gameState.attemptsLeft <= 0) {
       clearInterval(timerInterval);
       triggerLoss('attempts');
-      return true; // caused game over
+      return true;
     }
     setErr(msg + ` · ${gameState.attemptsLeft} attempt${gameState.attemptsLeft !== 1 ? 's' : ''} left`);
     return false;
@@ -1746,7 +1978,6 @@ function submitWord() {
 
   clearInterval(timerInterval);
 
-  // valid word
   gameState.usedWords.add(word);
   gameState.wordsInRound++;
 
@@ -1761,7 +1992,6 @@ function submitWord() {
   gameState.currentPrefix = nextP;
   checkRoundAdvance();
 
-  // bot's turn
   gameState.phase = 'bot';
   renderGameArena();
 
@@ -1786,10 +2016,11 @@ function submitWord() {
     gameState.currentPrefix = botNextP;
     checkRoundAdvance();
     gameState.phase = 'player';
-    gameState.attemptsLeft = 5; // reset attempts for the new prefix
+    gameState.attemptsLeft = 5;
     gameState.timeLeft = getTimerForRound(gameState.round);
     gameState.maxTime = gameState.timeLeft;
-    renderGameArena();
+
+    renderGameArena(botNextP);
     startTimer();
   }, 600 + Math.random() * 600);
 }
@@ -1968,7 +2199,6 @@ function clearAllHistory(panelId) {
     }
   );
 }
-
 </script>
 </body>
 </html>
