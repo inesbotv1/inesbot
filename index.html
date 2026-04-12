@@ -289,6 +289,29 @@ select option{background:var(--bg1);color:var(--text0)}
 .breakdown-letter{font-family:var(--mono);font-size:0.82rem;font-weight:500;color:var(--accent);margin-bottom:3px;}
 .breakdown-words{font-size:0.75rem;color:var(--text2);font-family:var(--mono);}
 
+/* ── FORCE PREFIX ── */
+.force-section{background:var(--bg2);border-radius:12px;border:1px solid var(--border);padding:16px;margin-top:14px;}
+.force-section .section-label{font-family:var(--mono);font-size:0.72rem;letter-spacing:.06em;color:var(--text2);margin-bottom:10px;}
+.force-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.force-row input{flex:1;min-width:130px;padding:9px 14px;border:1.5px solid var(--border);border-radius:9px;background:var(--bg0);color:var(--text0);font-family:var(--mono);font-size:0.88rem;outline:none;transition:border-color .2s;}
+.force-row input:focus{border-color:var(--accent)}
+.force-row input::placeholder{color:var(--text2);font-style:italic;font-family:var(--sans)}
+.force-hint{font-family:var(--mono);font-size:0.7rem;color:var(--text2);line-height:1.8;margin-bottom:10px;}
+.force-result{display:none;margin-top:12px;animation:fadeIn .25s ease both;}
+.force-count-bar{padding:10px 13px;background:var(--bg3);border-radius:8px;margin-bottom:10px;font-size:0.75rem;font-family:var(--mono);color:var(--text2);border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.force-count-bar strong{color:var(--text0);font-weight:500;}
+.force-group{margin-bottom:12px;}
+.force-group-label{font-family:var(--mono);font-size:0.68rem;letter-spacing:.08em;color:var(--text2);margin-bottom:7px;display:flex;align-items:center;gap:6px;}
+.force-group-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.force-words{display:flex;flex-wrap:wrap;gap:6px;}
+.force-word{font-family:var(--mono);font-size:0.82rem;padding:5px 11px;border-radius:7px;background:var(--bg0);border:1px solid var(--border);color:var(--text0);transition:border-color .15s;display:inline-flex;align-items:center;gap:0;}
+.force-word:hover{border-color:var(--border2);}
+.force-word-body{color:var(--text1);}
+.force-word-suffix{color:var(--accent);font-weight:500;}
+.force-empty{font-family:var(--mono);font-size:0.78rem;color:var(--text2);text-align:center;padding:18px 0;font-style:italic;}
+.force-show-more{background:none;border:1.5px solid var(--border2);color:var(--text2);font-family:var(--mono);font-size:0.75rem;padding:5px 14px;border-radius:7px;cursor:pointer;transition:all .2s;margin-top:6px;}
+.force-show-more:hover{background:var(--bg3);border-color:var(--text1);color:var(--text1);}
+
 #dict-panel{
   position:fixed;background:var(--bg1);border:1.5px solid var(--border2);border-radius:14px;
   width:300px;max-height:380px;overflow:hidden;box-shadow:0 8px 32px var(--shadow2);
@@ -814,6 +837,16 @@ footer{text-align:center;padding:32px 0 20px;font-family:var(--mono);font-size:0
       </div>
       <div class="checker-result" id="checker-result"></div>
     </div>
+    <div class="force-section">
+      <div class="section-label">FORCE PREFIX</div>
+      <div class="force-row">
+        <input type="text" id="force-startletter" maxlength="4" placeholder="start letters  e.g.  coog" style="max-width:160px">
+        <input type="text" id="force-target" maxlength="4" placeholder="target prefix  e.g.  t">
+        <button class="btn btn-primary" style="flex:0;padding:9px 18px" onclick="runForcePrefix()">Find</button>
+        <button class="btn btn-ghost" style="flex:0;padding:9px 14px" onclick="clearForcePrefix()">✕</button>
+      </div>
+      <div class="force-result" id="force-result"></div>
+    </div>
   </div>
 
   <!-- RARE PANEL -->
@@ -937,6 +970,9 @@ const PHRASES = [
 
 // ── DATA ──
 let words = [];
+let lowerWords = [];
+let wordSet = new Set();
+let prefixStats = new Map();
 let blacklist = new Set();
 let rareWordsLoaded = false;
 const defCache = new Map();
@@ -958,6 +994,24 @@ async function loadWords() {
     const r = await fetch(WORDS_URL + '?t=' + Date.now());
     const t = await r.text();
     words = [...new Set(t.split(/\r?\n/).map(w => w.trim()).filter(Boolean))];
+    lowerWords = words.map(w => w.toLowerCase());
+    wordSet = new Set(lowerWords);
+    prefixStats = new Map();
+    lowerWords.forEach(w => {
+      for (let len = 1; len <= Math.min(4, w.length); len++) {
+        const p = w.slice(0, len);
+        let stats = prefixStats.get(p);
+        if (!stats) {
+          stats = { nextLetters: new Set(), isWord: false };
+          prefixStats.set(p, stats);
+        }
+        if (w.length === len) {
+          stats.isWord = true;
+        } else {
+          stats.nextLetters.add(w[len]);
+        }
+      }
+    });
     setCount('word-count', words.length);
     document.getElementById('results-box').innerHTML = '<div class="msg success">✓ ' + words.length + ' words loaded</div>';
     setCount('result-count', 0);
@@ -1429,12 +1483,267 @@ function clearChecker() {
   res.style.display = 'none'; res.innerHTML = '';
 }
 
+// ── FORCE PREFIX ──
+document.getElementById('force-target').addEventListener('keydown', e => { if (e.key === 'Enter') runForcePrefix(); });
+document.getElementById('force-startletter').addEventListener('keydown', e => { if (e.key === 'Enter') runForcePrefix(); });
+
+// Cache for prefix validity to avoid recomputing repeatedly
+const _fpValidCache = new Map();
+
+function fpIsValidPrefix(prefix) {
+  if (!prefix) return false;
+  const n = prefix.toLowerCase();
+  if (_fpValidCache.has(n)) return _fpValidCache.get(n);
+  if (blacklist.has(n) || n.length > 4) { _fpValidCache.set(n, false); return false; }
+  const stats = prefixStats.get(n);
+  if (!stats || (!stats.isWord && stats.nextLetters.size === 0)) { _fpValidCache.set(n, false); return false; }
+  if (stats.nextLetters.size === 1 && stats.nextLetters.has('s')) {
+    _fpValidCache.set(n, false); return false;
+  }
+  const required = stats.isWord ? 2 : 3;
+  const result = stats.nextLetters.size >= required;
+  _fpValidCache.set(n, result);
+  return result;
+}
+
+function fpAnswerCount(prefix) {
+  const n = prefix.toLowerCase();
+  return lowerWords.filter(w => w.startsWith(n) && w.length > n.length).length;
+}
+
+// Given a word, what prefix does it actually give?
+// Returns the longest valid suffix (up to 4 chars) that is a valid prefix.
+// If none are valid, returns the 1-letter suffix (the last letter) regardless —
+// because the game still uses it as the "given" prefix even if invalid/escapable.
+function fpGetGivenPrefix(wl) {
+  for (let len = Math.min(4, wl.length); len >= 1; len--) {
+    const p = wl.slice(-len);
+    if (fpIsValidPrefix(p)) return p;
+  }
+  // No valid prefix found — the word still "gives" its last letter (which is escapable)
+  return wl.slice(-1);
+}
+
+// Force prefix paged state
+let fpState = null;
+
+function runForcePrefix() {
+  const targetRaw = document.getElementById('force-target').value.trim().toLowerCase();
+  const startRaw = document.getElementById('force-startletter').value.trim().toLowerCase();
+  const res = document.getElementById('force-result');
+  res.style.display = 'block';
+
+  if (!targetRaw) { res.innerHTML = '<div class="checker-stats" style="color:var(--invalid)">enter a target prefix</div>'; return; }
+  if (!/^[a-z]+$/.test(targetRaw)) { res.innerHTML = '<div class="checker-stats" style="color:var(--invalid)">letters only</div>'; return; }
+  if (targetRaw.length > 4) { res.innerHTML = '<div class="checker-stats" style="color:var(--invalid)">max 4 letters</div>'; return; }
+  if (startRaw && !/^[a-z]{1,4}$/.test(startRaw)) { res.innerHTML = '<div class="checker-stats" style="color:var(--invalid)">start letters must be 1–4 letters</div>'; return; }
+  if (!words.length) { res.innerHTML = '<div class="checker-stats" style="color:var(--invalid)">words still loading…</div>'; return; }
+
+  res.innerHTML = '<div class="checker-stats">searching…</div>';
+  fpState = null;
+
+  setTimeout(() => {
+    _fpValidCache.clear();
+    const target = targetRaw;
+    const indices = [];
+    for (let i = 0; i < words.length; i++) {
+      if (!startRaw || lowerWords[i].startsWith(startRaw)) indices.push(i);
+    }
+
+    // Find all words whose computed "given prefix" is exactly the target.
+    // This correctly handles cases like "cooghneiorvlt" → tries rvlt, vlt, lt, t → if only t is valid, gives t.
+    // Also include words where no valid prefix exists but the last letter matches target (target length=1 case).
+    const allGiving = indices.filter(i => {
+      const wl = lowerWords[i];
+      if (!wl.endsWith(target)) return false;
+      return fpGetGivenPrefix(wl) === target;
+    }).map(i => words[i]);
+
+    // Sort: shorter words first (easier to play in-game)
+    allGiving.sort((a, b) => a.length - b.length);
+
+    const prefixValid = fpIsValidPrefix(target);
+    const answerCount = fpAnswerCount(target);
+
+    // Separate trapping words (target is rare/hard = 3–8 answers) from regular
+    const isTrapping = prefixValid && answerCount >= 3 && answerCount <= 8;
+    const trapping = isTrapping ? allGiving : [];
+    const others   = isTrapping ? [] : allGiving;
+
+    const allGroups = [];
+    if (trapping.length) allGroups.push({ label: 'trapping (few answers)', list: trapping });
+    if (others.length)   allGroups.push({ label: `gives "${target}"`, list: others });
+    // If no separation happened just show everything under one label
+    if (!trapping.length && !others.length && allGiving.length) {
+      allGroups.push({ label: `gives "${target}"`, list: allGiving });
+    }
+
+    fpState = {
+      target,
+      startRaw,
+      prefixValid,
+      answerCount,
+      allGiving,
+      groups: allGroups,
+      groupIdx: 0,      // which group we're in
+      groupOffset: 0,   // how many words shown in current group
+      pageSize: 10,
+      infiniteScroll: false
+    };
+
+    // Build header HTML
+    const headerHtml = `<div class="force-count-bar">
+      giving <strong>"${target}"</strong>${startRaw ? ` · starts with <strong>"${startRaw}"</strong>` : ''}
+      &nbsp;·&nbsp; <strong>${allGiving.length}</strong> word${allGiving.length !== 1 ? 's' : ''} found
+      &nbsp;·&nbsp; "${target}" is ${prefixValid
+        ? `<span style="color:var(--valid)">✓ valid</span> · ${answerCount} answer${answerCount !== 1 ? 's' : ''}`
+        : `<span style="color:var(--invalid)">✗ invalid/escapable</span>`}
+    </div>`;
+
+    if (!allGiving.length) {
+      res.innerHTML = headerHtml + `<div class="force-empty">no words give "${target}"${startRaw ? ` starting with "${startRaw}"` : ''}</div>`;
+      return;
+    }
+
+    res.innerHTML = headerHtml + '<div id="fp-groups-container"></div>';
+    renderFpPage(true);
+  }, 10);
+}
+
+function renderFpPage(isFirst) {
+  if (!fpState) return;
+  const { groups, pageSize, target } = fpState;
+  const container = document.getElementById('fp-groups-container');
+  if (!container) return;
+
+  // Remove old load-more/sentinel
+  document.getElementById('fp-load-more-wrap')?.remove();
+  document.getElementById('fp-sentinel')?.remove();
+
+  let rendered = 0;
+  const toRender = pageSize;
+
+  while (rendered < toRender && fpState.groupIdx < groups.length) {
+    const group = groups[fpState.groupIdx];
+    const list = group.list;
+    const offset = fpState.groupOffset;
+
+    // Find or create the group element
+    const gid = 'fpg-' + fpState.groupIdx;
+    let groupEl = document.getElementById(gid);
+    if (!groupEl) {
+      groupEl = document.createElement('div');
+      groupEl.className = 'force-group';
+      groupEl.id = gid;
+      const labelEl = document.createElement('div');
+      labelEl.className = 'force-group-label';
+      labelEl.textContent = group.label + ' (' + list.length + ')';
+      const wordsEl = document.createElement('div');
+      wordsEl.className = 'force-words';
+      wordsEl.id = gid + '-words';
+      groupEl.appendChild(labelEl);
+      groupEl.appendChild(wordsEl);
+      container.appendChild(groupEl);
+    }
+
+    const wordsEl = document.getElementById(gid + '-words');
+    const end = Math.min(offset + (toRender - rendered), list.length);
+    const batch = list.slice(offset, end);
+    rendered += batch.length;
+    fpState.groupOffset = end;
+
+    batch.forEach(w => {
+      const wl = w.toLowerCase();
+      const idx = wl.lastIndexOf(target);
+      const body = idx >= 0 ? w.slice(0, idx) : w;
+      const suf = idx >= 0 ? w.slice(idx) : '';
+      const div = document.createElement('div');
+      div.className = 'force-word';
+      div.innerHTML = `<span class="force-word-body">${body}</span><span class="force-word-suffix">${suf}</span>`;
+      wordsEl.appendChild(div);
+    });
+
+    if (fpState.groupOffset >= list.length) {
+      // Done with this group, move to next
+      fpState.groupIdx++;
+      fpState.groupOffset = 0;
+    }
+  }
+
+  // Check if more to show
+  const totalShown = groups.slice(0, fpState.groupIdx).reduce((s, g) => s + g.list.length, 0) + fpState.groupOffset;
+  const totalAll = fpState.allGiving.length;
+
+  if (totalShown < totalAll) {
+    if (fpState.infiniteScroll) {
+      fpActivateInfiniteScroll();
+    } else {
+      fpAddLoadMore(totalShown, totalAll);
+    }
+  }
+}
+
+function fpAddLoadMore(shown, total) {
+  const res = document.getElementById('force-result');
+  if (!res) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'load-more-wrap'; wrap.id = 'fp-load-more-wrap';
+  const count = document.createElement('div');
+  count.className = 'load-more-count';
+  count.textContent = `showing ${shown} of ${total}`;
+  const btnRow = document.createElement('div');
+  btnRow.style.cssText = 'display:flex;gap:8px;';
+  const btn = document.createElement('button');
+  btn.className = 'btn-load'; btn.textContent = 'load more ▼';
+  btn.addEventListener('click', function() {
+    this.disabled = true; this.textContent = 'loading…';
+    renderFpPage(false);
+  });
+  const btnAll = document.createElement('button');
+  btnAll.className = 'btn-load'; btnAll.textContent = 'load all';
+  btnAll.addEventListener('click', function() {
+    fpState.infiniteScroll = true;
+    wrap.remove();
+    fpActivateInfiniteScroll();
+  });
+  btnRow.appendChild(btn); btnRow.appendChild(btnAll);
+  wrap.appendChild(count); wrap.appendChild(btnRow);
+  res.appendChild(wrap);
+}
+
+function fpActivateInfiniteScroll() {
+  const res = document.getElementById('force-result');
+  if (!res) return;
+  const sentinel = document.createElement('div');
+  sentinel.id = 'fp-sentinel';
+  sentinel.style.height = '1px';
+  res.appendChild(sentinel);
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && fpState) {
+      const totalShown = fpState.groups.slice(0, fpState.groupIdx).reduce((s, g) => s + g.list.length, 0) + fpState.groupOffset;
+      if (totalShown < fpState.allGiving.length) {
+        observer.disconnect();
+        document.getElementById('fp-sentinel')?.remove();
+        renderFpPage(false);
+      }
+    }
+  }, { root: res, threshold: 0.1 });
+  observer.observe(sentinel);
+}
+
+function clearForcePrefix() {
+  document.getElementById('force-target').value = '';
+  document.getElementById('force-startletter').value = '';
+  const res = document.getElementById('force-result');
+  res.style.display = 'none';
+  res.innerHTML = '';
+  fpState = null;
+  _fpValidCache.clear();
+}
+
 // ═══════════════════════════════════════════
 // BOT TAUNTS — no-repeat shuffle pools
 // ═══════════════════════════════════════════
-
-// Each pool gets its own deck that refills only when exhausted.
-// pickFromDeck(deckObj) always returns a unique taunt until the deck is empty, then reshuffles.
 
 function shuffle(arr) {
   const a = [...arr];
@@ -1454,7 +1763,6 @@ function pickFromDeck(deck) {
   return deck.remaining.pop();
 }
 
-// ── Hard taunts (≤5 answers for prefix) ──
 const HARD_TAUNT_POOL = [
   "gl with that one",
   "good luck fr fr",
@@ -1481,7 +1789,6 @@ const HARD_TAUNT_POOL = [
   "don't look at me like that",
 ];
 
-// ── Mid taunts (6–18 answers for prefix) ──
 const MID_TAUNT_POOL = [
   "not the easiest one 👀",
   "hmm, tricky",
@@ -1494,7 +1801,6 @@ const MID_TAUNT_POOL = [
   "no hints from me",
 ];
 
-// ── Wrong-answer taunts ──
 const WRONG_TAUNT_POOL = [
   "bro what 💀",
   "not even close",
@@ -1528,7 +1834,6 @@ const WRONG_TAUNT_POOL = [
   "just throw at this point",
 ];
 
-// Deck instances — persist across the whole session
 const hardDeck  = makeDeck(HARD_TAUNT_POOL);
 const midDeck   = makeDeck(MID_TAUNT_POOL);
 const wrongDeck = makeDeck(WRONG_TAUNT_POOL);
