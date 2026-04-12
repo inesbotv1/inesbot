@@ -1398,24 +1398,50 @@ function buildPrefixIndex() {
   prefixIndexBuilt = true;
 }
 
-// Same validity logic as the rest of the site
+function hasOneLetterSolveWithS(prefix, usedWords) {
+  const normalized = prefix.toLowerCase();
+  return (prefixIndex.get(normalized) || []).some(w =>
+    !usedWords.has(w) &&
+    w.length === normalized.length + 1 &&
+    w[normalized.length].toLowerCase() === 's'
+  );
+}
+
 function isValidPrefix(prefix, usedWords) {
   if (!prefix || blacklist.has(prefix) || prefix.length > 4) return false;
-  const candidates = (prefixIndex.get(prefix) || []).filter(w => !usedWords.has(w));
-  
-  // check if the prefix itself is a word (and hasn't been used)
-  const selfIsWord = candidates.some(w => w.toLowerCase() === prefix.toLowerCase());
-  
+  const normalized = prefix.toLowerCase();
+  if (words.some(w => w.toLowerCase() === normalized)) return false;
+  if (hasOneLetterSolveWithS(normalized, usedWords)) return false;
+
+  const candidates = (prefixIndex.get(normalized) || []).filter(w => !usedWords.has(w));
   const nextLetters = new Set();
   for (const w of candidates) {
-    if (w.length > prefix.length) {
-      nextLetters.add(w[prefix.length].toLowerCase());
+    if (w.length > normalized.length) {
+      nextLetters.add(w[normalized.length].toLowerCase());
     }
   }
-  
-  // if prefix is itself a word, only need 2 distinct next letters instead of 3
+  return nextLetters.size >= 3;
+}
+
+function isPromptValidPrefix(prefix, usedWords) {
+  if (!prefix || prefix.length > 4) return false;
+  const normalized = prefix.toLowerCase();
+  const candidates = (prefixIndex.get(normalized) || []).filter(w => !usedWords.has(w));
+  const selfIsWord = candidates.some(w => w.toLowerCase() === normalized);
+  const nextLetters = new Set();
+  for (const w of candidates) {
+    if (w.length > normalized.length) {
+      nextLetters.add(w[normalized.length].toLowerCase());
+    }
+  }
   const required = selfIsWord ? 2 : 3;
   return nextLetters.size >= required;
+}
+
+function isRealSolvablePrefix(prefix, usedWords) {
+  if (!prefix || blacklist.has(prefix) || prefix.length > 4) return false;
+  const normalized = prefix.toLowerCase();
+  return getPossibleAnswers(normalized, usedWords).length > 0;
 }
 
 function getPossibleAnswers(prefix, usedWords) {
@@ -1425,17 +1451,19 @@ function getPossibleAnswers(prefix, usedWords) {
 // Get the prefix from last N letters of a word where N = min(round, 4)
 function getPrefixFromWord(word, round, usedWords) {
   const targetLen = Math.min(round, 4);
+  let fallback = null;
   // try from target length down to 1
   for (let len = targetLen; len >= 1; len--) {
     const p = word.slice(-len).toLowerCase();
-    if (isValidPrefix(p, usedWords)) return p;
+    if (isPromptValidPrefix(p, usedWords)) return p;
+    if (!fallback && isRealSolvablePrefix(p, usedWords)) fallback = p;
   }
-  return null; // no valid prefix found — game ends
+  return fallback; // if no prompt-valid prefix exists, use a real solvable prefix
 }
 
 function getRandomValidStart(usedWords) {
   const letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
-  const valid = letters.filter(l => isValidPrefix(l, usedWords));
+  const valid = letters.filter(l => isPromptValidPrefix(l, usedWords));
   return valid.length ? valid[Math.floor(Math.random() * valid.length)] : null;
 }
 
