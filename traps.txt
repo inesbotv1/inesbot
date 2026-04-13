@@ -17,6 +17,7 @@ bery
 bial
 bian
 burh
+cni
 erio
 kham
 otherprefixeslater
