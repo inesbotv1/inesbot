@@ -169,7 +169,6 @@ asin
 aske
 aski
 asmo
-aso
 asum
 atam
 atha
