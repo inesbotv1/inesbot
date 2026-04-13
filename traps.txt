@@ -16,6 +16,7 @@ bats
 bery
 bial
 bian
+burh
 erio
 kham
 otherprefixeslater
