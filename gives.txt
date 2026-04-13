@@ -25,7 +25,6 @@ abelian
 abers
 abhinaya
 abhiseka
-abigeus
 abiturs
 ablaut
 ablepharus
@@ -107,7 +106,6 @@ actinopoda
 activist
 actress
 aculeata
-aculeus
 acupress
 acupuncturist
 acuter
@@ -127,7 +125,6 @@ adffroze
 adfroze
 adiaphorist
 adiaphoron
-adieus
 adjiga
 adjoinant
 adjoiner
@@ -159,7 +156,6 @@ adzer
 aedicule
 aedilian
 aedilic
-aeneus
 aeolharmonica
 aeolian
 aequiculi
@@ -225,7 +221,6 @@ agrostographer
 agrostography
 agrotourist
 aguaji
-agyieus
 ahistoric
 ahmadabad
 ahorse
@@ -348,7 +343,6 @@ aloed
 alopias
 alosa
 alpestral
-alpheus
 alpid
 alruna
 altair
@@ -363,7 +357,6 @@ alumni
 aluta
 alveoli
 alveololabial
-alveus
 always
 amadan
 amahs
@@ -437,7 +430,6 @@ amphibiotica
 amphicoelian
 amphigoric
 amphineura
-amphinucleus
 amphiphilic
 amphipleura
 amphipoda
@@ -493,7 +485,6 @@ anchoress
 ancienne
 ancistrodon
 anconeal
-anconeus
 ancress
 ancylopod
 ancylopoda
@@ -559,7 +550,6 @@ anostraca
 anour
 anoura
 answers
-antaeus
 antalkalis
 antarchy
 antarctalian
@@ -733,7 +723,6 @@ arcae
 archaeobotany
 archaeography
 archaeometrist
-archaeus
 archangelica
 archbeadle
 archconsoler
@@ -742,7 +731,6 @@ archduchy
 archemastry
 archeobotany
 archeress
-archeus
 archheresy
 archibuteo
 archididascalian
@@ -854,7 +842,6 @@ ashur
 asinicos
 askancing
 askile
-asmodeus
 asoka
 asonant
 asouth
@@ -905,8 +892,6 @@ atlantica
 atokous
 atrenne
 atresy
-atroceruleus
-atrocoeruleus
 atropias
 attabal
 attacapan
@@ -1085,8 +1070,6 @@ ballyhooed
 balneal
 balneographer
 balneography
-balteus
-baltheus
 baluch
 baluga
 balun
@@ -1163,7 +1146,6 @@ basenjis
 basest
 basho
 basihyal
-basileus
 basilian
 basilic
 basilica
@@ -1796,7 +1778,6 @@ cadencing
 cades
 cadie
 cadillo
-caduceus
 caecilian
 caelian
 caesarist
@@ -1816,9 +1797,7 @@ calamistral
 calathiscus
 calcaneal
 calcaneotibial
-calcaneus
 calcedonio
-calceus
 calci
 calciminer
 calciner
@@ -2149,7 +2128,6 @@ centricae
 centriscus
 centrist
 centrolineal
-centronucleus
 centurist
 cephaelis
 cephalad
@@ -2160,7 +2138,6 @@ cephalopod
 cephalopoda
 cephalostyle
 cephalothoracic
-cepheus
 cepter
 ceramography
 cerasin
@@ -2255,7 +2232,6 @@ charterist
 chartographer
 chartography
 chastacosta
-chateus
 chattah
 chaumers
 chauncing
@@ -2280,7 +2256,6 @@ cheesepress
 cheesily
 cheetah
 chehalis
-cheirogaleus
 cheirography
 cheiropod
 cheka
@@ -2381,7 +2356,6 @@ cholestanol
 choletelin
 chonchina
 chondrography
-chondropharyngeus
 chondrus
 chookies
 choosily
@@ -2528,7 +2502,6 @@ claustrophobiac
 claut
 clavacin
 clavierist
-clavodeltoideus
 clawers
 clawhammers
 clearways
@@ -2546,7 +2519,6 @@ climatography
 climbers
 clinanthia
 clinkery
-clipeus
 cliqued
 clisiocampa
 clitoric
@@ -2578,7 +2550,6 @@ clumbers
 clumsily
 clutch
 clutchy
-clypeus
 cnidopod
 coadjutress
 coadventuress
@@ -2592,9 +2563,7 @@ coastways
 coatdress
 cobbers
 cobwebbery
-coccosteus
 coccule
-coccygeus
 coccygomorphae
 cochineal
 cochromatography
@@ -2765,7 +2734,6 @@ connarus
 connive
 conniving
 connubial
-conocuneus
 conominees
 conopid
 conopophaga
@@ -2843,7 +2811,6 @@ coredemptress
 coregnant
 coremiumia
 coresonant
-corineus
 corivals
 corneal
 cornelian
@@ -2875,7 +2842,6 @@ cortili
 coruminacan
 corvisor
 corydalis
-coryphaeus
 coryphene
 coryphodon
 coryzal
@@ -3003,7 +2969,6 @@ criticastry
 criticule
 critiqued
 critturs
-croceus
 crockery
 crocodilian
 crocuta
@@ -3082,7 +3047,6 @@ cuculi
 cucumbers
 cudava
 culbuter
-culeus
 culminant
 culpeper
 culprit
@@ -3100,7 +3064,6 @@ cunan
 cunas
 cund
 cuneal
-cuneus
 cuniculi
 cunjah
 cuphea
@@ -3329,7 +3292,6 @@ delillo
 deliquescing
 delis
 deliveress
-deltoideus
 delustred
 delving
 demagog
@@ -3418,7 +3380,6 @@ detractress
 detraque
 detrench
 deucing
-deus
 deuteranopias
 deuterotokies
 deuterotokous
@@ -3772,7 +3733,6 @@ driveways
 driving
 droichy
 droler
-dromaeus
 dromedarist
 droshkies
 droskies
@@ -3828,7 +3788,6 @@ dysbulic
 dysphoric
 dyspneal
 dystopias
-dystrophaeus
 dytiscus
 eagle
 earth
@@ -4007,7 +3966,6 @@ encephalopathia
 enchantress
 encharms
 enchoric
-enchytraeus
 encinillo
 encipher
 enclaving
@@ -4113,13 +4071,11 @@ entreprenant
 entrist
 entryways
 enweaving
-eodromaeus
 eolian
 eolienne
 eosinophilic
 epagomenal
 eparchy
-epeus
 ephebeum
 ephelis
 ephemera
@@ -4159,7 +4115,6 @@ epistemophilic
 epistoler
 epistolographer
 epistolography
-epistropheus
 epistyle
 epitaph
 epitapher
@@ -4183,15 +4138,12 @@ equison
 equisonant
 equivalencing
 equivalve
-equuleus
 erechtheum
-erechtheus
 erfurt
 ergane
 ergophobiac
 ergotoxin
 erica
-erinaceus
 eristalis
 ermelin
 eroica
@@ -4275,7 +4227,6 @@ eurychoric
 euryokies
 euryokous
 euryphage
-eurystheus
 eusebian
 eustress
 eustyle
@@ -4406,7 +4357,6 @@ faraways
 farci
 farcing
 fardo
-farleus
 farmeress
 farmers
 farms
@@ -4463,7 +4413,6 @@ fessways
 festivals
 fetialis
 fetography
-feus
 feute
 feuter
 feutred
@@ -4787,7 +4736,6 @@ galbula
 galei
 galeod
 galet
-galeus
 galey
 galileo
 gallerist
@@ -4836,7 +4784,6 @@ gasparillo
 gassily
 gasteropod
 gasteropoda
-gasterosteus
 gastraeum
 gastral
 gastrocoel
@@ -4988,7 +4935,6 @@ glossography
 glossohyal
 glossolabial
 glossophaga
-glossopharyngeus
 glossopode
 glossorrhaphy
 gloveress
@@ -4997,11 +4943,9 @@ glowers
 gloze
 glucolipid
 gluhwein
-glutaeus
 glutch
 glutelin
 gluteoperineal
-gluteus
 glutinant
 glycerophosphoric
 glycolipid
@@ -5011,7 +4955,6 @@ glyptodon
 glyptographer
 glyptography
 glyptothecae
-gnaeus
 gnathopod
 gnathopoda
 gnathostomi
@@ -5246,7 +5189,6 @@ haematocrya
 haemocoel
 haemophilic
 haemopod
-haemoproteus
 haemorrhage
 haemotoxin
 haen
@@ -5397,7 +5339,6 @@ heimin
 heiress
 heishis
 hejazi
-hekteus
 helenn
 helicopter
 heliodon
@@ -5538,7 +5479,6 @@ hierarchy
 hieratica
 hierodulic
 hieroglypher
-hierogrammateus
 hierographer
 hierography
 highliner
@@ -5625,7 +5565,6 @@ homoneura
 homophene
 homopolymers
 homopter
-homosteus
 homuncule
 homunculi
 honchoed
@@ -5644,7 +5583,6 @@ hoorooed
 hootch
 hooving
 hoplonemertini
-hoplophoneus
 hoppler
 hopscotch
 hordeum
@@ -5752,7 +5690,6 @@ hydrus
 hydurilic
 hyetography
 hygienal
-hymenaeus
 hymenal
 hymeneal
 hymenopter
@@ -5836,7 +5773,6 @@ iconodulic
 iconographer
 iconography
 iconomatography
-icosteus
 idalian
 ideaed
 ideata
@@ -5844,9 +5780,7 @@ ideography
 idiomography
 idiot
 idolatress
-idomeneus
 idoneal
-idoneus
 idrisid
 idryl
 idylian
@@ -5855,10 +5789,8 @@ igbira
 igorot
 iguanodon
 ileum
-ileus
 ilian
 iliocaudalis
-iliococcygeus
 iliocostalis
 iliopectineal
 ilioperoneal
@@ -6060,7 +5992,6 @@ intermediae
 interminant
 internees
 interneuron
-interosseus
 interpaving
 interpretress
 interproducing
@@ -6304,7 +6235,6 @@ jurat
 jurist
 juror
 justicing
-justinianeus
 juvenal
 juvenalian
 juxtapyloric
@@ -6451,7 +6381,6 @@ kinematographer
 kinematography
 kinetographer
 kinetography
-kinetonucleus
 kingklip
 kingu
 kinoos
@@ -6660,7 +6589,6 @@ lapillo
 lapin
 lapis
 lapon
-laqueus
 lardier
 lardiner
 largemouth
@@ -6740,7 +6668,6 @@ lemography
 lemonades
 lemurid
 lenaeum
-lenaeus
 lench
 lengthways
 lenocinant
@@ -6756,8 +6683,6 @@ leper
 lepero
 lepidopter
 lepidopterist
-lepidosteus
-lepisosteus
 leporis
 lepralian
 leptin
@@ -6811,7 +6736,6 @@ lienculi
 lienees
 lienorenal
 lienotoxin
-lieus
 lieutenant
 lifesaving
 lifestyle
@@ -6842,7 +6766,6 @@ linguisa
 linguistry
 linhenykus
 linkup
-linnaeus
 linoleum
 linos
 linoxin
@@ -6930,7 +6853,6 @@ lookup
 loosest
 lophiodon
 lophopoda
-lophostropheus
 lophotriaene
 lorazepams
 lorgnons
@@ -7011,7 +6933,6 @@ lymphocytotoxin
 lymphography
 lymphorrhage
 lymphotoxin
-lynceus
 lyophilic
 lyrist
 maaed
@@ -7019,7 +6940,6 @@ macaasim
 macan
 macaque
 macaroni
-maccabaeus
 maccaroni
 machiavelian
 machiavellian
@@ -7035,7 +6955,6 @@ macrocycle
 macrofaunas
 macrography
 macromolecule
-macronucleus
 macrophage
 macrophotography
 macropod
@@ -7119,7 +7038,6 @@ malinke
 malis
 malison
 malleoli
-malleus
 mallophaga
 mallophagan
 malmaison
@@ -7134,7 +7052,6 @@ mamers
 mammalian
 mammers
 mammography
-mammonteus
 mammula
 mamoncillo
 mams
@@ -7217,7 +7134,6 @@ martyress
 masada
 mascagni
 mascaraed
-masculonucleus
 maselin
 mashawi
 mashua
@@ -7313,7 +7229,6 @@ megalodon
 megalography
 megalopsychy
 meganeura
-meganucleus
 megaphotography
 megapode
 megasporic
@@ -7497,7 +7412,6 @@ microlepidopterist
 microlevel
 micrometallographer
 micrometallography
-micronucleus
 micropetrography
 microphage
 microphakia
@@ -7527,7 +7441,6 @@ mignons
 miguel
 mikron
 milchy
-milieus
 militarist
 milkeress
 millefioris
@@ -7746,7 +7659,6 @@ moron
 moroni
 morosest
 morphea
-morpheus
 morphographer
 morphography
 morpholinos
@@ -7846,7 +7758,6 @@ murlans
 murraya
 murumuru
 murzim
-musaeus
 muscae
 muscule
 musculi
@@ -7879,7 +7790,6 @@ myelin
 myelography
 myelorrhaphy
 mylodon
-mylohyoideus
 myocardiac
 myocoel
 myographer
@@ -8270,7 +8180,6 @@ nubian
 nucleo
 nucleoli
 nucleophilic
-nucleus
 nucule
 numbats
 numbers
@@ -8336,10 +8245,8 @@ oculi
 ocypoda
 ocypode
 odeum
-odocoileus
 odontography
 odontolcae
-odysseus
 oeci
 oeillades
 oestral
@@ -8370,7 +8277,6 @@ olericulturist
 oleum
 oligarchy
 oligomers
-oligotokeus
 oligotokous
 ollamh
 oloroso
@@ -8412,7 +8318,6 @@ opaqued
 opegrapha
 opercule
 ophiography
-ophiopluteus
 ophiurid
 ophthalmography
 ophthalmopod
@@ -8480,7 +8385,6 @@ oromo
 oronoko
 oronooko
 orpheum
-orpheus
 ortalis
 orthagoriscus
 orthoboric
@@ -8780,7 +8684,6 @@ palanquiner
 palapa
 palapas
 palatography
-palatopharyngeus
 palatorrhaphy
 palaverist
 paleethnographer
@@ -8810,7 +8713,6 @@ palliocardiac
 palmchrist
 palmcrist
 palmers
-palmicoleus
 palmillo
 palmipede
 palmistry
@@ -8819,7 +8721,6 @@ palominos
 palosapis
 palustral
 pampa
-pampadromaeus
 pampero
 pams
 panak
@@ -8894,7 +8795,6 @@ paramita
 paramyelin
 parandrus
 paranthodon
-paranucleus
 parapathia
 paraphernalian
 parapineal
@@ -8938,7 +8838,6 @@ paroophoron
 parotid
 parsonarchy
 partaken
-parthenopaeus
 parthia
 participatress
 particularist
@@ -9015,7 +8914,6 @@ peccadillo
 peckham
 pecorinos
 pectineal
-pectineus
 pectoralis
 pectoris
 pedagog
@@ -9038,10 +8936,8 @@ peevish
 pejorist
 pelargomorphae
 pelecypoda
-peleus
 pellian
 pellicule
-pelopaeus
 pelopid
 peloric
 pelvigraphy
@@ -9145,7 +9041,6 @@ peromyscus
 peroneal
 peroneocalcaneal
 peroneotibial
-peroneus
 peronospora
 peropod
 peropoda
@@ -9154,7 +9049,6 @@ perpetratress
 perradii
 perrukery
 persecutress
-perseus
 persicos
 persienne
 persio
@@ -9338,7 +9232,6 @@ physogastry
 physopod
 physopoda
 physostomi
-phyteus
 phytoalexin
 phytochemistry
 phytogeographer
@@ -9387,11 +9280,9 @@ pignet
 pileata
 pileoli
 pileum
-pileus
 pilgrimers
 pilikia
 pillarist
-pilleus
 piloncillo
 pinacothecae
 pinacyanol
@@ -9419,7 +9310,6 @@ pipsissewa
 piqued
 piquillo
 piracetams
-piraeus
 pirandellian
 piranha
 piraya
@@ -9501,7 +9391,6 @@ pleurostict
 plica
 plicae
 pliskies
-ploceus
 plomb
 plotch
 plouter
@@ -9518,7 +9407,6 @@ pluricentral
 pluricuspid
 plurivalve
 plutarchy
-pluteus
 plutoed
 pluvialis
 pluviography
@@ -9631,7 +9519,6 @@ pooler
 pooncing
 pooris
 poormouth
-popliteus
 popode
 popularist
 porbeagle
@@ -9644,7 +9531,6 @@ pornomag
 pornotopias
 portato
 porteress
-portheus
 porticos
 portolans
 portress
@@ -9714,7 +9600,6 @@ pozzolans
 praams
 practicing
 pradhana
-praecuneus
 praelectress
 pragmatica
 prakrit
@@ -9755,7 +9640,6 @@ precooler
 precorneal
 precule
 precuneal
-precuneus
 precycle
 predeceiving
 predentata
@@ -9871,7 +9755,6 @@ previsor
 prewarms
 pricey
 pricing
-priedieus
 prieving
 priggery
 primar
@@ -9936,7 +9819,6 @@ promammalian
 promenaderess
 promenades
 prometheum
-prometheus
 promilitarist
 proministry
 promisor
@@ -9950,7 +9832,6 @@ promptress
 pronouncing
 pronubial
 pronuclearist
-pronucleus
 propagatress
 propanol
 propenal
@@ -9985,7 +9866,6 @@ prosumers
 protanopias
 protectress
 proteosaurid
-proteus
 prothalamiumia
 prothoracic
 protid
@@ -10134,7 +10014,6 @@ puraque
 purgery
 purist
 puritano
-purlieus
 purloiner
 purpler
 purposivist
@@ -10300,7 +10179,6 @@ ranis
 ranomers
 ransomers
 ranunculi
-rapaceus
 raphae
 rapid
 rapillo
@@ -10385,7 +10263,6 @@ recrudescing
 recta
 rectilineal
 rectirostral
-rectococcygeus
 rectoress
 rectorrhaphy
 rectress
@@ -10684,7 +10561,6 @@ rhizota
 rhizotomi
 rhodomontades
 rhombenporphyr
-rhomboideus
 rhonda
 rhumbaed
 rhymers
@@ -10879,7 +10755,6 @@ sacrificing
 sacrilumbalis
 sacrist
 sacristry
-sacrococcygeus
 sacrolumbalis
 sacropectineal
 sacroperineal
@@ -10920,8 +10795,6 @@ salonika
 saloonkeeper
 salpa
 salpid
-salpingomalleus
-salpingopharyngeus
 salpingorrhaphy
 salsaed
 saltah
@@ -11037,7 +10910,6 @@ scaphopod
 scaphopoda
 scappler
 scapulothoracic
-scarabaeus
 scarola
 scarth
 scarus
@@ -11592,7 +11464,6 @@ smashmouth
 smatch
 smilacin
 smilodon
-smintheus
 sminthurid
 smirchy
 smokery
@@ -11649,7 +11520,6 @@ solen
 solenne
 solenodon
 soler
-soleus
 solferinos
 solicitress
 solidarist
@@ -11773,7 +11643,6 @@ spimmers
 spinalis
 spinel
 spinigrades
-spinostropheus
 spinstress
 spinstry
 spinulosa
@@ -11946,7 +11815,6 @@ stereotypography
 stereum
 sterhydraulic
 sternalis
-sternocleidomastoideus
 sternofacialis
 sternopericardiac
 sternways
@@ -12006,7 +11874,6 @@ straightways
 strainer
 straitlacing
 stralet
-stramineus
 strangeways
 strappadoed
 stratigrapher
@@ -12064,8 +11931,6 @@ style
 stylo
 stylography
 stylohyal
-stylohyoideus
-stylopharyngeus
 stylopid
 stylopod
 stymphalian
@@ -12090,7 +11955,6 @@ subclans
 subcosta
 subcostalis
 subcounty
-subcuneus
 subcycle
 subdeterminant
 subdistrict
@@ -12101,7 +11965,6 @@ subendorse
 subequivalve
 subers
 subexaminer
-subfeus
 subgrades
 subindustry
 subintervals
@@ -12117,7 +11980,6 @@ submariner
 submembers
 submetaphoric
 submolecule
-subnucleus
 subopaque
 suboptimuma
 subpagoda
@@ -12560,7 +12422,6 @@ teotihuacan
 tepehua
 tepoys
 teraglin
-teratophoneus
 terebenthene
 terebilic
 terebinthina
@@ -12617,7 +12478,6 @@ teuch
 texan
 textuarist
 thackoor
-thaddeus
 thaim
 thalamiumia
 thalassographer
@@ -12669,7 +12529,6 @@ thermophilic
 theropod
 theropoda
 theseum
-theseus
 thesmophoric
 thessalian
 theta
@@ -12722,10 +12581,8 @@ thundershowers
 thurso
 thwartways
 thyreoantitoxin
-thyreoarytenoideus
 thyreohyal
 thyroantitoxin
-thyroarytenoideus
 thyrocardiac
 thyrohyal
 thyrostraca
@@ -12759,7 +12616,6 @@ tiklin
 tikoor
 tilapias
 tileways
-timaeus
 timar
 timbers
 timbery
@@ -12988,7 +12844,6 @@ trimers
 trimestral
 trimmers
 trimoric
-trinucleus
 triodon
 triosteum
 trioxoboric
@@ -13015,7 +12870,6 @@ triverbial
 troades
 trochalopod
 trochalopoda
-trocheus
 trochilic
 trochiscus
 trochosphaera
@@ -13029,7 +12883,6 @@ troodon
 trooperess
 tropaeoli
 trophaeum
-trophonucleus
 tropicalian
 trotol
 troubadourist
@@ -13116,7 +12969,6 @@ twoccing
 twomo
 txalaparta
 tyauve
-tydeus
 tykhana
 tylarus
 tylopod
@@ -13126,7 +12978,6 @@ tympanohyal
 tynemouth
 typestyle
 typhlopid
-typhoeus
 typographer
 typography
 typolithography
@@ -13512,7 +13363,6 @@ uptaken
 upter
 upways
 upwrench
-uraeus
 uraguay
 uralian
 uralis
@@ -13529,7 +13379,6 @@ uranostaphylorrhaphy
 urbacodon
 urbian
 urceoli
-urceus
 urechitoxin
 uredineal
 urediniosporic
@@ -14110,7 +13959,6 @@ zephyr
 zeppelin
 zeroed
 zeuglodon
-zeus
 ziamet
 ziggurat
 zigzaggery
