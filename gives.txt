@@ -11,6 +11,7 @@ ajaja
 aji
 alarms
 albian
+ambary
 amebian
 amoebian
 amphibian
@@ -24,6 +25,7 @@ aquafarms
 arabian
 arms
 azerbaijanis
+barbary
 barms
 bastaard
 bathybian
@@ -52,6 +54,7 @@ cinnamol
 circumquaque
 claque
 colombian
+columbary
 columbian
 coraji
 cosaque
@@ -98,6 +101,7 @@ healey
 hemagog
 hemerobian
 hemibathybian
+herbary
 hetaerio
 hindustanis
 hobbian
@@ -203,12 +207,14 @@ sorbian
 strongarms
 studfarms
 subopaque
+subturbary
 suburbian
 superfarms
 suprapubian
 swabian
 swarms
 swingarms
+syllabary
 synagog
 tapis
 tharms
@@ -216,6 +222,7 @@ tinaja
 titanis
 tonearms
 triphibian
+turbary
 unarms
 uncharms
 underarms
