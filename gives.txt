@@ -2652,6 +2652,7 @@ colchica
 colen
 coleopter
 coleopterist
+coleus
 coliphage
 coliseum
 collarinos
