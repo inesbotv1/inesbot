@@ -977,8 +977,11 @@ let blacklist = new Set();
 let rareWordsLoaded = false;
 const defCache = new Map();
 
-const WORDS_URL = 'https://raw.githubusercontent.com/inesbotv1/inesbot/refs/heads/main/lastletter.txt';
-const BLACK_URL = 'https://raw.githubusercontent.com/inesbotv1/inesbot/refs/heads/main/blacklist.txt';
+const WORDS_URL  = 'https://raw.githubusercontent.com/inesbotv1/inesbot/refs/heads/main/lastletter.txt';
+const BLACK_URL  = 'https://raw.githubusercontent.com/inesbotv1/inesbot/refs/heads/main/blacklist.txt';
+const GIVES_URL  = 'https://raw.githubusercontent.com/inesbotv1/inesbot/refs/heads/main/gives.txt';
+
+let givesSet = new Set();
 
 function setCount(id, val) {
   const el = document.getElementById(id);
@@ -1028,8 +1031,17 @@ async function loadBlacklist() {
   } catch {}
 }
 
+async function loadGives() {
+  try {
+    const r = await fetch(GIVES_URL + '?t=' + Date.now());
+    const t = await r.text();
+    givesSet = new Set(t.split(/\r?\n/).map(w => w.trim().toLowerCase()).filter(Boolean));
+  } catch {}
+}
+
 loadWords();
 loadBlacklist();
+loadGives();
 
 // ── TABS ──
 let savedNormalResults = { html: '<div class="r-placeholder">enter search criteria…</div>', count: '0' };
@@ -2000,34 +2012,104 @@ function getTimerForRound(round) {
   return Math.max(4, 15 - Math.floor((round - 4) / 2));
 }
 
+function _prefixAnswerCount(prefix, usedWords) {
+  return getPossibleAnswers(prefix, usedWords).length;
+}
+
 function botChooseWord(prefix, round, usedWords) {
   const possible = getPossibleAnswers(prefix, usedWords);
   if (!possible.length) return null;
 
-  if (Math.random() < 0.1) {
-    return possible[Math.floor(Math.random() * possible.length)];
-  }
+  // Sample up to 35 candidates (same as Python version)
+  const sampleSize = Math.min(35, possible.length);
+  const sampled = possible.length > sampleSize
+    ? possible.slice().sort(() => Math.random() - 0.5).slice(0, sampleSize)
+    : possible.slice();
 
-  const targetLen = Math.min(round, 4);
-  let bestWord = null;
-  let bestScore = Infinity;
-
-  const sample = possible.length > 40 ? possible.sort(() => Math.random() - .5).slice(0, 40) : possible;
-
-  for (const word of sample) {
-    for (let len = targetLen; len >= 1; len--) {
-      const nextP = word.slice(-len).toLowerCase();
-      if (!isValidPrefix(nextP, usedWords)) continue;
-      const playerOptions = getPossibleAnswers(nextP, usedWords).length;
-      if (playerOptions >= 3 && playerOptions < bestScore) {
-        bestScore = playerOptions;
-        bestWord = word;
-      }
-      break;
+  // ── TIER 0: gives.txt — absolute highest priority ──
+  // Words pre-computed to FORCE a specific trap prefix on the player
+  if (givesSet.size) {
+    const givesCandidates = sampled.filter(w => givesSet.has(w.toLowerCase()));
+    if (givesCandidates.length) {
+      // Shorter gives-words are often more punishing
+      givesCandidates.sort((a, b) => a.length - b.length);
+      return givesCandidates[0];
     }
   }
 
-  return bestWord || possible[Math.floor(Math.random() * possible.length)];
+  // ── TIER 1: 4-letter trap prefixes that are NOT valid words (hardest) ──
+  const eliteTraps = [];
+  for (const word of sampled) {
+    const nextP = getPrefixFromWord(word.toLowerCase(), round, usedWords);
+    if (nextP && nextP.length === 4 && !wordSet.has(nextP)) {
+      const answers = _prefixAnswerCount(nextP, usedWords);
+      if (answers >= 3 && answers <= 8) {
+        eliteTraps.push(word);
+      }
+    }
+  }
+  if (eliteTraps.length) {
+    return eliteTraps[Math.floor(Math.random() * eliteTraps.length)];
+  }
+
+  // ── TIER 2: Any trap (3–8 answers — still hard) ──
+  const trapCandidates = [];
+  for (const word of sampled) {
+    const nextP = getPrefixFromWord(word.toLowerCase(), round, usedWords);
+    if (nextP) {
+      const answers = _prefixAnswerCount(nextP, usedWords);
+      if (answers >= 3 && answers <= 8) {
+        trapCandidates.push(word);
+      }
+    }
+  }
+  if (trapCandidates.length) {
+    return trapCandidates[Math.floor(Math.random() * trapCandidates.length)];
+  }
+
+  // ── TIER 3: Word that leaves MINIMUM answers (starve the player) ──
+  let bestWord  = null;
+  let bestScore = 999;
+  for (const word of sampled) {
+    const nextP = getPrefixFromWord(word.toLowerCase(), round, usedWords);
+    if (!nextP) continue;
+    const penalty  = wordSet.has(nextP) ? 50 : 0;
+    const options  = _prefixAnswerCount(nextP, usedWords);
+    const total    = options + penalty;
+    if (total < bestScore) {
+      bestScore = total;
+      bestWord  = word;
+    }
+  }
+  if (bestWord && bestScore <= 5) return bestWord;
+
+  // ── TIER 4: Avoid giving back common easy letters ──
+  const easyPrefixes = new Set(['s','e','t','a','i','n','r']);
+  const filteredWords = sampled.filter(w => {
+    const nextP = getPrefixFromWord(w.toLowerCase(), round, usedWords);
+    return nextP && !easyPrefixes.has(nextP);
+  });
+  if (filteredWords.length) {
+    let bestFiltered = null;
+    let bestFilteredScore = 999;
+    for (const word of filteredWords) {
+      const nextP = getPrefixFromWord(word.toLowerCase(), round, usedWords);
+      if (nextP) {
+        const options = _prefixAnswerCount(nextP, usedWords);
+        if (options < bestFilteredScore) {
+          bestFilteredScore = options;
+          bestFiltered = word;
+        }
+      }
+    }
+    if (bestFiltered) return bestFiltered;
+  }
+
+  // ── TIER 5: Last resort — anything that doesn't end in 's' ──
+  const noS = sampled.filter(w => !w.endsWith('s'));
+  if (noS.length) return noS[Math.floor(Math.random() * noS.length)];
+
+  return possible[Math.floor(Math.random() * possible.length)];
 }
 
 // ── GAME UI RENDERING ──
