@@ -631,6 +631,7 @@ nica
 nika
 nimi
 nio
+niv
 nive
 noga
 nons
@@ -921,6 +922,7 @@ uror
 urso
 usi
 usp
+uss
 usti
 uter
 uve
