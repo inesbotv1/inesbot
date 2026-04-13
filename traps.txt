@@ -818,7 +818,6 @@ sio
 sito
 skia
 skop
-skr
 slie
 smol
 smr
