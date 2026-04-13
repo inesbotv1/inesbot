@@ -5531,7 +5531,6 @@ hexachloraphene
 hexachlorophene
 hexadactyle
 hexades
-hexagyn
 hexametral
 hexametrist
 hexametrographer
@@ -9085,7 +9084,6 @@ pennyearth
 penseroso
 pensieroso
 pentadactyle
-pentagyn
 pentaiodide
 pentair
 pentamera
@@ -12634,7 +12632,6 @@ tetrachoric
 tetradactyle
 tetradarchy
 tetradecapoda
-tetragyn
 tetraiodide
 tetramera
 tetrameralian
