@@ -93,6 +93,7 @@ cosaque
 countercharms
 crabbery
 crossarms
+cund
 cymraeg
 daley
 danagla
@@ -116,7 +117,9 @@ etaerio
 euphorbial
 eusebian
 fabian
+facund
 farms
+fecund
 femorotibial
 ferio
 fibbery
@@ -130,6 +133,7 @@ galactagog
 galey
 gambian
 garms
+gesithcund
 gingivolabial
 glanis
 glibbery
@@ -158,10 +162,12 @@ hydragog
 iliotibial
 inaja
 inarms
+infecund
 infralabial
 infrapubian
 inguinolabial
 interlabial
+iracund
 ischiotibial
 jacobian
 jagla
@@ -169,6 +175,7 @@ jamdanis
 jampanis
 jicaque
 jobbery
+jocund
 kashubian
 kasubian
 keratocni
@@ -213,6 +220,7 @@ newichawanoc
 nonadverbial
 nonamphibian
 nonconnubial
+nonfecund
 nonmicrobial
 nonopaque
 nubian
@@ -277,6 +285,7 @@ romaji
 rontgenopaque
 rubbery
 rubian
+rubicund
 rybats
 sabbats
 sabian
@@ -285,6 +294,7 @@ saprobial
 scabbery
 schoolmarms
 scrubbery
+secund
 semiopaque
 senegambian
 serapis
@@ -296,6 +306,7 @@ sherwanis
 shrubbery
 sidearms
 sinapis
+sithcund
 slabbery
 slobbery
 slubbery
@@ -339,6 +350,8 @@ umbery
 unarms
 uncharms
 underarms
+unfecund
+unjocund
 unmicrobial
 unopaque
 unproverbial
@@ -346,6 +359,7 @@ unslumbery
 upswarms
 urbian
 vaginolabial
+verecund
 waeg
 warms
 weanoc
