@@ -1,6 +1,7 @@
 bastaard
 caserio
 cheerio
+cymraeg
 etaerio
 ferio
 hetaerio
@@ -12,3 +13,4 @@ ockham
 peckham
 rackham
 serio
+waeg
