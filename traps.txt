@@ -5,7 +5,6 @@ agog
 aja
 aji
 aley
-ally
 amol
 anis
 anoc
@@ -21,6 +20,5 @@ burh
 cni
 cund
 erio
-ines
 kham
 otherprefixeslater
