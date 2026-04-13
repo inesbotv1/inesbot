@@ -5,6 +5,7 @@ agog
 aja
 aji
 aley
+amol
 erio
 kham
 otherprefixeslater
