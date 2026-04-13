@@ -4683,7 +4683,6 @@ frankfurt
 franklin
 franz
 frapler
-frascati
 fratch
 fratchy
 fraticellian
@@ -6940,7 +6939,6 @@ lorgnons
 loric
 lorica
 loricae
-loricati
 lorimers
 loriner
 loris
@@ -7285,7 +7283,6 @@ mcleod
 mealmouth
 mealymouth
 meatorrhaphy
-mecati
 mechanochemistry
 mechitza
 mechoacan
@@ -7369,7 +7366,6 @@ mentolabial
 mentomeckelian
 menurae
 mephistophelian
-mercati
 merceress
 mercurialis
 mercurid
@@ -9448,7 +9444,6 @@ pithecanthropi
 pithecanthropid
 pityocampa
 piyaz
-pizzicati
 placentalian
 placentography
 placing
@@ -10882,7 +10877,6 @@ sacerdocy
 sacheverell
 sacramentalis
 sacramentarist
-sacrificati
 sacrificing
 sacrilumbalis
 sacrist
@@ -11860,7 +11854,6 @@ sriracha
 ssireum
 stabbers
 stablekeeper
-staccati
 stacey
 stachytarpheta
 stackgarth
@@ -12359,7 +12352,6 @@ taekwondo
 tagalog
 tagbanua
 tagel
-tagnicati
 tagraggery
 tahin
 tahina
@@ -12730,7 +12722,6 @@ thruways
 thuan
 thuggery
 thundershowers
-thurificati
 thurso
 thwartways
 thyreoantitoxin
