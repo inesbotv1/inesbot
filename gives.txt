@@ -16,6 +16,7 @@ caserio
 cellentanis
 chaja
 cheerio
+chowanoc
 cinnamol
 coraji
 cymraeg
@@ -56,10 +57,12 @@ magog
 maharanis
 makhanis
 manis
+manoc
 markham
 mopanis
 mystagog
 naja
+newichawanoc
 oakham
 ockham
 pakistanis
@@ -82,3 +85,4 @@ synagog
 tinaja
 titanis
 waeg
+weanoc
