@@ -430,7 +430,6 @@ guya
 haba
 habb
 hach
-hada
 hadj
 haga
 hage
@@ -810,7 +809,6 @@ scod
 scus
 seh
 seli
-seph
 sest
 sewa
 shek
@@ -843,7 +841,6 @@ surs
 sust
 syns
 taca
-tagi
 tah
 tair
 talt
