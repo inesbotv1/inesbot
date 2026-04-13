@@ -1,6 +1,2 @@
 elisa
 elissa
-mnapfx
-nivpfx
-tydpfx
-usspfx
