@@ -543,6 +543,7 @@ anisopoda
 ankus
 anlaut
 anneal
+anniv
 announcing
 annulosa
 anodon
@@ -558,6 +559,7 @@ anorthography
 anostraca
 anour
 anoura
+anschluss
 answers
 antaeus
 antalkalis
@@ -1367,6 +1369,7 @@ bicycle
 bidactyle
 biddelian
 bieldier
+bielorouss
 bienne
 bifida
 biftah
@@ -1527,6 +1530,7 @@ bonda
 bonnive
 bonnyclabbers
 bonspiel
+bonuss
 boobery
 booed
 boogalooed
@@ -1641,6 +1645,7 @@ breastsummers
 breezeways
 brekkies
 brenne
+brennschluss
 bressummers
 brett
 bretticing
@@ -3304,6 +3309,7 @@ deforcing
 deformers
 deforse
 defroze
+degauss
 degrades
 degringolades
 degringoler
@@ -4858,6 +4864,7 @@ gauch
 gaudier
 gaulic
 gaunty
+gauss
 gavialis
 gawcey
 gawkies
@@ -4885,6 +4892,7 @@ geneura
 genio
 genipapada
 genipapo
+geniuss
 gentilic
 gentisin
 genua
@@ -5684,6 +5692,7 @@ hotpress
 housedress
 housekeeper
 housemistress
+houss
 houve
 hoving
 howarth
@@ -6442,6 +6451,7 @@ kiladja
 kileskus
 killadars
 kilocycle
+kilogauss
 kilogramme
 kilomegacycle
 kimboed
@@ -7309,6 +7319,7 @@ megacoulomb
 megacycle
 megaera
 megafaunas
+megagauss
 megaladapis
 megalodon
 megalography
@@ -7489,6 +7500,7 @@ microfaunas
 microfibers
 microfibres
 microfilmers
+microgauss
 micrognathia
 microgramme
 micrographer
@@ -8040,6 +8052,7 @@ neurorrhaphy
 neurospora
 neurosurgery
 neurotoxin
+neuss
 neuter
 neutral
 neutrinos
@@ -9187,6 +9200,7 @@ pettifoggery
 petuntse
 petuntze
 peytral
+pfeffernuss
 phacopid
 phaedrus
 phaenogams
@@ -9589,6 +9603,7 @@ polyethene
 polyfenestral
 polygams
 polygarchy
+polygenouss
 polygrapher
 polygraphy
 polyhistoric
@@ -10547,6 +10562,7 @@ replevisor
 replica
 repondez
 reporteress
+repouss
 repowers
 repracticing
 repreeving
@@ -10625,6 +10641,7 @@ retrogress
 retroperitoneal
 retrorenal
 retrorse
+retrouss
 returnees
 reub
 reuptaken
@@ -11309,6 +11326,7 @@ sesquiquarta
 setenant
 setirostral
 setophaga
+seuss
 seventeenth
 seventh
 sevillian
@@ -12014,6 +12032,7 @@ stratigrapher
 stratigraphy
 stratography
 stratotrainer
+strauss
 strawflowers
 strayving
 streamers
@@ -12242,6 +12261,7 @@ surgery
 surimi
 surmistress
 surnamers
+surpluss
 surprizal
 surrenal
 surstyle
@@ -13036,6 +13056,7 @@ trotol
 troubadourist
 trouncing
 troupe
+trouss
 trouter
 trouty
 trouve
