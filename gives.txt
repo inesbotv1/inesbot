@@ -380,7 +380,6 @@ amargoso
 amarillo
 amarth
 amazer
-ambary
 ambassadress
 ambatch
 ambers
@@ -1120,7 +1119,6 @@ baracan
 barajillo
 baramika
 barbacan
-barbary
 barbequed
 barberess
 barbers
@@ -2681,7 +2679,6 @@ colourways
 colpoperineorrhaphy
 colporrhaphy
 colubers
-columbary
 columbian
 comaneci
 combats
@@ -5474,7 +5471,6 @@ heptateuch
 heracleum
 heraldress
 herbarist
-herbary
 herborist
 hereaways
 hereditarist
@@ -12171,7 +12167,6 @@ subtopias
 subtrades
 subtrench
 subtrist
-subturbary
 suburbian
 subventral
 subways
@@ -12321,7 +12316,6 @@ swobbers
 swoler
 sybarist
 sybils
-syllabary
 syllabatim
 syllabography
 sylvestral
@@ -13115,7 +13109,6 @@ tunica
 tunicae
 tupunas
 turacin
-turbary
 turbiner
 turcois
 turgescing
