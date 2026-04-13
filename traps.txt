@@ -14,6 +14,7 @@ arms
 bary
 bats
 bery
+bial
 bian
 erio
 kham
