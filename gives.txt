@@ -1,1 +1,6 @@
-
+caserio
+cheerio
+etaerio
+ferio
+hetaerio
+serio
