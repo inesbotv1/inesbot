@@ -7,6 +7,7 @@ bastaard
 caserio
 chaja
 cheerio
+cinnamol
 coraji
 cymraeg
 daley
@@ -38,12 +39,15 @@ naja
 oakham
 ockham
 paley
+paracetamol
 peckham
 pedagog
 quillaja
 rackham
 romaji
+salbutamol
 serio
+sesamol
 shaley
 synagog
 tinaja
