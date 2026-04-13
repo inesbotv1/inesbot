@@ -1,6 +1,8 @@
 acarapis
 achaque
+acrobats
 adapis
+aerobats
 aerobian
 afghanis
 afterswarms
@@ -29,6 +31,7 @@ barbary
 barms
 bastaard
 bathybian
+bats
 becharms
 beelzebubian
 bessarabian
@@ -39,6 +42,8 @@ biriyanis
 biryanis
 brahmanis
 braque
+brickbats
+bullbats
 canis
 caque
 casaque
@@ -56,6 +61,7 @@ claque
 colombian
 columbary
 columbian
+combats
 coraji
 cosaque
 countercharms
@@ -69,6 +75,7 @@ demihaque
 detraque
 dewanis
 dezaley
+dingbats
 disarms
 drepanis
 electroplaque
@@ -105,6 +112,8 @@ herbary
 hetaerio
 hindustanis
 hobbian
+holderbats
+hurlbats
 hydragog
 inaja
 inarms
@@ -148,6 +157,7 @@ newichawanoc
 nonamphibian
 nonopaque
 nubian
+numbats
 oakham
 ockham
 okapis
@@ -178,6 +188,7 @@ prytanis
 pubian
 puraque
 quillaja
+rabats
 rackham
 radiopaque
 ranis
@@ -188,6 +199,8 @@ roentgenopaque
 romaji
 rontgenopaque
 rubian
+rybats
+sabbats
 sabian
 salbutamol
 schoolmarms
@@ -220,6 +233,7 @@ tapis
 tharms
 tinaja
 titanis
+tittlebats
 tonearms
 triphibian
 turbary
@@ -232,6 +246,9 @@ urbian
 waeg
 warms
 weanoc
+whirlbats
+whorlbats
+wombats
 xenophobian
 xicaque
 yardarms
