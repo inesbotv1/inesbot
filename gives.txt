@@ -3,4 +3,10 @@ cheerio
 etaerio
 ferio
 hetaerio
+khakham
+markham
+oakham
+ockham
+peckham
+rackham
 serio
