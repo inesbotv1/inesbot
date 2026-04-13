@@ -18,6 +18,7 @@ bial
 bian
 burh
 cni
+cund
 erio
 kham
 otherprefixeslater
