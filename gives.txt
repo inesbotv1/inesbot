@@ -62,7 +62,6 @@ acclaimers
 accolades
 accouter
 accoutred
-accubita
 aceacenaphthene
 acenaphthene
 acerli
@@ -1124,7 +1123,6 @@ barberess
 barbers
 barbery
 barbicel
-barbita
 barbula
 bardier
 bardo
@@ -3084,7 +3082,6 @@ cuckooflowers
 cucule
 cuculi
 cucumbers
-cucurbita
 cudava
 culbuter
 culeus
@@ -4210,7 +4207,6 @@ escalades
 escapades
 eschewals
 eschewers
-escobita
 esculic
 eskies
 eskimo
@@ -8448,7 +8444,6 @@ orangery
 oratoric
 oratress
 orbilian
-orbita
 orchesography
 orchestral
 orchidorrhaphy
@@ -9134,7 +9129,6 @@ perineal
 perineorrhaphy
 periodide
 perioeci
-periorbita
 periosteorrhaphy
 periosteum
 periostraca
@@ -9940,7 +9934,6 @@ programme
 programmers
 progress
 progressivist
-prohibita
 proindustry
 projectress
 prolans
@@ -13006,7 +12999,6 @@ triffidier
 trikaya
 trilisa
 trillo
-trilobita
 trilophodon
 trimera
 trimers
