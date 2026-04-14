@@ -63,6 +63,7 @@ accouter
 accoutred
 aceacenaphthene
 acenaphthene
+acephal
 acerli
 acerola
 acervatim
@@ -594,6 +595,7 @@ antireducing
 antisophistry
 antispermotoxin
 antistress
+antistrophal
 antistyle
 antithalian
 antitoxin
@@ -618,10 +620,12 @@ apiculi
 aplomb
 apocalypse
 apocamphoric
+apocryphal
 apoda
 apode
 apofenchene
 apogalacteum
+apographal
 apohyal
 apoikia
 apomict
@@ -631,6 +635,7 @@ aposporic
 aposthia
 apostoli
 apostolian
+apostrophal
 appaloosa
 appendorontgenography
 apperceiving
@@ -856,6 +861,7 @@ autarkies
 authoress
 autoaddress
 autoantitoxin
+autobiographal
 autobiographer
 autobiography
 autocades
@@ -863,6 +869,7 @@ autoclaving
 autocratoric
 autocycle
 autoed
+autographal
 autographer
 autography
 autohemorrhage
@@ -1436,6 +1443,7 @@ brachiopoda
 brachiopode
 brachioradialis
 brachiorrheuma
+brachycephal
 brachygnathia
 brachygrapher
 brachygraphy
@@ -1647,6 +1655,7 @@ caliculi
 caligrapher
 caligraphy
 calimocho
+caliphal
 callans
 calligramme
 calligrapha
@@ -1858,6 +1867,7 @@ catalpa
 catapan
 cataphoric
 catarrhina
+catastrophal
 catch
 catchy
 catechumenal
@@ -2752,6 +2762,7 @@ cryopreserving
 cryptarchy
 cryptodira
 cryptogams
+cryptographal
 cryptographer
 cryptography
 cryptoheresy
@@ -3087,6 +3098,7 @@ deus
 deuterotokies
 deuterotokous
 deutomalal
+deutonymphal
 devel
 develin
 devisor
@@ -3318,6 +3330,7 @@ dogmouth
 dogrobbers
 dogwatch
 doko
+dolichocephal
 dollodon
 dolmades
 doloroso
@@ -3715,6 +3728,7 @@ eolienne
 eosinophilic
 epagomenal
 eparchy
+epencephal
 epeus
 ephebeum
 ephelis
@@ -4703,8 +4717,10 @@ haftorot
 hagada
 haganah
 haggada
+haggiographal
 hagiarchy
 hagiographa
+hagiographal
 hagiographer
 hagiography
 haglin
@@ -5154,9 +5170,11 @@ hyoplastral
 hypanthia
 hyperabelian
 hyperanarchy
+hyperbrachycephal
 hyperchloric
 hypercycle
 hyperdeterminant
+hyperdolichocephal
 hyperdulic
 hypermetaphoric
 hyperoodon
@@ -5170,6 +5188,7 @@ hypertrichy
 hypervisor
 hyphae
 hyphaene
+hyphal
 hypnosporic
 hypnotoxin
 hypoaeolian
@@ -6616,12 +6635,14 @@ merell
 meridienne
 merinos
 merycoidodon
+mesaticephal
 meshuga
 meshugana
 meshuggana
 meshuggeneh
 mesiolabial
 mesoamerica
+mesocephal
 mesocoelian
 mesogastral
 mesometral
@@ -6712,6 +6733,7 @@ microblades
 microbrewers
 microburet
 microcamera
+microcephal
 microchemistry
 microcinematography
 microcomputer
@@ -7436,6 +7458,7 @@ nutjobbers
 nyaya
 nymphae
 nymphaeum
+nymphal
 nympheum
 oaken
 oakham
@@ -7555,6 +7578,7 @@ ophthalmopod
 opinant
 opiner
 opisthocoelian
+opisthographal
 opisthography
 opisthothelae
 oppress
@@ -7835,6 +7859,7 @@ pablum
 pacaya
 pacey
 pacha
+pachycephal
 pacificae
 pacificos
 pacing
@@ -7995,6 +8020,7 @@ paramyelin
 parandrus
 paranthodon
 paranucleus
+paranymphal
 parapathia
 paraphernalian
 pararctalian
@@ -8957,6 +8983,7 @@ promptress
 pronouncing
 pronubial
 pronucleus
+pronymphal
 propagatress
 propanol
 propenal
@@ -9002,6 +9029,7 @@ protomalal
 protomammalian
 protonemertini
 protoneuron
+protonymphal
 protopapas
 protopathia
 protophilic
@@ -9036,6 +9064,7 @@ psalmography
 psaltress
 pseud
 pseudepigrapha
+pseudepigraphal
 pseudepigraphy
 pseudoancestral
 pseudocelian
@@ -11223,6 +11252,7 @@ telegraphy
 telekinematography
 telemeteorography
 telemetrography
+telencephal
 teleneuron
 teleoroentgenography
 teleostomi
@@ -11615,6 +11645,7 @@ tributer
 trica
 tricae
 tricentral
+tricephal
 trichina
 trichiurid
 trichonotid
@@ -11635,6 +11666,7 @@ trierarchy
 triethiodide
 trifa
 trifecta
+triglyphal
 trikaya
 trilisa
 trillo
@@ -11658,7 +11690,9 @@ trisonant
 trisporic
 tritaph
 triticeum
+tritonymphal
 tritylodon
+triumphal
 triumpher
 triurid
 trivalve
@@ -11681,6 +11715,7 @@ troodon
 trooperess
 tropaeoli
 trophaeum
+trophal
 trophonucleus
 tropicalian
 trotol
@@ -11814,6 +11849,7 @@ unactiving
 unaddress
 unadvancing
 unaggrieving
+unapocryphal
 unappliqued
 unapproving
 unarms
@@ -12002,6 +12038,7 @@ unnerving
 unneutral
 unnoisily
 unnoticing
+unnymphal
 unobserving
 unopaque
 unovertaken
