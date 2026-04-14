@@ -2595,6 +2595,7 @@ corse
 corsica
 cortili
 coruminacan
+corunna
 corvisor
 corydalis
 coryphaeus
@@ -2901,6 +2902,7 @@ dalecarlian
 daley
 dalis
 damascus
+damgalnunna
 damme
 damnosa
 danae
@@ -5860,6 +5862,7 @@ kokila
 kolackies
 koleroga
 kolinskies
+koltunna
 kominuter
 komitajis
 komondoroc
@@ -5875,6 +5878,7 @@ kootcha
 kootchy
 koreroed
 koris
+korntunna
 koromika
 koruna
 korunas
@@ -6532,6 +6536,7 @@ mattress
 matza
 matzo
 maungy
+maunna
 mausoleum
 mauve
 mauvelin
@@ -7535,6 +7540,7 @@ oligotokeus
 oligotokous
 ollamh
 oloroso
+oltunna
 ombers
 ombrellinos
 ombres
@@ -10956,6 +10962,7 @@ sunflowers
 sungazer
 sunil
 sunkies
+sunna
 sunshades
 sunup
 superb
@@ -11763,6 +11770,7 @@ tunas
 tuner
 tunica
 tunicae
+tunna
 tupunas
 turacin
 turbiner
@@ -12584,6 +12592,7 @@ wristwatch
 writeress
 wrymouth
 wugg
+wunna
 wyethia
 wymondham
 wyndham
