@@ -154,7 +154,6 @@ nc
 nd
 nde
 ng
-nj
 np
 nr
 ns
