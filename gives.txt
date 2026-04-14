@@ -1466,7 +1466,6 @@ branchiocardiac
 branchiopod
 branchiopoda
 branchy
-brancusi
 brandades
 branzinos
 braque
@@ -5184,7 +5183,6 @@ hulchy
 hulloaed
 hulloed
 hullooed
-hulusi
 hummers
 hunchy
 hunkies
@@ -6434,7 +6432,6 @@ macrostachya
 macrostyle
 macrourid
 macule
-macusi
 macuta
 madhab
 madison
@@ -10300,7 +10297,6 @@ sensitivist
 senso
 sentencing
 sentinel
-senusi
 separatress
 sephardi
 sephira
@@ -10500,7 +10496,6 @@ sipid
 sirdars
 siress
 sitkamers
-siusi
 sixteenth
 sizal
 skaalpund
@@ -12623,7 +12618,6 @@ watercress
 watercycle
 waterhorse
 waterpowers
-watusi
 wauch
 wauner
 wauve
