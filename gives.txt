@@ -182,6 +182,7 @@ aflatoxin
 africa
 aftercooler
 afterhatch
+afterswarms
 agada
 agana
 agapai
@@ -245,6 +246,7 @@ alala
 alans
 alapa
 alapas
+alarms
 alastair
 alauda
 albany
@@ -651,6 +653,7 @@ apterygota
 apulian
 aquacades
 aquadag
+aquafarms
 aquench
 aquilian
 araban
@@ -733,6 +736,7 @@ armisonant
 armonica
 armoric
 armorica
+arms
 arnica
 aroba
 arpeggioed
@@ -1031,6 +1035,7 @@ bargainer
 barkeeper
 barkery
 barmouth
+barms
 barnardo
 barnstormers
 baroco
@@ -1111,6 +1116,7 @@ bebotch
 becarve
 beccaficos
 bechancing
+becharms
 becrawl
 bedchambers
 bedide
@@ -1206,6 +1212,7 @@ bestarve
 bestench
 bestowals
 bestowers
+beswarms
 betaken
 betcha
 betonica
@@ -1289,6 +1296,7 @@ biostratigraphy
 biotoxin
 bioweapon
 bipartisan
+birdfarms
 birdwatch
 birkies
 birrotch
@@ -2039,6 +2047,7 @@ charadriomorphae
 chargoggagoggmanchauggagoggchaubunagungamaugg
 charkhana
 charmers
+charms
 charpoys
 charqued
 charta
@@ -2660,6 +2669,7 @@ counteraddress
 counterbalancing
 counterblockades
 counterbracing
+countercharms
 countercoupe
 counterearth
 counterfleury
@@ -2749,6 +2759,7 @@ crocuta
 croisad
 cromwellian
 crookery
+crossarms
 crossbeams
 crossbench
 crossbowers
@@ -3243,6 +3254,7 @@ disadvancing
 disapprovals
 disapproving
 disarmers
+disarms
 disavauncing
 disavowals
 disavowers
@@ -3662,12 +3674,14 @@ emuls
 enaluron
 enantiomers
 enantiopathia
+enarms
 encatarrhaphy
 encauma
 encaving
 encephalography
 encephalopathia
 enchantress
+encharms
 enchoric
 enchytraeus
 encinillo
@@ -4038,6 +4052,7 @@ fardo
 farleus
 farmeress
 farmers
+farms
 farolito
 farrell
 farth
@@ -4123,6 +4138,7 @@ finochio
 finos
 fioraturae
 firearm
+firearms
 firebombers
 firepan
 firepowers
@@ -4219,6 +4235,7 @@ forastero
 forcarve
 forcing
 forearm
+forearms
 forecar
 forecooler
 forediscern
@@ -4401,6 +4418,7 @@ gangava
 ganglioneuron
 gaoler
 gaoleress
+garms
 garnison
 garrett
 garrison
@@ -4856,6 +4874,7 @@ harico
 harlequinades
 harmers
 harmonica
+harms
 harperess
 harpress
 harrison
@@ -5370,6 +5389,7 @@ imputer
 imshis
 inaja
 inapter
+inarms
 incalving
 incandescing
 incarnant
@@ -6562,6 +6582,7 @@ markup
 markus
 marmalades
 marmoric
+marms
 marriner
 marrowskies
 marsalis
@@ -7785,6 +7806,7 @@ outbraving
 outbrawl
 outcatch
 outcavil
+outcharms
 outclomb
 outcrawl
 outcurving
@@ -7864,6 +7886,7 @@ ovampo
 overachieving
 overadvancing
 overafflict
+overarms
 overbalancing
 overbracing
 overbusily
@@ -7938,6 +7961,7 @@ overthrowers
 overtimers
 overtowers
 overtrades
+overwarms
 overwatch
 ovist
 oxalis
@@ -8148,6 +8172,7 @@ parki
 parkies
 parkour
 parleyvooed
+parms
 parochialis
 parochiner
 paroemiographer
@@ -8403,6 +8428,7 @@ pharmacic
 pharmacochemistry
 pharmacography
 pharmers
+pharms
 pharsalian
 pharyngognath
 pharyngography
@@ -8888,6 +8914,7 @@ preafflict
 preannouncing
 preapproving
 prearm
+prearms
 prebalancing
 prebelieving
 precalculi
@@ -9017,6 +9044,7 @@ prevetoed
 previewers
 preving
 previsor
+prewarms
 pricey
 pricing
 priedieus
@@ -9447,6 +9475,7 @@ reanswers
 reapproving
 rearhorse
 rearm
+rearms
 reata
 reaving
 reawaken
@@ -9743,6 +9772,7 @@ revoltress
 revolving
 revving
 rewaken
+rewarms
 rewatch
 reweaken
 reweaving
@@ -10120,6 +10150,7 @@ schnorr
 schomburgkia
 schooler
 schoolkeeper
+schoolmarms
 schoolmistress
 schradan
 schreiner
@@ -10427,6 +10458,7 @@ siculi
 siculian
 sidearm
 sidearmers
+sidearms
 sidecar
 sidedress
 sideliner
@@ -10567,6 +10599,7 @@ slutch
 slutchy
 smallmouth
 smallsats
+smarms
 smartmouth
 smartwatch
 smashage
@@ -10977,11 +11010,13 @@ stroams
 stroganov
 stromatopora
 strombolian
+strongarms
 strouthiocamelian
 strouthocamelian
 strowers
 struldbrug
 strummers
+studfarms
 studhorse
 stumers
 stunty
@@ -11118,6 +11153,7 @@ superendorse
 superengraving
 superexaminer
 superexpress
+superfarms
 superfecta
 superfinancing
 superheresy
@@ -11181,6 +11217,7 @@ swaird
 swallowers
 swankies
 swarmers
+swarms
 swarth
 swarve
 swarving
@@ -11195,6 +11232,7 @@ swelp
 swerving
 swimmers
 swinecress
+swingarms
 switchblades
 switchkeeper
 switchy
@@ -11514,6 +11552,7 @@ thanatographer
 thanatography
 thanatophobiac
 thanksgiving
+tharms
 thatch
 thatchy
 thaumatography
@@ -11672,6 +11711,7 @@ tonant
 tondinos
 tondo
 tonearm
+tonearms
 tonguer
 tontiner
 tooler
@@ -12001,6 +12041,7 @@ unadvancing
 unaggrieving
 unappliqued
 unapproving
+unarms
 unarriving
 unbalancing
 unbarricades
@@ -12021,6 +12062,7 @@ uncatchy
 uncentral
 uncentred
 unchapter
+uncharms
 unciatim
 uncipher
 unclench
@@ -12048,6 +12090,7 @@ undecanaphthene
 undeceiving
 undecipher
 underachieving
+underarms
 underbalancing
 underbeadle
 underbracing
@@ -12303,6 +12346,7 @@ upsnatch
 upspurt
 upstair
 upstreams
+upswarms
 uptaken
 upter
 upwrench
@@ -12575,6 +12619,7 @@ waribashis
 warison
 warmers
 warmouth
+warms
 warnison
 warpowers
 warragle
@@ -12777,6 +12822,7 @@ yampa
 yangtze
 yankies
 yapon
+yardarms
 yarmouth
 yarta
 yarth
