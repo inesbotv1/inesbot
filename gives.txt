@@ -2626,6 +2626,7 @@ coryphaeus
 coryphene
 coryphodon
 coryzal
+cosa
 cosaque
 coscinodiscus
 coscoroba
@@ -6391,6 +6392,7 @@ lyart
 lyceum
 lycopod
 lycopode
+lycosa
 lymphangiography
 lymphocytotoxin
 lymphography
@@ -7108,6 +7110,7 @@ mridamgams
 mridangams
 msource
 muchacha
+mucosa
 muehlenbeckia
 muga
 muhammadan
@@ -11053,6 +11056,7 @@ submariner
 submembers
 submetaphoric
 submolecule
+submucosa
 subnucleus
 subopaque
 suboptimuma
