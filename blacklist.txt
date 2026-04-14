@@ -143,7 +143,6 @@ mk
 ml
 mn
 mna
-mne
 mp
 mr
 ms
