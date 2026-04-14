@@ -217,7 +217,6 @@ sth
 sz
 sze
 taa
-taum
 tc
 td
 ti
