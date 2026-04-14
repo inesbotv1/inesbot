@@ -12899,7 +12899,6 @@ stomatopod
 stomatopoda
 stomodaeum
 stomodeum
-stomoxys
 stomp
 stonehatch
 stonehorse
