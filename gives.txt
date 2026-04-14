@@ -228,6 +228,7 @@ aistopod
 aistopoda
 ajaja
 ajis
+ajivika
 ajonjoli
 akene
 akia
@@ -974,6 +975,7 @@ bakshis
 bakuba
 bakwiri
 balagan
+balalaika
 balancing
 baldachinos
 baldwin
@@ -3846,6 +3848,7 @@ erfurt
 ergophobiac
 ergotoxin
 erica
+erika
 erinaceus
 eristalis
 ermelin
@@ -4792,6 +4795,7 @@ hagiographa
 hagiographer
 hagiography
 haglin
+haika
 haikus
 hairdress
 hairstyle
@@ -5758,6 +5762,7 @@ kades
 kadischi
 kaed
 kahunas
+kaika
 kailyaird
 kaimakams
 kaimo
@@ -5777,6 +5782,7 @@ kamelaukia
 kamelkia
 kamika
 kamikaze
+kamleika
 kamme
 kamokamo
 kanae
@@ -5786,6 +5792,7 @@ kangarooed
 kanjis
 kapai
 kapas
+kapeika
 karabiner
 karagan
 karakia
@@ -5812,6 +5819,8 @@ kauch
 kaupapas
 kauru
 kavals
+kavika
+kawika
 kayoed
 kazatskies
 kebele
@@ -6039,6 +6048,7 @@ lagrimoso
 lagunas
 lagunero
 laica
+laika
 lainer
 laird
 lallans
@@ -7212,6 +7222,7 @@ naams
 nabal
 nabbers
 nabobery
+nagaika
 nagana
 nagano
 nagel
@@ -8089,6 +8100,7 @@ papistry
 papoula
 pappi
 paprica
+paprika
 papriks
 papyr
 papyrographer
@@ -8308,6 +8320,7 @@ pereiopod
 perendinant
 pereopod
 pereskia
+perestroika
 perfecta
 perfectibilian
 performers
@@ -9847,6 +9860,7 @@ rognons
 roguer
 rojis
 rollerblades
+romaika
 romajis
 romanceress
 romancing
@@ -9956,6 +9970,7 @@ sacrospinalis
 saddo
 sades
 sadhana
+sadhika
 sadie
 saeume
 safekeeper
@@ -11310,6 +11325,7 @@ tanadars
 tanak
 tandava
 tandooris
+tanganyika
 tangoed
 tanha
 tanica
@@ -11868,6 +11884,7 @@ trochosphaera
 trockery
 troco
 troiades
+troika
 trominos
 trompillo
 tronc
@@ -12415,6 +12432,7 @@ vauxhallian
 vectorcardiography
 vegetalcule
 veiner
+velika
 vellala
 velocipede
 venal
@@ -12886,6 +12904,7 @@ zorinos
 zoris
 zorrillo
 zuisin
+zuleika
 zurbian
 zuzim
 zuzzim
