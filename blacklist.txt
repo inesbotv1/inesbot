@@ -253,7 +253,6 @@ vr
 vs
 vug
 waa
-wc
 wee
 wf
 wg
