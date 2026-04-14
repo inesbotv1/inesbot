@@ -27,7 +27,6 @@ ct
 cz
 daa
 db
-dc
 ddt
 dhi
 dib
