@@ -1228,7 +1228,6 @@ barbula
 bardiglio
 bardo
 bareka
-barflys
 bargainees
 bargainer
 barilla
@@ -1903,7 +1902,6 @@ butcheress
 buteo
 butleress
 buttercreams
-butterflys
 buttermouth
 butterscotch
 buttinskies
@@ -3564,7 +3562,6 @@ deducing
 deepen
 deeper
 deepfroze
-deerflys
 deeving
 defacing
 defencing
@@ -4892,7 +4889,6 @@ fioritura
 firearm
 firearms
 firebombers
-fireflys
 firepan
 firepowers
 fiscus
@@ -6119,7 +6115,6 @@ hotliner
 hotpress
 housecleaner
 housedress
-houseflys
 housekeeper
 housemistress
 housesmith
@@ -9241,7 +9236,6 @@ outechoed
 outer
 outfacing
 outfencing
-outflys
 outgarth
 outgiving
 outgleams
