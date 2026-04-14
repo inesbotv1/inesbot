@@ -50,11 +50,9 @@ agan
 agap
 agel
 agge
-agla
 agle
 agli
 agni
-agog
 ahau
 ahin
 ahun
@@ -64,7 +62,6 @@ aime
 aird
 airg
 aja
-aji
 ajo
 ajon
 aken
@@ -110,7 +107,6 @@ anak
 anau
 angr
 anha
-anis
 anit
 anoc
 anoe
@@ -124,7 +120,6 @@ apel
 apha
 aphy
 apin
-apis
 apit
 apoa
 apoi
@@ -146,7 +141,6 @@ ardo
 arel
 arib
 arki
-arms
 arsc
 arta
 arth
@@ -190,7 +184,6 @@ baca
 bama
 bany
 basu
-bats
 baza
 bazi
 beed
@@ -221,7 +214,6 @@ brug
 buca
 bugo
 bula
-burh
 buru
 buto
 byn
@@ -254,7 +246,6 @@ crya
 cuin
 cule
 culi
-cund
 cuta
 cuth
 cymo
@@ -274,10 +265,8 @@ dham
 diac
 diae
 diak
-dica
 dici
 dide
-dier
 digo
 dii
 diod
@@ -377,17 +366,14 @@ exen
 exin
 exos
 eyef
-faur
 fich
 fida
 fige
 frid
-from
 furb
 furt
 gada
 gana
-gane
 gano
 garu
 gava
@@ -397,7 +383,6 @@ geas
 geel
 gema
 geri
-gery
 ghar
 ghu
 gilp
@@ -408,7 +393,6 @@ gnet
 goba
 gobe
 goda
-goma
 gott
 goud
 griv
@@ -422,7 +406,6 @@ guya
 haba
 habb
 hach
-hadj
 haga
 hage
 haim
@@ -455,10 +438,8 @@ hya
 hyal
 hyda
 hyge
-hyps
 hyr
 hyst
-ibis
 ica
 icef
 icel
@@ -502,14 +483,9 @@ isin
 ison
 isor
 itha
-jah
-jain
-jape
-jaun
 jeri
 jero
 jiga
-jinn
 jis
 joba
 joli
@@ -541,7 +517,6 @@ kini
 kint
 kita
 klin
-klip
 kog
 kohe
 kool
@@ -569,13 +544,11 @@ leit
 lenn
 lepp
 lesi
-levo
 lian
 lieb
 liot
 lito
 loh
-loka
 lomb
 lomi
 losa
@@ -606,7 +579,6 @@ mita
 mne
 mni
 molo
-momo
 mude
 mula
 muls
@@ -615,7 +587,6 @@ mylo
 nani
 nant
 nath
-neal
 nedd
 neel
 nees
@@ -710,7 +681,6 @@ pez
 phae
 phea
 pher
-pias
 pid
 piel
 piri
@@ -735,14 +705,10 @@ puki
 pund
 purt
 pyon
-qat
 qued
-raca
 rapa
-rasa
 raso
 rawl
-raya
 redt
 regg
 regn
@@ -766,7 +732,6 @@ rimp
 rinn
 ripi
 riso
-rist
 rito
 roba
 roco
@@ -778,7 +743,6 @@ roni
 ropi
 rosi
 roso
-roto
 rowl
 royn
 roze
@@ -795,7 +759,6 @@ saig
 sait
 sarn
 sats
-saum
 sawa
 schi
 scod
@@ -806,7 +769,6 @@ sest
 sewa
 shek
 shev
-shia
 shig
 shis
 shl
@@ -822,7 +784,6 @@ skop
 slie
 smol
 smr
-soka
 somm
 sono
 sowe
@@ -836,7 +797,6 @@ taca
 tah
 tair
 talt
-tano
 tany
 tanz
 taph
@@ -892,7 +852,6 @@ tzo
 uga
 ugg
 ulic
-ulm
 uma
 umia
 umpt
@@ -944,7 +903,6 @@ wala
 wals
 wani
 wara
-ways
 weh
 wein
 wers
@@ -973,4 +931,3 @@ zhen
 zim
 zlot
 zois
-zug
