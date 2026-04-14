@@ -4757,7 +4757,6 @@ falsest
 falsi
 falun
 familic
-familys
 fams
 fandabidozi
 fanegada
@@ -7386,7 +7385,6 @@ lignography
 lilacin
 lilian
 lillian
-lilys
 limbers
 limbi
 limbo
