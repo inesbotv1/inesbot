@@ -676,6 +676,7 @@ pero
 pesh
 pez
 phae
+phal
 phea
 pher
 pid
