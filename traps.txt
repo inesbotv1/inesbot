@@ -964,7 +964,6 @@ schi
 scht
 scod
 scus
-seh
 seli
 sema
 seph
