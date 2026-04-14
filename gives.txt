@@ -384,7 +384,6 @@ amiranha
 amita
 ammelin
 amnio
-amober
 amoebaeum
 amoebeum
 amoebian
@@ -2612,7 +2611,6 @@ corpuscule
 corrades
 correctress
 corrivals
-corrober
 corrosiving
 corrupter
 corruptress
@@ -3311,7 +3309,6 @@ disprovals
 disproving
 disputer
 disremembers
-disrober
 disrobers
 disrupter
 dissait
@@ -3734,7 +3731,6 @@ enracing
 enravish
 enregistry
 enrheum
-enrober
 enrobers
 ensampler
 ensconcing
@@ -3743,7 +3739,6 @@ ensepulchre
 enshrinees
 enskies
 enslaving
-ensober
 enstyle
 entelechy
 entelodon
@@ -4600,7 +4595,6 @@ gonophoric
 gonopod
 gonostyle
 gonothecae
-goober
 goobers
 goodwin
 goonda
@@ -7494,7 +7488,6 @@ nonrivals
 nonruminant
 nonsacrificing
 nonsaving
-nonsober
 nonsonant
 nonspectral
 nonstainer
@@ -7591,7 +7584,6 @@ octanol
 octarchy
 octastyle
 octateuch
-october
 octobers
 octodactyle
 octodecimo
@@ -9048,7 +9040,6 @@ prison
 prissily
 pritchett
 proanarchy
-prober
 probers
 proboulevard
 procambial
@@ -9835,7 +9826,6 @@ roams
 robalito
 robbers
 robbery
-rober
 rockall
 rockcress
 rockery
@@ -10615,7 +10605,6 @@ snowshoed
 snubbers
 soaken
 sobbers
-sober
 sobers
 sociography
 sockeye
@@ -12252,7 +12241,6 @@ unslouchy
 unsluicing
 unslumbery
 unsnatch
-unsober
 unsobers
 unsolacing
 unsonant
@@ -12582,7 +12570,6 @@ wankapin
 wapokomo
 waratah
 wardress
-wardrober
 wardrobers
 wargamers
 warhorse
@@ -12862,7 +12849,6 @@ zingano
 zingibers
 zinjanthropi
 zinke
-zinober
 zirbanit
 zlotych
 zodiac
