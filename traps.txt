@@ -880,7 +880,6 @@ url
 uron
 uror
 urso
-usi
 usp
 uss
 usti
