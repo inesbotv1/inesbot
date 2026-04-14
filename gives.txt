@@ -363,6 +363,7 @@ allasch
 allegge
 allegoric
 allegri
+allelomorph
 allentato
 allentiacan
 alliancing
@@ -370,7 +371,9 @@ alligarta
 allison
 allmouth
 allodesmism
+allomorph
 allophylian
+allothimorph
 allowancing
 almacen
 almaciga
@@ -468,6 +471,7 @@ amolilla
 amooving
 amoris
 amoroso
+amorph
 amouret
 amoving
 ampalaya
@@ -652,6 +656,7 @@ anthriscus
 anthropogeographer
 anthropogeography
 anthropography
+anthropomorph
 anthropopathia
 anthropophysiography
 anthropotoxin
@@ -1044,6 +1049,7 @@ autohemorrhage
 autoicous
 autolithographer
 autolithography
+automorph
 autonephrotoxin
 autoneurotoxin
 autopathography
@@ -1508,6 +1514,7 @@ biloxi
 bimahs
 bimbashis
 bimbo
+bimorph
 binal
 bindass
 biner
@@ -1530,6 +1537,7 @@ biographer
 biography
 bioindustry
 biomolecule
+biomorph
 biophilic
 biophysiography
 biordinal
@@ -2296,6 +2304,7 @@ cedars
 cedilla
 cedrus
 celebres
+celeomorph
 celeomorphae
 celidographer
 celidography
@@ -2806,6 +2815,7 @@ coccosteus
 coccous
 coccule
 coccygeus
+coccygomorph
 coccygomorphae
 cochromatography
 cocinero
@@ -3057,6 +3067,7 @@ copse
 copter
 coquilla
 coracobrachialis
+coracomorph
 coracomorphae
 coracoradialis
 corallian
@@ -3429,6 +3440,7 @@ cypher
 cypress
 cypselae
 cypseli
+cypselomorph
 cypselomorphae
 cyrenaica
 cyrilla
@@ -3781,6 +3793,7 @@ dimin
 diminuendoed
 dimisi
 dimoric
+dimorph
 dinarchy
 diner
 dinero
@@ -4124,9 +4137,11 @@ dyarchy
 dynamism
 dyostyle
 dysbulic
+dysmeromorph
 dysodile
 dysphemism
 dysphoric
+dysporomorph
 dystrophaeus
 dytiscus
 eagle
@@ -4162,6 +4177,7 @@ ecophene
 ecstatica
 ectognatha
 ectoloph
+ectomorph
 ectoparasitica
 ectorhinal
 ectosarcous
@@ -4247,6 +4263,7 @@ elemol
 elench
 eleutheri
 eleutherococci
+eleutheromorph
 eleventeenth
 eleventh
 elian
@@ -4305,6 +4322,7 @@ empyreuma
 emulatress
 emuls
 enaluron
+enantiomorph
 enantiopathia
 enarched
 enarms
@@ -4339,6 +4357,7 @@ endoclinal
 endocrinal
 endocycle
 endognath
+endomorph
 endoparasitica
 endopleura
 endopod
@@ -4443,6 +4462,7 @@ epeus
 ephebeum
 ephelis
 ephemera
+ephemeromorph
 ephoric
 ephphatha
 epicardiac
@@ -4512,7 +4532,9 @@ equuleus
 erechtheum
 erechtheus
 erfurt
+ergatandromorph
 ergataner
+ergatomorph
 ergophobiac
 ergotoxin
 erica
@@ -4598,6 +4620,7 @@ euchre
 eucopepoda
 eudesmol
 eugeosynclinal
+eumeromorph
 euphemism
 euphorbial
 euphoric
@@ -5278,6 +5301,7 @@ geosynclinal
 geotilla
 gepik
 geraera
+geranomorph
 geranomorphae
 gereagle
 germinal
@@ -5607,6 +5631,7 @@ gymnotid
 gymnotokous
 gynaeceum
 gynandrarchy
+gynandromorph
 gynarchy
 gynecophoric
 gynophoric
@@ -5827,6 +5852,7 @@ hemicardiac
 hemichorda
 hemicycle
 hemielytral
+hemimorph
 hemipode
 hemipodii
 hemipter
@@ -6003,6 +6029,7 @@ holognatha
 holographer
 holography
 holometabolian
+holomorph
 holorhinal
 holosteum
 holothoracic
@@ -6011,6 +6038,7 @@ holubtsi
 homarus
 hombres
 homekeeper
+homeomorph
 homeothermism
 homeschooler
 homesourcing
@@ -6022,10 +6050,12 @@ homoclinal
 homocycle
 homoeoarchy
 homoeography
+homoeomorph
 homography
 homoiothermism
 homolegalis
 homolography
+homomorph
 homoneura
 homophene
 homoplassy
@@ -6156,6 +6186,7 @@ hydrographer
 hydrography
 hydroguret
 hydrometeor
+hydromorph
 hydropac
 hydrophilic
 hydroplaner
@@ -6191,6 +6222,7 @@ hyperdolichocephal
 hyperdulic
 hyperepinephry
 hypermetaphoric
+hypermorph
 hyperoodon
 hyperpathia
 hyperphoric
@@ -6216,6 +6248,7 @@ hypogaeum
 hypogonadia
 hypohyal
 hypolemniscus
+hypomorph
 hypophosphoric
 hypophyge
 hypoplastral
@@ -6236,6 +6269,7 @@ hypsography
 hyraceum
 hyracodon
 hysterorrhaphy
+hystricomorph
 iachimo
 iambographer
 ianthina
@@ -6624,6 +6658,7 @@ isoclinal
 isography
 isogriv
 isomera
+isomorph
 isonitroso
 isophene
 isophenomenal
@@ -6833,6 +6868,7 @@ kamikaze
 kamleika
 kamme
 kamokamo
+kamptomorph
 kanae
 kanaima
 kanap
@@ -7131,6 +7167,7 @@ laeti
 lagan
 lagarto
 lagerspetze
+lagomorph
 lagopode
 lagrimoso
 lagunas
@@ -7385,6 +7422,7 @@ lipliner
 lipocardiac
 lipoed
 lipography
+lipomorph
 lipophilic
 lipopod
 lipopoda
@@ -7954,6 +7992,7 @@ mesocephal
 mesocoelian
 mesogastral
 mesometral
+mesomorph
 mesonemertini
 mesophilic
 mesoplastral
@@ -8077,6 +8116,7 @@ microlepidopter
 microlevel
 micrometallographer
 micrometallography
+micromorph
 micronucleus
 micropetrography
 microphage
@@ -8343,6 +8383,7 @@ morocota
 moron
 moroni
 morosest
+morph
 morphea
 morpheus
 morphographer
@@ -8501,6 +8542,7 @@ myocoel
 myofibrilla
 myographer
 myography
+myomorph
 myoneme
 myopathia
 myorrhaphy
@@ -8620,6 +8662,7 @@ nemertini
 neobeckia
 neobotany
 neoconstructivist
+neomorph
 neomylodon
 neopagan
 neostyle
@@ -9045,6 +9088,7 @@ opaqued
 opegrapha
 opercule
 ophiography
+ophiomorph
 ophiopluteus
 ophiurid
 ophthalmography
@@ -9105,6 +9149,7 @@ orison
 ormazd
 ornithobiography
 ornithography
+ornithomorph
 ornithopappi
 ornithopod
 ornithopoda
@@ -9487,6 +9532,7 @@ palmula
 palominos
 paludinal
 palustral
+palynomorph
 pampa
 pampadromaeus
 pampero
@@ -9513,6 +9559,7 @@ panspermism
 pantagruel
 pantagruelian
 pantalet
+pantamorph
 pantarchy
 pantdress
 pantelegraphy
@@ -9523,6 +9570,7 @@ pantochromism
 pantodon
 pantographer
 pantography
+pantomorph
 pantopod
 pantopoda
 paomo
@@ -9569,6 +9617,7 @@ paramedicos
 parametral
 paramiographer
 paramita
+paramorph
 paramyelin
 parandrus
 paranthodon
@@ -9726,6 +9775,7 @@ peeress
 peeving
 peevish
 pelanos
+pelargomorph
 pelargomorphae
 pelecypoda
 peleus
@@ -9788,6 +9838,7 @@ perched
 perchloric
 perchloroethene
 percing
+percomorph
 pereiopod
 perendinant
 pereopod
@@ -9814,6 +9865,7 @@ perihelian
 perilla
 perilunes
 perimetral
+perimorph
 perinaeum
 perineorrhaphy
 perineovaginal
@@ -9831,6 +9883,7 @@ perirhinal
 perisarcous
 perispomenons
 perissodactyle
+peristeromorph
 peristeromorphae
 peristeropod
 peristeropode
@@ -10014,8 +10067,10 @@ phthoric
 phulwara
 phycography
 phylarchy
+phyllamorph
 phylloclades
 phyllocladia
+phyllomorph
 phyllophaga
 phyllophagan
 phyllopod
@@ -10030,6 +10085,7 @@ physapoda
 physharmonica
 physicianer
 physicochemistry
+physicomorph
 physio
 physiochemistry
 physiographer
@@ -10201,8 +10257,10 @@ pledgeor
 pleiades
 plench
 plenilunes
+pleomorph
 pleopod
 pleospora
+pleromorph
 plerophoric
 plethodon
 plethoric
@@ -10327,6 +10385,7 @@ polymastiga
 polymastodon
 polymelian
 polymicrobial
+polymorph
 polymyxin
 polynaphthene
 polyodon
@@ -10697,6 +10756,7 @@ promisor
 promo
 promoed
 promonarchy
+promorph
 promotress
 prompter
 promptress
@@ -10757,6 +10817,7 @@ protohistoric
 protoloph
 protomalal
 protomammalian
+protomorph
 protoneme
 protonemertini
 protoneuron
@@ -10816,6 +10877,7 @@ pseudohistoric
 pseudolabial
 pseudoministry
 pseudomonades
+pseudomorph
 pseudoneuropter
 pseudonymuncule
 pseudopagan
@@ -10949,6 +11011,7 @@ pyroxyle
 pyrrhonean
 pythagoric
 pythia
+pythonomorph
 qaimaqams
 qawwalis
 qawwals
@@ -11495,6 +11558,7 @@ rhipsalis
 rhizautoicous
 rhizobial
 rhizocephalans
+rhizomorph
 rhizopod
 rhizopoda
 rhizota
@@ -11925,6 +11989,7 @@ scirtopod
 scirtopoda
 scissorsmith
 sciurid
+sciuromorph
 sclatch
 sclerospora
 sclerotica
@@ -12362,6 +12427,7 @@ skene
 skeppund
 sketched
 sketchy
+skeuomorph
 skevish
 skewers
 skiagrapher
@@ -12602,6 +12668,7 @@ spetched
 spewers
 sphacelotoxin
 sphene
+spheniscomorph
 spheniscomorphae
 spheniscus
 sphenobasilic
@@ -13514,6 +13581,7 @@ tetradecapoda
 tetraiodide
 tetramera
 tetrameralian
+tetramorph
 tetraodon
 tetrapla
 tetrapleuron
@@ -13575,6 +13643,7 @@ theraphosa
 therebiforn
 therell
 thereup
+theriomorph
 thermochemistry
 thermochromism
 thermoclinal
@@ -13582,6 +13651,7 @@ thermogeography
 thermographer
 thermography
 thermophilic
+theromorph
 theropod
 theropoda
 theseum
@@ -13880,6 +13950,7 @@ tresillo
 tress
 triactinal
 triaene
+triamorph
 triarchy
 tribades
 tribo
@@ -13924,6 +13995,7 @@ trilophodon
 trimera
 trimestral
 trimoric
+trimorph
 trinal
 trinucleus
 triodon
@@ -15107,6 +15179,7 @@ xenophya
 xenosaurid
 xerographer
 xerography
+xeromorph
 xeroradiography
 xicaque
 ximenean
@@ -15203,6 +15276,7 @@ zeuglodon
 zeus
 zhivago
 ziamet
+zigamorph
 ziggurat
 zikkurat
 zikurat
@@ -15233,6 +15307,7 @@ zoographer
 zoography
 zookeeper
 zoomastigoda
+zoomorph
 zoophaga
 zoophagan
 zoophilic
