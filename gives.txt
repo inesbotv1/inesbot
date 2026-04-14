@@ -27,6 +27,7 @@ abhinaya
 abhiseka
 abigeus
 abiturs
+abiuret
 ablaut
 ablepharus
 aboulic
@@ -68,6 +69,7 @@ acervatim
 acetabula
 acetanisidide
 acetla
+acetylbiuret
 acetyliodide
 achaenodon
 achage
@@ -380,6 +382,7 @@ aminos
 amiranha
 amita
 ammelin
+ammoniuret
 amnio
 amoebaeum
 amoebeum
@@ -388,6 +391,7 @@ amoebula
 amooving
 amoris
 amoroso
+amouret
 amoving
 ampalaya
 ampelis
@@ -567,6 +571,7 @@ antihierarchy
 antikenotoxin
 antimicrobial
 antimonarchy
+antimoniuret
 antineurotoxin
 antineutral
 antineutrinos
@@ -745,6 +750,7 @@ arroba
 arsanilic
 arsenal
 arsenillo
+arseniuret
 arsono
 artemisin
 arteriography
@@ -1292,6 +1298,7 @@ bitreadle
 bitstreams
 bittercress
 bitturs
+biuret
 bivalve
 biventral
 bixin
@@ -1503,6 +1510,7 @@ bromindigo
 bromiodide
 bromo
 bromoiodide
+bromuret
 bronc
 bronchography
 bronchorrhaphy
@@ -1549,6 +1557,7 @@ bunty
 buphaga
 bupkus
 burdigalian
+buret
 burgheress
 burghuls
 burgullian
@@ -1755,6 +1764,7 @@ carbonades
 carbonadoed
 carbonero
 carbonnades
+carburet
 carcharodon
 cardamom
 cardanol
@@ -2791,6 +2801,7 @@ curae
 curat
 curbers
 curchy
+curet
 curiosa
 curioso
 curiousest
@@ -2813,6 +2824,7 @@ cyaathia
 cyanol
 cyanophoric
 cyanospiza
+cyanuret
 cyathia
 cybele
 cycasin
@@ -3059,6 +3071,7 @@ destreams
 destress
 destructivist
 destry
+desulphuret
 detainees
 detainer
 detectivist
@@ -3273,6 +3286,8 @@ district
 distrito
 disturbers
 distyle
+disulfuret
+disulphuret
 disvisor
 disweapon
 diswench
@@ -3426,6 +3441,7 @@ dupondii
 duramatral
 duraspinalis
 duress
+duret
 durrell
 duryodhana
 dusio
@@ -4080,6 +4096,7 @@ fleapit
 fleecing
 fleishig
 flench
+fleuret
 fleuron
 fleury
 fleuve
@@ -5100,6 +5117,7 @@ hydrangeas
 hydraulic
 hydriodide
 hydroborofluoric
+hydrocarburet
 hydrochemistry
 hydrochloric
 hydrochoric
@@ -5111,12 +5129,16 @@ hydrofluoboric
 hydrofluoric
 hydrographer
 hydrography
+hydroguret
 hydrometeor
 hydrophilic
 hydropowers
 hydrorhizal
+hydroselenuret
+hydrosulphuret
 hydrothecae
 hydrothoracic
+hydruret
 hydrus
 hydurilic
 hyetography
@@ -5456,6 +5478,7 @@ inweaving
 iodide
 iodinophilic
 iodoso
+ioduret
 ionoxalis
 ipecacuanha
 ipid
@@ -5497,6 +5520,7 @@ isoporic
 isopropanol
 isosporic
 israelis
+isuret
 iswara
 italian
 itchy
@@ -6685,6 +6709,7 @@ microbial
 microbian
 microblades
 microbrewers
+microburet
 microcamera
 microchemistry
 microcinematography
@@ -8300,6 +8325,7 @@ phospholipid
 phosphorescing
 phosphoric
 phosphorography
+phosphuret
 photechy
 photinos
 photoalgraphy
@@ -10051,6 +10077,7 @@ sejero
 selachostomi
 selcouth
 selecta
+seleniuret
 selenographer
 selenography
 selfeffacing
@@ -10138,6 +10165,7 @@ seseli
 seselis
 sesquipedalian
 sesquiquarta
+sesquisulphuret
 setenant
 setirostral
 setophaga
@@ -10261,6 +10289,7 @@ silencing
 silica
 siliceofluoric
 silicifluoric
+siliciuret
 silicofluoric
 silicule
 silkgrowers
@@ -10871,11 +10900,15 @@ suitress
 sukiyaki
 sulaba
 sulfanilic
+sulfarseniuret
 sulfhydryl
+sulfuret
 sulkies
 sulphanilic
+sulpharseniuret
 sulphhydryl
 sulphophosphoric
+sulphuret
 sulphydryl
 sultany
 sumatra
@@ -10927,6 +10960,7 @@ superrenal
 supersonant
 superstrict
 superstructral
+supersulphuret
 supersuperb
 supervirtuoso
 supervisor
@@ -11028,6 +11062,7 @@ tabers
 tabira
 tabitha
 tabooed
+tabouret
 tabula
 tabun
 tacan
@@ -11075,6 +11110,7 @@ tamarillo
 tamashek
 tambers
 tamboura
+tambouret
 tamburitza
 tamilian
 tamilic
@@ -11199,6 +11235,7 @@ teleutosporic
 televiewers
 televisor
 teliosporic
+telluret
 telpher
 temacha
 temazepams
@@ -11243,6 +11280,7 @@ terrapin
 territelae
 terrorisor
 tersest
+tersulphuret
 tertenant
 terutero
 teruteru
@@ -11485,6 +11523,7 @@ tosily
 tossily
 totonacan
 touchy
+touret
 touristry
 tournant
 tournasin
@@ -12607,6 +12646,7 @@ zimbi
 zincing
 zincographer
 zincography
+zincuret
 zindabad
 zingana
 zingano
