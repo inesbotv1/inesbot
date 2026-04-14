@@ -8850,7 +8850,6 @@ prestress
 presupervisor
 presuppress
 pretergress
-preterito
 prethoracic
 pretibial
 pretracing
