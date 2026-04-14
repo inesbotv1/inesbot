@@ -151,7 +151,6 @@ ms
 mt
 naa
 naw
-nb
 nc
 nd
 nde
