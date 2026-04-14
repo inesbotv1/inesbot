@@ -448,6 +448,7 @@ icos
 ict
 iffi
 iga
+ika
 ileo
 ilic
 illo
