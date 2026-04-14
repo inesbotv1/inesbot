@@ -57,7 +57,6 @@ accepter
 acceptress
 accipitral
 accipter
-acclaimers
 accolades
 accouter
 accoutred
@@ -163,7 +162,6 @@ aerogeography
 aerogramme
 aerographer
 aerography
-aeronomers
 aerophilic
 aerophotography
 aerophotos
@@ -175,7 +173,6 @@ afacing
 affettuoso
 affiancing
 affich
-affirmers
 afflict
 afforcing
 aflatoxin
@@ -219,7 +216,6 @@ aillt
 ailourophilic
 ailurophilic
 ailuropoda
-aimers
 airampo
 airliner
 airpowers
@@ -297,7 +293,6 @@ alkies
 alkool
 allantica
 allasch
-allcomers
 allegge
 allegoric
 allegri
@@ -434,7 +429,6 @@ anaconda
 anaerobian
 anagap
 anaglyptography
-anagrammers
 anakoluthia
 anaktoron
 analcime
@@ -559,7 +553,6 @@ anticamera
 anticardiac
 anticivilian
 anticodon
-anticonsumers
 anticreeper
 anticrepuscule
 anticytotoxin
@@ -647,7 +640,6 @@ approving
 appurtenant
 aprowl
 apso
-aptamers
 apter
 apterygota
 apulian
@@ -730,7 +722,6 @@ aristotelian
 arithmography
 armadillo
 armatoli
-armers
 armigeri
 armisonant
 armonica
@@ -796,7 +787,6 @@ assisa
 assisan
 assoluta
 assonant
-assumers
 assumpt
 assuror
 asteriscus
@@ -810,7 +800,6 @@ astrodon
 astrographer
 astrography
 astrohatch
-astronomers
 astrophotographer
 astrophotography
 astrospectral
@@ -882,9 +871,7 @@ autorrhaphy
 autosaving
 autoschediaze
 autosporic
-autotimers
 autotoxin
-autotransformers
 autotypography
 autovalet
 autovalve
@@ -939,7 +926,6 @@ backspacing
 backsplicing
 backstabbers
 backstair
-backswimmers
 backup
 backus
 bacteriophage
@@ -1001,7 +987,6 @@ balun
 balustrades
 bambinos
 bamboula
-bammers
 bams
 banak
 bandala
@@ -1037,7 +1022,6 @@ barkery
 barmouth
 barms
 barnardo
-barnstormers
 baroco
 baroko
 barometrography
@@ -1105,7 +1089,6 @@ bdelloura
 beachcombers
 beadle
 beagle
-beamers
 beams
 bearess
 bearm
@@ -1120,12 +1103,10 @@ becharms
 becrawl
 bedchambers
 bedide
-bedlamers
 bedliner
 bedrench
 bedress
 beduncing
-bedwarmers
 beechy
 beekeeper
 beelzebubian
@@ -1168,7 +1149,6 @@ bemouth
 benadryl
 benamee
 bench
-benchwarmers
 benchy
 benefactress
 beneficing
@@ -1291,7 +1271,6 @@ bioindustry
 biomolecule
 biophilic
 biophysiography
-biopolymers
 biostratigraphy
 biotoxin
 bioweapon
@@ -1327,11 +1306,9 @@ blackpatch
 blades
 blaguer
 blahlaut
-blamers
 blanketflowers
 blankies
 blanquillo
-blasphemers
 blastocoel
 blastophaga
 blastophoric
@@ -1351,7 +1328,6 @@ blockholer
 blockies
 blogstreams
 bloodstreams
-bloomers
 bloosme
 blotch
 blotchy
@@ -1401,7 +1377,6 @@ bookies
 bookkeeper
 bookpress
 boolian
-boomers
 boothage
 bootid
 borachio
@@ -1428,7 +1403,6 @@ botany
 botch
 botchy
 botticellian
-bottomers
 boulevard
 bouncing
 bounty
@@ -1465,7 +1439,6 @@ bradycauma
 bradypode
 brainer
 brainpowers
-brainstormers
 braird
 branchage
 branchihyal
@@ -1490,11 +1463,9 @@ brazilian
 breakdancing
 breakup
 breams
-breastsummers
 brekkies
 brenne
 brennschluss
-bressummers
 brett
 bretticing
 brevicauda
@@ -1512,7 +1483,6 @@ brigades
 briguer
 briks
 brillo
-brimmers
 brindisi
 briner
 brisa
@@ -1531,7 +1501,6 @@ brokery
 bromelin
 bromindigo
 bromiodide
-brommers
 bromo
 bromoiodide
 bronc
@@ -1542,7 +1511,6 @@ bronteum
 brookies
 brotany
 bruch
-brummers
 brunel
 bruno
 bruscus
@@ -1565,7 +1533,6 @@ bukshis
 bullockies
 bullosa
 bumbaze
-bummers
 bunas
 bunchy
 buncing
@@ -1591,7 +1558,6 @@ burrell
 burrito
 burrowers
 burushaski
-bushhammers
 busily
 butanol
 butch
@@ -1709,7 +1675,6 @@ cameography
 camera
 camerlengo
 camisades
-cammers
 campa
 campanero
 campesinos
@@ -1765,7 +1730,6 @@ capriccioso
 capripede
 caprolactams
 capsizal
-capsomers
 capsulorrhaphy
 captcha
 captiving
@@ -2007,7 +1971,6 @@ chaetopoda
 chaga
 chagan
 chainer
-chairwarmers
 chaja
 chalans
 chalazal
@@ -2046,7 +2009,6 @@ charades
 charadriomorphae
 chargoggagoggmanchauggagoggchaubunagungamaugg
 charkhana
-charmers
 charms
 charpoys
 charqued
@@ -2056,7 +2018,6 @@ chartography
 chastacosta
 chateus
 chattah
-chaumers
 chauncing
 chauntress
 chauve
@@ -2118,7 +2079,6 @@ chimaera
 chimalapa
 chimar
 chimera
-chimers
 chimin
 chimo
 china
@@ -2135,7 +2095,6 @@ chiricahua
 chirico
 chirographer
 chirography
-chironomers
 chiropod
 chiropodistry
 chiropter
@@ -2150,7 +2109,6 @@ chlamydosporic
 chloric
 chloriodide
 chloroethene
-chloroformers
 chloroiodide
 chlorophyllian
 chlorospinel
@@ -2290,10 +2248,8 @@ civilian
 clabbers
 clabbery
 clades
-claimers
 clairschach
 clambers
-clammers
 clans
 clapmatch
 clapperclawers
@@ -2311,7 +2267,6 @@ claut
 clavacin
 clavodeltoideus
 clawers
-clawhammers
 cleaving
 clechy
 clench
@@ -2450,7 +2405,6 @@ combinatoric
 combiner
 comedienne
 comembers
-comers
 cometographer
 cometography
 comfortress
@@ -2459,7 +2413,6 @@ comitadjis
 commandress
 commencing
 commercing
-commers
 committiturs
 commonplacing
 commorse
@@ -2467,7 +2420,6 @@ commoving
 communer
 commuter
 comolecule
-comonomers
 companero
 comparativist
 comparison
@@ -2510,10 +2462,8 @@ conferencing
 confessionalian
 confessoress
 confiner
-confirmers
 confiteor
 conflict
-conformers
 confuter
 conglutinant
 congoleum
@@ -2546,7 +2496,6 @@ constituter
 constrainer
 constrict
 constructivist
-consumers
 consumpt
 contadinos
 container
@@ -2577,7 +2526,6 @@ cootch
 copaene
 copeognatha
 copepoda
-copolymers
 copopoda
 coppicing
 coprah
@@ -2646,7 +2594,6 @@ costata
 costocentral
 costothoracic
 costotrachelian
-costumers
 cotch
 cotenant
 coterell
@@ -2681,7 +2628,6 @@ counterparadox
 counterplans
 counterpoison
 counterpowers
-counterreformers
 counterstreams
 counterstyle
 countertrades
@@ -2713,7 +2659,6 @@ crackup
 cracovienne
 cradle
 craichy
-crammers
 crancelin
 craniographer
 craniography
@@ -2728,7 +2673,6 @@ craturs
 craunchy
 craving
 crawl
-creamers
 creams
 creatinephosphoric
 creatress
@@ -2743,7 +2687,6 @@ cress
 cretacic
 cribbers
 crimison
-crimmers
 crimp
 crinel
 crippler
@@ -2835,7 +2778,6 @@ cultrirostral
 culveriner
 cumbers
 cumbu
-cummers
 cumulonimbi
 cunabula
 cunan
@@ -2862,7 +2804,6 @@ cuscuta
 cusinero
 cuspid
 custodiae
-customers
 cutch
 cutcha
 cuter
@@ -2938,7 +2879,6 @@ daley
 dalis
 damascus
 damme
-dammers
 damnosa
 danae
 danazol
@@ -2965,7 +2905,6 @@ daubers
 daubery
 dauner
 dayabhaga
-daydreamers
 daydreams
 dayflowers
 dazer
@@ -2994,7 +2933,6 @@ decigramme
 decime
 decipher
 deckoed
-declaimers
 declinant
 decliner
 declutch
@@ -3012,7 +2950,6 @@ deeper
 deepfroze
 deeving
 defacing
-defamers
 defencing
 defendress
 defenso
@@ -3021,11 +2958,9 @@ defilades
 definer
 defleaed
 deflowers
-defoamers
 defoams
 deforceor
 deforcing
-deformers
 deforse
 defroze
 degauss
@@ -3074,7 +3009,6 @@ demonographer
 demonography
 denat
 dench
-dendrimers
 dendrography
 dendroica
 deneuve
@@ -3099,7 +3033,6 @@ depress
 deprivals
 depriving
 deprogramme
-deprogrammers
 dereferencing
 derelict
 derepress
@@ -3149,7 +3082,6 @@ devolving
 devouress
 devouter
 dewani
-dewormers
 dextral
 dextrocardiac
 dextrorse
@@ -3169,7 +3101,6 @@ diabrotica
 diaconica
 diadochy
 diaene
-diagrammers
 diakonika
 dialog
 dialoguer
@@ -3178,8 +3109,6 @@ diametral
 diarchy
 diaspora
 diasporic
-diastereoisomers
-diastereomers
 diastral
 diastyle
 diatoric
@@ -3213,11 +3142,9 @@ digress
 diiodide
 diluter
 dimera
-dimers
 dimetrodon
 dimin
 diminuendoed
-dimmers
 dimoric
 dinarchy
 diner
@@ -3253,7 +3180,6 @@ dirhem
 disadvancing
 disapprovals
 disapproving
-disarmers
 disarms
 disavauncing
 disavowals
@@ -3266,7 +3192,6 @@ dischevel
 discing
 disciplinant
 discipliner
-disclaimers
 discographer
 discography
 disconsonant
@@ -3394,7 +3319,6 @@ doohickies
 doohickus
 doohinkus
 doolans
-doomers
 doomwatch
 doorkeeper
 doppler
@@ -3402,7 +3326,6 @@ dorcastry
 doric
 dorippid
 doris
-dormers
 doroscentral
 dorsalis
 dorse
@@ -3412,7 +3335,6 @@ dorsocephalad
 dorsothoracic
 dorsoventral
 doseh
-dotcommers
 douhua
 doula
 douma
@@ -3429,7 +3351,6 @@ dovyalis
 doweress
 dowers
 dowle
-downcomers
 downgrades
 downstair
 dowress
@@ -3453,7 +3374,6 @@ drawhorse
 drawl
 drawlatch
 drayhorse
-dreamers
 dreams
 dreamsily
 dreich
@@ -3475,7 +3395,6 @@ drouth
 droving
 drowsily
 drubbers
-drummers
 drunkery
 drupe
 dryades
@@ -3493,7 +3412,6 @@ duckshoving
 duettinos
 dukery
 dukuma
-dulcimers
 dumpler
 dunams
 dungy
@@ -3582,7 +3500,6 @@ elancing
 elans
 elapid
 elastica
-elastomers
 elatcha
 elatha
 elayl
@@ -3603,7 +3520,6 @@ electrography
 electrograving
 electrohydraulic
 electromagnet
-electromers
 electrometeor
 electromyography
 electroneutral
@@ -3637,7 +3553,6 @@ emanant
 emancipatress
 embacing
 emballonurid
-embalmers
 embargoed
 embassades
 embassadress
@@ -3654,7 +3569,6 @@ embroideress
 embryographer
 embryography
 emeute
-emmers
 emmoving
 emojis
 emoving
@@ -3672,7 +3586,6 @@ empyreuma
 emulatress
 emuls
 enaluron
-enantiomers
 enantiopathia
 enarms
 encatarrhaphy
@@ -3809,7 +3722,6 @@ epigraphy
 epihyal
 epikia
 epimanikia
-epimers
 epinikia
 epiphenomenal
 epiphloeum
@@ -3961,9 +3873,7 @@ excentral
 excepter
 excern
 excerpter
-excimers
 excisor
-exclaimers
 exclusivist
 excussio
 executer
@@ -3971,7 +3881,6 @@ executioneress
 executress
 exequaturs
 exercycle
-exhumers
 exilian
 exilic
 exmouth
@@ -4051,7 +3960,6 @@ farcing
 fardo
 farleus
 farmeress
-farmers
 farms
 farolito
 farrell
@@ -4059,7 +3967,6 @@ farth
 fascicule
 fasciculi
 fascinatress
-fathomers
 fatwaed
 faunas
 fauve
@@ -4123,7 +4030,6 @@ fikery
 filazer
 filipinos
 fillo
-filmers
 filmography
 filosa
 finagle
@@ -4142,7 +4048,6 @@ firearms
 firebombers
 firepan
 firepowers
-firmers
 fiscus
 fisheress
 fishgarth
@@ -4156,7 +4061,6 @@ fivish
 flackery
 flakies
 flambeed
-flamers
 flamethrowers
 flaminica
 flanagan
@@ -4181,9 +4085,7 @@ fleury
 fleuve
 flexography
 flexos
-flextimers
 flickery
-flimflammers
 flimsily
 floccing
 floccule
@@ -4211,7 +4113,6 @@ fluoric
 fluorography
 flutemouth
 fluter
-foamers
 foamflowers
 foams
 foison
@@ -4230,7 +4131,6 @@ fonticuli
 fontinalis
 fooler
 foothil
-footwarmers
 forastero
 forcarve
 forcing
@@ -4257,7 +4157,6 @@ forhooed
 foris
 forleaving
 forleit
-formers
 formula
 fornacic
 fornicatress
@@ -4282,7 +4181,6 @@ fragrancing
 fraken
 frakfurt
 frakturs
-framers
 frampler
 francae
 franchisor
@@ -4342,7 +4240,6 @@ fullans
 fullmouth
 fulmarus
 fulminant
-fumers
 funambulic
 funckia
 fungoed
@@ -4405,12 +4302,10 @@ gamboler
 gamekeeper
 gamelans
 gamelin
-gamers
 gamestress
 gametophoric
 gammarus
 gamme
-gammers
 gams
 ganderess
 gandoura
@@ -4436,7 +4331,6 @@ gastrocoel
 gastroduodenal
 gastrohysterorrhaphy
 gastrolienal
-gastronomers
 gastropod
 gastropoda
 gastropyloric
@@ -4517,7 +4411,6 @@ gillian
 gilliflowers
 gillyflowers
 gimcrackery
-gimmers
 gimmickery
 gingelis
 gingerades
@@ -4537,12 +4430,10 @@ glans
 glassblowers
 glassily
 glazer
-gleamers
 gleams
 gleit
 glenn
 glibbery
-glimmers
 glimpse
 gliosa
 glissades
@@ -4603,7 +4494,6 @@ goldenmouth
 goldminer
 gollans
 gomeisa
-gomers
 gommelin
 gomokus
 gonfanons
@@ -4628,7 +4518,6 @@ gorsehatch
 gospoda
 gospodars
 gospodipoda
-gossamers
 gotch
 gotcha
 gotchy
@@ -4701,7 +4590,6 @@ grison
 grizelin
 grobian
 groceress
-groomers
 grooving
 grossest
 grottoed
@@ -4740,7 +4628,6 @@ guenons
 guerison
 guideress
 guillotiner
-gummers
 gumshoed
 gunarchy
 gungy
@@ -4845,7 +4732,6 @@ hamamelis
 hamantasch
 hammams
 hammerdress
-hammers
 hamotzi
 hanafi
 handelian
@@ -4873,7 +4759,6 @@ hardwickia
 harebur
 harico
 harlequinades
-harmers
 harmonica
 harms
 harperess
@@ -4940,7 +4825,6 @@ heliotypography
 helixin
 helleboric
 helloed
-helmers
 helsinki
 helvetica
 helving
@@ -4958,7 +4842,6 @@ hemielytral
 hemipode
 hemipodii
 hemipter
-hemmers
 hemocoel
 hemoglobinophilic
 hemophage
@@ -4979,7 +4862,6 @@ hepatorenal
 hepatorrhaphy
 hepatotoxin
 hephaesteum
-hephthemimers
 heptanaphthene
 heptarchy
 heptastyle
@@ -5111,9 +4993,7 @@ holothoracic
 holubtsi
 homarus
 hombres
-homecomers
 homekeeper
-homers
 homeschooler
 homesourcing
 homestyle
@@ -5127,7 +5007,6 @@ homolegalis
 homolography
 homoneura
 homophene
-homopolymers
 homopter
 homosteus
 homuncule
@@ -5195,7 +5074,6 @@ hulchy
 hulloaed
 hulloed
 hullooed
-hummers
 hunchy
 hunkies
 huntress
@@ -5353,7 +5231,6 @@ imaginant
 imaginer
 imams
 imanlaut
-imbalmers
 imbecilic
 imbibers
 imbondo
@@ -5400,7 +5277,6 @@ incienso
 incisor
 incitress
 incliner
-incomers
 inconsonant
 inconveniencing
 incorpse
@@ -5437,13 +5313,11 @@ infectress
 inferencing
 infidelis
 infirmaress
-inflamers
 inflict
 influencing
 influenzal
 inforcing
 informatica
-informers
 infracentral
 infracostalis
 infralabial
@@ -5462,7 +5336,6 @@ inguinolabial
 inhabitress
 inhercing
 inheritress
-inhumers
 initiatress
 inkatha
 inkhosi
@@ -5583,7 +5456,6 @@ inweaving
 iodide
 iodinophilic
 iodoso
-ionomers
 ionoxalis
 ipecacuanha
 ipid
@@ -5615,7 +5487,6 @@ isochoric
 isography
 isogriv
 isomera
-isomers
 isonitroso
 isophene
 isophenomenal
@@ -5640,7 +5511,6 @@ jabul
 jackarooed
 jackass
 jackerooed
-jackhammers
 jackies
 jacklin
 jacobi
@@ -5665,7 +5535,6 @@ jambalaya
 jambers
 jambolans
 jambosa
-jammers
 jampanees
 jams
 janapan
@@ -5824,7 +5693,6 @@ katchina
 katha
 kathakalis
 katipunan
-katzenjammers
 kauch
 kaupapas
 kauru
@@ -5858,7 +5726,6 @@ kerving
 ketchy
 ketimin
 ketonimin
-kettledrummers
 ketupa
 kevel
 keyaki
@@ -5892,7 +5759,6 @@ kilogauss
 kilogramme
 kilomegacycle
 kimboed
-kimmers
 kimonoed
 kinderspiel
 kinematographer
@@ -5916,7 +5782,6 @@ klans
 klatch
 kleagle
 kleftiko
-klezmers
 klootch
 knackery
 knatch
@@ -5988,7 +5853,6 @@ kraken
 kranz
 kriegspiel
 kriegsspiel
-krimmers
 krishis
 kritarchy
 krithia
@@ -6067,7 +5931,6 @@ lambdiod
 lambers
 lamellirostral
 lamestreams
-lammers
 lampistry
 lampshades
 lampuki
@@ -6109,7 +5972,6 @@ lassoed
 latah
 latakia
 latch
-latecomers
 lateralis
 lateroventral
 latifondo
@@ -6156,7 +6018,6 @@ legislatress
 leglans
 leglin
 legumelin
-legwarmers
 lehaim
 lehua
 leiotrichy
@@ -6244,7 +6105,6 @@ limbers
 limbi
 limboed
 limeades
-limmers
 limoncillo
 limpid
 linen
@@ -6332,7 +6192,6 @@ lomita
 longirostral
 longliner
 longobardi
-longprimers
 looed
 lookup
 loosest
@@ -6345,7 +6204,6 @@ lorgnons
 loric
 lorica
 loricae
-lorimers
 loriner
 loris
 lorrainer
@@ -6472,7 +6330,6 @@ maharanees
 maharawal
 maharishis
 mahua
-maimers
 mainer
 mainliner
 mainour
@@ -6521,9 +6378,7 @@ malva
 mamakus
 mamboed
 mamee
-mamers
 mammalian
-mammers
 mammography
 mammonteus
 mammula
@@ -6772,7 +6627,6 @@ metagnath
 metagraphy
 metallographer
 metallography
-metamers
 metamict
 metamynodon
 metanemertini
@@ -6843,7 +6697,6 @@ microcycle
 microfaunas
 microfibers
 microfibres
-microfilmers
 microgauss
 micrognathia
 microgramme
@@ -6871,7 +6724,6 @@ microsthene
 microstress
 microwaving
 midstreams
-midsummers
 midventral
 midwatch
 midwiving
@@ -6897,7 +6749,6 @@ millstreams
 miltiades
 mimeoed
 mimeography
-mimers
 mimographer
 mimography
 minbu
@@ -6951,13 +6802,11 @@ misfortuner
 misgiving
 misgrades
 misimproving
-misinformers
 mislie
 misliving
 mismatch
 mismetred
 mismoving
-misnomers
 misnumbers
 misobserving
 misosopher
@@ -7038,11 +6887,9 @@ monodactyle
 monodon
 monogenetica
 monogonoporic
-monogrammers
 monographer
 monography
 monokini
-monomers
 monomict
 mononykus
 monopod
@@ -7153,7 +7000,6 @@ multisource
 multispectral
 multitoed
 multivalve
-mummers
 munchy
 mungy
 munshis
@@ -7176,7 +7022,6 @@ museographer
 museography
 museum
 mushmouth
-mushroomers
 musica
 musicographer
 musicography
@@ -7240,7 +7085,6 @@ naiades
 naileress
 naivist
 naja
-namers
 namibian
 nams
 namul
@@ -7355,7 +7199,6 @@ neutrinos
 neutrophilic
 nevadan
 nevel
-newcomers
 newichawanoc
 newstrades
 ngana
@@ -7363,7 +7206,6 @@ ngondo
 niacin
 nickery
 nicknamee
-nicknamers
 nidiot
 nielloed
 niersteiner
@@ -7371,11 +7213,9 @@ nightclubbers
 nightdress
 nightshades
 nimbi
-nimmers
 ninepin
 niner
 nineteenth
-ninnyhammers
 ninnywatch
 ninons
 ninos
@@ -7431,14 +7271,11 @@ noncoalescing
 noncomputer
 nonconceiving
 nonconcern
-nonconformers
 nonconnubial
 nonconserving
 nonconsonant
-nonconsumers
 noncorrupter
 noncounty
-noncustomers
 nonda
 nondeceiving
 nondefiner
@@ -7454,7 +7291,6 @@ nonenticing
 nonepiscopalian
 nonevolving
 nonfacing
-nonfarmers
 nonforgiving
 nongrieving
 nonhemophilic
@@ -7488,7 +7324,6 @@ nonpagan
 nonpartisan
 nonpenal
 nonperceiving
-nonperformers
 nonpetroleum
 nonphenomenal
 nonphilosopher
@@ -7496,7 +7331,6 @@ nonpracticing
 nonpregnant
 nonpress
 nonproducing
-nonprogrammers
 nonquota
 nonreceiving
 nonrecombinant
@@ -7517,7 +7351,6 @@ nonstress
 nonstretchy
 nonstyle
 nonsubscribers
-nonswimmers
 nontenant
 nonthoracic
 nonumbrellaed
@@ -7648,7 +7481,6 @@ oleography
 oleophilic
 oleum
 oligarchy
-oligomers
 oligotokeus
 oligotokous
 ollamh
@@ -7658,7 +7490,6 @@ ombrellinos
 ombres
 ombrophilic
 omentorrhaphy
-omers
 omikron
 omissio
 ommateum
@@ -7738,7 +7569,6 @@ originant
 originatress
 orison
 ormazd
-ormers
 ornithobiography
 ornithography
 ornithopappi
@@ -7827,7 +7657,6 @@ outgarth
 outgiving
 outgleams
 outhit
-outhomers
 outkeeper
 outlancing
 outlauncing
@@ -7851,7 +7680,6 @@ outproducing
 outracing
 outraving
 outred
-outremers
 outreproducing
 outrivals
 outromancing
@@ -7892,7 +7720,6 @@ overbalancing
 overbracing
 overbusily
 overcatch
-overcomers
 overcompress
 overconcern
 overcramme
@@ -7959,7 +7786,6 @@ oversurviving
 overswarth
 overtaken
 overthrowers
-overtimers
 overtowers
 overtrades
 overwarms
@@ -8061,7 +7887,6 @@ palisades
 palisadoed
 palki
 palliocardiac
-palmers
 palmicoleus
 palmillo
 palmipede
@@ -8306,7 +8131,6 @@ pentarchy
 pentastichy
 pentastyle
 pentateuch
-penthemimers
 penthia
 penthiophene
 penticing
@@ -8333,9 +8157,7 @@ pereskia
 perestroika
 perfecta
 perfectibilian
-performers
 perfumeress
-perfumers
 pergolesi
 periareum
 periastral
@@ -8428,7 +8250,6 @@ phantosme
 pharmacic
 pharmacochemistry
 pharmacography
-pharmers
 pharms
 pharsalian
 pharyngognath
@@ -8509,7 +8330,6 @@ photomicrographer
 photomicrography
 photophilic
 photopography
-photopolymers
 photoreducing
 photos
 phototelegraphy
@@ -8602,7 +8422,6 @@ pileata
 pileoli
 pileum
 pileus
-pilgrimers
 pilikia
 pilleus
 piloncillo
@@ -8666,7 +8485,6 @@ plaque
 plasmagel
 plastral
 platch
-platformers
 platinichloric
 platinochloric
 platycelian
@@ -8790,7 +8608,6 @@ polymagnet
 polymastiga
 polymastodon
 polymelian
-polymers
 polymicrobial
 polymyxin
 polynaphthene
@@ -9030,7 +8847,6 @@ presolving
 press
 pressirostral
 prestress
-presumers
 presupervisor
 presuppress
 pretergress
@@ -9051,10 +8867,8 @@ pricing
 priedieus
 prieving
 primar
-primers
 primi
 primitivist
-primmers
 primo
 primp
 primula
@@ -9073,7 +8887,6 @@ probers
 proboulevard
 procambial
 procivilian
-proclaimers
 procoelian
 procollectivist
 procreatress
@@ -9091,9 +8904,7 @@ proegumenal
 professoress
 progenitress
 progrades
-programers
 programme
-programmers
 progress
 progressivist
 proindustry
@@ -9111,7 +8922,6 @@ prometheum
 prometheus
 proministry
 promisor
-prommers
 promo
 promoed
 promonarchy
@@ -9150,7 +8960,6 @@ prostades
 prostatauxe
 prostomiumia
 prostyle
-prosumers
 protectress
 proteosaurid
 proteus
@@ -9416,7 +9225,6 @@ radiotelegraphy
 raghu
 raglans
 raglin
-ragtimers
 rainer
 raird
 raisin
@@ -9428,15 +9236,12 @@ ramadan
 ramee
 rameseum
 ramet
-rammers
 rampallian
 rampler
 ramuscule
 ranatra
 rancing
 ranees
-ranomers
-ransomers
 ranunculi
 rapaceus
 raphae
@@ -9469,7 +9274,6 @@ readvancing
 readymades
 reafflict
 reagan
-reamers
 reams
 reannouncing
 reanswers
@@ -9481,7 +9285,6 @@ reata
 reaving
 reawaken
 rebalancing
-rebloomers
 rebosa
 reboso
 rebracing
@@ -9497,7 +9300,6 @@ receiving
 recentred
 rechromatography
 recidivist
-reclaimers
 reclinant
 recliner
 recognisor
@@ -9525,7 +9327,6 @@ recurvirostral
 recycle
 redeceiving
 redeemeress
-redeemers
 redemptress
 redhorse
 rediae
@@ -9571,7 +9372,6 @@ reflectography
 reflowers
 reformades
 reformeress
-reformers
 refrainer
 refroze
 refurb
@@ -9595,7 +9395,6 @@ regrooving
 regulatress
 reguli
 rehabbers
-rehammers
 rehoboams
 rehonour
 reich
@@ -9723,7 +9522,6 @@ restress
 restrict
 restriving
 restyle
-resumers
 resuppress
 resurfacing
 retablo
@@ -9812,7 +9610,6 @@ rhombenporphyr
 rhomboideus
 rhonda
 rhumbaed
-rhymers
 rhynchocephalian
 rhynchocoel
 rhynchospora
@@ -9838,8 +9635,6 @@ riglin
 rigodon
 rijksmuseum
 rimaye
-rimers
-rimmers
 rimula
 ringgiving
 rippler
@@ -9852,7 +9647,6 @@ rivals
 riving
 roadeo
 roadie
-roamers
 roams
 robalito
 robbers
@@ -9866,7 +9660,6 @@ rodeoed
 rodham
 rodomontades
 roed
-roemers
 roentgenography
 roentgenopaque
 rognons
@@ -9892,7 +9685,6 @@ rooed
 rookery
 rookies
 rookus
-roomers
 roomkeeper
 roosa
 rooving
@@ -9938,7 +9730,6 @@ ruiner
 rumbaed
 rumelian
 ruminant
-rummers
 runer
 runkeeper
 runsy
@@ -10110,7 +9901,6 @@ scalades
 scalepan
 scalet
 scalfe
-scammers
 scampi
 scapas
 scapel
@@ -10136,7 +9926,6 @@ schantze
 schanz
 schechitah
 scheelin
-schemers
 schene
 schepen
 scherzoso
@@ -10159,7 +9948,6 @@ schriks
 schul
 schuls
 schultze
-schussboomers
 schwarz
 schwarzlot
 sciagraphy
@@ -10193,7 +9981,6 @@ scratch
 scratchy
 scrauch
 scrawl
-screamers
 screams
 screechy
 screeving
@@ -10220,7 +10007,6 @@ sculptography
 sculptress
 scultch
 scumbers
-scummers
 scungy
 scuppler
 scurvish
@@ -10235,7 +10021,6 @@ seaforthia
 seahorse
 sealet
 sealevel
-seamers
 seams
 seamstress
 searcheress
@@ -10251,7 +10036,6 @@ sedovic
 seducing
 seductress
 seecatch
-seemers
 seeress
 seigneuress
 seigneury
@@ -10376,15 +10160,12 @@ shaken
 shakeress
 shakti
 shaley
-shamers
 shamianah
 shamiyanah
 shammasim
-shammers
 shampooed
 shanklin
 shaptin
-sharefarmers
 sharki
 shaving
 shawnees
@@ -10407,7 +10188,6 @@ shilingi
 shillabers
 shillala
 shiloh
-shimmers
 shina
 shiner
 shipkeeper
@@ -10441,7 +10221,6 @@ shrieving
 shrimp
 shriner
 shriving
-shroomers
 shroving
 shrubbery
 shuls
@@ -10458,7 +10237,6 @@ sickies
 siculi
 siculian
 sidearm
-sidearmers
 sidearms
 sidecar
 sidedress
@@ -10494,7 +10272,6 @@ siloed
 silurid
 simar
 simblum
-simmers
 simpler
 simplicidentata
 simula
@@ -10515,7 +10292,6 @@ siphonogams
 sipid
 sirdars
 siress
-sitkamers
 sixteenth
 sizal
 skaalpund
@@ -10538,7 +10314,6 @@ skiddooed
 skidooed
 skies
 skillo
-skimmers
 skimo
 skindiving
 skint
@@ -10548,7 +10323,6 @@ skool
 skouth
 skriks
 skrimp
-skummers
 skunkery
 skydiving
 skysweeper
@@ -10559,9 +10333,7 @@ slacktivist
 slactivist
 slades
 slairg
-slalomers
 slamdancing
-slammers
 slangrell
 slarth
 slatch
@@ -10571,14 +10343,12 @@ slavish
 slavist
 sleaving
 sleaze
-sledgehammers
 sleechy
 sleeper
 sleeving
 slepez
 slicing
 slickery
-slimmers
 slipdress
 slipstreams
 sliving
@@ -10595,7 +10365,6 @@ slubbery
 sluicing
 slumbers
 slumbery
-slummers
 slutch
 slutchy
 smallmouth
@@ -10666,7 +10435,6 @@ somalis
 sombers
 sombreroed
 sombres
-somers
 somnambulic
 sompnour
 sonant
@@ -10711,7 +10479,6 @@ spacing
 spades
 spadillo
 spaghettini
-spammers
 spams
 spaniardo
 sparkies
@@ -10763,7 +10530,6 @@ spiel
 spigelian
 spignet
 spikery
-spimmers
 spinalis
 spinel
 spinigrades
@@ -10834,7 +10600,6 @@ squinant
 squirarchy
 squirearchy
 squiress
-squirmers
 squirrelian
 squitchy
 sriracha
@@ -10855,7 +10620,6 @@ stahlian
 stainer
 stair
 stallkeeper
-stammers
 stampede
 stampedoed
 standeth
@@ -10883,7 +10647,6 @@ staup
 stauracin
 stauter
 staving
-steamers
 steams
 stedd
 steenth
@@ -10897,7 +10660,6 @@ stegocephalian
 stegodon
 stelae
 stelography
-stemmers
 stench
 stenchy
 stenocardiac
@@ -10916,7 +10678,6 @@ stereochemistry
 stereoed
 stereographer
 stereography
-stereoisomers
 stereophotography
 stereopter
 stereoradiography
@@ -10968,7 +10729,6 @@ stonesmatch
 stookies
 stopwatch
 storekeeper
-stormers
 stotinki
 stouter
 stouth
@@ -10988,7 +10748,6 @@ stratotrainer
 strauss
 strawflowers
 strayving
-streamers
 streamliner
 streams
 streetkeeper
@@ -11004,7 +10763,6 @@ stretchy
 strewers
 strict
 stridhana
-strimmers
 strippler
 striving
 stroams
@@ -11016,15 +10774,12 @@ strouthiocamelian
 strouthocamelian
 strowers
 struldbrug
-strummers
 studfarms
 studhorse
-stumers
 stunty
 stupa
 stupe
 stupid
-sturmers
 stychomythia
 style
 stylo
@@ -11075,7 +10830,6 @@ subjectivist
 sublabial
 sublevel
 sublieutenant
-sublimers
 submariner
 submembers
 submetaphoric
@@ -11127,7 +10881,6 @@ sulphydryl
 sultany
 sumatra
 sumbulic
-summers
 summula
 sumotoris
 sumpt
@@ -11169,7 +10922,6 @@ superliner
 superminicomputer
 supermolecule
 supermotos
-superpolymers
 superpowers
 superproducing
 superrenal
@@ -11194,7 +10946,6 @@ surculi
 surfacing
 surimi
 surmistress
-surnamers
 surpluss
 surprizal
 surrenal
@@ -11217,7 +10968,6 @@ swahilian
 swaird
 swallowers
 swankies
-swarmers
 swarms
 swarth
 swarve
@@ -11231,7 +10981,6 @@ sweeper
 sweeperess
 swelp
 swerving
-swimmers
 swinecress
 swingarms
 switchblades
@@ -11328,7 +11077,6 @@ tamashek
 tambers
 tamboura
 tamburitza
-tamers
 tamilian
 tamilic
 tampa
@@ -11388,13 +11136,11 @@ tauntress
 taupe
 taurid
 tauter
-tautomers
 tawers
 tawhai
 taxeopod
 taxeopoda
 taxol
-taxonomers
 tchapan
 tcheckup
 tcheka
@@ -11405,7 +11151,6 @@ teacup
 teades
 teaed
 teagle
-teamers
 teams
 teapot
 teapoys
@@ -11421,7 +11166,6 @@ technostress
 techy
 tecta
 tedeschi
-teemers
 tegucigalpa
 teguexin
 tehsildars
@@ -11490,12 +11234,10 @@ terebenthene
 terebilic
 terebinthina
 teriyaki
-termers
 terminalis
 terminant
 terminer
 terpineol
-terpolymers
 terracing
 terraefilian
 terrapin
@@ -11523,7 +11265,6 @@ tetradecapoda
 tetraiodide
 tetramera
 tetrameralian
-tetramers
 tetraodon
 tetrapleuron
 tetrapoda
@@ -11623,7 +11364,6 @@ throatlatch
 throbbers
 throed
 throwers
-thrummers
 thrutch
 thuan
 thundershowers
@@ -11667,7 +11407,6 @@ timbira
 timbres
 timbrophilic
 timekeeper
-timers
 timesaving
 timeserving
 timoroso
@@ -11798,7 +11537,6 @@ transbaikalian
 transcribers
 transducing
 transferography
-transformers
 transgress
 translatress
 translumenal
@@ -11863,15 +11601,12 @@ trilisa
 trillo
 trilophodon
 trimera
-trimers
 trimestral
-trimmers
 trimoric
 trinucleus
 triodon
 triosteum
 trioxoboric
-triphammers
 triphibian
 tripler
 trippler
@@ -12054,7 +11789,6 @@ unbelieving
 unbench
 unbenignant
 unbesot
-unbosomers
 unbracing
 unburlesqued
 unbusily
@@ -12459,7 +12193,6 @@ venewe
 venezuelans
 venison
 venography
-venomers
 ventral
 ventred
 ventricule
@@ -12551,7 +12284,6 @@ vison
 visor
 vistaed
 vistulian
-vitamers
 vitreum
 vivaed
 vizcacha
@@ -12568,10 +12300,8 @@ volunty
 volupte
 voluta
 volving
-vomers
 vomicae
 voodooed
-voorkamers
 vorspiel
 vorticel
 votaress
@@ -12614,11 +12344,9 @@ wapokomo
 waratah
 wardress
 wardrobers
-wargamers
 warhorse
 waribashis
 warison
-warmers
 warmouth
 warms
 warnison
@@ -12664,8 +12392,6 @@ weeper
 weighage
 weimar
 weiner
-weisenheimers
-welcomers
 welp
 wench
 wendigo
@@ -12719,7 +12445,6 @@ wincing
 windbracing
 windflowers
 windigo
-windjammers
 windowpeeper
 windrowers
 winebibbers
@@ -12735,7 +12460,6 @@ wiredancing
 wiredrawers
 wirephotos
 wisecrackery
-wisenheimers
 wisest
 witchy
 withdrawal
@@ -12771,7 +12495,6 @@ workhorse
 workmistress
 workstreams
 workup
-wormers
 worse
 wotcha
 wouralis
@@ -12818,7 +12541,6 @@ yahvist
 yahweh
 yaird
 yakitoris
-yammers
 yampa
 yangtze
 yankies
@@ -12837,9 +12559,7 @@ yecchy
 yechy
 yeelin
 yeeuch
-yellowhammers
 yeltsin
-yemmers
 yeving
 yobbery
 yohimbi
@@ -12907,7 +12627,6 @@ zoographer
 zoography
 zookeeper
 zoomastigoda
-zoomers
 zoophaga
 zoophagan
 zoophilic
