@@ -5047,7 +5047,6 @@ hillo
 hilloaed
 hilloed
 himalaya
-himne
 hinahina
 hinau
 hinderlans
@@ -6059,7 +6058,6 @@ lampuki
 lanarkia
 lancegaye
 lancing
-landdamne
 landlubbers
 landsleit
 landsmanleit
@@ -6915,7 +6913,6 @@ minshukus
 minuscule
 minuter
 miranha
-miriamne
 mirving
 misaddress
 misanthropi
@@ -10647,7 +10644,6 @@ sombreroed
 sombres
 somers
 somnambulic
-somne
 sompnour
 sonant
 sondelis
@@ -11435,7 +11431,6 @@ teliosporic
 telpher
 temacha
 temazepams
-temne
 tempora
 temporalis
 temporis
@@ -11646,7 +11641,6 @@ timekeeper
 timers
 timesaving
 timeserving
-timne
 timoroso
 tinaja
 tingi
