@@ -125,7 +125,6 @@ ks
 kv
 laa
 laes
-lb
 lc
 ld
 lf
