@@ -424,7 +424,6 @@ eoc
 eod
 eoli
 eor
-eot
 epan
 epen
 eper
