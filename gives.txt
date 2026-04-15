@@ -276,7 +276,6 @@ airampo
 airliner
 airplaner
 airpowers
-airstreams
 aissaoua
 aistopod
 aistopoda
@@ -416,7 +415,6 @@ amahs
 amakhosi
 amakosa
 amalg
-amalgams
 amampondo
 amantillo
 amapondo
@@ -1196,7 +1194,6 @@ balustrades
 bamalip
 bambinos
 bamboula
-bams
 banak
 bandala
 bandanaed
@@ -1210,7 +1207,6 @@ bangladeshis
 bangwaketsi
 bankalachi
 bankeress
-bantams
 baptanodon
 baptisin
 baptistry
@@ -1318,7 +1314,6 @@ beachcombers
 beached
 beadle
 beagle
-beams
 beaner
 beanos
 bearess
@@ -1347,7 +1342,6 @@ beeper
 beevish
 befleaed
 beflowers
-befoams
 befortuned
 befortunes
 beggaress
@@ -1566,7 +1560,6 @@ bistred
 bitched
 bitchy
 bitreadle
-bitstreams
 bittercress
 bitturs
 biuret
@@ -1614,8 +1607,6 @@ blitt
 blockades
 blockholer
 blockies
-blogstreams
-bloodstreams
 bloosme
 blotch
 blotched
@@ -1779,7 +1770,6 @@ brazilian
 breached
 breakdancing
 breakup
-breams
 breeched
 brekkies
 brenne
@@ -1901,7 +1891,6 @@ butcha
 butcheress
 buteo
 butleress
-buttercreams
 buttermouth
 butterscotch
 buttinskies
@@ -2102,7 +2091,6 @@ cappadochio
 cappuccinos
 capriccioso
 capripede
-caprolactams
 capsizal
 capsulorrhaphy
 captcha
@@ -2749,7 +2737,6 @@ cleruch
 cleruchy
 cleuch
 cliched
-clickstreams
 clicktivist
 climatography
 climbers
@@ -2766,7 +2753,6 @@ clitoris
 cloacae
 cloacinal
 cloacinean
-cloams
 clobbers
 clockkeeper
 clockmutch
@@ -2777,7 +2763,6 @@ cloistress
 clokies
 clomb
 clomiphene
-clonazepams
 closemouth
 closest
 clotheshorse
@@ -3175,7 +3160,6 @@ counterplans
 counterpoison
 counterpowers
 counterpunched
-counterstreams
 counterstyle
 countertrades
 countertrench
@@ -3228,7 +3212,6 @@ craunched
 craunchy
 craving
 crawl
-creams
 creatinephosphoric
 creatress
 creaze
@@ -3262,7 +3245,6 @@ croisad
 cromwellian
 crookery
 crossarms
-crossbeams
 crossbench
 crossbowers
 crossest
@@ -3311,7 +3293,6 @@ cryptadia
 cryptarchy
 cryptococci
 cryptodira
-cryptogams
 cryptographal
 cryptographer
 cryptography
@@ -3514,7 +3495,6 @@ daubery
 dauner
 dayabhaga
 dayched
-daydreams
 dayflowers
 dazer
 deadass
@@ -3573,7 +3553,6 @@ defilades
 definer
 defleaed
 deflowers
-defoams
 deforceor
 deforcing
 deformism
@@ -3680,7 +3659,6 @@ desorbers
 despatch
 despatched
 destinal
-destreams
 destress
 destructivist
 destry
@@ -3750,7 +3728,6 @@ diastral
 diastyle
 diatoric
 diaulic
-diazepams
 diazinons
 dibbers
 dibrell
@@ -4063,7 +4040,6 @@ drawhorse
 drawl
 drawlatch
 drayhorse
-dreams
 dreamsily
 dreich
 drench
@@ -4104,7 +4080,6 @@ duettinos
 dukery
 dukuma
 dumpler
-dunams
 dunched
 dunes
 dungy
@@ -4129,7 +4104,6 @@ dusio
 dutch
 dutched
 dutchy
-dwams
 dyarchy
 dynamism
 dyostyle
@@ -4410,7 +4384,6 @@ enriched
 enrobers
 ensampler
 ensconcing
-enseams
 ensepulchre
 enshrinees
 enskies
@@ -4658,7 +4631,6 @@ exacum
 examinant
 examinees
 examiner
-exams
 exanguin
 exarchy
 excentral
@@ -4720,7 +4692,6 @@ extremuma
 extrorse
 exuccous
 eyalet
-eyebeams
 eyelevel
 eyeliner
 eyepatch
@@ -4754,7 +4725,6 @@ falsest
 falsi
 falun
 familic
-fams
 fandabidozi
 fanegada
 fanfarades
@@ -4815,7 +4785,6 @@ fencing
 fenestral
 fennelflowers
 fenuron
-ferbams
 ferdiad
 feringi
 ferio
@@ -4855,7 +4824,6 @@ fidelis
 fidicinal
 fifteenth
 fighteress
-figjams
 figurae
 fikery
 filazer
@@ -4923,7 +4891,6 @@ flauta
 flavanol
 flaxwench
 fleadh
-fleams
 fleapit
 fleeched
 fleecing
@@ -4960,7 +4927,6 @@ flubbers
 flubdubbery
 fluctisonant
 fluigramme
-flunitrazepams
 flunkies
 fluoboric
 fluoranthene
@@ -4971,7 +4937,6 @@ fluorography
 flutemouth
 fluter
 foamflowers
-foams
 foison
 folacin
 folioed
@@ -4999,7 +4964,6 @@ forearms
 forecar
 forecooler
 forediscern
-foregleams
 foreglimpse
 forehatch
 forehearth
@@ -5209,7 +5173,6 @@ gametophoric
 gammadia
 gammarus
 gamme
-gams
 ganched
 ganderess
 gandoura
@@ -5361,7 +5324,6 @@ glassy
 glauber
 glaucous
 glazer
-gleams
 gleaner
 gleit
 glenn
@@ -5370,7 +5332,6 @@ glimpse
 gliosa
 glissades
 glitchy
-gloams
 globeflowers
 glockenspiel
 glomera
@@ -5496,7 +5457,6 @@ grandisonant
 grandpapas
 grangemouth
 granilla
-grannams
 grantham
 granulosa
 graphene
@@ -5683,7 +5643,6 @@ hairstyle
 hairweaving
 hajis
 hajjis
-hakams
 hakus
 halacha
 halal
@@ -5719,7 +5678,6 @@ hamald
 hamamelin
 hamamelis
 hamantasch
-hammams
 hammerdress
 hammersmith
 hamotzi
@@ -5747,7 +5705,6 @@ haranguer
 harari
 haratch
 hardass
-hardbeams
 hardliner
 hardmouth
 hardwickia
@@ -5796,7 +5753,6 @@ headle
 headliner
 headmistress
 headreached
-headstreams
 healey
 hearth
 heartscald
@@ -6083,7 +6039,6 @@ hopscotch
 hopscotched
 hordeum
 hormism
-hornbeams
 hornero
 hornmouth
 horoeka
@@ -6329,7 +6284,6 @@ ilpirra
 imaginal
 imaginant
 imaginer
-imams
 imanlaut
 imbecilic
 imbibers
@@ -6479,7 +6433,6 @@ inradii
 insaner
 insconcing
 inscribers
-inseams
 insecta
 inshrinees
 insipid
@@ -6711,7 +6664,6 @@ jambolans
 jambosa
 jambu
 jampanees
-jams
 janapan
 jangada
 janitress
@@ -6743,12 +6695,10 @@ jellica
 jemadars
 jemidars
 jerkies
-jeroboams
 jeropiga
 jerqued
 jessica
 jetliner
-jetstreams
 jettatura
 jettison
 jewelsmith
@@ -6759,7 +6709,6 @@ jicaque
 jicarilla
 jillarooed
 jimbo
-jimjams
 jingoed
 jingu
 jinni
@@ -6777,7 +6726,6 @@ jodrell
 jogjakarta
 johann
 johannean
-johnadreams
 joinant
 joiner
 jointress
@@ -6839,7 +6787,6 @@ kaed
 kahunas
 kaika
 kailyaird
-kaimakams
 kaimo
 kajugaru
 kakapo
@@ -7034,7 +6981,6 @@ kohua
 kojang
 kojis
 kokako
-kokams
 kokanees
 kokia
 kokila
@@ -7142,7 +7088,6 @@ lacing
 lackies
 laconica
 lacrimoso
-lactams
 lactescenle
 lactivist
 lactobaccilli
@@ -7178,7 +7123,6 @@ lambadi
 lambdiod
 lambers
 lamellirostral
-lamestreams
 laminal
 lampistry
 lampshades
@@ -7266,7 +7210,6 @@ leached
 leaderess
 leadeth
 leaguer
-leams
 leaner
 leasowe
 leaving
@@ -7393,7 +7336,6 @@ limpopo
 linen
 linenumbers
 liner
-lingams
 lingualis
 linguica
 linguisa
@@ -7448,7 +7390,6 @@ litteratim
 littress
 litvak
 liverpudlian
-livestreams
 living
 livish
 livraison
@@ -7456,7 +7397,6 @@ llanero
 llanos
 llautu
 lludd
-loams
 loanees
 loaner
 loaving
@@ -7477,7 +7417,6 @@ loculi
 lodicule
 loed
 logicianer
-logjams
 logoed
 logographer
 logography
@@ -7498,7 +7437,6 @@ lophiodon
 lophopoda
 lophostropheus
 lophotriaene
-lorazepams
 lorgnons
 loric
 lorica
@@ -7655,7 +7593,6 @@ mainer
 mainliner
 mainour
 mainprisor
-mainstreams
 maintainer
 maintenancing
 maiolica
@@ -7710,7 +7647,6 @@ mammography
 mammonteus
 mammula
 mamoncillo
-mams
 manacing
 manageress
 manak
@@ -8078,7 +8014,6 @@ micos
 micrampelis
 micraner
 microaerophilic
-microbeams
 microbial
 microbian
 microblades
@@ -8128,7 +8063,6 @@ microsthene
 microstress
 microvilli
 microwaving
-midstreams
 midventral
 midwatch
 midwiving
@@ -8155,7 +8089,6 @@ millionairess
 millionnairess
 milliosmol
 millipede
-millstreams
 miltiades
 milvago
 mimeoed
@@ -8355,7 +8288,6 @@ monuron
 moocah
 mooched
 mooed
-moonbeams
 mooncreeper
 moonflowers
 moonshiner
@@ -8429,8 +8361,6 @@ moyenant
 moyenne
 mozarabian
 mpondo
-mridamgams
-mridangams
 msource
 muchacha
 mucosa
@@ -8558,7 +8488,6 @@ mythohistoric
 mythologema
 myxopod
 myxopoda
-naams
 nabal
 nabbers
 nabla
@@ -8575,7 +8504,6 @@ nailsmith
 naivist
 naja
 namibian
-nams
 namul
 nanaimo
 nanduti
@@ -8731,12 +8659,10 @@ nisan
 nisin
 nispero
 nitranilic
-nitrazepams
 nitred
 nitrohydrochloric
 nitroso
 niyama
-nizams
 nobatch
 noctilucae
 noctilucous
@@ -9018,7 +8944,6 @@ officeress
 officinal
 ogalala
 ogallala
-ogams
 oglala
 ogress
 oiligarchy
@@ -9213,7 +9138,6 @@ ouranos
 ourari
 outachieving
 outbalancing
-outbeams
 outbitched
 outbraving
 outbrawl
@@ -9229,7 +9153,6 @@ outdespatch
 outdispatch
 outdistancing
 outdistrict
-outdreams
 outdress
 outdriving
 outechoed
@@ -9238,7 +9161,6 @@ outfacing
 outfencing
 outgarth
 outgiving
-outgleams
 outhit
 outkeeper
 outlancing
@@ -9276,7 +9198,6 @@ outrivals
 outromancing
 outroving
 outsat
-outscreams
 outsentinel
 outserving
 outshiner
@@ -9407,7 +9328,6 @@ ovoli
 owari
 oxalis
 oxanilic
-oxazepams
 oxybapha
 oxychloric
 oxygenant
@@ -9528,7 +9448,6 @@ palynomorph
 pampa
 pampadromaeus
 pampero
-pams
 panached
 panak
 panarchy
@@ -9934,13 +9853,11 @@ peytral
 pfeffernuss
 phacopid
 phaedrus
-phaenogams
 phaenomenal
 phage
 phalarica
 phallephoric
 phanar
-phanerogams
 phanos
 phantasim
 phantasmagoric
@@ -9959,7 +9876,6 @@ pharyngography
 phaselin
 phene
 phenicopter
-phenogams
 phenomenal
 phenomenons
 phenylboric
@@ -10175,7 +10091,6 @@ pippiner
 pipsissewa
 piqued
 piquillo
-piracetams
 piraeus
 pirandellian
 piranha
@@ -10365,7 +10280,6 @@ polycoccous
 polydactyle
 polyethene
 polyfenestral
-polygams
 polygarchy
 polygenouss
 polygrapher
@@ -10511,7 +10425,6 @@ pouty
 powers
 poynant
 pozzolans
-praams
 practicing
 pradhana
 praecuneus
@@ -11004,7 +10917,6 @@ pyrrhonean
 pythagoric
 pythia
 pythonomorph
-qaimaqams
 qawwalis
 qawwals
 qindars
@@ -11051,7 +10963,6 @@ quica
 quiched
 quichua
 quichuan
-quickbeams
 quickhatch
 quickies
 quienal
@@ -11174,7 +11085,6 @@ readvancing
 readymades
 reafflict
 reagan
-reams
 reannouncing
 reanswers
 reapproving
@@ -11253,7 +11163,6 @@ redondilla
 redowa
 redrawerredrawers
 redrawers
-redreams
 redress
 redriving
 reducing
@@ -11308,7 +11217,6 @@ regrooving
 regulatress
 reguli
 rehabbers
-rehoboams
 rehonour
 reich
 reicing
@@ -11464,7 +11372,6 @@ retainal
 retainer
 retaken
 retched
-reteams
 retenant
 retepora
 rethatch
@@ -11603,7 +11510,6 @@ riving
 roached
 roadeo
 roadie
-roams
 robalito
 robbers
 robbery
@@ -11779,7 +11685,6 @@ saimin
 saison
 sakia
 sakti
-salaams
 salad
 salades
 salal
@@ -12012,7 +11917,6 @@ scratchy
 scrauch
 scrauched
 scrawl
-screams
 screeched
 screechy
 screeving
@@ -12055,15 +11959,12 @@ scutched
 scyllarus
 scyphae
 scythesmith
-seabreams
 seacatch
-seafoams
 seaforthia
 seahorse
 sealch
 sealet
 sealevel
-seams
 seamstress
 seanad
 searched
@@ -12394,7 +12295,6 @@ sinneress
 sinsemilla
 sinsiga
 siochana
-siphonogams
 siphonorhinal
 siphorhinal
 sipid
@@ -12467,7 +12367,6 @@ sleuth
 slicing
 slickery
 slipdress
-slipstreams
 sliving
 slivovic
 slobbers
@@ -12620,7 +12519,6 @@ spades
 spadilla
 spadillo
 spaghettini
-spams
 spaniardo
 sparkies
 sparsest
@@ -12816,7 +12714,6 @@ staup
 stauracin
 stauter
 staving
-steams
 stedd
 steenth
 steepen
@@ -12928,7 +12825,6 @@ strauss
 strawflowers
 strayving
 streamliner
-streams
 streatham
 streetkeeper
 strelitzi
@@ -12950,7 +12846,6 @@ strict
 stridhana
 strippler
 striving
-stroams
 stroganov
 stromatopora
 strombolian
@@ -12979,7 +12874,6 @@ stylopid
 stylopod
 stymphalian
 styracin
-styrofoams
 subabdominal
 subadars
 subahdars
@@ -13109,7 +13003,6 @@ summula
 sumotoris
 sumpt
 sumpter
-sunbeams
 sundrenched
 sundress
 sundris
@@ -13351,7 +13244,6 @@ tamilian
 tamilic
 tampa
 tamponades
-tams
 tamul
 tamulian
 tamulic
@@ -13427,7 +13319,6 @@ teacup
 teades
 teaed
 teagle
-teams
 teapot
 teapoys
 teasel
@@ -13485,7 +13376,6 @@ teliosporic
 telluret
 telpher
 temacha
-temazepams
 tempi
 tempo
 tempora
@@ -13662,7 +13552,6 @@ thionaphthene
 thiophene
 thiophosphoric
 thiophthene
-thirdstreams
 thirteenth
 thirtytwomo
 thitsi
@@ -13890,7 +13779,6 @@ tramsmith
 trancey
 trancing
 tranect
-trangams
 tranquillo
 transalpiner
 transbaikalian
@@ -14415,7 +14303,6 @@ unisonant
 univalve
 universalian
 universalis
-unjams
 unjaunty
 unlacing
 unlades
@@ -14528,7 +14415,6 @@ unscorched
 unscotch
 unscotched
 unscratched
-unseams
 unsearched
 unsepulchre
 unserving
@@ -14569,7 +14455,6 @@ unswerving
 unswitched
 untaken
 untattooed
-unteams
 untenant
 unthatch
 unthatched
@@ -14627,7 +14512,6 @@ upreached
 upsnatch
 upspurt
 upstair
-upstreams
 upstretched
 upswarms
 uptaken
@@ -15027,7 +14911,6 @@ whamo
 whamp
 whanau
 whanaus
-whangams
 wharve
 whatcha
 whatchy
@@ -15050,7 +14933,6 @@ whiskerandoed
 whiskery
 whiskies
 whistleblowers
-whitebeams
 whitechapel
 whitehorse
 whitesmith
@@ -15063,11 +14945,9 @@ wicketkeeper
 wickies
 wickup
 widowers
-wigwams
 wildflowers
 wilfrid
 willi
-williams
 willowers
 willpowers
 willyart
@@ -15136,7 +15016,6 @@ wordsmith
 workbench
 workhorse
 workmistress
-workstreams
 workup
 worse
 wotcha
