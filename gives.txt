@@ -1937,6 +1937,7 @@ caelian
 caesurae
 cafeneh
 caganer
+cageot
 cagui
 cahokia
 cahuilla
@@ -9847,6 +9848,7 @@ petruchio
 pettah
 petuntse
 petuntze
+peugeot
 peytral
 pfeffernuss
 phacopid
@@ -11575,6 +11577,7 @@ rotse
 rotulian
 rouched
 roucous
+rougeot
 roughage
 roughdress
 roulades
@@ -14796,6 +14799,7 @@ votress
 vouched
 voucheress
 vouchsaving
+vougeot
 vowers
 vowess
 vulcanalian
