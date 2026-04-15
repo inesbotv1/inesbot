@@ -147,7 +147,6 @@ adelopod
 adenographer
 adenography
 adephaga
-adephagan
 adepter
 adffroze
 adfroze
@@ -1167,7 +1166,6 @@ bakkies
 bakshis
 bakuba
 bakwiri
-balagan
 balalaika
 balancing
 baldachinos
@@ -1243,7 +1241,6 @@ barosma
 barotrauma
 barotse
 barracan
-barragan
 barranquilla
 barrett
 barricades
@@ -2384,7 +2381,6 @@ chaetopoda
 chaetosema
 chaetura
 chaga
-chagan
 chainer
 chainsmith
 chaja
@@ -3043,7 +3039,6 @@ coprah
 coprodaeum
 coproducing
 copromisor
-coprophagan
 coprophilic
 coprosma
 coprostanol
@@ -3598,7 +3593,6 @@ demihaque
 demihorse
 demilunes
 deminer
-demipagan
 demoed
 demographer
 demography
@@ -4408,7 +4402,6 @@ entocoel
 entohyal
 entomofaunas
 entomophaga
-entomophagan
 entomostracan
 entomostracous
 entoplastral
@@ -4874,7 +4867,6 @@ flakies
 flambeed
 flamethrowers
 flaminica
-flanagan
 flanched
 flanconades
 flannelmouth
@@ -6113,7 +6105,6 @@ hyalography
 hyalomelans
 hyderabad
 hydradephaga
-hydradephagan
 hydrangeas
 hydraulic
 hydrilla
@@ -6234,7 +6225,6 @@ ichthyal
 ichthyofaunas
 ichthyographer
 ichthyography
-ichthyophagan
 ichthyosaurid
 ichthyotomi
 ichthyotoxin
@@ -6817,7 +6807,6 @@ kapas
 kapeika
 karabiner
 karachi
-karagan
 karakia
 karateka
 karatto
@@ -7098,7 +7087,6 @@ ladysmith
 laemodipoda
 laen
 laeti
-lagan
 lagarto
 lagerspetze
 lagomorph
@@ -7624,7 +7612,6 @@ malison
 malleoli
 malleus
 mallophaga
-mallophagan
 malmaison
 malocchio
 malojilla
@@ -7807,7 +7794,6 @@ mechoacan
 meckelian
 medalet
 medcinal
-medenagan
 medevacing
 mediad
 mediae
@@ -7857,7 +7843,6 @@ melaxuma
 melcarth
 melian
 melica
-meliphagan
 melis
 mellisonant
 melomame
@@ -8552,7 +8537,6 @@ necklacing
 necrographer
 necromancing
 necrophaga
-necrophagan
 necrophilic
 nectopod
 needham
@@ -8579,7 +8563,6 @@ neobotany
 neoconstructivist
 neomorph
 neomylodon
-neopagan
 neostyle
 neotoxin
 nepalis
@@ -8764,7 +8747,6 @@ nonofficinal
 nonopaque
 nonorchestral
 nonoriginal
-nonpagan
 nonpartisan
 nonpenal
 nonperceiving
@@ -8942,9 +8924,7 @@ oglala
 ogress
 oiligarchy
 oisin
-okanagan
 okia
-okinagan
 oklafalaya
 oldham
 oldstyle
@@ -8978,7 +8958,6 @@ oniscus
 onkus
 onliner
 onondaga
-onondagan
 ontocycle
 ontogenal
 ontography
@@ -9356,7 +9335,6 @@ padroni
 paedarchy
 paedophilic
 paesanos
-pagan
 paganalian
 paginal
 pagiopod
@@ -9882,7 +9860,6 @@ philobiblian
 philologastry
 philomelian
 philomythia
-philopagan
 philosophastry
 philosopher
 philosopheress
@@ -9975,7 +9952,6 @@ phylloclades
 phyllocladia
 phyllomorph
 phyllophaga
-phyllophagan
 phyllopod
 phyllopoda
 phyllopode
@@ -10009,7 +9985,6 @@ phytography
 phytomastigoda
 phytomera
 phytophaga
-phytophagan
 phytophage
 phytotopography
 phytotoxin
@@ -10377,7 +10352,6 @@ postlabial
 postmediastinal
 postmistress
 postnominal
-postpagan
 postparotid
 postprison
 postpyloric
@@ -10780,7 +10754,6 @@ pseudomonades
 pseudomorph
 pseudoneuropter
 pseudonymuncule
-pseudopagan
 pseudopod
 pseudopode
 pseudopregnant
@@ -11079,7 +11052,6 @@ readdress
 readvancing
 readymades
 reafflict
-reagan
 reannouncing
 reanswers
 reapproving
@@ -11666,7 +11638,6 @@ saeume
 safekeeper
 safflowers
 safi
-sagan
 saguin
 sahaptin
 saheb
@@ -11752,7 +11723,6 @@ sapotilla
 sapotoxin
 sapphira
 saprobial
-saprophagan
 sapucainha
 sarabacan
 saracen
@@ -12038,7 +12008,6 @@ semineutral
 semiography
 semiopacous
 semiopaque
-semipagan
 semiphenomenal
 semipornography
 semipronominal
@@ -12971,7 +12940,6 @@ sudaminal
 sudokus
 sudoric
 sufficing
-suffragan
 suffruticous
 sugamo
 suggestress
@@ -13279,7 +13247,6 @@ taratantaraed
 taraxacin
 taraxacum
 tarbadillo
-tarbagan
 tardigrades
 tardo
 tarepatch
@@ -13611,7 +13578,6 @@ tierra
 tifoso
 tignons
 tigress
-tikinagan
 tiklin
 tikoor
 timaeus
@@ -13930,7 +13896,6 @@ truckies
 trugo
 trunched
 tryphosa
-tsaagan
 tsades
 tsaritza
 tsetse
@@ -14343,7 +14308,6 @@ unopaque
 unordinal
 unoriginal
 unovertaken
-unpagan
 unpaginal
 unpalisadoed
 unparadox
@@ -15054,7 +15018,6 @@ xylocopid
 xylographer
 xylography
 xylophaga
-xylophagan
 xylophage
 xylopyrographer
 xylopyrography
@@ -15079,7 +15042,6 @@ yarta
 yarth
 yarto
 yasht
-yatagan
 yavapai
 yaya
 yearth
@@ -15171,7 +15133,6 @@ zookeeper
 zoomastigoda
 zoomorph
 zoophaga
-zoophagan
 zoophilic
 zoophoric
 zoophytography
