@@ -782,7 +782,6 @@ odon
 oed
 oeno
 ofte
-ogo
 oiko
 oko
 olei
@@ -807,7 +806,6 @@ oron
 orot
 orph
 orse
-orv
 osa
 osma
 osme
@@ -964,7 +962,6 @@ shek
 shev
 shig
 shis
-shl
 shtu
 shur
 sica
