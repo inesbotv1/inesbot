@@ -2011,7 +2011,6 @@ towers
 rimaye
 wickup
 pinero
-saltah
 cabers
 tonant
 thecae
