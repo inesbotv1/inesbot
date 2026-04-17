@@ -120,6 +120,7 @@ js
 jt
 jx
 kaa
+kene
 kh
 kr
 ks
