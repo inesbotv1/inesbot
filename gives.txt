@@ -720,7 +720,6 @@ gauss
 varve
 linos
 campo
-cinna
 halve
 aluta
 bixin
