@@ -1102,7 +1102,6 @@ style
 laeti
 peaze
 fungi
-nauru
 baird
 benga
 duomo
