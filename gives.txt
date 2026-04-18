@@ -715,7 +715,6 @@ zemni
 pisin
 zilla
 canoe
-rapic
 primp
 lerot
 dinos
