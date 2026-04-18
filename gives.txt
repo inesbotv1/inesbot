@@ -219,7 +219,6 @@ renal
 chica
 rheum
 rojis
-adige
 cauma
 lapon
 ngana
@@ -286,7 +285,6 @@ finer
 blitt
 ramet
 janos
-auber
 baird
 soler
 renne
@@ -719,7 +717,6 @@ primp
 lerot
 dinos
 solei
-rooed
 ferio
 dalis
 worse
@@ -1019,7 +1016,6 @@ poler
 haddo
 routh
 leper
-duret
 jurat
 farms
 runed
@@ -1109,7 +1105,6 @@ skool
 kojis
 muros
 peaze
-pitha
 tlaco
 tapit
 outer
@@ -2202,7 +2197,6 @@ sparta
 uncous
 caroba
 aljoba
-imshis
 siress
 hyahya
 kwamme
