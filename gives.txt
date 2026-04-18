@@ -735,7 +735,6 @@ yarto
 curat
 pashm
 coupe
-novak
 gepik
 luteo
 varve
@@ -990,7 +989,6 @@ sapin
 tutsi
 goura
 gades
-neuss
 genio
 duomo
 khyal
