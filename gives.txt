@@ -690,8 +690,6 @@ datto
 matto
 natto
 thuan
-ferio
-serio
 khaph
 bhava
 dhava
@@ -4610,9 +4608,6 @@ sichuan
 simblum
 teleuto
 murgavi
-caserio
-cheerio
-etaerio
 bhatura
 cultura
 gestura
@@ -7587,7 +7582,6 @@ acolhuan
 quechuan
 quichuan
 goldblum
-hetaerio
 chaetura
 peritura
 velatura
