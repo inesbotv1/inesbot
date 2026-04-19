@@ -206,9 +206,6 @@ primi
 dasht
 hasht
 yasht
-fanit
-manit
-sanit
 balun
 falun
 fairm
@@ -6178,7 +6175,6 @@ calibres
 celebres
 tenebres
 salonika
-zirbanit
 mariposa
 hedgepig
 taghairm
