@@ -270,10 +270,6 @@ moron
 tahin
 halal
 salal
-calpa
-kalpa
-salpa
-talpa
 latro
 apoda
 carve
@@ -770,8 +766,6 @@ crimp
 primp
 schul
 aluta
-happi
-pappi
 aulic
 benni
 penni
@@ -3728,7 +3722,6 @@ vestral
 felahin
 patapat
 pitapat
-catalpa
 lockrum
 convect
 provect
@@ -4612,7 +4605,6 @@ wolvish
 cardiac
 phidiac
 bhowani
-unhappi
 taccada
 aboulic
 diaulic
@@ -6295,7 +6287,6 @@ spectral
 theatral
 veratral
 fellahin
-myotalpa
 chuckrum
 psilatro
 copepoda
@@ -8849,7 +8840,6 @@ subastral
 symmetral
 uncentral
 unneutral
-matagalpa
 aistopoda
 amblypoda
 amphipoda
@@ -12206,8 +12196,6 @@ exocardiac
 myocardiac
 noncardiac
 precardiac
-photomappi
-shaganappi
 funambulic
 hierodulic
 hyperdulic
@@ -13846,8 +13834,6 @@ setirostral
 trisceptral
 uncloistral
 unfenestral
-gryllotalpa
-tegucigalpa
 brachiopoda
 cephalopoda
 condylopoda
@@ -16232,7 +16218,6 @@ retrocardiac
 stenocardiac
 tachycardiac
 thyrocardiac
-ornithopappi
 nonhydraulic
 beelzebubian
 nonamphibian
