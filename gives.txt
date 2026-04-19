@@ -108,6 +108,14 @@ toged
 eking
 irpex
 pines
+condo
+hondo
+kondo
+mondo
+nondo
+pondo
+rondo
+tondo
 purged
 ticked
 qually
@@ -679,6 +687,8 @@ bagged
 pugged
 cowked
 awaked
+mpondo
+ngondo
 sozines
 hawking
 lirking
@@ -1718,6 +1728,8 @@ perking
 domines
 snarked
 sticked
+imbondo
+secondo
 salteaux
 carlines
 tracking
@@ -3208,6 +3220,7 @@ croakers
 pronking
 eastness
 moraines
+amapondo
 reversely
 tubmaking
 chemicked
@@ -5107,6 +5120,9 @@ shrubwood
 prickwood
 paledness
 comfiness
+amampondo
+latifondo
+taekwondo
 oversmoked
 demissness
 colossally
