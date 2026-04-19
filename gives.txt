@@ -1672,7 +1672,6 @@ snouty
 spouty
 stouty
 trouty
-destry
 hostry
 mistry
 pastry
