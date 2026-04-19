@@ -7,7 +7,6 @@ ness
 cent
 ally
 king
-spex
 dely
 eked
 kers
@@ -59,7 +58,6 @@ kines
 ewked
 naked
 joked
-ampex
 utero
 fiked
 ryked
@@ -82,7 +80,6 @@ egged
 piked
 puked
 yoked
-irpex
 igged
 byked
 mines
@@ -346,7 +343,6 @@ licked
 eskers
 navely
 ranged
-stupex
 cloked
 rugged
 rocked
@@ -361,7 +357,6 @@ milked
 faiked
 bunked
 zigged
-auspex
 making
 tagged
 trines
@@ -426,7 +421,6 @@ picked
 shaked
 nudely
 lurked
-torpex
 longed
 rouged
 snaked
@@ -774,7 +768,6 @@ franked
 unedged
 polking
 unyoked
-perspex
 virally
 caulked
 neckers
@@ -1006,7 +999,6 @@ sculked
 changed
 tagines
 quacked
-aruspex
 creaked
 perking
 slakers
@@ -1972,7 +1964,6 @@ trekking
 icewines
 keneally
 unbooked
-haruspex
 primines
 carmines
 pectines
@@ -2712,7 +2703,6 @@ rockwood
 stacking
 debeaked
 numbness
-extispex
 unhedged
 matiness
 dearness
@@ -3922,7 +3912,6 @@ mateyness
 runniness
 solidness
 partially
-xenically
 obeseness
 tussocked
 goldanged
@@ -3988,12 +3977,10 @@ astringed
 stuntness
 embankers
 blearness
-xenurines
 beseeking
 becloaked
 bepranked
 chemicked
-xanthines
 embarking
 booziness
 weirdness
@@ -4017,7 +4004,6 @@ miskicked
 totalness
 resoaking
 enterally
-xylidines
 unwinking
 unnaively
 dauphines
@@ -4261,7 +4247,6 @@ yolkiness
 phocomely
 tabescent
 backlines
-xerically
 restively
 germiness
 bowmaking
@@ -6622,7 +6607,6 @@ optionally
 spiritally
 dreepiness
 protogines
-xyloidines
 tricotines
 divisively
 ordinately
@@ -15179,7 +15163,6 @@ unmailableness
 slatternliness
 unhallowedness
 bareheadedness
-xerophytically
 lithologically
 unsnobbishness
 nonprofaneness
@@ -15792,7 +15775,6 @@ transitoriness
 unexplicitness
 unhomelikeness
 buffoonishness
-xanthopterines
 indigestedness
 nonconnubially
 organismically
@@ -16632,7 +16614,6 @@ noneternalness
 pestilentially
 predestinately
 undiscreetness
-xenophobically
 bioluminescent
 confirmatively
 inexpectedness
@@ -17270,7 +17251,6 @@ unexcitableness
 unpervasiveness
 nonfeasibleness
 nonorchestrally
-xerographically
 viscometrically
 nonderivatively
 nonfeverishness
@@ -17331,7 +17311,6 @@ unrelentingness
 opinionatedness
 concentratively
 unseaworthiness
-xenomorphically
 nonblamableness
 preeconomically
 uneccentrically
@@ -18274,7 +18253,6 @@ acetometrically
 uninjuriousness
 unverminousness
 unresistingness
-xylographically
 unpenetratively
 illimitableness
 dithyrambically
