@@ -2442,7 +2442,6 @@ scalet
 sealet
 octoyl
 emeute
-andira
 rhachi
 urachi
 magilp
@@ -4814,7 +4813,6 @@ xantham
 medalet
 royalet
 stralet
-mandira
 hibachi
 hitachi
 kamachi
@@ -12420,9 +12418,6 @@ bromindigo
 thioindigo
 bacitracin
 sandaracin
-arthrodira
-cryptodira
-pleurodira
 bankalachi
 shakuhachi
 paramaribo
