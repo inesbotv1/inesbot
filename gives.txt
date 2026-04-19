@@ -624,7 +624,6 @@ pasmo
 cebur
 debur
 gebur
-spiel
 padri
 proyn
 scena
@@ -2442,6 +2441,7 @@ scalet
 sealet
 octoyl
 emeute
+andira
 rhachi
 urachi
 magilp
@@ -4813,6 +4813,7 @@ xantham
 medalet
 royalet
 stralet
+mandira
 hibachi
 hitachi
 kamachi
@@ -6954,11 +6955,6 @@ meteoris
 pectoris
 temporis
 outspurt
-beispiel
-bonspiel
-carspiel
-soutpiel
-vorspiel
 feldgrau
 aduncous
 amurcous
@@ -9506,9 +9502,6 @@ sumotoris
 tandooris
 yakitoris
 cocklebur
-cashspiel
-langspiel
-singspiel
 autoecous
 autoicous
 bifurcous
@@ -12050,7 +12043,6 @@ struldbrug
 chitarroni
 karwinskia
 goniodoris
-kriegspiel
 alviducous
 anasarcous
 molluscous
@@ -12418,6 +12410,9 @@ bromindigo
 thioindigo
 bacitracin
 sandaracin
+arthrodira
+cryptodira
+pleurodira
 bankalachi
 shakuhachi
 paramaribo
@@ -14271,8 +14266,6 @@ bibliognost
 siderognost
 damgalnunna
 millefioris
-kinderspiel
-kriegsspiel
 ectosarcous
 endosarcous
 felliducous
@@ -16201,7 +16194,6 @@ emballonurid
 gerrhosaurid
 proteosaurid
 legislatoris
-glockenspiel
 coenosarcous
 hyperviscous
 luteofuscous
