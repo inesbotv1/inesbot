@@ -155,7 +155,6 @@ khazi
 minbu
 jambu
 mambu
-sakti
 aesop
 stedd
 hempy
@@ -1507,8 +1506,6 @@ ynambu
 vomito
 cudava
 yadava
-bhakti
-shakti
 anagap
 deisin
 hoisin
@@ -13744,8 +13741,6 @@ statcoulomb
 ferrimagnet
 ferromagnet
 therebiforn
-jnanashakti
-svarabhakti
 redisseisin
 upboulevard
 clisiocampa
