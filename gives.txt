@@ -299,11 +299,6 @@ bunje
 funje
 finno
 curso
-bonda
-fonda
-honda
-nonda
-zonda
 canap
 hanap
 kanap
@@ -857,8 +852,6 @@ theyd
 china
 rhina
 shina
-costa
-hosta
 cardi
 mardi
 pardi
@@ -1694,8 +1687,6 @@ wastry
 kiwach
 ghalva
 thurso
-goonda
-rhonda
 cipher
 cypher
 gopher
@@ -3761,9 +3752,6 @@ ungouty
 maistry
 tapstry
 catelog
-rotonda
-waconda
-wakonda
 telpher
 deforse
 endorse
@@ -6344,10 +6332,6 @@ tapestry
 malawach
 travelog
 concurso
-anaconda
-gioconda
-golconda
-wahconda
 caquetio
 vermetio
 decipher
@@ -7409,10 +7393,6 @@ ianthina
 janthina
 katchina
 trichina
-langosta
-risposta
-starosta
-subcosta
 sephardi
 acanthia
 agnathia
@@ -8917,7 +8897,6 @@ provostry
 sacristry
 sophistry
 touristry
-marimonda
 epitapher
 galumpher
 miscipher
@@ -12422,7 +12401,6 @@ gymnorhina
 platyrhina
 tibouchina
 genipapada
-septocosta
 longobardi
 akolouthia
 amphanthia
@@ -14523,8 +14501,6 @@ supralabial
 unmicrobial
 platyrrhina
 pseudochina
-chastacosta
-pseudocosta
 anacoluthia
 anakoluthia
 hyperpathia
