@@ -1548,17 +1548,6 @@ seanad
 coprah
 dagoba
 shlepp
-betcha
-butcha
-cutcha
-datcha
-gotcha
-hotcha
-kutcha
-matcha
-netcha
-watcha
-wotcha
 hazara
 arroba
 caroba
@@ -3549,12 +3538,6 @@ tutelae
 ichabod
 labredt
 schlepp
-captcha
-elatcha
-gertcha
-kootcha
-lantcha
-whatcha
 mischio
 secchio
 araroba
@@ -8681,7 +8664,6 @@ prepoison
 antipasch
 subchelae
 melospiza
-kadaitcha
 borrachio
 finnochio
 finocchio
@@ -11396,7 +11378,6 @@ territelae
 cyanospiza
 emphyteuta
 yponomeuta
-kurdaitcha
 maldocchio
 moustachio
 preconsult
