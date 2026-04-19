@@ -155,6 +155,7 @@ khazi
 minbu
 jambu
 mambu
+sakti
 aesop
 stedd
 hempy
@@ -907,6 +908,7 @@ iseum
 odeum
 oleum
 rheum
+ferio
 purged
 ticked
 qually
@@ -1505,6 +1507,8 @@ ynambu
 vomito
 cudava
 yadava
+bhakti
+shakti
 anagap
 deisin
 hoisin
@@ -4880,6 +4884,9 @@ ssireum
 stereum
 theseum
 vitreum
+caserio
+cheerio
+etaerio
 salteaux
 carlines
 tracking
@@ -7446,6 +7453,7 @@ pinoleum
 rameseum
 serapeum
 urodaeum
+hetaerio
 reversely
 tubmaking
 chemicked
@@ -13736,6 +13744,8 @@ statcoulomb
 ferrimagnet
 ferromagnet
 therebiforn
+jnanashakti
+svarabhakti
 redisseisin
 upboulevard
 clisiocampa
