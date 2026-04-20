@@ -523,7 +523,6 @@ palet
 labda
 doric
 farer
-dhaba
 scald
 china
 bemol
@@ -600,7 +599,6 @@ fress
 funje
 glaux
 caner
-dheri
 battu
 coxal
 bunas
@@ -673,7 +671,6 @@ legge
 cuber
 decor
 willi
-dhabb
 tanha
 loric
 natto
@@ -778,7 +775,6 @@ banak
 toric
 bacup
 vacua
-dhava
 sicel
 proyn
 calve
@@ -10707,7 +10703,6 @@ burushaski
 lieutenant
 baptanodon
 overwisely
-dharmakaya
 unadjacent
 retrainees
 ridgelines
