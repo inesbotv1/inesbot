@@ -449,7 +449,6 @@ caddo
 haddo
 saddo
 skaff
-clara
 cauma
 bench
 dench
