@@ -449,6 +449,7 @@ caddo
 haddo
 saddo
 skaff
+clara
 cauma
 bench
 dench
@@ -853,7 +854,6 @@ chaga
 slubb
 ovoli
 kneel
-owari
 tabun
 stuss
 bunas
