@@ -180,8 +180,6 @@ vison
 amalg
 leuco
 linha
-nasch
-pasch
 bronc
 tronc
 trapa
@@ -450,9 +448,6 @@ saddo
 skaff
 clara
 cauma
-casel
-easel
-wasel
 bench
 dench
 hench
@@ -630,9 +625,6 @@ malfi
 doula
 dhabb
 ochre
-cabal
-nabal
-sabal
 usurp
 duroc
 cades
@@ -701,7 +693,6 @@ herem
 vinho
 canoe
 cycle
-tapoa
 dairi
 battu
 pattu
@@ -1526,7 +1517,6 @@ raison
 toison
 unison
 pareja
-raasch
 carapa
 chelae
 stelae
@@ -1779,7 +1769,6 @@ haglin
 leglin
 raglin
 riglin
-thanah
 neavil
 scapha
 batata
@@ -1807,8 +1796,6 @@ marica
 myrica
 narica
 parica
-exacum
-zoacum
 herola
 pyrola
 araban
@@ -1872,8 +1859,6 @@ tikoor
 albuca
 trauma
 almude
-teasel
-weasel
 blench
 clench
 drench
@@ -1948,8 +1933,6 @@ whiner
 decyne
 teapot
 kouros
-aljoba
-jojoba
 acrawl
 scrawl
 sprawl
@@ -2118,8 +2101,6 @@ mislie
 amedeo
 ullucu
 euchre
-atabal
-trabal
 blades
 clades
 evades
@@ -3518,7 +3499,6 @@ venison
 warison
 kouproh
 farinha
-allasch
 tutelae
 ichabod
 labredt
@@ -3844,13 +3824,8 @@ leadeth
 ferrugo
 danglin
 gorglin
-elkanah
-haganah
 fluavil
 agrapha
-aphacic
-boracic
-sebacic
 cantata
 costata
 dentata
@@ -3914,7 +3889,6 @@ ephelis
 fidelis
 putelis
 seselis
-tabacum
 acerola
 arerola
 scarola
@@ -4372,8 +4346,6 @@ kneepan
 papoula
 taiyaki
 rigadig
-attabal
-mutabal
 abrades
 alcades
 arcades
@@ -6081,7 +6053,6 @@ portunid
 tucutucu
 tallapoi
 caixinha
-goulasch
 anthelae
 cypselae
 querelae
@@ -6165,7 +6136,6 @@ scheelin
 tethelin
 zeppelin
 sunscald
-testamur
 arrhenal
 crumenal
 duodenal
@@ -6432,13 +6402,8 @@ asperugo
 rejoneos
 pariglin
 teraglin
-hashanah
-takkanah
 outcavil
 oxybapha
-cretacic
-fornacic
-thoracic
 crostata
 edentata
 frittata
@@ -6480,8 +6445,6 @@ pantelis
 sondelis
 teruteru
 indrawal
-guaiacum
-ostracum
 motorola
 victrola
 pyrameis
@@ -6959,7 +6922,6 @@ sukiyaki
 teriyaki
 murdabad
 zindabad
-chanabal
 aggrades
 alidades
 ballades
@@ -8636,7 +8598,6 @@ malmaison
 nonunison
 outpoison
 prepoison
-antipasch
 subchelae
 melospiza
 borrachio
@@ -8996,11 +8957,7 @@ buxbaumia
 ichneumia
 gochujang
 metheglin
-shamianah
 opegrapha
-anthracic
-carapacic
-pharmacic
 cockerell
 slangrell
 decoupler
@@ -9022,8 +8979,6 @@ cephaelis
 hamamelis
 infidelis
 maharawal
-taraxacum
-tripsacum
 cayubaban
 chamaeleo
 cytococci
@@ -11344,8 +11299,6 @@ reimprison
 spitpoison
 unimprison
 sapucainha
-benetnasch
-hamantasch
 mesothelae
 territelae
 cyanospiza
@@ -11585,7 +11538,6 @@ cinecamera
 heteromera
 minicamera
 telecamera
-phylloxera
 antialexin
 cephalexin
 cirrhipede
@@ -11613,7 +11565,6 @@ chlamydiae
 coremiumia
 encomiumia
 komondoroc
-shamiyanah
 incrustata
 predentata
 septimanae
@@ -11630,7 +11581,6 @@ cockneyess
 fadednyess
 panegyrica
 withdrawal
-ammoniacum
 squatarola
 camerlengo
 antechapel
@@ -13909,17 +13859,12 @@ thalamiumia
 calligrapha
 hagiographa
 amphithalmi
-nonthoracic
-prethoracic
-prothoracic
-subthoracic
 sacheverell
 fortepianos
 parmigianos
 mesoamerica
 micrampelis
 patriofelis
-endostracum
 whitechapel
 cryptococci
 echinococci
@@ -14234,7 +14179,6 @@ paramedicos
 ipecacuanha
 ensepulchre
 unsepulchre
-tubatulabal
 balustrades
 biodegrades
 carbonnades
@@ -15931,19 +15875,11 @@ semimolecule
 prostomiumia
 cyclorrhapha
 orthorrhapha
-endothoracic
-holothoracic
-mesothoracic
-metathoracic
-osteomalacic
-perithoracic
-postthoracic
 retrocoupler
 variocoupler
 variocuopler
 econometrica
 rewithdrawal
-periostracum
 gonococcocci
 meningococci
 streptococci
@@ -17441,15 +17377,6 @@ supermolecule
 supramolecule
 proventriculi
 gynostemiumia
-costothoracic
-dorsothoracic
-extrathoracic
-hydrothoracic
-infrathoracic
-intrathoracic
-introthoracic
-suprathoracic
-transthoracic
 tubulidentata
 diplococcocci
 micrococcocci
@@ -18729,12 +18656,9 @@ counterformula
 epithalamiumia
 prothalamiumia
 pseudepigrapha
-cardiothoracic
-schizothoracic
 duplicidentata
 stratovolcanos
 intensivenyess
-alexipharmacum
 eleutherococci
 pneumococcocci
 antihemophilic
@@ -19737,10 +19661,6 @@ thalassographer
 pseudotetramera
 philosophuncule
 pseudonymuncule
-acromiothoracic
-cephalothoracic
-cervicothoracic
-scapulothoracic
 simplicidentata
 meningococcocci
 streptococcocci
@@ -20383,7 +20303,6 @@ psychobiographer
 radiotelegrapher
 splanchnographer
 ultrasonographer
-abdominothoracic
 staphylococcocci
 eurithermophilic
 cycadofilicinean
