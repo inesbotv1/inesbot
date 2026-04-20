@@ -29,6 +29,9 @@ tavy
 wavy
 meum
 erer
+gonk
+lonk
+sonk
 utero
 beaux
 tally
@@ -917,6 +920,15 @@ surer
 tirer
 wirer
 yarer
+boonk
+bronk
+clonk
+cronk
+plonk
+pronk
+quonk
+slonk
+tronk
 purged
 ticked
 qually
@@ -2529,6 +2541,7 @@ tourer
 usurer
 warrer
 wearer
+skronk
 sozines
 hawking
 lirking
@@ -18311,6 +18324,7 @@ thunderbearer
 undercellarer
 underlabourer
 undersorcerer
+attiwendaronk
 professionally
 aminophyllines
 brevirostrines
