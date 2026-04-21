@@ -455,7 +455,6 @@ parve
 rally
 sunni
 nondo
-iseum
 linus
 vacua
 tlaco
@@ -1865,7 +1864,6 @@ sealch
 fraken
 easels
 stadle
-isuret
 fugged
 umlaut
 fecked
