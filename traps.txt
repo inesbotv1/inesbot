@@ -253,7 +253,6 @@ epik
 kaff
 phel
 rhag
-alei
 wach
 usel
 gnet
@@ -560,7 +559,6 @@ imbi
 oubl
 aphe
 opio
-alio
 amme
 colb
 adne
