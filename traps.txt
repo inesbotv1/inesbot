@@ -766,7 +766,6 @@ adig
 luct
 wett
 hage
-tedd
 lieb
 klin
 kall
@@ -875,7 +874,6 @@ dham
 kous
 rico
 teru
-ludd
 iont
 euta
 inna
@@ -936,7 +934,6 @@ auxe
 biza
 alki
 unid
-nedd
 raks
 unsy
 acua
