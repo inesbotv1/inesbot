@@ -267,7 +267,6 @@ erio
 bula
 ingu
 perg
-enal
 ving
 suri
 cuta
@@ -306,7 +305,6 @@ auta
 bial
 gelo
 pade
-tyle
 ecor
 guin
 krum
@@ -326,7 +324,6 @@ unup
 enle
 atro
 enen
-arai
 acup
 yapo
 furb
