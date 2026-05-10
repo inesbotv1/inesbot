@@ -1590,7 +1590,6 @@ asm
 ida
 ivy
 joo
-juk
 kyn
 nex
 noa
