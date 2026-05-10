@@ -1506,7 +1506,6 @@ oer
 olp
 ryn
 sny
-tue
 woc
 yed
 yot
@@ -1578,7 +1577,6 @@ oas
 ong
 oxo
 roh
-sly
 uda
 uve
 yas
@@ -1711,7 +1709,6 @@ sond
 sori
 spig
 taps
-thon
 tost
 uple
 upma
