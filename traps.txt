@@ -41,7 +41,6 @@ eod
 zal
 xin
 tza
-aed
 aya
 nua
 aic
@@ -1696,7 +1695,6 @@ egb
 eot
 erd
 huk
-kua
 rix
 udi
 weg
@@ -1720,7 +1718,6 @@ bua
 edo
 kiv
 lua
-nuk
 oer
 olp
 ryn
@@ -1932,7 +1929,6 @@ cita
 coto
 dows
 duch
-enal
 inal
 ladi
 lova
@@ -1972,7 +1968,6 @@ fero
 fois
 guis
 igna
-issu
 llan
 loba
 lott
