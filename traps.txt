@@ -727,7 +727,6 @@ prut
 puds
 puir
 pyla
-quor
 rags
 rasa
 rife
@@ -1711,7 +1710,6 @@ laf
 lle
 oxs
 oya
-rae
 uit
 url
 von
