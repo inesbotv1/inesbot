@@ -1601,7 +1601,6 @@ cyne
 badi
 vaci
 taph
-cous
 apoi
 tata
 abda
@@ -1800,7 +1799,6 @@ kt
 yp
 sz
 uz
-alon
 anel
 anse
 atax
@@ -1992,3 +1990,4 @@ yc
 naso
 illo
 elp
+nars
