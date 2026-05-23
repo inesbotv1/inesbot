@@ -186,7 +186,6 @@ pyon
 asim
 gero
 auma
-oxal
 asmo
 ungi
 hana
@@ -1084,7 +1083,6 @@ talt
 rowl
 fida
 bols
-atim
 dzer
 gamo
 prit
@@ -1747,7 +1745,6 @@ joo
 kyn
 nex
 toh
-abar
 alei
 amab
 anth
@@ -1991,3 +1988,5 @@ naso
 illo
 elp
 nars
+pk
+uy
