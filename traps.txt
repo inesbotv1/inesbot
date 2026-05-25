@@ -1236,7 +1236,6 @@ rix
 eir
 tse
 awk
-ily
 eer
 sze
 mov
