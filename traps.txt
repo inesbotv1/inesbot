@@ -6,7 +6,6 @@ sumo
 scon
 kete
 anah
-assy
 atim
 pleg
 tini
@@ -897,7 +896,6 @@ whid
 adeo
 orna
 temi
-drin
 ptin
 atel
 chud
@@ -1135,7 +1133,6 @@ ulic
 veto
 irro
 gorp
-tish
 petu
 rasa
 coyo
@@ -2183,7 +2180,6 @@ riss
 ross
 sadh
 seld
-seru
 shlu
 sizz
 suss
@@ -2630,7 +2626,6 @@ vidi
 wiss
 adha
 agla
-aquo
 ardu
 bans
 beld
