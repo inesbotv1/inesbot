@@ -1328,7 +1328,6 @@ adra
 jang
 dass
 isch
-asel
 riks
 elep
 agel
@@ -1648,7 +1647,6 @@ azer
 alka
 digo
 nant
-ines
 airi
 urso
 ampi
@@ -1990,3 +1988,4 @@ elp
 nars
 pk
 uy
+ines
